@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {map} from 'lodash';
 import styles from './styles.scss';
@@ -56,16 +55,16 @@ class InputEnum extends React.Component { // eslint-disable-line react/prefer-st
       />
       < /label>
     )
-      ;
-    }
+
+        }
   )
   }
   <
     /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 InputEnum.propTypes = {

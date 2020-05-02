@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import cn from 'classnames';
 
@@ -22,7 +21,7 @@ function HeaderNavLink({custom, id, isActive, onClick}) {
 }
   style = {
   {
-    cursor: 'pointer'
+    'pointer'
   }
 }
   onClick = {()
@@ -37,8 +36,8 @@ function HeaderNavLink({custom, id, isActive, onClick}) {
   />
   < /div>
 )
-  ;
-}
+
+    }
 
 HeaderNavLink.defaultProps = {
   custom: null,

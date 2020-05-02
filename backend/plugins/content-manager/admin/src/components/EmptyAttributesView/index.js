@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 import Button from 'components/Button';
@@ -20,20 +19,20 @@ function EmptyAttributesView({currentModelName, history, modelEntries}) {
     < PluginHeader
   title = {
   {
-    id: currentModelName,
+    currentModelName,
   }
 }
-  description = {
-  {
-    id: 'content-manager.containers.List.pluginHeaderDescription',
-      values
-  :
+  description ={
     {
-      label: modelEntries,
-    }
-  ,
+      'content-manager.containers.List.pluginHeaderDescription',
+      values
+    :
+  {
+    modelEntries,
   }
-}
+    ,
+  }
+  }
   actions = {[]}
   />
   < div >
@@ -70,8 +69,8 @@ function EmptyAttributesView({currentModelName, history, modelEntries}) {
     < /div>
     < /div>
 )
-  ;
-}
+
+      }
 
 EmptyAttributesView.propTypes = {
   currentModelName: PropTypes.string.isRequired,

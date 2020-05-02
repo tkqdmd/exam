@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import CustomInputCheckbox from '../CustomInputCheckbox';
@@ -37,8 +36,8 @@ class TableHeader extends React.Component {
       />
       < /th>
     )
-      ;
-    }
+
+        }
 
     return null;
   }
@@ -88,8 +87,8 @@ class TableHeader extends React.Component {
 
       < /th>
     )
-      ;
-    });
+
+        });
 
     // Add empty th for actions column.
     headers.push( < th
@@ -106,8 +105,8 @@ class TableHeader extends React.Component {
     < /tr>
     < /thead>
   )
-    ;
-  }
+
+        }
 }
 
 TableHeader.defaultProps = {

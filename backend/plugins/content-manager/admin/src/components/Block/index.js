@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 import styles from './styles.scss';
@@ -42,10 +41,9 @@ id = {title}
 /div>
 < /div>
 )
-;
 
 
-Block.defaultProps = {
+  Block.defaultProps = {
   children: null,
   description: null,
   style: {},

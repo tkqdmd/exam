@@ -5,7 +5,6 @@
 
 import React from 'react';
 import {upperFirst} from 'lodash';
-import PropTypes from 'prop-types';
 
 import IcoContainer from 'components/IcoContainer';
 
@@ -41,8 +40,8 @@ function SettingsRow({destination, name, onClick}) {
   < /div>
   < /div>
 )
-  ;
-}
+
+    }
 
 SettingsRow.propTypes = {
   destination: PropTypes.string.isRequired,

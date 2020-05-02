@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import styles from './styles.scss';
@@ -38,8 +37,8 @@ class StyleButton extends React.Component {
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 const WysiwygInlineControls = ({buttons, disabled, editorState, handlers, onToggle, onToggleBlock}) => {
@@ -77,8 +76,8 @@ const WysiwygInlineControls = ({buttons, disabled, editorState, handlers, onTogg
 <
   /div>
 )
-  ;
-};
+
+    };
 
 /* eslint-disable react/default-props-match-prop-types */
 StyleButton.defaultProps = {

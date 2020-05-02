@@ -5,20 +5,13 @@
 
 /* eslint-disable react/no-find-dom-node */
 import React from 'react';
-import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
-import {
-  DragSource,
-  DropTarget,
-} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
-import {get, flow} from 'lodash';
+import {get} from 'lodash';
 import cn from 'classnames';
 
 import GrabIconBlue from '../../assets/images/icon_grab_blue.svg';
 import GrabIcon from '../../assets/images/icon_grab.svg';
-
-import ItemTypes from '../../utils/ItemTypes';
 
 import ClickOverHint from '../ClickOverHint';
 import DraggedRemovedIcon from '../DraggedRemovedIcon';
@@ -263,7 +256,7 @@ class VariableDraggableAttr extends React.Component {
       < div
     style = {
     {
-      display: 'flex'
+      'flex'
     }
   }>
     {
@@ -327,8 +320,8 @@ class VariableDraggableAttr extends React.Component {
         />}
         < /div>
       )
-    ;
-  }
+
+          }
 
   render() {
     const {classNames} = this.state;
@@ -353,8 +346,8 @@ class VariableDraggableAttr extends React.Component {
   ),
   )
   )
-    ;
-  }
+
+          }
 }
 
 VariableDraggableAttr.defaultProps = {

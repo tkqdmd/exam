@@ -5,21 +5,14 @@
 
 import React from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {isObject, size} from 'lodash';
-
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
-import PluginHeader from 'components/PluginHeader';
 
 import FilterOptions from '../FilterOptions/Loadable';
-
-import Div from './Div';
-import Flex from './Flex';
 import SpanStyled from './SpanStyled';
-import Wrapper from './Wrapper';
 import styles from './wrapperStyles.scss';
 
 class FiltersPickWrapper extends React.PureComponent {
@@ -151,7 +144,7 @@ SpanStyled >
 <
 /FormattedMessage>
 )
-;
+
 
 render()
 {
@@ -172,7 +165,7 @@ render()
   actions = {this.generateActions()}
   description = {
   {
-    id: 'content-manager.components.FiltersPickWrapper.PluginHeader.description',
+    'content-manager.components.FiltersPickWrapper.PluginHeader.description',
   }
 }
   title = {this.renderTitle()}
@@ -198,7 +191,7 @@ render()
     !showInput && < div
     style = {
     {
-      height: '34px'
+      '34px'
     }
   }
     />}
@@ -217,8 +210,8 @@ render()
     < /form>
     < /Div>
   )
-  ;
-}
+
+  }
 }
 
 FiltersPickWrapper.contextTypes = {

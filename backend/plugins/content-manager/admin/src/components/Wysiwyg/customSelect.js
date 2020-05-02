@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Select from 'components/InputSelect';
 import {SELECT_OPTIONS} from './constants';
@@ -30,8 +29,8 @@ class CustomSelect extends React.Component {
     />
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 CustomSelect.contextTypes = {

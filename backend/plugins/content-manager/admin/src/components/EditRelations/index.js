@@ -5,9 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {get} from 'lodash';
-
 // Components.
 import SelectOne from '../SelectOne';
 import SelectMany from '../SelectMany';
@@ -35,7 +33,7 @@ function EditRelations(props) {
           onRedirect = {props.onRedirect}
           />
         )
-          ;
+
         }
 
         return (
@@ -54,13 +52,13 @@ function EditRelations(props) {
         schema = {props.schema}
         />
       )
-        ;
+
       })
     }
     < /div>
 )
-  ;
-}
+
+      }
 
 EditRelations.defaultProps = {
   displayedRelations: [],

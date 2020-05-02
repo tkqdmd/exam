@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {ModalBody} from 'reactstrap';
 
 import styles from './styles.scss';
@@ -28,8 +27,8 @@ function BodyModal({children, ...rest}) {
     < /div>
     < /ModalBody>
 )
-  ;
-}
+
+      }
 
 /* istanbul ignore next */
 BodyModal.defaultProps = {

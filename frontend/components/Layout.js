@@ -3,17 +3,17 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { unsetToken } from "../lib/auth";
-import { Container, Nav, NavItem } from "reactstrap";
+import {unsetToken} from "../lib/auth";
+import {Container, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, UncontrolledDropdown} from "reactstrap";
 import defaultPage from "../hocs/defaultPage";
-import Cookie from "js-cookie";
 
 
 class Layout extends React.Component {
   constructor(props) {
     super(props);
   }
-  static async getInitialProps({ req }) {
+
+  static async getInitialProps({req}) {
     let pageProps = {};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -50,10 +50,20 @@ class Layout extends React.Component {
             </NavItem>
             {isAuthenticated ? (
               <>
+
                 <NavItem className="ml-auto">
-                  <span style={{ color: "white", marginRight: 30 }}>
-                    {this.props.loggedUser}
-                  </span>
+                  <UncontrolledDropdown style={{marginRight: 30}}>
+                    <DropdownToggle caret>
+                      {this.props.loggedUsername}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem>
+                        <a style={{color: "black"}} href="/history">
+                          History test
+                        </a>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                 </NavItem>
                 <NavItem>
                   <Link href="/">
@@ -81,25 +91,24 @@ class Layout extends React.Component {
           </Nav>
         </header>
         <Container>{children}</Container>
-        {/* <footer className="footer">
-          {"Strapi footer"}
-          <style jsx>
-            {`
-              .footer {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                height: 60px;
-                line-height: 60px;
-                background-color: #f5f5f5;
-              }
-              a:hover {
-                cursor: pointer;
-                color: yellow;
-              }
-            `}
-          </style>
-        </footer> */}
+        {/*<footer className="footer">*/}
+        {/*  {"Powered by Strapi & ReactJS"}*/}
+        {/*  <style jsx>*/}
+        {/*    {`*/}
+        {/*      .footer {*/}
+        {/*        bottom: 0;*/}
+        {/*        width: 100%;*/}
+        {/*        height: 60px;*/}
+        {/*        line-height: 60px;*/}
+        {/*        background-color: #f5f5f5;*/}
+        {/*      }*/}
+        {/*      a:hover {*/}
+        {/*        cursor: pointer;*/}
+        {/*        color: yellow;*/}
+        {/*      }*/}
+        {/*    `}*/}
+        {/*  </style>*/}
+        {/*</footer>*/}
       </div>
     );
   }

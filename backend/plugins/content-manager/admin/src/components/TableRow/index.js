@@ -5,14 +5,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import {isEmpty, isNull, isObject, toLower, toString} from 'lodash';
 import cn from 'classnames';
 
 import IcoContainer from 'components/IcoContainer';
-
-import CustomInputCheckbox from '../CustomInputCheckbox';
 
 import styles from './styles.scss';
 
@@ -103,9 +100,9 @@ class TableRow extends React.Component {
 />
 < /td>
 )
-;
 
-renderCells = () => {
+
+  renderCells = () => {
   const {headers} = this.props;
   return [this.renderDelete()]
     .concat(
@@ -147,8 +144,8 @@ renderDelete = () => {
     />
     < /td>
   )
-    ;
-  }
+
+    }
 
   return null;
 }
@@ -164,8 +161,8 @@ render()
     {this.renderCells()}
     < /tr>
 )
-  ;
-}
+
+  }
 }
 
 TableRow.contextTypes = {

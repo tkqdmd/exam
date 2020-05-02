@@ -5,9 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {map} from 'lodash';
-import WithFormSection from '../WithFormSection';
 import styles from './styles.scss';
 
 /* eslint-disable react/require-default-props  */
@@ -53,8 +51,8 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 PopUpForm.propTypes = {

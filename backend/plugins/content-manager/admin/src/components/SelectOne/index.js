@@ -7,19 +7,8 @@
 import React from 'react';
 import Select from 'react-select';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 import 'react-select/dist/react-select.css';
-import {
-  cloneDeep,
-  map,
-  includes,
-  isArray,
-  isNull,
-  isUndefined,
-  isFunction,
-  get,
-  findIndex,
-} from 'lodash';
+import {cloneDeep, findIndex, get, includes, isArray, isFunction, isNull, isUndefined, map,} from 'lodash';
 
 import request from 'utils/request';
 import templateObject from 'utils/templateObject';
@@ -189,7 +178,7 @@ class SelectOne extends React.Component {
   <
     /FormattedMessage>
   )
-    ;
+
 
     /* eslint-disable jsx-a11y/label-has-for */
     return (
@@ -239,8 +228,8 @@ class SelectOne extends React.Component {
     />
     < /div>
   )
-    ;
-    /* eslint-disable jsx-a11y/label-has-for */
+
+      /* eslint-disable jsx-a11y/label-has-for */
   }
 }
 

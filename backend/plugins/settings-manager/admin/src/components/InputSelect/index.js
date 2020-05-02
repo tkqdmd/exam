@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {isEmpty, map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import styles from './styles.scss';
@@ -71,8 +70,8 @@ class InputSelect extends React.Component { // eslint-disable-line react/prefer-
     /select>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 InputSelect.propTypes = {

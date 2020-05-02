@@ -7,7 +7,6 @@
 import React from 'react';
 import {get, includes, map, tail, toLower} from 'lodash';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './styles.scss';
 
@@ -70,7 +69,7 @@ function BoundRoute({route}) {
   < /div>
   < /div>
 )
-  ;
+
 }
 
 BoundRoute.defaultProps = {

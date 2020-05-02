@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import styles from './styles.scss';
@@ -40,7 +39,7 @@ function CustomInputCheckbox({entriesToDelete, isAll, name, onChange, value}) {
     < /label>
     < /span>
 )
-  ;
+
 }
 
 CustomInputCheckbox.defaultProps = {

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {startCase} from 'lodash';
 import {FormattedMessage} from 'react-intl';
@@ -69,8 +68,8 @@ function LeftMenuLink({icon, isTemporary, name, source, to}) {
   < /NavLink>
   < /li>
 )
-  ;
-}
+
+    }
 
 LeftMenuLink.defaultProps = {
   icon: null,

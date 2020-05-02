@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import Button from '../Button';
@@ -51,8 +50,8 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
     <
       /div>
     )
-      ;
-    }
+
+      }
   )
   }
   <
@@ -97,8 +96,8 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
     < /form>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 EditForm.propTypes = {

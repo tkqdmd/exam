@@ -7,11 +7,9 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
+import styles from './styles.scss';
 
 // import InputCheckBox from 'components/InputCheckbox';
-
-import styles from './styles.scss';
 
 function ListHeader({changeSort, sort}) {
   const titles = [
@@ -81,8 +79,8 @@ function ListHeader({changeSort, sort}) {
         < span / >
         < /div>
       )
-        ;
-      }
+
+          }
 
       return
     <
@@ -95,8 +93,8 @@ function ListHeader({changeSort, sort}) {
   /div>
   < /li>
 )
-  ;
-}
+
+    }
 
 ListHeader.defaultProps = {
   changeSort: () => {

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {Button} from 'reactstrap';
 
@@ -26,8 +25,8 @@ function ButtonModalPrimary({add, message, onClick, type}) {
   />
   < /Button>
 )
-  ;
-}
+
+    }
 
 ButtonModalPrimary.defaultProps = {
   add: false,

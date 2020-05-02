@@ -4,12 +4,8 @@
  */
 
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {createStructuredSelector} from 'reselect';
 import cn from 'classnames';
 import {get, sortBy} from 'lodash';
-import PropTypes from 'prop-types';
 
 import Input from 'components/InputsIndex';
 import PluginHeader from 'components/PluginHeader';
@@ -18,13 +14,7 @@ import PopUpWarning from 'components/PopUpWarning';
 import Block from '../../components/Block';
 import SettingsRow from '../../components/SettingsRow';
 
-import pluginId from '../../pluginId';
-
-import {onChange, onSubmit, onReset} from '../App/actions';
-import {makeSelectModifiedSchema, makeSelectSubmitSuccess} from '../App/selectors';
-
-import reducer from './reducer';
-import saga from './saga';
+import {onChange} from '../App/actions';
 import styles from './styles.scss';
 import forms from './forms.json';
 
@@ -122,7 +112,7 @@ class SettingsPage extends React.PureComponent {
 
 />
 )
-;
+
 
 renderRow = model =>
 <
@@ -150,7 +140,7 @@ render()
   title = "Content Manager"
   description = {
   {
-    id: 'content-manager.containers.SettingsPage.pluginHeaderDescription'
+    'content-manager.containers.SettingsPage.pluginHeaderDescription'
   }
 }
   />
@@ -158,8 +148,8 @@ render()
   isOpen = {showWarning}
   toggleModal = {this.toggle}
   content = {
-  {
-    title: 'content-manager.popUpWarning.title',
+    {
+      'content-manager.popUpWarning.title',
       message
   :
     'content-manager.popUpWarning.warning.updateAllSettings',
@@ -178,8 +168,8 @@ render()
   isOpen = {showWarningCancel}
   toggleModal = {this.toggleWarningCancel}
   content = {
-  {
-    title: 'content-manager.popUpWarning.title',
+    {
+      'content-manager.popUpWarning.title',
       message
   :
     'content-manager.popUpWarning.warning.cancelAllSettings',
@@ -236,8 +226,8 @@ render()
   /div>
   < /div>
 )
-  ;
-}
+
+    }
 }
 
 SettingsPage.defaultProps = {};

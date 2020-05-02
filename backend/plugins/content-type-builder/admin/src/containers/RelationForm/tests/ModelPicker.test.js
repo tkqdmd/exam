@@ -1,13 +1,12 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {DropdownToggle, DropdownItem} from 'reactstrap';
 import ModelPicker from '../ModelPicker';
 
 describe('<ModelPicker />', () => {
   it('should not crash', () => {
     shallow( < ModelPicker / >
   )
-    ;
+
   });
 
   it('should use the defaultProps', () => {

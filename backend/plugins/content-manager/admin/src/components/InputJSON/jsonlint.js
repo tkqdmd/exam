@@ -267,66 +267,65 @@ var jsonlint = (function () {
         }
 
         // handle parse error
-        _handle_error:
-          if (typeof action === 'undefined' || !action.length || !action[0]) {
+        if (typeof action === 'undefined' || !action.length || !action[0]) {
 
-            if (!recovering) {
-              // Report error
-              expected = [];
-              for (p in table[state]) if (this.terminals_[p] && p > 2) {
-                expected.push("'" + this.terminals_[p] + "'");
-              }
-              var errStr = '';
-              if (this.lexer.showPosition) {
-                errStr = 'Parse error on line ' + (yylineno + 1) + ":\n" + this.lexer.showPosition() + "\nExpecting " + expected.join(', ') + ", got '" + this.terminals_[symbol] + "'";
-              } else {
-                errStr = 'Parse error on line ' + (yylineno + 1) + ": Unexpected " +
-                  (symbol == 1 /*EOF*/ ? "end of input" :
-                    ("'" + (this.terminals_[symbol] || symbol) + "'"));
-              }
-              this.parseError(errStr,
-                {
-                  text: this.lexer.match,
-                  token: this.terminals_[symbol] || symbol,
-                  line: this.lexer.yylineno,
-                  loc: yyloc,
-                  expected: expected
-                });
+          if (!recovering) {
+            // Report error
+            expected = [];
+            for (p in table[state]) if (this.terminals_[p] && p > 2) {
+              expected.push("'" + this.terminals_[p] + "'");
             }
-
-            // just recovered from another error
-            if (recovering == 3) {
-              if (symbol == EOF) {
-                throw new Error(errStr || 'Parsing halted.');
-              }
-
-              // discard current lookahead and grab another
-              yyleng = this.lexer.yyleng;
-              yytext = this.lexer.yytext;
-              yylineno = this.lexer.yylineno;
-              yyloc = this.lexer.yylloc;
-              symbol = lex();
+            var errStr = '';
+            if (this.lexer.showPosition) {
+              errStr = 'Parse error on line ' + (yylineno + 1) + ":\n" + this.lexer.showPosition() + "\nExpecting " + expected.join(', ') + ", got '" + this.terminals_[symbol] + "'";
+            } else {
+              errStr = 'Parse error on line ' + (yylineno + 1) + ": Unexpected " +
+                (symbol == 1 /*EOF*/ ? "end of input" :
+                  ("'" + (this.terminals_[symbol] || symbol) + "'"));
             }
-
-            // try to recover from error
-            while (1) {
-              // check for error recovery rule in this state
-              if ((TERROR.toString()) in table[state]) {
-                break;
-              }
-              if (state == 0) {
-                throw new Error(errStr || 'Parsing halted.');
-              }
-              popStack(1);
-              state = stack[stack.length - 1];
-            }
-
-            preErrorSymbol = symbol; // save the lookahead token
-            symbol = TERROR;         // insert generic error symbol as new lookahead
-            state = stack[stack.length - 1];
-            action = table[state] && table[state][TERROR];
-            recovering = 3; // allow 3 real symbols to be shifted before reporting a new error
+            this.parseError(errStr,
+              {
+                text: this.lexer.match,
+                token: this.terminals_[symbol] || symbol,
+                line: this.lexer.yylineno,
+                loc: yyloc,
+                expected: expected
+              });
           }
+
+          // just recovered from another error
+          if (recovering == 3) {
+            if (symbol == EOF) {
+              throw new Error(errStr || 'Parsing halted.');
+            }
+
+            // discard current lookahead and grab another
+            yyleng = this.lexer.yyleng;
+            yytext = this.lexer.yytext;
+            yylineno = this.lexer.yylineno;
+            yyloc = this.lexer.yylloc;
+            symbol = lex();
+          }
+
+          // try to recover from error
+          while (1) {
+            // check for error recovery rule in this state
+            if ((TERROR.toString()) in table[state]) {
+              break;
+            }
+            if (state == 0) {
+              throw new Error(errStr || 'Parsing halted.');
+            }
+            popStack(1);
+            state = stack[stack.length - 1];
+          }
+
+          preErrorSymbol = symbol; // save the lookahead token
+          symbol = TERROR;         // insert generic error symbol as new lookahead
+          state = stack[stack.length - 1];
+          action = table[state] && table[state][TERROR];
+          recovering = 3; // allow 3 real symbols to be shifted before reporting a new error
+        }
 
         // this shouldn't happen, unless resolve defaults are off
         if (action[0] instanceof Array && action.length > 1) {
@@ -587,7 +586,6 @@ var jsonlint = (function () {
     lexer.conditions = {"INITIAL": {"rules": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "inclusive": true}};
 
 
-    ;
     return lexer;
   })()
   parser.lexer = lexer;

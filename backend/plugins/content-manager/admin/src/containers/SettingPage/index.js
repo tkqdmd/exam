@@ -4,65 +4,17 @@
  */
 
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {createStructuredSelector} from 'reselect';
 import {findIndex, get, isEmpty, upperFirst} from 'lodash';
 import cn from 'classnames';
-import HTML5Backend from 'react-dnd-html5-backend';
-import {DragDropContext} from 'react-dnd';
 import {FormattedMessage} from 'react-intl';
-import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import PropTypes from 'prop-types';
-import BackHeader from 'components/BackHeader';
-import HeaderNav from 'components/HeaderNav';
-import Input from 'components/InputsIndex';
-import InputSelect from 'components/InputSelect';
-import PluginHeader from 'components/PluginHeader';
-import PopUpWarning from 'components/PopUpWarning';
-
-import pluginId from '../../pluginId';
+import {ButtonDropdown, DropdownMenu, DropdownToggle} from 'reactstrap';
 
 import Block from '../../components/Block';
-import CustomDragLayer from '../../components/CustomDragLayer';
 import DraggableAttr from '../../components/DraggableAttr';
 import FormTitle from '../../components/FormTitle';
 import VariableDraggableAttr from '../../components/VariableDraggableAttr';
 
-import {
-  beginMove,
-  endMove,
-  moveAttr,
-  moveAttrEditView,
-  moveVariableAttrEditView,
-  onChangeInputType,
-  onChangeSettings,
-  onClickAddAttr,
-  onClickAddAttrField,
-  onRemove,
-  onRemoveEditViewFieldAttr,
-  onRemoveEditViewRelationAttr,
-  onReset,
-  onSubmit,
-  setLayout,
-} from '../App/actions';
-import {
-  makeSelectAddedField,
-  makeSelectDraggedItemName,
-  makeSelectGrid,
-  makeSelectHoverIndex,
-  makeSelectInitDragLine,
-  makeSelectModifiedSchema,
-  makeSelectShouldResetGrid,
-  makeSelectSubmitSuccess,
-} from '../App/selectors';
-
-import {onClickEditField, onClickEditListItem, onClickEditRelation} from './actions';
-import reducer from './reducer';
-import saga from './saga';
-import makeSelectSettingPage from './selectors';
-
-import SectionTitle from './SectionTitle';
+import {beginMove, onChangeInputType, onChangeSettings, onSubmit,} from '../App/actions';
 
 import forms from './forms.json';
 import styles from './styles.scss';
@@ -660,7 +612,7 @@ class SettingPage extends React.PureComponent {
     onClickEdit = {this.handleClickEditField}
     />
   )
-    ;
+
   };
 
   renderDraggableAttrEditSettingsRelation = (attr, index) => {
@@ -685,7 +637,7 @@ class SettingPage extends React.PureComponent {
   }
     />
   )
-    ;
+
   };
 
   renderDraggableAttrListSettings = (attr, index) => {
@@ -710,7 +662,7 @@ class SettingPage extends React.PureComponent {
     />
     < /div>
   )
-    ;
+
   };
 
   renderDropDownItemSettingField = item => {
@@ -728,7 +680,7 @@ class SettingPage extends React.PureComponent {
   <
     /DropdownItem>
   )
-    ;
+
   };
 
   renderDropDownItemEditSettingsRelation = item => {
@@ -746,7 +698,7 @@ class SettingPage extends React.PureComponent {
   <
     /DropdownItem>
   )
-    ;
+
   };
 
   renderDropDownItemListSettings = item => {
@@ -766,7 +718,7 @@ class SettingPage extends React.PureComponent {
   <
     /DropdownItem>
   )
-    ;
+
   };
 
   renderDropDownP = msg =>
@@ -817,7 +769,7 @@ renderFormEditSettingsField = (input, i) => {
   name = {path.join('.')}
   />
 )
-  ;
+
 };
 
 renderFormEditSettingsRelation = (input, i) => {
@@ -842,7 +794,7 @@ renderFormEditSettingsRelation = (input, i) => {
   name = {path.join('.')}
   />
 )
-  ;
+
 };
 
 renderFormListAttrSettings = (input, i) => {
@@ -876,8 +828,8 @@ renderFormListAttrSettings = (input, i) => {
   name = {inputName}
   />
 )
-  ;
-};
+
+          };
 
 renderInputMainSettings = input => {
   const inputName = `${this.getPath()}.${input.name}`;
@@ -894,8 +846,8 @@ renderInputMainSettings = input => {
   value = {this.getValue(inputName, input.type)}
   />
 )
-  ;
-};
+
+          };
 
 renderEditSettings = () => {
   const {isOpenField, isOpenRelation} = this.state;
@@ -905,8 +857,8 @@ renderEditSettings = () => {
   return (
     < Block
   style = {
-  {
-    marginBottom: '13px', paddingBottom
+              {
+                '13px', paddingBottom
   :
     '30px', paddingTop
   :
@@ -936,7 +888,7 @@ renderEditSettings = () => {
   onChange = {this.props.onChangeSettings}
   style = {
   {
-    marginBottom: '6px'
+    '6px'
   }
 }
   selectOptions = {this.getEditPagePossibleEntryTitleFields()}
@@ -1100,7 +1052,7 @@ renderEditSettings = () => {
   className = {styles.editWrapper}
   style = {
   {
-    paddingTop: '26px'
+    '26px'
   }
 }>
 <
@@ -1124,8 +1076,8 @@ renderEditSettings = () => {
 <
   /Block>
 )
-  ;
-}
+
+  }
 
 renderListSettings = () => {
   const {isOpen} = this.state;
@@ -1133,8 +1085,8 @@ renderListSettings = () => {
   return (
     < Block
   style = {
-  {
-    marginBottom: '13px', paddingBottom
+    {
+      '13px', paddingBottom
   :
     '30px', paddingTop
   :
@@ -1221,8 +1173,8 @@ renderListSettings = () => {
   /div>
   < /Block>
 )
-  ;
-};
+
+  };
 
 renderInputWysiwyg = () => {
   const {
@@ -1242,7 +1194,7 @@ renderInputWysiwyg = () => {
   Input
   label = {
   {
-    id: 'content-manager.form.Input.wysiwyg'
+    'content-manager.form.Input.wysiwyg'
   }
 }
   type = "toggle"
@@ -1275,7 +1227,7 @@ render()
 }
   description = {
   {
-    id: 'content-manager.containers.SettingPage.pluginHeaderDescription'
+    'content-manager.containers.SettingPage.pluginHeaderDescription'
   }
 }
   />
@@ -1284,8 +1236,8 @@ render()
   toggleModal = {this.toggle}
   content = {
   {
-    title: 'content-manager.popUpWarning.title',
-      message
+    'content-manager.popUpWarning.title',
+    message
   :
     'content-manager.popUpWarning.warning.updateAllSettings',
       cancel
@@ -1307,8 +1259,8 @@ render()
   toggleModal = {this.toggleWarningCancel}
   content = {
   {
-    title: 'content-manager.popUpWarning.title',
-      message
+    'content-manager.popUpWarning.title',
+    message
   :
     'content-manager.popUpWarning.warning.cancelAllSettings',
       cancel
@@ -1338,8 +1290,8 @@ render()
   < /div>
   < /form>
 )
-  ;
-}
+
+  }
 }
 
 SettingPage.contextTypes = {

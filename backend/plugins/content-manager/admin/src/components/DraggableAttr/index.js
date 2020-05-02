@@ -6,16 +6,8 @@
 /* eslint-disable react/no-find-dom-node */
 import React from 'react';
 import {findDOMNode} from 'react-dom';
-import {
-  DragSource,
-  DropTarget,
-} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
-import {flow} from 'lodash';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
-
-import ItemTypes from '../../utils/ItemTypes';
 
 import GrabIconBlue from '../../assets/images/icon_grab_blue.svg';
 import GrabIcon from '../../assets/images/icon_grab.svg';
@@ -206,8 +198,8 @@ class DraggableAttr extends React.Component {
   ),
   )
   )
-    ;
-  }
+
+    }
 }
 
 DraggableAttr.defaultProps = {

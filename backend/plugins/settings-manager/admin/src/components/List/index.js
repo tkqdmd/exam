@@ -16,11 +16,10 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import ButtonPrimaryHotline from '../Button';
 import PopUpForm from '../PopUpForm';
 import styles from './styles.scss';
@@ -61,7 +60,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
     onClick = {handleToggle}
     />
   )
-    ;
+
 
     const addListTitleMarginTop = this.props.addListTitleMarginTop ? styles.paddedTopList : '';
     const titleSpacer = this.props.addListTitleMarginTop ?
@@ -69,7 +68,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
     div
     style = {
     {
-      height: '.1rem'
+      '.1rem'
     }
   }
     /> : '';
@@ -103,7 +102,7 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
   <
     /FormattedMessage>
   )
-    ;
+
     return (
       < div
     className = {styles.listContainer} >
@@ -153,8 +152,8 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
       /div>
       < /li>
     )
-      ;
-    }
+
+        }
   )
   }
   <
@@ -222,8 +221,8 @@ class List extends React.Component { // eslint-disable-line react/prefer-statele
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 List.propTypes = {

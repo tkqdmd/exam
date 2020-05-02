@@ -6,7 +6,6 @@
 
 import React from 'react';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {get, isEmpty, map, takeRight, toLower, without} from 'lodash';
 
@@ -55,7 +54,7 @@ class Policies extends React.Component { // eslint-disable-line react/prefer-sta
         customBootstrapClass = "col-md-12"
       label = {
       {
-        id: 'users-permissions.Policies.InputSelect.label'
+        'users-permissions.Policies.InputSelect.label'
       }
     }
       name = {this.props.inputSelectName}
@@ -89,8 +88,8 @@ class Policies extends React.Component { // eslint-disable-line react/prefer-sta
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 Policies.contextTypes = {

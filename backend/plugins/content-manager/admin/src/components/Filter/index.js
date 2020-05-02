@@ -7,10 +7,8 @@
 import React from 'react';
 import moment from 'moment';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 import {get, toString, upperFirst} from 'lodash';
 import Flex from './Flex';
-import Remove from './Remove';
 import Separator from './Separator';
 
 
@@ -65,7 +63,7 @@ function Filter({filter, index, onClick, onClickOpen, schema}) {
   />
   < /Flex>
 )
-  ;
+
 }
 
 Filter.defaultProps = {

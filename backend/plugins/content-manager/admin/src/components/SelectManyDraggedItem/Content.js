@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 import IconRemove from '../../assets/images/icon_remove.svg';
@@ -49,7 +48,7 @@ function Content({index, item, onClick, onRemove}) {
   < /div>
   < /React.Fragment>
 )
-  ;
+
 }
 
 Content.defaultProps = {

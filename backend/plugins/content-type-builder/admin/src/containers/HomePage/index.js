@@ -5,14 +5,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {isEmpty} from 'lodash';
 
 import PluginHeader from 'components/PluginHeader';
 
 import getQueryParameters from 'utils/getQueryParameters';
-
-import {routerPropTypes} from 'commonPropTypes';
 
 import EmptyContentTypeView from '../../components/EmptyContentTypeView';
 import TableList from '../../components/TableList';
@@ -80,22 +77,22 @@ class HomePage extends React.Component {
     push = {push}
     />
   )
-    ;
+
 
     return (
       < div
     className = {styles.homePage} >
       < PluginHeader
     title = {
-    {
-      id: `${pluginId}.home.contentTypeBuilder.name`,
+      {
+        `${pluginId}.home.contentTypeBuilder.name`,
     }
-  }
-    description = {
-    {
-      id: `${pluginId}.home.contentTypeBuilder.description`,
     }
-  }
+    description ={
+      {
+        `${pluginId}.home.contentTypeBuilder.description`,
+    }
+    }
     actions = {[]}
     />
     {
@@ -121,8 +118,8 @@ class HomePage extends React.Component {
     />
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 HomePage.contextTypes = {

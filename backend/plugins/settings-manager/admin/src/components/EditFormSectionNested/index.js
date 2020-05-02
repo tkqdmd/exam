@@ -5,12 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {has, map, forEach} from 'lodash';
-
+import {forEach, has, map} from 'lodash';
 // HOC
 import EditFormSectionSubNested from '../EditFormSectionSubNested';
-import WithFormSection from '../WithFormSection';
 
 /* eslint-disable react/require-default-props  */
 class EditFormSectionNested extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -72,7 +69,7 @@ class EditFormSectionNested extends React.Component { // eslint-disable-line rea
         key = {key}
         style = {
         {
-          width: '100%'
+          '100%'
         }
       }>
         {
@@ -87,8 +84,8 @@ class EditFormSectionNested extends React.Component { // eslint-disable-line rea
         />
         < /div>
       )
-        ;
-      }
+
+          }
 
       return this.props.renderInput(item, key);
     }
@@ -98,8 +95,8 @@ class EditFormSectionNested extends React.Component { // eslint-disable-line rea
     /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 EditFormSectionNested.propTypes = {

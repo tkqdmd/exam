@@ -5,8 +5,7 @@
 */
 
 import React from 'react';
-import {isEmpty, upperFirst} from 'lodash';
-import PropTypes from 'prop-types';
+import {isEmpty} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 
 import Logo from '../../assets/images/icon_filter_blue.svg';
@@ -87,8 +86,8 @@ class Search extends React.Component {
         < /div>
         < /div>
     )
-    ;
-  }
+
+          }
 }
 
 Search.defaultProps = {

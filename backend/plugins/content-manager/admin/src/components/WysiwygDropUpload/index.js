@@ -27,7 +27,7 @@ const WysiwygDropUpload = (props) => {
     / >
     < /label>
 )
-  ;
-};
+
+      };
 
 export default WysiwygDropUpload;

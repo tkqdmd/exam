@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /* eslint-disable jsx-a11y/media-has-caption */
 const Video = props => {
@@ -17,7 +16,7 @@ const Video = props => {
   width = {width}
   style = {
   {
-    maxWidth: '100%'
+    '100%'
   }
 }
   controls >
@@ -26,8 +25,8 @@ const Video = props => {
   />
   < /video>
 )
-  ;
-};
+
+    };
 
 Video.propTypes = {
   contentState: PropTypes.object.isRequired,

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 function InputSearchLi({onClick, isAdding, item}) {
@@ -51,8 +50,8 @@ function InputSearchLi({onClick, isAdding, item}) {
   < /div>
   < /li>
 )
-  ;
-}
+
+    }
 
 InputSearchLi.defaultProps = {
   item: {

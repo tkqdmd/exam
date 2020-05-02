@@ -5,67 +5,20 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {createStructuredSelector} from 'reselect';
-import {
-  endsWith,
-  find,
-  findIndex,
-  findKey,
-  forEach,
-  get,
-  isEmpty,
-  includes,
-  join,
-  map,
-  replace,
-  size,
-  toNumber,
-} from 'lodash';
+import {endsWith, find, findIndex, forEach, get, isEmpty, join, map, replace, size, toNumber,} from 'lodash';
 import {FormattedMessage} from 'react-intl';
-import Helmet from 'react-helmet';
 import {router} from 'app';
-
-import InputSelect from 'strapi-helper-plugin/lib/src/components/InputSelect';
-
-import pluginId from '../../pluginId';
 // design
-import ContentHeader from '../../components/ContentHeader';
 import EditForm from '../../components/EditForm';
 import HeaderNav from '../../components/HeaderNav';
 import List from '../../components/List';
-import RowDatabase from '../../components/RowDatabase';
 import RowLanguage from '../../components/RowLanguage';
-import PluginLeftMenu from '../../components/PluginLeftMenu';
 
 import {checkFormValidity, getRequiredInputsDb} from '../../utils/inputValidations';
 import {formatLanguageLocale} from '../../utils/getFlag';
 import sendUpdatedParams from '../../utils/sendUpdatedParams';
 // App selectors
-import {makeSelectSections, makeSelectEnvironments} from '../App/selectors';
-import selectHomePage from './selectors';
-import {
-  cancelChanges,
-  changeDefaultLanguage,
-  changeInput,
-  closeModal,
-  configFetch,
-  databaseEdit,
-  databasesFetch,
-  databaseDelete,
-  editSettings,
-  emptyDbModifiedData,
-  languageDelete,
-  languagesFetch,
-  newLanguagePost,
-  newDatabasePost,
-  setErrors,
-  specificDatabaseFetch,
-} from './actions';
-import reducer from './reducer';
-import saga from './sagas';
+import {cancelChanges,} from './actions';
 
 import styles from './styles.scss';
 import config from './config.json';
@@ -331,9 +284,9 @@ listLanguages = {this.props.home.listLanguages}
 onDefaultLanguageChange = {this.handleDefaultLanguageChange}
 />
 )
-;
 
-renderListTitle = () => {
+
+  renderListTitle = () => {
   const availableContentNumber = size(this.props.home.configsDisplay.sections);
   const title =
     availableContentNumber > 1
@@ -355,7 +308,7 @@ renderListTitle = () => {
 <
   /span>
 )
-  ;
+
 };
 
 renderListButtonLabel = () => `list.${this.props.match.params.slug}.button.label`;
@@ -392,7 +345,7 @@ renderPopUpFormDatabase = (section, props, popUpStyles) =>
     <
       /div>
     )
-      ;
+
     }
     return props.renderInput(item, key);
   });
@@ -429,8 +382,8 @@ renderPopUpFormLanguage = section =>
     />
     < /div>
   )
-    ;
-  });
+
+      });
 
 renderRowDatabase = (props, key) => (
   < RowDatabase
@@ -448,9 +401,9 @@ error = {this.props.home.error}
 resetToggleDefaultConnection = {this.resetToggleDefaultConnection}
 />
 )
-;
 
-renderComponent = () => {
+
+      renderComponent = () => {
   // check if  settingName (params.slug) has a custom view display
   let specificComponent = findKey(this.customComponents, value =>
     includes(value, this.props.match.params.slug),
@@ -535,8 +488,8 @@ renderComponent = () => {
   showLoader = {this.props.home.showLoader}
   />
 )
-  ;
-};
+
+      };
 
 // Set the toggleDefaultConnection to false
 resetToggleDefaultConnection = () => this.setState({toggleDefaultConnection: false});
@@ -577,8 +530,8 @@ render()
   < /div>
   < /div>
 )
-  ;
-}
+
+  }
 }
 
 const mapStateToProps = createStructuredSelector({

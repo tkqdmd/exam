@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {includes} from 'lodash';
 
 const Link = props => {
@@ -25,7 +24,7 @@ const Link = props => {
     height = {height}
     style = {
     {
-      marginTop: '27px', maxWidth
+      '27px', maxWidth
     :
       '100%'
     }
@@ -45,7 +44,7 @@ const Link = props => {
 }
   style = {
   {
-    cursor: 'pointer'
+    'pointer'
   }
 }
 >
@@ -55,8 +54,8 @@ const Link = props => {
 <
   /a>
 )
-  ;
-};
+
+  };
 
 Link.defaultProps = {
   children: '',

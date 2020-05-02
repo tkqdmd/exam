@@ -5,18 +5,14 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
-import {map, omitBy, size} from 'lodash';
+import {size} from 'lodash';
 import cn from 'classnames';
-
 // Components from strapi-helper-plugin
 import LoadingBar from 'components/LoadingBar';
 import LoadingIndicator from 'components/LoadingIndicator';
-
 // Design
 import Button from 'components/Button';
-import ListRow from '../ListRow';
 
 import styles from './styles.scss';
 
@@ -29,7 +25,7 @@ const generateListTitle = (data, settingType) => {
       id = "users-permissions.List.title.roles.singular"
       values = {
       {
-        number: size(data)
+        size(data)
       }
     }
       />
@@ -38,7 +34,7 @@ const generateListTitle = (data, settingType) => {
       id = "users-permissions.List.title.roles.plural"
       values = {
       {
-        number: size(data)
+        size(data)
       }
     }
       />;
@@ -54,7 +50,7 @@ const generateListTitle = (data, settingType) => {
       id = "users-permissions.List.title.providers.enabled.plural"
       values = {
       {
-        number: enabledProvidersSize
+        enabledProvidersSize
       }
     }
       />
@@ -63,7 +59,7 @@ const generateListTitle = (data, settingType) => {
       id = "users-permissions.List.title.providers.enabled.singular"
       values = {
       {
-        number: enabledProvidersSize
+        enabledProvidersSize
       }
     }
       />;
@@ -73,8 +69,8 @@ const generateListTitle = (data, settingType) => {
       FormattedMessage
       id = "users-permissions.List.title.providers.disabled.plural"
       values = {
-      {
-        number: size(data) - enabledProvidersSize
+        {
+          size(data) - enabledProvidersSize
       }
     }
       />
@@ -82,8 +78,8 @@ const generateListTitle = (data, settingType) => {
       FormattedMessage
       id = "users-permissions.List.title.providers.disabled.singular"
       values = {
-      {
-        number: size(data) - enabledProvidersSize
+        {
+          size(data) - enabledProvidersSize
       }
     }
       />;
@@ -105,7 +101,7 @@ const generateListTitle = (data, settingType) => {
       id = "users-permissions.List.title.emailTemplates.plural"
       values = {
       {
-        number: size(data)
+        size(data)
       }
     }
       />
@@ -114,7 +110,7 @@ const generateListTitle = (data, settingType) => {
       id = "users-permissions.List.title.emailTemplates.singular"
       values = {
       {
-        number: size(data)
+        size(data)
       }
     }
       />;
@@ -137,7 +133,7 @@ function List({data, deleteData, noButton, onButtonClick, settingType, showLoade
     {showLoaders ? < LoadingBar
   style = {
   {
-    marginTop: '0'
+    '0'
   }
 }
   /> : generateListTitle(data, settingType)}
@@ -194,8 +190,8 @@ function List({data, deleteData, noButton, onButtonClick, settingType, showLoade
   /div>
   < /div>
 )
-  ;
-}
+
+    }
 
 List.defaultProps = {
   noButton: false,

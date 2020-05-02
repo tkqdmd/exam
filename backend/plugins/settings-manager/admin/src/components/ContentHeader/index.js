@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import styles from './styles.scss';
 
@@ -36,8 +35,8 @@ function ContentHeader({name, description}) { // eslint-disable-line react/prefe
     < /div>
     < /div>
 )
-  ;
-}
+
+      }
 
 ContentHeader.propTypes = {
   description: PropTypes.string,

@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 import styles from './componentsStyles.scss';
 
 const ToggleMode = props => {
@@ -27,8 +26,8 @@ const ToggleMode = props => {
   < /button>
   < /div>
 )
-  ;
-};
+
+    };
 
 ToggleMode.defaultProps = {
   isPreviewMode: false,

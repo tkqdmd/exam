@@ -11,6 +11,6 @@ className = {styles.centered} >
   < /div>
   < /div>
 )
-;
 
-export default Loader;
+
+    export default Loader;

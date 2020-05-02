@@ -6,10 +6,9 @@
  */
 
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import pluginId from '../../pluginId';
-
 // Containers
 import ConfigPage from '../ConfigPage';
 
@@ -36,7 +35,7 @@ function App() {
   < /Switch>
   < /div>
 )
-  ;
-}
+
+    }
 
 export default App;

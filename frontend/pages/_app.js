@@ -2,37 +2,35 @@
 
 import Layout from "../components/Layout";
 import withData from "../lib/apollo";
-import defaultPage from "../hocs/defaultPage";
-import { compose } from "recompose";
-import App, { Container } from "next/app";
+import App, {Container} from "next/app";
 import React from "react";
 
 class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+    static async getInitialProps({Component, router, ctx}) {
+        let pageProps = {};
+        if (Component.getInitialProps) {
+            pageProps = await Component.getInitialProps(ctx);
+        }
+        return {pageProps};
     }
-    return { pageProps };
-  }
 
-  render() {
-    const { Component, pageProps, isAuthenticated, ctx } = this.props;
-    return (
-      <Container>
-        
-          <Layout isAuthenticated={isAuthenticated} {...pageProps}>
-            <Component {...pageProps} />
-          </Layout>
-        
-        <style jsx global>
-          {`
+    render() {
+        const {Component, pageProps, isAuthenticated, ctx} = this.props;
+        return (
+            <Container>
+
+                <Layout isAuthenticated={isAuthenticated} {...pageProps}>
+                    <Component {...pageProps} />
+                </Layout>
+
+                <style jsx global>
+                    {`
             a {
-              color: white !important;
+              color: white;
             }
             a:link {
               text-decoration: none !important;
-              color: white !important;
+              color: white;
             }
             a:hover {
               color: white;
@@ -44,9 +42,9 @@ class MyApp extends App {
               column-count: 3;
             }
           `}
-        </style>
-      </Container>
-    );
-  }
+                </style>
+            </Container>
+        );
+    }
 }
 export default withData(MyApp);

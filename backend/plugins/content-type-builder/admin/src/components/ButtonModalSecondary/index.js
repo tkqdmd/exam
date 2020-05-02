@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {Button} from 'reactstrap';
 
@@ -23,8 +22,8 @@ function ButtonModalSecondary({message, onClick, type}) {
   />
   < /Button>
 )
-  ;
-}
+
+    }
 
 ButtonModalSecondary.defaultProps = {
   type: 'button',

@@ -5,54 +5,18 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {createStructuredSelector} from 'reselect';
-import {bindActionCreators, compose} from 'redux';
-import {FormattedMessage} from 'react-intl';
-import {findIndex, get, isEmpty, isEqual, size} from 'lodash';
+import {findIndex, get, isEmpty} from 'lodash';
 import cn from 'classnames';
-
 // Design
-import BackHeader from 'components/BackHeader';
 import Input from 'components/InputsIndex';
 import LoadingIndicator from 'components/LoadingIndicator';
-import LoadingIndicatorPage from 'components/LoadingIndicatorPage';
-import PluginHeader from 'components/PluginHeader';
 
 import InputSearch from '../../components/InputSearchContainer';
 import Plugins from '../../components/Plugins';
 import Policies from '../../components/Policies';
-import pluginId from '../../pluginId';
-
 // Actions
-import {
-  addUser,
-  getPermissions,
-  getPolicies,
-  getRole,
-  getUser,
-  onCancel,
-  onChangeInput,
-  onClickAdd,
-  onClickDelete,
-  selectAllActions,
-  setActionType,
-  setErrors,
-  setForm,
-  setInputPoliciesPath,
-  setRoleId,
-  setShouldDisplayPolicieshint,
-  submit,
-  resetProps,
-  resetShouldDisplayPoliciesHint,
-} from './actions';
-
+import {addUser,} from './actions';
 // Selectors
-import makeSelectEditPage from './selectors';
-
-import reducer from './reducer';
-import saga from './saga';
 
 import styles from './styles.scss';
 
@@ -136,7 +100,7 @@ export class EditPage extends React.Component { // eslint-disable-line react/pre
 didCheckErrors = {this.props.editPage.didCheckErrors}
 label = {
 {
-  id: 'users-permissions.EditPage.form.roles.label.name'
+  'users-permissions.EditPage.form.roles.label.name'
 }
 }
 name = "name"
@@ -144,7 +108,7 @@ onChange = {this.props.onChangeInput}
 type = "text"
 validations = {
 {
-  required: true
+  true
 }
 }
 value = {get(this.props.editPage, ['modifiedData', 'name'
@@ -158,7 +122,7 @@ className = "row" >
 customBootstrapClass = "col-md-12"
 label = {
 {
-  id: 'users-permissions.EditPage.form.roles.label.description'
+  'users-permissions.EditPage.form.roles.label.description'
 }
 }
 name = "description"
@@ -166,7 +130,7 @@ onChange = {this.props.onChangeInput}
 type = "textarea"
 validations = {
 {
-  required: true
+  true
 }
 }
 value = {get(this.props.editPage, ['modifiedData', 'description'
@@ -181,15 +145,15 @@ didDeleteUser = {this.props.editPage.didDeleteUser}
 didFetchUsers = {this.props.editPage.didFetchUsers}
 didGetUsers = {this.props.editPage.didGetUsers}
 getUser = {this.props.getUser}
-label = {
-{
-  id: 'users-permissions.EditPage.form.roles.label.users',
-    params
-:
+label ={
   {
-    number: size(get(this.props.editPage, ['modifiedData', 'users'])),
-  }
-,
+    'users-permissions.EditPage.form.roles.label.users',
+    params
+  :
+{
+  size(get(this.props.editPage, ['modifiedData', 'users'])),
+}
+  ,
 }
 }
 onClickAdd = {()
@@ -207,7 +171,7 @@ users = {get(this.props.editPage, 'users'
 }
 validations = {
 {
-  required: true
+  true
 }
 }
 values = {get(this.props.editPage, ['modifiedData', 'users'
@@ -269,25 +233,25 @@ render()
   PluginHeader
   title = {
   {
-    id: pluginHeaderTitle,
-      values
+    pluginHeaderTitle,
+    values
   :
-    {
-      name: get(this.props.editPage.initialData, 'name'),
-    }
+{
+  get(this.props.editPage.initialData, 'name'),
+}
   ,
-  }
+}
 }
   description = {
   {
-    id: pluginHeaderDescription,
-      values
+    pluginHeaderDescription,
+    values
   :
-    {
-      description: get(this.props.editPage.initialData, 'description') || '',
-    }
+{
+  get(this.props.editPage.initialData, 'description') || '',
+}
   ,
-  }
+}
 }
   actions = {pluginHeaderActions}
   />
@@ -321,7 +285,7 @@ render()
   className = "row"
   style = {
   {
-    marginRight: '-30px'
+    '-30px'
   }
 }>
   {
@@ -330,7 +294,7 @@ render()
     className = {styles.loaderWrapper}
     style = {
     {
-      minHeight: '400px'
+      '400px'
     }
   }>
   <
@@ -363,8 +327,8 @@ render()
   < /div>
   < /div>
 )
-  ;
-}
+
+    }
 }
 
 EditPage.childContextTypes = {

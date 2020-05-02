@@ -7,17 +7,13 @@
 import React from 'react';
 import Select from 'react-select';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
-import {cloneDeep, includes, isArray, isNull, isUndefined, get, findIndex, isEmpty} from 'lodash';
-
+import {cloneDeep, findIndex, get, includes, isArray, isEmpty, isNull, isUndefined} from 'lodash';
 // Utils.
 import request from 'utils/request';
 import templateObject from 'utils/templateObject';
-
 // CSS.
 import 'react-select/dist/react-select.css';
 // Component.
-import SortableList from './SortableList';
 // CSS.
 import styles from './styles.scss';
 
@@ -225,8 +221,8 @@ class SelectMany extends React.PureComponent {
     />
     < /div>
   )
-    ;
-    /* eslint-disable jsx-a11y/label-has-for */
+
+      /* eslint-disable jsx-a11y/label-has-for */
   }
 }
 

@@ -1,18 +1,19 @@
 /* components/ExaminationList/index.js */
 import gql from "graphql-tag";
 import Link from "next/link";
-import { graphql } from "react-apollo";
+import {graphql} from "react-apollo";
 import {
-  Button,
-  Card,
-  CardBody,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  CardColumns,
-  Alert
+    Button,
+    Card,
+    CardBody,
+    CardColumns,
+    CardText,
+    CardTitle,
+    Col,
+    Input,
+    InputGroup,
+    InputGroupAddon
 } from "reactstrap";
-import { CardText, CardTitle, Col } from "reactstrap";
 
 const ExaminationList = (
   { data: { error, examinations }, search, examCode, onChangeExamCode, onExamCodeFound, onSubmitExamCode }) => {
@@ -36,8 +37,8 @@ const ExaminationList = (
     const targetExam = examinations.filter(tar =>
       tar.code == examCode
     );
-    console.log(targetExam);
-    let examId;
+
+      let examId;
     if(targetExam.length === 1) {
         examId = targetExam[0].id;
         

@@ -6,10 +6,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Switch, Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import pluginId from '../../pluginId';
-
 // Containers
 import AuthPage from '../AuthPage';
 import EditPage from '../EditPage';
@@ -55,8 +53,8 @@ class App extends React.Component {
     < /Switch>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 App.contextTypes = {

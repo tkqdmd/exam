@@ -5,10 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {isEmpty, includes, mapKeys, reject, map, isObject, size} from 'lodash';
+import {includes, isEmpty, isObject, map, mapKeys, reject, size} from 'lodash';
 import {FormattedMessage} from 'react-intl';
-import WithInput from '../WithInput';
 
 /* eslint-disable react/require-default-props  */
 class InputPassword extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -105,7 +103,7 @@ class InputPassword extends React.Component { // eslint-disable-line react/prefe
           className = "form-control-feedback invalid-feedback"
           style = {
           {
-            fontSize: '1.3rem'
+            '1.3rem'
           }
         }>
           {
@@ -114,8 +112,8 @@ class InputPassword extends React.Component { // eslint-disable-line react/prefe
         <
           /div>
         )
-          ;
-        })
+
+          })
       );
     }
   }
@@ -187,8 +185,8 @@ class InputPassword extends React.Component { // eslint-disable-line react/prefe
       < /div>
       < /div>
   )
-    ;
-  }
+
+      }
 }
 
 InputPassword.propTypes = {

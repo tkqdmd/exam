@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {capitalize} from 'lodash';
 
@@ -101,7 +100,7 @@ function AttributeLi({
       < span
     style = {
     {
-      fontStyle: 'italic'
+      'italic'
     }
   }>
     {
@@ -138,7 +137,7 @@ function AttributeLi({
   < /div>
   < /li>
 )
-  ;
+
 }
 
 AttributeLi.defaultProps = {

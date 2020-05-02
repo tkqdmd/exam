@@ -28,10 +28,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {isEmpty, includes, mapKeys, reject, map, isObject, union, findIndex, uniqBy, size} from 'lodash';
+import {findIndex, includes, isEmpty, isObject, map, mapKeys, reject, size, union, uniqBy} from 'lodash';
 import {FormattedMessage} from 'react-intl';
-import WithInput from '../WithInput';
 
 /* eslint-disable react/require-default-props  */
 class InputText extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -136,8 +134,8 @@ class InputText extends React.Component { // eslint-disable-line react/prefer-st
           key = {key}
           className = "form-control-feedback invalid-feedback"
           style = {
-          {
-            marginBottom: '1.8rem', fontSize
+            {
+              '1.8rem', fontSize
           :
             '1.3rem'
           }
@@ -148,7 +146,7 @@ class InputText extends React.Component { // eslint-disable-line react/prefer-st
         <
           /div>
         )
-          ;
+
         })
       );
     }
@@ -225,12 +223,12 @@ render()
   placeholder = {placeholder}
   style = {
   {
-    marginBottom: marginBottomInput
+    marginBottomInput
   }
 }
   />
 )
-  ;
+
 
   const requiredClass = this.props.validations.required && this.props.addRequiredInputDesign ? this.props.styles.requiredClass : '';
   let marginTopSmall = this.props.inputDescription ? '-3rem' : '-1.5rem';
@@ -248,7 +246,7 @@ render()
   small
   style = {
   {
-    marginTop: marginTopSmall
+    marginTopSmall
   }
 }>
   {
@@ -262,8 +260,8 @@ render()
 <
   /div>
 )
-  ;
-}
+
+  }
 }
 
 InputText.propTypes = {

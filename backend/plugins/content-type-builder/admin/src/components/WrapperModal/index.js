@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Modal, ModalHeader} from 'reactstrap';
 import styles from './styles.scss';
 
@@ -33,8 +32,8 @@ function WrapperModal({children, isOpen, onToggle, ...rest}) {
   /Modal>
   < /div>
 )
-  ;
-}
+
+    }
 
 WrapperModal.defaultProps = {
   children: null,

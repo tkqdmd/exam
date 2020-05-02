@@ -4,16 +4,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {DragLayer} from 'react-dnd';
-import {flow} from 'lodash';
 
 import ItemTypes from '../../utils/ItemTypes';
 
 import DragBox from '../DragBox';
 import SelectManyDraggedItem from '../SelectManyDraggedItem';
-
-import styles from './styles.scss';
 
 function getItemStyles(props) {
   const {initialOffset, currentOffset, mouseOffset} = props;
@@ -71,8 +66,8 @@ class CustomDragLayer extends React.Component {
       < /div>
       < /div>
   )
-    ;
-  }
+
+        }
 }
 
 const withDragLayer = DragLayer(monitor => ({

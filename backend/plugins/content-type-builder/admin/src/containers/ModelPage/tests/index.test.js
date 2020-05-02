@@ -1,27 +1,16 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {cloneDeep} from 'lodash';
-import {FormattedMessage} from 'react-intl';
-import {Redirect, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 import mountWithIntl from 'testUtils/mountWithIntl';
 import formatMessagesWithPluginId from 'testUtils/formatMessages';
 
-import EmptyAttributesBlock from 'components/EmptyAttributesBlock';
-
 import pluginId from '../../../pluginId';
 import pluginTradsEn from '../../../translations/en.json';
 
-import AttributeLi from '../../../components/AttributeLi';
-import Block from '../../../components/Block';
-import LeftMenuLink from '../../../components/LeftMenuLink';
+import {clearTemporaryAttribute} from '../../App/actions';
 
-import {clearTemporaryAttribute, onChangeAttribute} from '../../App/actions';
-
-import {ModelPage, mapDispatchToProps} from '../index';
-
+import {mapDispatchToProps, ModelPage} from '../index';
 // import CustomLink from '../CustomLink';
-import initialData from './initialData.json';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
 
@@ -38,9 +27,9 @@ const renderComponent = (props = {}) =>
 messages,
   context,
 )
-;
 
-describe('<ModelPage />', () => {
+
+  describe('<ModelPage />', () => {
   let props;
   const basePath = '/plugins/content-type-builder/models';
 

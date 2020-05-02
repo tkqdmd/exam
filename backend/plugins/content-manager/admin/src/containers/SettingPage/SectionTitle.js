@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import styles from './styles.scss';
 
@@ -11,7 +10,7 @@ const SectionTitle = ({isSettings}) => {
     < div
   style = {
   {
-    marginBottom: '18px'
+    '18px'
   }
 }>
 <
@@ -24,7 +23,7 @@ const SectionTitle = ({isSettings}) => {
     < /FormattedMessage>
     < /div>
 )
-  ;
+
 };
 
 SectionTitle.propTypes = {

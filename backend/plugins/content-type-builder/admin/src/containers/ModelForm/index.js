@@ -5,25 +5,12 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {get, isEmpty} from 'lodash';
 
 import Input from 'components/InputsIndex';
 
 import pluginId from '../../pluginId';
-
-import BodyModal from '../../components/BodyModal';
-import ButtonModalPrimary from '../../components/ButtonModalPrimary';
-import ButtonModalSecondary from '../../components/ButtonModalSecondary';
-import FooterModal from '../../components/FooterModal';
-import HeaderModal from '../../components/HeaderModal';
-import HeaderModalTitle from '../../components/HeaderModalTitle';
-import HeaderModalNavContainer from '../../components/HeaderModalNavContainer';
-import HeaderNavLink from '../../components/HeaderNavLink';
-import WrapperModal from '../../components/WrapperModal';
-
-import forms from './forms.json';
 
 const NAVLINKS = [{id: 'base'}, {id: 'advanced'}];
 
@@ -159,8 +146,8 @@ class ModelForm extends React.Component {
     ),
     },
     }
-      ;
-    }
+
+      }
 
     const errors = get(formErrors, input.name, []);
     const onChange =
@@ -188,8 +175,8 @@ class ModelForm extends React.Component {
   }
     />
   )
-    ;
-  };
+
+      };
 
   renderNavLinks = (link, index) => {
     const {activeTab} = this.props;
@@ -207,8 +194,8 @@ class ModelForm extends React.Component {
   }
     />
   )
-    ;
-  };
+
+    };
 
   render() {
     const {actionType, activeTab, isOpen} = this.props;
@@ -249,8 +236,8 @@ class ModelForm extends React.Component {
       < /form>
       < /WrapperModal>
   )
-    ;
-  }
+
+      }
 }
 
 ModelForm.contextTypes = {

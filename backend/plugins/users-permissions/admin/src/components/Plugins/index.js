@@ -7,7 +7,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {has, map} from 'lodash';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import Plugin from '../Plugin';
@@ -60,8 +59,8 @@ class Plugins extends React.Component {
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 Plugins.defaultProps = {

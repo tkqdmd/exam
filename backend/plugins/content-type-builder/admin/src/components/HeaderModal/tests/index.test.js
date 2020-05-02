@@ -7,7 +7,7 @@ describe('<HeaderModal />', () => {
   it('should not crash', () => {
     shallow( < HeaderModal / >
   )
-    ;
+
   });
 
   it('should render its children', () => {

@@ -793,7 +793,7 @@ module.exports = {
       } catch (e) {
         return null
       }
-      ;
+
       if (format === 'boolean') return value === 'true';
 
       return value;

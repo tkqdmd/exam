@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {upperFirst} from 'lodash';
 
@@ -36,8 +35,8 @@ function TableEmpty({colspan, contentType, filters, search}) {
   < /td>
   < /tr>
 )
-  ;
-}
+
+    }
 
 TableEmpty.defaultProps = {
   search: '',

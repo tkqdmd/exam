@@ -5,44 +5,20 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {injectIntl} from 'react-intl';
-import {bindActionCreators, compose} from 'redux';
 import cn from 'classnames';
-import {clone, get, includes, isEqual, isEmpty} from 'lodash';
+import {clone, get, includes, isEmpty, isEqual} from 'lodash';
 
 import HeaderNav from 'components/HeaderNav';
 import PluginHeader from 'components/PluginHeader';
-
-import pluginId from '../../pluginId';
-
 // Design
 import EditForm from '../../components/EditForm';
 import List from '../../components/List';
 import PopUpForm from '../../components/PopUpForm';
-
 // Selectors
-import selectHomePage from './selectors';
-
 // Styles
 import styles from './styles.scss';
-
 // Actions
-import {
-  cancelChanges,
-  deleteData,
-  fetchData,
-  onChange,
-  resetProps,
-  setDataToEdit,
-  setFormErrors,
-  submit,
-  unsetDataToEdit,
-} from './actions';
-
-import reducer from './reducer';
-import saga from './saga';
+import {cancelChanges, setDataToEdit,} from './actions';
 
 import checkFormValidity from './checkFormValidity';
 
@@ -239,12 +215,12 @@ className = {cn('container-fluid', styles.containerFluid
 PluginHeader
 title = {
 {
-  id: 'users-permissions.HomePage.header.title'
+  'users-permissions.HomePage.header.title'
 }
 }
 description = {
 {
-  id: 'users-permissions.HomePage.header.description'
+  'users-permissions.HomePage.header.description'
 }
 }
 actions = {headerActions}
@@ -271,8 +247,8 @@ values = {get(modifiedData, [this.getEndPoint(), dataToEdit], {})}
 < /form>
 < /div>
 )
-;
-}
+
+  }
 }
 
 HomePage.childContextTypes = {

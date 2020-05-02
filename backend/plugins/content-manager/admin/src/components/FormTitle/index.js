@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 const FormTitle = ({description, title}) => (
@@ -21,9 +20,9 @@ id = {title}
 <
 /React.Fragment>
 )
-;
 
-FormTitle.propTypes = {
+
+  FormTitle.propTypes = {
   description: PropTypes.string,
   title: PropTypes.string,
 };

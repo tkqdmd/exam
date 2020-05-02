@@ -6,8 +6,6 @@
 
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
-
 // Design
 import Logo from '../../assets/images/icon_filter.png';
 import Button from '../CustomButton';
@@ -49,8 +47,8 @@ class AddFilterCTA extends React.Component {
     < /div>
     < /Button>
   )
-    ;
-  }
+
+      }
 }
 
 AddFilterCTA.defaultProps = {

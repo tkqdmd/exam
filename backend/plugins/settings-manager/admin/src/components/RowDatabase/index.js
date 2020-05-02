@@ -5,11 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
-
 // modal
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import PopUpWarning from 'components/PopUpWarning';
 
 import PopUpForm from '../PopUpForm';
@@ -90,7 +88,7 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
   <
     /FormattedMessage>
   )
-    ;
+
 
     return (
       < li
@@ -98,7 +96,7 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
   }
     style = {
     {
-      cursor: 'pointer'
+      'pointer'
     }
   }
     onClick = {this.handleShowDatabaseModal} >
@@ -109,9 +107,9 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
       < div
     className = {styles.squared}
     style = {
-    {
-      backgroundColor: this.props.data.color
-    }
+      {
+        this.props.data.color
+      }
   }>
     {
       this.props.data.letter
@@ -122,7 +120,7 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
     className = {styles.label}
     style = {
     {
-      fontWeight: '500'
+      '500'
     }
   }>
     {
@@ -139,7 +137,7 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
     className = {styles.centered}
     style = {
     {
-      width: '15rem'
+      '15rem'
     }
   }>
     {
@@ -150,8 +148,8 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
     < div
     className = {styles.flexed}
     style = {
-    {
-      minWidth: '3rem', justifyContent
+      {
+        '3rem', justifyContent
     :
       'space-between'
     }
@@ -237,8 +235,8 @@ class RowDatabase extends React.Component { // eslint-disable-line react/prefer-
     < /div>
     < /li>
   )
-    ;
-  }
+
+      }
 }
 
 RowDatabase.propTypes = {

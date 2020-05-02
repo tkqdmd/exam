@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import styles from './styles.scss';
@@ -111,8 +110,8 @@ class InputCheckboxPlugin extends React.Component { // eslint-disable-line react
     /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 InputCheckboxPlugin.contextTypes = {

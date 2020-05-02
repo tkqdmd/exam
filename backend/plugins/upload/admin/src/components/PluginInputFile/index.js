@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import cn from 'classnames';
 
@@ -48,7 +47,7 @@ class PluginInputFile extends React.PureComponent {
     className = {styles.underline} > {message} < /span>}
       < /FormattedMessage>
   )
-    ;
+
 
     return (
       < label
@@ -141,8 +140,8 @@ class PluginInputFile extends React.PureComponent {
       / >
       < /label>
   )
-    ;
-  }
+
+    }
 }
 
 PluginInputFile.defaultProps = {};

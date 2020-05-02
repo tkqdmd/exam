@@ -7,7 +7,7 @@ describe('<InlineBlock />', () => {
   it('should not crash', () => {
     shallow( < InlineBlock / >
   )
-    ;
+
   });
 
   it('should render his children', () => {
@@ -20,8 +20,8 @@ describe('<InlineBlock />', () => {
       < Child / >
       < /InlineBlock>,
   )
-    ;
 
-    expect(wrapper.find(Child).exists()).toBe(true);
+
+  expect(wrapper.find(Child).exists()).toBe(true);
   });
 });

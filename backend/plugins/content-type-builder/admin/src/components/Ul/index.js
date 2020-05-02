@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 function Ul({children, id}) {
@@ -16,8 +15,8 @@ function Ul({children, id}) {
     {children}
     < /div>
 )
-  ;
-}
+
+      }
 
 Ul.defaultProps = {
   children: null,

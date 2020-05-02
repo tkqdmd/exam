@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {get} from 'lodash';
 import cn from 'classnames';
 
@@ -37,7 +36,7 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
       LoadingIndicator / >
       < /div>
     )
-      ;
+
     }
 
     return (
@@ -48,13 +47,13 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
       < Input
     inputDescription = {
     {
-      id: 'users-permissions.EditForm.inputSelect.description.role'
+      'users-permissions.EditForm.inputSelect.description.role'
     }
   }
     inputClassName = {styles.inputStyle}
     label = {
     {
-      id: 'users-permissions.EditForm.inputSelect.label.role'
+      'users-permissions.EditForm.inputSelect.label.role'
     }
   }
     name = "advanced.settings.default_role"
@@ -74,12 +73,12 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
       < Input
     label = {
     {
-      id: 'users-permissions.EditForm.inputToggle.label.email'
+      'users-permissions.EditForm.inputToggle.label.email'
     }
   }
     inputDescription = {
     {
-      id: 'users-permissions.EditForm.inputToggle.description.email'
+      'users-permissions.EditForm.inputToggle.description.email'
     }
   }
     name = "advanced.settings.unique_email"
@@ -126,12 +125,12 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
       < Input
     label = {
     {
-      id: 'users-permissions.EditForm.inputToggle.label.sign-up'
+      'users-permissions.EditForm.inputToggle.label.sign-up'
     }
   }
     inputDescription = {
     {
-      id: 'users-permissions.EditForm.inputToggle.description.sign-up'
+      'users-permissions.EditForm.inputToggle.description.sign-up'
     }
   }
     name = "advanced.settings.allow_register"
@@ -150,12 +149,12 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
       < Input
     label = {
     {
-      id: 'users-permissions.EditForm.inputToggle.label.email-confirmation'
+      'users-permissions.EditForm.inputToggle.label.email-confirmation'
     }
   }
     inputDescription = {
     {
-      id: 'users-permissions.EditForm.inputToggle.description.email-confirmation'
+      'users-permissions.EditForm.inputToggle.description.email-confirmation'
     }
   }
     name = "advanced.settings.email_confirmation"
@@ -171,12 +170,12 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
       < Input
     label = {
     {
-      id: 'users-permissions.EditForm.inputToggle.label.email-confirmation-redirection'
+      'users-permissions.EditForm.inputToggle.label.email-confirmation-redirection'
     }
   }
     inputDescription = {
     {
-      id: 'users-permissions.EditForm.inputToggle.description.email-confirmation-redirection'
+      'users-permissions.EditForm.inputToggle.description.email-confirmation-redirection'
     }
   }
     name = "advanced.settings.email_confirmation_redirection"
@@ -189,8 +188,8 @@ class EditForm extends React.Component { // eslint-disable-line react/prefer-sta
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 EditForm.propTypes = {

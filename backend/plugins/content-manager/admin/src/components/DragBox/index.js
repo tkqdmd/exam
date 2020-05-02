@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import GrabIcon from '../../assets/images/icon_grab_blue.svg';
 import DraggedRemovedIcon from '../DraggedRemovedIcon';
@@ -25,7 +24,7 @@ function DragBox({name}) {
   isDragging / >
   < /div>
 )
-  ;
+
 }
 
 DragBox.defaultProps = {

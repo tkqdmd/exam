@@ -6,24 +6,16 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {createStructuredSelector} from 'reselect';
-import {bindActionCreators, compose} from 'redux';
 import 'flag-icon-css/css/flag-icon.css';
-import {Switch, Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {isEmpty} from 'lodash';
 
 import pluginId from '../../pluginId';
 
 import HomePage from '../HomePage';
 
-import {menuFetch, environmentsFetch} from './actions';
-import {makeSelectLoading, makeSelectSections} from './selectors';
+import {environmentsFetch} from './actions';
 import styles from './styles.scss';
-
-import reducer from './reducer';
-import saga from './sagas';
 
 /* eslint-disable react/require-default-props  */
 class App extends React.Component {
@@ -74,8 +66,8 @@ class App extends React.Component {
     < /Switch>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 App.contextTypes = {

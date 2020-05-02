@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import InputText from 'components/InputsIndex';
 
@@ -39,7 +38,7 @@ const RelationBox = ({
     !!source && < span
     style = {
     {
-      fontStyle: 'italic', fontWeight
+      'italic', fontWeight
     :
       '500'
     }
@@ -79,7 +78,7 @@ const RelationBox = ({
   < /div>
   < /InlineBlock>
 )
-  ;
+
 };
 
 RelationBox.defaultProps = {

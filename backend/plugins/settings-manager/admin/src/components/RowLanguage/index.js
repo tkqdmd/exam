@@ -5,10 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {find, get, join, isObject} from 'lodash';
+import {find, get, isObject, join} from 'lodash';
 import {FormattedMessage} from 'react-intl';
-
 // utils
 import getFlag, {formatLanguageLocale} from '../../utils/getFlag';
 
@@ -39,8 +37,8 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
     i
     className = "fa fa-trash"
     style = {
-    {
-      fontSize: '1.1rem', color
+      {
+        '1.1rem', color
     :
       'rgba(14,22,34,0.75)'
     }
@@ -61,7 +59,7 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
     FormattedMessage
     {...
       {
-        id: `settings-manager.${languageObject.name}`
+        `settings-manager.${languageObject.name}`
       }
     }
     /> : '';
@@ -101,13 +99,13 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
   <
     /FormattedMessage>
   )
-    ;
+
 
     return (
       < li
     style = {
     {
-      marginTop: '0'
+      '0'
     }
   }>
   <
@@ -143,7 +141,7 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
     className = "text-center"
     style = {
     {
-      width: '33%'
+      '33%'
     }
   }>
     {
@@ -153,8 +151,8 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
     /div>
     < div
     style = {
-    {
-      display:'flex', width
+      {
+        'flex', width
     :
       '33%'
     }
@@ -173,7 +171,7 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
     onConfirm = {this.handleDeleteLanguage}
     content = {
     {
-      message: 'settings-manager.popUpWarning.languages.delete.message'
+      'settings-manager.popUpWarning.languages.delete.message'
     }
   }
     popUpWarningType = "danger"
@@ -181,8 +179,8 @@ class RowLanguage extends React.Component { // eslint-disable-line react/prefer-
       < /div>
       < /li>
   )
-    ;
-  }
+
+        }
 }
 
 RowLanguage.propTypes = {

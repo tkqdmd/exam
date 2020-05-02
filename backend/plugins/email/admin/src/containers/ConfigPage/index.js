@@ -5,34 +5,15 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
 import {findIndex, get, isEmpty} from 'lodash';
-
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
 import ContainerFluid from 'components/ContainerFluid';
 import HeaderNav from 'components/HeaderNav';
 import PluginHeader from 'components/PluginHeader';
-
-import pluginId from '../../pluginId';
-
 // Plugin's components
 import EditForm from '../../components/EditForm';
-
-import {
-  getSettings,
-  onCancel,
-  onChange,
-  setErrors,
-  submit,
-} from './actions';
-
-import reducer from './reducer';
-import saga from './saga';
-import selectConfigPage from './selectors';
 
 class ConfigPage extends React.Component {
   componentDidMount() {
@@ -117,12 +98,12 @@ class ConfigPage extends React.Component {
     actions = {this.pluginHeaderActions}
     description = {
     {
-      id: 'email.ConfigPage.description'
+      'email.ConfigPage.description'
     }
   }
     title = {
     {
-      id: 'email.ConfigPage.title'
+      'email.ConfigPage.title'
     }
   }
     />
@@ -141,8 +122,8 @@ class ConfigPage extends React.Component {
     < /form>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 ConfigPage.contextTypes = {};

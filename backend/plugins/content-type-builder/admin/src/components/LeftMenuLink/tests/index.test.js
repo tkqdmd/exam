@@ -1,6 +1,5 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {FormattedMessage} from 'react-intl';
 
 import LeftMenuLink from '../index';
 
@@ -8,7 +7,7 @@ describe('<LeftMenuLink />', () => {
   it('Should not crash', () => {
     shallow( < LeftMenuLink / >
   )
-    ;
+
   });
 
   it('should add a span containing from:<source /> if a source prop is given', () => {
@@ -17,8 +16,8 @@ describe('<LeftMenuLink />', () => {
     name = "test"
     source = "source" / >
   )
-    ;
-    const sourceInfo = renderedComponent.find(FormattedMessage).first();
+
+  const sourceInfo = renderedComponent.find(FormattedMessage).first();
 
     expect(sourceInfo.exists()).toBe(true);
 
@@ -33,7 +32,7 @@ describe('<LeftMenuLink />', () => {
     name = "test"
     isTemporary / >
   )
-    ;
+
     const isTemporaryInfo = renderedComponent.find(FormattedMessage).first();
 
     expect(isTemporaryInfo.exists()).toBe(true);

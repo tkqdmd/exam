@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {toString} from 'lodash';
 
 import TableDelete from '../TableDelete';
@@ -43,7 +42,7 @@ class Table extends React.Component {
     value = {this.props.entriesToDelete.indexOf(toString(record.id)) !== -1}
     />
   ))
-    ;
+
     const entriesToDeleteNumber = this.props.entriesToDelete.length;
 
     return (
@@ -79,8 +78,8 @@ class Table extends React.Component {
       < /tbody>
       < /table>
     )
-    ;
-  }
+
+        }
 }
 
 Table.contextTypes = {

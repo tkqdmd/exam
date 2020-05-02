@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 // import { SortableContainer } from 'react-sortable-hoc';
 import SortableItem from './SortableItem';
@@ -45,8 +44,8 @@ const SortableList = ({items, isDraggingSibling, keys, moveAttr, moveAttrEnd, na
     />}
     < /div>
   )
-  ;
-};
+
+      };
 
 SortableList.propTypes = {
   isDraggingSibling: PropTypes.bool.isRequired,

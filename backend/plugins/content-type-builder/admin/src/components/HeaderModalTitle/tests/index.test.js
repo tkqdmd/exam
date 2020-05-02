@@ -8,6 +8,6 @@ describe('<HeaderModalTitle />', () => {
     shallow( < HeaderModalTitle
     title = "app.utils.defaultTitle" / >
   )
-    ;
+
   });
 });

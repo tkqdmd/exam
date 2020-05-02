@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import {trim} from 'lodash';
 
@@ -54,8 +53,8 @@ function FileIcon({fileType}) {
   />
   < /div>
 )
-  ;
-}
+
+    }
 
 FileIcon.defaultProps = {
   fileType: 'zip',

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 
@@ -41,7 +40,7 @@ class TableList extends React.Component {
     FormattedMessage
     {...
       {
-        id: this.props.title
+        this.props.title
       }
     }
     />
@@ -75,7 +74,7 @@ class TableList extends React.Component {
       < FormattedMessage
     {...
       {
-        id: `${pluginId}.table.contentType.head.name`
+        `${pluginId}.table.contentType.head.name`
       }
     }
     />
@@ -83,11 +82,11 @@ class TableList extends React.Component {
     < div
     className = "col-md-5 text-center" >
       < FormattedMessage
-    {...
-      {
-        id: `${pluginId}.table.contentType.head.description`,
-      }
-    }
+        {...
+          {
+            `${pluginId}.table.contentType.head.description`,
+        }
+        }
     />
     < /div>
     < div
@@ -95,7 +94,7 @@ class TableList extends React.Component {
       < FormattedMessage
     {...
       {
-        id: `${pluginId}.table.contentType.head.fields`
+        `${pluginId}.table.contentType.head.fields`
       }
     }
     />
@@ -123,8 +122,8 @@ class TableList extends React.Component {
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 TableList.defaultProps = {

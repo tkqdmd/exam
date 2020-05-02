@@ -5,29 +5,23 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
+  CharacterMetadata,
   CompositeDecorator,
+  ContentBlock,
   ContentState,
   convertFromHTML,
   EditorState,
-  ContentBlock,
-  genKey,
   Entity,
-  CharacterMetadata,
+  genKey,
 } from 'draft-js';
-import {List, OrderedSet, Repeat, fromJS} from 'immutable';
+import {fromJS, List, OrderedSet, Repeat} from 'immutable';
 import cn from 'classnames';
 import {isEmpty, toArray} from 'lodash';
 
 import WysiwygEditor from '../WysiwygEditor';
 import converter from './converter';
-import {
-  findAtomicEntities,
-  findLinkEntities,
-  findImageEntities,
-  findVideoEntities,
-} from './strategies';
+import {findAtomicEntities, findImageEntities, findLinkEntities, findVideoEntities,} from './strategies';
 
 import Image from './image';
 import Link from './link';
@@ -256,8 +250,8 @@ class PreviewWysiwyg extends React.PureComponent {
     tabIndex = "-1" / >
       < /div>
   )
-    ;
-  }
+
+        }
 }
 
 PreviewWysiwyg.contextTypes = {

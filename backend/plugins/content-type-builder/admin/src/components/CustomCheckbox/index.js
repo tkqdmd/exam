@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 import InputNumber from 'components/InputNumberWithErrors';
@@ -46,12 +45,12 @@ class CustomCheckbox extends React.Component {
       < div
     className = 'col-md-12'
     style = {
-    {
-      marginTop: -4, marginBottom
-    :
+      {
+      - 4, marginBottom
+      :
       9
     }
-  }>
+    }>
   <
     FormattedMessage
     id = {label.id} >
@@ -61,8 +60,8 @@ class CustomCheckbox extends React.Component {
     < label
     htmlFor = {name}
     style = {
-    {
-      fontWeight: '500', fontSize
+      {
+        '500', fontSize
     :
       12, cursor
     :
@@ -73,8 +72,8 @@ class CustomCheckbox extends React.Component {
   <
     input
     style = {
-    {
-      marginLeft: 0, marginRight
+      {
+        0, marginRight
     :
       13
     }
@@ -101,8 +100,8 @@ class CustomCheckbox extends React.Component {
       value = {value || ''
     }
       style = {
-      {
-        marginTop: -15
+        {
+        - 15
       }
     }
       />
@@ -111,8 +110,8 @@ class CustomCheckbox extends React.Component {
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 CustomCheckbox.defaultProps = {

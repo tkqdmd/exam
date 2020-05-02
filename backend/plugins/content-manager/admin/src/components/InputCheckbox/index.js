@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './styles.scss';
 
@@ -43,8 +42,8 @@ function InputCheckbox({name, onChange, value}) {
     < /div>
     < /div>
 )
-  ;
-}
+
+      }
 
 InputCheckbox.defaultProps = {
   onChange: () => {

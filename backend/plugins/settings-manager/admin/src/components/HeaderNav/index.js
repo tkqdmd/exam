@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
-import {join, map, take} from 'lodash';
+import {join, take} from 'lodash';
 
 import {darken} from '../../utils/colors';
 
@@ -55,7 +54,7 @@ class HeaderNav extends React.Component { // eslint-disable-line react/prefer-st
       className = {styles.headerLink}
       style = {
       {
-        backgroundColor: linkColor
+        linkColor
       }
     }
       to = {`${baseUrl}/${link.name}`
@@ -74,8 +73,8 @@ class HeaderNav extends React.Component { // eslint-disable-line react/prefer-st
       /div>
       < /NavLink>
     )
-      ;
-    }
+
+        }
   )
   }
   <
@@ -89,8 +88,8 @@ class HeaderNav extends React.Component { // eslint-disable-line react/prefer-st
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 HeaderNav.propTypes = {

@@ -7,7 +7,7 @@ describe('<Block />', () => {
   it('should not crash', () => {
     shallow( < Block / >
   )
-    ;
+
   });
 
   it('should render his children', () => {

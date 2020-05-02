@@ -5,22 +5,13 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  findIndex,
-  get,
-  has,
-  isEmpty,
-  isFunction,
-  upperFirst,
-} from 'lodash';
+import {findIndex, get, has, isEmpty, isFunction, upperFirst,} from 'lodash';
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
 import Input from 'components/InputsIndex';
 
 import InputJSONWithErrors from '../InputJSONWithErrors';
-import WysiwygWithErrors from '../WysiwygWithErrors';
 import styles from './styles.scss';
 
 const getInputType = (type = '') => {
@@ -144,8 +135,8 @@ class Edit extends React.PureComponent {
   }
     customBootstrapClass = {className}
     customInputs = {
-    {
-      json: InputJSONWithErrors, wysiwyg
+      {
+        InputJSONWithErrors, wysiwyg
     :
       WysiwygWithErrors
     }
@@ -179,7 +170,7 @@ class Edit extends React.PureComponent {
     value = {this.props.record[attr]}
     />
   )
-    ;
+
   }
 
   render() {
@@ -192,8 +183,8 @@ class Edit extends React.PureComponent {
       < /div>
       < /div>
   )
-    ;
-  }
+
+        }
 }
 
 Edit.defaultProps = {

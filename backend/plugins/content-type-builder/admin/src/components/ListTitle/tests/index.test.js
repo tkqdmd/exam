@@ -7,7 +7,7 @@ describe('<ListTitle />', () => {
   it('should not crash', () => {
     shallow( < ListTitle / >
   )
-    ;
+
   });
 
   it('should render his children', () => {

@@ -7,6 +7,6 @@ describe('<ButtonModalSecondary />', () => {
   it('should not crash', () => {
     shallow( < ButtonModalSecondary / >
   )
-    ;
+
   });
 });

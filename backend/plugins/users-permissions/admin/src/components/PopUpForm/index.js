@@ -5,26 +5,10 @@
  */
 
 import React from 'react';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
-import {
-  capitalize,
-  get,
-  findIndex,
-  isArray,
-  isEmpty,
-  isObject,
-  includes,
-  map,
-  startsWith,
-  tail,
-  take,
-  takeRight,
-} from 'lodash';
-
+import {capitalize, findIndex, get, includes, isArray, isEmpty, isObject, map, startsWith, tail, take,} from 'lodash';
 // Translations
-import en from 'translations/en.json';
 
 import Input from 'components/InputsIndex';
 
@@ -113,12 +97,12 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
       Input
       inputDescription = {
       {
-        id: 'users-permissions.PopUpForm.Providers.enabled.description'
+        'users-permissions.PopUpForm.Providers.enabled.description'
       }
     }
       label = {
       {
-        id: 'users-permissions.PopUpForm.Providers.enabled.label'
+        'users-permissions.PopUpForm.Providers.enabled.label'
       }
     }
       name = {`${settingType}.${dataToEdit}.enabled`
@@ -154,7 +138,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
           key = {value}
           label = {
           {
-            id: `users-permissions.PopUpForm.Providers.${includes(value, 'callback') || includes(value, 'redirect_uri') ? 'redirectURL.front-end' : value}.label`
+            `users-permissions.PopUpForm.Providers.${includes(value, 'callback') || includes(value, 'redirect_uri') ? 'redirectURL.front-end' : value}.label`
           }
         }
           name = {`${settingType}.${dataToEdit}.${value}`
@@ -176,7 +160,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
         }
           validations = {
           {
-            required: true
+            true
           }
         }
           />
@@ -189,7 +173,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
           disabled
           label = {
           {
-            id: `users-permissions.PopUpForm.Providers.${dataToEdit}.providerConfig.redirectURL`
+            `users-permissions.PopUpForm.Providers.${dataToEdit}.providerConfig.redirectURL`
           }
         }
           name = "noName"
@@ -210,7 +194,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
       <
         /div>
       )
-      ;
+
     }
 
     const params = {
@@ -223,7 +207,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
       < /a>
   ),
   }
-    ;
+
 
     return (
       < div
@@ -241,7 +225,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
   }
     label = {
     {
-      id: `users-permissions.PopUpForm.Email.${value}.label`
+      `users-permissions.PopUpForm.Email.${value}.label`
     }
   }
     name = {`${settingType}.${dataToEdit}.${value}`
@@ -274,17 +258,17 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
   }
     label = {
     {
-      id: `users-permissions.PopUpForm.Email.${value}.label`
+      `users-permissions.PopUpForm.Email.${value}.label`
     }
   }
     name = {`${settingType}.${dataToEdit}.${value}`
   }
     inputDescription = {
-    {
-      id: includes(value, 'object') ? 'users-permissions.PopUpForm.Email.email_templates.inputDescription' : '',
-        params,
-    }
-  }
+          {
+            includes(value, 'object') ? 'users-permissions.PopUpForm.Email.email_templates.inputDescription' : '',
+          params,
+        }
+        }
     onChange = {this.props.onChange}
     placeholder = {`users-permissions.PopUpForm.Email.${this.props.dataToEdit}.${value}.placeholder`
   }
@@ -294,7 +278,7 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
   }
     validations = {
     {
-      required: true
+      true
     }
   }
     value = {get(values, value)}
@@ -307,8 +291,8 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
   <
     /div>
   )
-    ;
-  }
+
+        }
 
   render() {
     const {display} = this.props.values;
@@ -390,8 +374,8 @@ class PopUpForm extends React.Component { // eslint-disable-line react/prefer-st
         < /Modal>
         < /div>
     )
-      ;
-    }
+
+          }
     }
 
     PopUpForm.contextTypes = {

@@ -9,6 +9,6 @@ className = "col-md-12" >
 className = {styles.wysLoader} > < div / > < /div>
   < /div>
 )
-;
 
-export default Loader;
+
+    export default Loader;

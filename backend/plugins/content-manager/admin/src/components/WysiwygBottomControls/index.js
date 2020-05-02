@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 
 import styles from './styles.scss';
@@ -20,7 +19,7 @@ const WysiwygBottomControls = ({isPreviewMode, onChange, onClick}) => {
   className = {styles.underline} > {message} < /span>}
     < /FormattedMessage>
 )
-  ;
+
 
   return (
     < div
@@ -60,7 +59,7 @@ const WysiwygBottomControls = ({isPreviewMode, onChange, onClick}) => {
     < /div>
     < /div>
 )
-  ;
+
 };
 
 WysiwygBottomControls.defaultProps = {

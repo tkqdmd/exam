@@ -5,9 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Collapse} from 'reactstrap';
-import {capitalize, get, isEmpty, map} from 'lodash';
+import {get, isEmpty, map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 
 import Controller from '../Controller';
@@ -82,20 +81,20 @@ class Plugin extends React.Component { // eslint-disable-line react/prefer-state
       {
         this.props.name === 'application' ? (
           < FormattedMessage
-          id = "users-permissions.Plugin.permissions.application.description"
+            id="users-permissions.Plugin.permissions.application.description"
             / >
-  ) :
-    (
-    < FormattedMessage
-    id = "users-permissions.Plugin.permissions.plugins.description"
-    values = {
-    {
-      name: capitalize(this.props.name)
-    }
-  }
-    />
-  )
-  }
+        ) :
+        (
+        < FormattedMessage
+        id = "users-permissions.Plugin.permissions.plugins.description"
+        values = {
+      {
+        capitalize(this.props.name)
+      }
+      }
+        />
+        )
+      }
   <
     /div>
     < /div>
@@ -125,8 +124,8 @@ class Plugin extends React.Component { // eslint-disable-line react/prefer-state
       < /Collapse>
       < /div>
     )
-    ;
-  }
+
+        }
 }
 
 Plugin.contextTypes = {

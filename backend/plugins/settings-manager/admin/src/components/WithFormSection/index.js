@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {findIndex, forEach, has, isObject, join, pullAt, split, includes} from 'lodash';
+import {findIndex, forEach, has, includes, isObject, join, pullAt, split} from 'lodash';
 
 import InputNumber from '../InputNumber';
 import InputText from '../InputText';
@@ -128,7 +128,7 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
     errors = {errors}
     />
   )
-    ;
+
   }
 
   render() {
@@ -142,7 +142,7 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
     styles = {styles}
     />
   )
-    ;
+
   }
 };
 

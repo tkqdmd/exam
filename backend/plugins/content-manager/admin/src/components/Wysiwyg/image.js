@@ -20,7 +20,7 @@ const Image = props => {
   width = {width}
   style = {
   {
-    maxWidth: '100%'
+    '100%'
   }
 }
   />;

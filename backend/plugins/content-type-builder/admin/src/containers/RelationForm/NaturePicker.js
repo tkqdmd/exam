@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {camelCase, truncate} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import pluralize from 'pluralize';
@@ -42,7 +41,7 @@ const NaturePicker = ({modelName, onClick, nature, target}) => {
     < InlineBlock
   style = {
   {
-    width: '100%', paddingTop
+    '100%', paddingTop
   :
     '70px', cursor
   :
@@ -83,7 +82,7 @@ const NaturePicker = ({modelName, onClick, nature, target}) => {
   < /div>
   < /InlineBlock>
 )
-  ;
+
 };
 
 NaturePicker.defaultProps = {

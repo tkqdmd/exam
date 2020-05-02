@@ -70,36 +70,56 @@ export const getUserFromServerCookie = req => {
     username = username.split("=")[1];
   }
 
-  let email = req.headers.cookie
-    .split(";")
-    .find(user => user.trim().startsWith("email="));
-  if (email) {
-    email = email.split("=")[1];
-  }
+    const jwtCookie = req.headers.cookie
+        .split(";")
+        .find(c => c.trim().startsWith("jwt="));
+    if (!jwtCookie) {
+        return undefined;
+    }
+    const jwt = jwtCookie.split("=")[1];
+    return jwtDecode(jwt), username;
+};
 
-  const jwtCookie = req.headers.cookie
-    .split(";")
-    .find(c => c.trim().startsWith("jwt="));
-  if (!jwtCookie) {
-    return undefined;
-  }
-  const jwt = jwtCookie.split("=")[1];
-  return jwtDecode(jwt), username, email;
+export const getEmailFromServerCookie = req => {
+    if (!req.headers.cookie || "") {
+        return undefined;
+    }
+
+    let email = req.headers.cookie
+        .split(";")
+        .find(user => user.trim().startsWith("email="));
+    if (email) {
+        email = email.split("=")[1];
+    }
+
+    const jwtCookie = req.headers.cookie
+        .split(";")
+        .find(c => c.trim().startsWith("jwt="));
+    if (!jwtCookie) {
+        return undefined;
+    }
+    const jwt = jwtCookie.split("=")[1];
+    return jwtDecode(jwt), email;
 };
 
 export const getUserFromLocalCookie = () => {
-  return Cookies.get("email");
+    return Cookies.get("email");
+};
+
+
+export const getUsernameFromLocalCookie = () => {
+    return Cookies.get("username");
 };
 
 //these will be used if you expand to a provider such as Auth0
 const getQueryParams = () => {
-  const params = {};
-  window.location.href.replace(
-    /([^(?|#)=&]+)(=([^&]*))?/g,
-    ($0, $1, $2, $3) => {
-      params[$1] = $3;
-    }
-  );
+    const params = {};
+    window.location.href.replace(
+        /([^(?|#)=&]+)(=([^&]*))?/g,
+        ($0, $1, $2, $3) => {
+            params[$1] = $3;
+        }
+    );
   return params;
 };
 export const extractInfoFromHash = () => {

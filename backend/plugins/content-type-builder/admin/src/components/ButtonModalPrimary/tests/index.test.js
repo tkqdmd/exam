@@ -7,7 +7,7 @@ describe('<ButtonModalPrimary />', () => {
   it('should not crash', () => {
     shallow( < ButtonModalPrimary / >
   )
-    ;
+
   });
 
   it('should use the defaultProps', () => {

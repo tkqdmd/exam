@@ -1,6 +1,5 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {FormattedMessage} from 'react-intl';
 
 import AttributeLi from '../index';
 
@@ -8,7 +7,7 @@ describe('<AttributeLi />', () => {
   it('should not crash', () => {
     shallow( < AttributeLi / >
   )
-    ;
+
   });
 
   it("should show the origin of the model if it's comming from a plugin", () => {

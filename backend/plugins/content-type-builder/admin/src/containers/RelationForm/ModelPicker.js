@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 
 import styles from './styles.scss';
 
@@ -23,7 +22,7 @@ class ModelPicker extends React.Component {
     toggle = {this.toggle}
     style = {
     {
-      backgroundColor: 'transparent'
+      'transparent'
     }
   }>
   <
@@ -37,7 +36,7 @@ class ModelPicker extends React.Component {
       !!plugin && < span
       style = {
       {
-        fontStyle: 'italic', fontWeight
+        'italic', fontWeight
       :
         '500'
       }
@@ -65,7 +64,7 @@ class ModelPicker extends React.Component {
             !!model.source && < span
             style = {
             {
-              fontStyle: 'italic'
+              'italic'
             }
           }>&
             nbsp;
@@ -73,14 +72,14 @@ class ModelPicker extends React.Component {
             < /p>
             < /DropdownItem>
           )
-          ;
+
         })
       }
       < /DropdownMenu>
       < /Dropdown>
       < /div>
     )
-    ;
+
   }
 }
 

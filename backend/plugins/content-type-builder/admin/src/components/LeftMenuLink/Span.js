@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const Span = ({children}) =>
 <
@@ -7,7 +6,7 @@ span
 id = "from-wrapper"
 style = {
 {
-  marginLeft: '1rem', fontStyle
+  '1rem', fontStyle
 :
   'italic', marginRight
 :

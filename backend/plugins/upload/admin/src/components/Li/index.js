@@ -5,16 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 import cn from 'classnames';
 import moment from 'moment';
-
-import IcoContainer from 'components/IcoContainer';
-import PopUpWarning from 'components/PopUpWarning';
-
-import FileIcon from '../FileIcon';
 
 import styles from './styles.scss';
 
@@ -86,7 +79,7 @@ id = "upload.Li.linkCopied" / >
   < /div>
   < /li>
 )
-;
+
 
 render()
 {
@@ -126,7 +119,7 @@ render()
   target = "_blank"
   style = {
   {
-    display: 'none'
+    'none'
   }
 }
   id = {item.hash} > nothing < /a>
@@ -150,8 +143,8 @@ render()
       }<
         /div>
       )
-        ;
-      }
+
+            }
 
       if (value === 'size') {
         const {divider, unit} = this.getUnit(item[value]);
@@ -167,8 +160,8 @@ render()
       <
         /div>
       )
-        ;
-      }
+
+            }
 
       if (value !== '') {
         return (
@@ -176,8 +169,8 @@ render()
         key = {key}
         className = {styles.truncate} > {item[value]} < /div>
       )
-        ;
-      }
+
+              }
 
       return
     <
@@ -200,8 +193,8 @@ render()
   < /li>
   < /CopyToClipboard>
 )
-  ;
-}
+
+              }
 }
 
 Li.contextTypes = {

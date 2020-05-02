@@ -5,70 +5,26 @@
  */
 
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {createStructuredSelector} from 'reselect';
-import PropTypes from 'prop-types';
-import {
-  cloneDeep,
-  findIndex,
-  get,
-  includes,
-  isEmpty,
-  toNumber,
-  toString,
-  truncate,
-  replace,
-} from 'lodash';
-import HTML5Backend from 'react-dnd-html5-backend';
-import {DragDropContext} from 'react-dnd';
+import {cloneDeep, findIndex, get, includes, isEmpty, replace, toNumber, toString, truncate,} from 'lodash';
 import cn from 'classnames';
-
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
-import BackHeader from 'components/BackHeader';
-import EmptyAttributesBlock from 'components/EmptyAttributesBlock';
-import LoadingIndicator from 'components/LoadingIndicator';
-import PluginHeader from 'components/PluginHeader';
-import PopUpWarning from 'components/PopUpWarning';
 import NavLink from 'components/NavLink';
 
 import getQueryParameters from 'utils/getQueryParameters';
 import inputValidations from 'utils/inputsValidations';
 
 import pluginId from '../../pluginId';
-
 // Plugin's components
-import CustomDragLayer from '../../components/CustomDragLayer';
-import Edit from '../../components/Edit';
 import EditRelations from '../../components/EditRelations';
 
 import {bindLayout} from '../../utils/bindLayout';
 import {checkFormValidity} from '../../utils/formValidations';
-
 // App selectors
-import {makeSelectSchema} from '../App/selectors';
 
 import {generateRedirectURI} from '../ListPage/utils';
-import {
-  addRelationItem,
-  changeData,
-  deleteData,
-  getData,
-  initModelProps,
-  moveAttr,
-  moveAttrEnd,
-  onCancel,
-  onRemoveRelationItem,
-  resetProps,
-  setFileRelations,
-  setFormErrors,
-  submit,
-} from './actions';
-import reducer from './reducer';
-import saga from './saga';
-import makeSelectEditPage from './selectors';
+import {addRelationItem, moveAttr, moveAttrEnd,} from './actions';
 import styles from './styles.scss';
 
 export class EditPage extends React.Component {
@@ -452,7 +408,7 @@ export class EditPage extends React.Component {
     />
     < /li>
   )
-    ;
+
   };
 
   pluginHeaderActions = () => [
@@ -536,7 +492,7 @@ export class EditPage extends React.Component {
           />
           < /li>
         )
-          ;
+
         });
 
       return [...acc, ...compos];
@@ -611,7 +567,7 @@ export class EditPage extends React.Component {
         < /div>
         < /div>
     )
-      ;
+
     }
 
     if (!this.hasDisplayedFields()) {
@@ -634,8 +590,8 @@ export class EditPage extends React.Component {
       />
       < /div>
     )
-      ;
-    }
+
+          }
 
     return (
       < div
@@ -662,8 +618,8 @@ export class EditPage extends React.Component {
     < /div>
     < /div>
   )
-    ;
-  };
+
+          };
 
   render() {
     const {editPage, moveAttr, moveAttrEnd} = this.props;
@@ -686,9 +642,9 @@ export class EditPage extends React.Component {
     actions = {this.pluginHeaderActions()}
     subActions = {this.pluginHeaderSubActions()}
     title = {
-    {
-      id: this.getPluginHeaderTitle()
-    }
+              {
+                this.getPluginHeaderTitle()
+              }
   }
     titleId = "addNewEntry"
       / >
@@ -696,18 +652,18 @@ export class EditPage extends React.Component {
     isOpen = {showWarning}
     toggleModal = {this.toggle}
     content = {
-    {
-      title: `${pluginId}.popUpWarning.title`,
-        message
-    :
-      `${pluginId}.popUpWarning.warning.cancelAllSettings`,
-        cancel
-    :
-      `${pluginId}.popUpWarning.button.cancel`,
-        confirm
-    :
-      `${pluginId}.popUpWarning.button.confirm`,
-    }
+              {
+                `${pluginId}.popUpWarning.title`,
+              message
+              :
+              `${pluginId}.popUpWarning.warning.cancelAllSettings`,
+              cancel
+              :
+              `${pluginId}.popUpWarning.button.cancel`,
+              confirm
+              :
+              `${pluginId}.popUpWarning.button.confirm`,
+            }
   }
     popUpWarningType = "danger"
     onConfirm = {this.handleConfirm}
@@ -716,18 +672,18 @@ export class EditPage extends React.Component {
     isOpen = {showWarningDelete}
     toggleModal = {this.toggleDelete}
     content = {
-    {
-      title: `${pluginId}.popUpWarning.title`,
-        message
-    :
-      `${pluginId}.popUpWarning.bodyMessage.contentType.delete`,
-        cancel
-    :
-      `${pluginId}.popUpWarning.button.cancel`,
-        confirm
-    :
-      `${pluginId}.popUpWarning.button.confirm`,
-    }
+              {
+                `${pluginId}.popUpWarning.title`,
+              message
+              :
+              `${pluginId}.popUpWarning.bodyMessage.contentType.delete`,
+              cancel
+              :
+              `${pluginId}.popUpWarning.button.cancel`,
+              confirm
+              :
+              `${pluginId}.popUpWarning.button.confirm`,
+            }
   }
     popUpWarningType = "danger"
     onConfirm = {this.handleConfirm}
@@ -781,8 +737,8 @@ export class EditPage extends React.Component {
     < /form>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 EditPage.contextTypes = {

@@ -5,10 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {get, map, some} from 'lodash';
 import cn from 'classnames';
-import {FormattedMessage} from 'react-intl';
 
 import InputCheckbox from '../InputCheckboxPlugin';
 import styles from './styles.scss';
@@ -87,8 +85,8 @@ class Controller extends React.Component {
     /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 Controller.contextTypes = {

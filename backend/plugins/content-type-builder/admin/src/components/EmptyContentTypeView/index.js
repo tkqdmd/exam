@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import Button from 'components/Button';
 import Brush from '../../assets/images/paint_brush.svg';
@@ -47,8 +46,8 @@ class EmptyContentTypeView extends React.Component { // eslint-disable-line reac
 
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 EmptyContentTypeView.propTypes = {

@@ -3,7 +3,6 @@
  * TableLoading
  */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import LoadingIndicator from 'components/LoadingIndicator';
 
@@ -19,8 +18,8 @@ function TableLoading({colspan}) {
     < /td>
     < /tr>
 )
-  ;
-}
+
+      }
 
 
 TableLoading.propTypes = {

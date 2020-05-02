@@ -5,10 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
-import {get, isEmpty, findIndex} from 'lodash';
+import {findIndex, get, isEmpty} from 'lodash';
 import styles from './styles.scss';
 
 class PluginLeftMenuLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -66,8 +65,8 @@ class PluginLeftMenuLink extends React.Component { // eslint-disable-line react/
     < /NavLink>
     < /li>
   )
-    ;
-  }
+
+      }
 }
 
 PluginLeftMenuLink.propTypes = {

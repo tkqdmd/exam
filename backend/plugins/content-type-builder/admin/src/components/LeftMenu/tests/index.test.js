@@ -7,7 +7,7 @@ describe('<LeftMenu />', () => {
   it('should not crash', () => {
     shallow( < LeftMenu / >
   )
-    ;
+
   });
 
   it('should render a child if given', () => {

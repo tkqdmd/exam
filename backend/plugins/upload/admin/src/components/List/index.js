@@ -5,12 +5,10 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import cn from 'classnames';
 
 import Li from '../Li';
-import ListHeader from '../ListHeader';
 
 import styles from './styles.scss';
 
@@ -23,9 +21,9 @@ id = "upload.EmptyLi.message" / >
   < /div>
   < /li>
 )
-;
 
-function List(props) {
+
+    function List(props) {
   return (
     < div
   className = {cn('container-fluid', styles.listWrapper
@@ -56,8 +54,8 @@ function List(props) {
   < /div>
   < /div>
 )
-  ;
-}
+
+    }
 
 List.defaultProps = {
   sort: 'id',

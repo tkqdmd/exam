@@ -7,7 +7,7 @@ describe('<Ul />', () => {
   it('should not crash', () => {
     shallow( < Ul / >
   )
-    ;
+
   });
 
   it('should render its children', () => {
@@ -24,8 +24,8 @@ describe('<Ul />', () => {
     const wrapper = shallow( < Ul
     id = "test" / >
   )
-    ;
 
-    expect(wrapper.prop('id')).toBe('test');
+
+  expect(wrapper.prop('id')).toBe('test');
   });
 });

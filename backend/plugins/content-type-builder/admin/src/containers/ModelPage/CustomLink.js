@@ -1,6 +1,5 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import pluginId from '../../pluginId';
 
@@ -10,7 +9,7 @@ const CustomLink = ({onClick}) => (
   < li
 style = {
 {
-  color: '#2D3138'
+  '#2D3138'
 }
 }>
 <
@@ -31,9 +30,9 @@ pan >
 < /div>
 < /li>
 )
-;
 
-CustomLink.propTypes = {
+
+  CustomLink.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 

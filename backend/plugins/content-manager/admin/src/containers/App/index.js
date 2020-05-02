@@ -6,31 +6,8 @@
  */
 
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {createStructuredSelector} from 'reselect';
-import PropTypes from 'prop-types';
-import {isEmpty, get} from 'lodash';
-import {Switch, Route} from 'react-router-dom';
-import pluginId from 'pluginId';
-
-import getQueryParameters from 'utils/getQueryParameters';
 
 import LoadingIndicatorPage from 'components/LoadingIndicatorPage';
-import EmptyAttributesView from '../../components/EmptyAttributesView';
-
-import EditPage from '../EditPage';
-import ListPage from '../ListPage';
-import SettingsPage from '../SettingsPage';
-import SettingPage from '../SettingPage';
-
-import {
-  loadModels,
-} from './actions';
-import {makeSelectLoading, makeSelectModelEntries, makeSelectSchema} from './selectors';
-
-import reducer from './reducer';
-import saga from './sagas';
 
 class App extends React.Component {
   componentDidMount() {
@@ -82,7 +59,7 @@ class App extends React.Component {
     < /Switch>
     < /div>
   )
-    ;
+
   }
 }
 

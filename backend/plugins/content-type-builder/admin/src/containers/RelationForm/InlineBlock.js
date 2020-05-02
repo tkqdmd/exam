@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 
@@ -16,9 +15,9 @@ className = {styles.inlineBlock}
 <
 /div>
 )
-;
 
-InlineBlock.defaultProps = {
+
+  InlineBlock.defaultProps = {
   children: null,
 };
 

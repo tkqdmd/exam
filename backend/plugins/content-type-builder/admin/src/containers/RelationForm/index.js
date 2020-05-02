@@ -5,26 +5,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {FormattedMessage} from 'react-intl';
 import {get, isEmpty} from 'lodash';
 
 import Input from 'components/InputsIndex';
 
 import pluginId from '../../pluginId';
-
-import BodyModal from '../../components/BodyModal';
-import ButtonModalPrimary from '../../components/ButtonModalPrimary';
-import ButtonModalSecondary from '../../components/ButtonModalSecondary';
-import FooterModal from '../../components/FooterModal';
-import HeaderModal from '../../components/HeaderModal';
-import HeaderModalNavContainer from '../../components/HeaderModalNavContainer';
-import HeaderNavLink from '../../components/HeaderNavLink';
-import WrapperModal from '../../components/WrapperModal';
-
-import NaturePicker from './NaturePicker';
-import RelationWrapper from './RelationWrapper';
-import RelationBox from './RelationBox';
 
 import formAdvanced from './advanced.json';
 
@@ -192,7 +177,7 @@ class RelationForm extends React.Component {
     <
       /React.Fragment>
     )
-      ;
+
     });
   };
 
@@ -212,7 +197,7 @@ class RelationForm extends React.Component {
   }
     />
   )
-    ;
+
   };
 
   renderRelationForm = () => {
@@ -262,8 +247,8 @@ class RelationForm extends React.Component {
     />
     < /RelationWrapper>
   )
-    ;
-  };
+
+      };
 
   render() {
     const {actionType, activeTab, attributeToEditName, isOpen} = this.props;
@@ -282,8 +267,8 @@ class RelationForm extends React.Component {
       < HeaderModal >
       < div
     style = {
-    {
-      fontSize: '1.8rem', fontWeight
+          {
+            '1.8rem', fontWeight
     :
       'bold'
     }
@@ -297,8 +282,8 @@ class RelationForm extends React.Component {
   <
     span
     style = {
-    {
-      fontStyle: 'italic', textTransform
+          {
+            'italic', textTransform
     :
       'capitalize'
     }
@@ -343,8 +328,8 @@ class RelationForm extends React.Component {
     < /form>
     < /WrapperModal>
   )
-    ;
-  }
+
+        }
 }
 
 RelationForm.contextTypes = {

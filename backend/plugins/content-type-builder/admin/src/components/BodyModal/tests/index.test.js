@@ -7,7 +7,7 @@ describe('<BodyModal />', () => {
   it('should not crash', () => {
     shallow( < BodyModal / >
   )
-    ;
+
   });
 
   it('should render its children', () => {

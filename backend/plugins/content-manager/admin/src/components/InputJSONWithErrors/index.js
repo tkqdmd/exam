@@ -5,22 +5,16 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {isEmpty, isFunction} from 'lodash';
-import cn from 'classnames';
-
 // Design
 import Label from 'components/Label';
 import InputDescription from 'components/InputDescription';
 import InputErrors from 'components/InputErrors';
 import InputSpacer from 'components/InputSpacer';
-
 // Utils
 import validateInput from 'utils/inputsValidations';
 
 import InputJSON from '../InputJSON';
-
-import styles from './styles.scss';
 
 class InputJSONWithErrors extends React.Component { // eslint-disable-line react/prefer-stateless-function
   state = {errors: [], hasInitialValue: false};
@@ -150,7 +144,7 @@ class InputJSONWithErrors extends React.Component { // eslint-disable-line react
     message = {inputDescription}
     style = {
     {
-      marginTop: '3.2rem'
+      '3.2rem'
     }
   }
     />
@@ -168,8 +162,8 @@ class InputJSONWithErrors extends React.Component { // eslint-disable-line react
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 InputJSONWithErrors.defaultProps = {

@@ -20,7 +20,7 @@ function VariableEditIcon({onClick, withLongerHeight, ...rest}) {
   }
   />
 )
-  ;
+
 }
 
 VariableEditIcon.defaultProps = {

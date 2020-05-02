@@ -7,7 +7,7 @@ describe('<FooterModal />', () => {
   it('should not crash', () => {
     shallow( < FooterModal / >
   )
-    ;
+
   });
 
   it('should render its children', () => {

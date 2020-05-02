@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {get, isEmpty} from 'lodash';
 
@@ -174,7 +173,7 @@ class AttributeForm extends React.Component {
       value = {value}
       />
     )
-      ;
+
     }
 
     return (
@@ -191,7 +190,7 @@ class AttributeForm extends React.Component {
     value = {value}
     />
   )
-    ;
+
   };
 
   renderNavLink = (link, index) => {
@@ -210,7 +209,7 @@ class AttributeForm extends React.Component {
   }
     />
   )
-    ;
+
   };
 
   render() {
@@ -229,8 +228,8 @@ class AttributeForm extends React.Component {
       < HeaderModal >
       < div
     style = {
-    {
-      fontSize: '1.8rem', fontWeight
+      {
+        '1.8rem', fontWeight
     :
       'bold'
     }
@@ -244,8 +243,8 @@ class AttributeForm extends React.Component {
   <
     span
     style = {
-    {
-      fontStyle: 'italic', textTransform
+      {
+        'italic', textTransform
     :
       'capitalize'
     }
@@ -290,7 +289,7 @@ class AttributeForm extends React.Component {
     < /form>
     < /WrapperModal>
   )
-    ;
+
   }
 }
 

@@ -6,7 +6,6 @@
 
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cm from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
@@ -198,8 +197,8 @@ class InputJSON extends React.Component {
         < /select>
         < /div>
   )
-    ;
-  }
+
+          }
   }
 
   InputJSON

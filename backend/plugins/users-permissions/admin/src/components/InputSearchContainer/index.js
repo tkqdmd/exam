@@ -8,7 +8,6 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {findIndex, has, includes, isEmpty, map, toLower} from 'lodash';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 
 import Label from 'components/Label';
 import InputSearchLi from '../InputSearchLi';
@@ -156,8 +155,8 @@ class InputSearchContainer extends React.Component { // eslint-disable-line reac
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 InputSearchContainer.defaultProps = {

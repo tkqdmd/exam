@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import { bindActionCreators, compose } from 'redux';
 import pluginId from '../../pluginId';
@@ -146,7 +145,7 @@ class AttributesPickerModal extends React.Component {
     }
     />
   )
-    ;
+
   };
 
   render() {
@@ -168,7 +167,7 @@ class AttributesPickerModal extends React.Component {
     < BodyModal
     style = {
     {
-      paddingTop: '2.3rem'
+      '2.3rem'
     }
   }>
     {
@@ -179,8 +178,8 @@ class AttributesPickerModal extends React.Component {
     < FooterModal / >
     < /WrapperModal>
   )
-    ;
-  }
+
+      }
 }
 
 AttributesPickerModal.contextTypes = {

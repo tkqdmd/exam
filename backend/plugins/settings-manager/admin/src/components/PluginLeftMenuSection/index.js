@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import PluginLeftMenuLink from '../PluginLeftMenuLink';
@@ -24,7 +23,7 @@ class PluginLeftMenuSection extends React.Component { // eslint-disable-line rea
     envParams = {this.props.envParams}
     />
   ))
-    ;
+
 
     return (
       < div
@@ -40,8 +39,8 @@ class PluginLeftMenuSection extends React.Component { // eslint-disable-line rea
     < /ul>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 PluginLeftMenuSection.propTypes = {

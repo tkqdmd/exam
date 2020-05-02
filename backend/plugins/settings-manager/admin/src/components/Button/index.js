@@ -5,10 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
 import {FormattedMessage} from 'react-intl';
-import styles from './styles.scss';
 
 /* eslint-disable react/require-default-props  */
 class Button extends React.Component {
@@ -48,7 +45,7 @@ class Button extends React.Component {
       < /div>
       < /button>
     )
-      ;
+
     }
     return (
       < button
@@ -67,7 +64,7 @@ class Button extends React.Component {
   <
     /button>
   )
-    ;
+
   }
 }
 

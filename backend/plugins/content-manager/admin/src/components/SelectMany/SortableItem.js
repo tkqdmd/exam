@@ -7,13 +7,9 @@
 /* eslint-disable react/no-find-dom-node */
 import React from 'react';
 import {findDOMNode} from 'react-dom';
-import {DragSource, DropTarget} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
-import PropTypes from 'prop-types';
-import {flow, get} from 'lodash';
+import {get} from 'lodash';
 import cn from 'classnames';
-
-import ItemTypes from '../../utils/ItemTypes';
 
 import SelectManyDraggedItem from '../SelectManyDraggedItem';
 
@@ -132,8 +128,8 @@ class SortableItem extends React.Component {
   ),
   )
   )
-    ;
-  }
+
+      }
 }
 
 const withDropTarget = DropTarget(ItemTypes.SORTABLEITEM, sortableItemTarget, connect => ({

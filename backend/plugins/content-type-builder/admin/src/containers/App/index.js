@@ -5,10 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {Switch, Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import pluginId from '../../pluginId';
 
@@ -18,34 +15,7 @@ import NotFoundPage from '../NotFoundPage';
 
 import Loader from './Loader';
 
-import {
-  addAttributeRelation,
-  cancelNewContentType,
-  clearTemporaryAttributeRelation,
-  createTempContentType,
-  deleteModel,
-  deleteTemporaryModel,
-  getData,
-  onChangeExistingContentTypeMainInfos,
-  onChangeNewContentTypeMainInfos,
-  onChangeRelation,
-  onChangeRelationNature,
-  onChangeRelationTarget,
-  resetExistingContentTypeMainInfos,
-  resetNewContentTypeMainInfos,
-  resetProps,
-  saveEditedAttribute,
-  saveEditedAttributeRelation,
-  setTemporaryAttribute,
-  setTemporaryAttributeRelation,
-  updateTempContentType,
-} from './actions';
-
-import reducer from './reducer';
-import saga from './saga';
-import makeSelectApp from './selectors';
-
-import styles from './styles.scss';
+import {addAttributeRelation,} from './actions';
 
 const ROUTES = [
   {
@@ -103,7 +73,7 @@ export class App extends React.Component {
     />}
     />
   )
-    ;
+
   };
 
   render() {
@@ -126,8 +96,8 @@ export class App extends React.Component {
     < /Switch>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 App.defaultProps = {

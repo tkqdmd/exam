@@ -6,14 +6,10 @@
 
 import React from 'react';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import {capitalize, get, includes} from 'lodash';
-import {router} from 'app';
-
 // Design
 import IcoContainer from 'components/IcoContainer';
-import PopUpWarning from 'components/PopUpWarning';
 
 import en from 'translations/en.json';
 import styles from './styles.scss';
@@ -59,7 +55,7 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
     }
     style = {
     {
-      paddingLeft: '20px'
+      '20px'
     }
   }>
   <
@@ -91,7 +87,7 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
     < /div>
     < /div>
   )
-    ;
+
   case
     'providers'
   :
@@ -125,14 +121,14 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
     className = "col-md-6"
     style = {
     {
-      fontWeight: '500'
+      '500'
     }
   }>
     {
       get(this.props.values, [get(this.props.item, 'name'), 'enabled']) ? (
         < span style = {
       {
-        color: '#5A9E06'
+        '#5A9E06'
       }
     }>
       Enabled < /span>
@@ -141,7 +137,7 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
       < span
       style = {
       {
-        color: '#F64D0A'
+        '#F64D0A'
       }
     }>
       Disabled < /span>
@@ -157,7 +153,7 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
     < /div>
     < /div>
   )
-    ;
+
 
   case
     'email-templates'
@@ -201,7 +197,7 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
     < /div>
     < /div>
   )
-    ;
+
 
   default:
     return '';
@@ -253,8 +249,8 @@ class ListRow extends React.Component { // eslint-disable-line react/prefer-stat
     />
     < /li>
   )
-    ;
-  }
+
+      }
 }
 
 ListRow.contextTypes = {

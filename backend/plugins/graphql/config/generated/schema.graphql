@@ -6,6 +6,14 @@ type createExaminationPayload {
   examination: Examination
 }
 
+input createExamuserInput {
+  data: ExamuserInput
+}
+
+type createExamuserPayload {
+  examuser: Examuser
+}
+
 input createQuestionInput {
   data: QuestionInput
 }
@@ -51,6 +59,14 @@ type deleteExaminationPayload {
   examination: Examination
 }
 
+input deleteExamuserInput {
+  where: InputID
+}
+
+type deleteExamuserPayload {
+  examuser: Examuser
+}
+
 input deleteQuestionInput {
   where: InputID
 }
@@ -94,6 +110,11 @@ input editExaminationInput {
   examTime: Int
 }
 
+input editExamuserInput {
+  email: String
+  examCode: Int
+}
+
 input editFileInput {
   name: String
   hash: String
@@ -118,10 +139,11 @@ input editQuestionInput {
 }
 
 input editResultInput {
-  point: Int
+  point: Float
   datetime: DateTime
   email: String
   examCode: Int
+  username: String
 }
 
 input editRoleInput {
@@ -175,6 +197,19 @@ input ExaminationInput {
   examTime: Int
 }
 
+type Examuser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  email: String
+  examCode: Int
+}
+
+input ExamuserInput {
+  email: String
+  examCode: Int
+}
+
 input FileInput {
   name: String!
   hash: String!
@@ -200,12 +235,15 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Examination | createExaminationPayload | updateExaminationPayload | deleteExaminationPayload | Question | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | Result | createResultPayload | updateResultPayload | deleteResultPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Examination | createExaminationPayload | updateExaminationPayload | deleteExaminationPayload | Examuser | createExamuserPayload | updateExamuserPayload | deleteExamuserPayload | Question | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | Result | createResultPayload | updateResultPayload | deleteResultPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createExamination(input: createExaminationInput): createExaminationPayload
   updateExamination(input: updateExaminationInput): updateExaminationPayload
   deleteExamination(input: deleteExaminationInput): deleteExaminationPayload
+  createExamuser(input: createExamuserInput): createExamuserPayload
+  updateExamuser(input: updateExamuserInput): updateExamuserPayload
+  deleteExamuser(input: deleteExamuserInput): deleteExamuserPayload
   createQuestion(input: createQuestionInput): createQuestionPayload
   updateQuestion(input: updateQuestionInput): updateQuestionPayload
   deleteQuestion(input: deleteQuestionInput): deleteQuestionPayload
@@ -236,6 +274,8 @@ type Mutation {
 type Query {
   examination(id: ID!): Examination
   examinations(sort: String, limit: Int, start: Int, where: JSON): [Examination]
+  examuser(id: ID!): Examuser
+  examusers(sort: String, limit: Int, start: Int, where: JSON): [Examuser]
   question(id: ID!): Question
   questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
   result(id: ID!): Result
@@ -279,17 +319,19 @@ type Result {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  point: Int!
+  point: Float!
   datetime: DateTime
   email: String
   examCode: Int
+  username: String
 }
 
 input ResultInput {
-  point: Int!
+  point: Float!
   datetime: DateTime
   email: String
   examCode: Int
+  username: String
 }
 
 input RoleInput {
@@ -307,6 +349,15 @@ input updateExaminationInput {
 
 type updateExaminationPayload {
   examination: Examination
+}
+
+input updateExamuserInput {
+  where: InputID
+  data: editExamuserInput
+}
+
+type updateExamuserPayload {
+  examuser: Examuser
 }
 
 input updateQuestionInput {

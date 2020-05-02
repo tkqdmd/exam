@@ -5,14 +5,14 @@ const DocumentationSection = () => (
   < ul
 style = {
 {
-  marginTop: '20px'
+  '20px'
 }
 }>
 <
 li
 style = {
 {
-  marginLeft: '4.5rem'
+  '4.5rem'
 }
 }>
 <
@@ -34,6 +34,6 @@ target = "_blank" > {message} < /a>
 < /li>
 < /ul>
 )
-;
 
-export default DocumentationSection;
+
+  export default DocumentationSection;

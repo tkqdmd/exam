@@ -5,37 +5,14 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {Link} from 'react-router-dom';
-import {FormattedMessage} from 'react-intl';
-import {findIndex, get, isBoolean, isEmpty, map, replace} from 'lodash';
+import {findIndex, get, isBoolean, isEmpty, replace} from 'lodash';
 import cn from 'classnames';
-
 // Design
 import Button from 'components/Button';
-import Input from 'components/InputsIndex';
-
 // Utils
 import auth from 'utils/auth';
-
-import pluginId from '../../pluginId';
-
 // Logo
 import LogoStrapi from '../../assets/images/logo_strapi.png';
-
-import {
-  hideLoginErrorsInput,
-  onChangeInput,
-  setErrors,
-  setForm,
-  submit,
-} from './actions';
-import form from './form.json';
-import reducer from './reducer';
-import saga from './saga';
-import makeSelectAuthPage from './selectors';
 
 import styles from './styles.scss';
 
@@ -160,7 +137,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
       type = "submit" / >
         < /div>
     )
-      ;
+
     }
     const isEmailForgotSent = this.isAuthType('forgot-password') && submitSuccess;
     const label = isEmailForgotSent ? 'users-permissions.Auth.form.button.forgot-password.success' : `users-permissions.Auth.form.button.${authType}`;
@@ -178,7 +155,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
     label = {label}
     style = {
     {
-      width: '100%'
+      '100%'
     }
   }
     primary = {
@@ -188,7 +165,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
       / >
       < /div>
   )
-    ;
+
   }
 
   renderLogo = () => this.isAuthType('register') && < div
@@ -205,8 +182,8 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
       id = "users-permissions.Auth.link.forgot-password" / >
         < /Link>
     )
-      ;
-    }
+
+        }
 
     if (this.isAuthType('forgot-password') || this.isAuthType('register-success')) {
       return (
@@ -216,8 +193,8 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
       id = "users-permissions.Auth.link.ready" / >
         < /Link>
     )
-      ;
-    }
+
+          }
 
     return
   <
@@ -272,7 +249,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
     }
       validations = {
       {
-        required: true
+        true
       }
     }
       value = {get(modifiedData, get(input, 'name'), get(input, 'value')
@@ -281,7 +258,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
       noErrorsDescription = {noErrorsDescription}
       />
     )
-      ;
+
     });
   }
 
@@ -344,7 +321,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
     className = "row"
     style = {
     {
-      textAlign: 'start'
+      'start'
     }
   }>
     {
@@ -383,7 +360,7 @@ export class AuthPage extends React.Component { // eslint-disable-line react/pre
   <
     /div>
   )
-    ;
+
   }
 }
 

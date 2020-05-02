@@ -1,21 +1,9 @@
-/* /pages/signin.js */ 
+/* /pages/signin.js */
 import React from "react";
-
-import defaultPage from "../hocs/defaultPage";
-import { strapiLogin } from "../lib/auth";
+import {strapiLogin} from "../lib/auth";
 
 import Router from "next/router";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText
-} from "reactstrap";
+import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import Cookies from "js-cookie";
 
 class SignIn extends React.Component {
@@ -31,6 +19,7 @@ class SignIn extends React.Component {
     };
   }
   componentDidMount() {
+    console.log(this.props.isAuthenticated)
     if (this.props.isAuthenticated) {
       Router.push("/"); // redirect if you're already logged in
     }
@@ -43,16 +32,22 @@ class SignIn extends React.Component {
   }
   onSubmit() {
     const {
-      data: { email, username, password }
+      data: {email, username, password}
     } = this.state;
-    const { context } = this.props;
+    const {context} = this.props;
 
-    this.setState({ loading: true });
+    this.setState({loading: true});
 
-    strapiLogin(email, password).then(() => console.log(Cookies.get("user")));
+    strapiLogin(email, password).then(() => console.log(Cookies.get("user")))
+        .catch(error => {
+          this.setState({error: error})
+          console.log(error);
+        });
+
   }
   render() {
     const { error } = this.state;
+    console.log(error);
     return (
       <Container>
         <Row>
@@ -84,15 +79,15 @@ class SignIn extends React.Component {
                   </FormGroup>
 
                   <FormGroup>
-                    <span>
-                      <a href="">
-                        <small>Forgot Password?</small>
-                      </a>
-                    </span>
+                    {/*<span>*/}
+                    {/*  <a href="">*/}
+                    {/*    <small>Forgot Password?</small>*/}
+                    {/*  </a>*/}
+                    {/*</span>*/}
                     <Button
-                      style={{ float: "right", width: 120 }}
-                      color="primary"
-                      onClick={this.onSubmit.bind(this)}
+                        style={{float: "right", width: 120}}
+                        color="primary"
+                        onClick={this.onSubmit.bind(this)}
                     >
                       Submit
                     </Button>

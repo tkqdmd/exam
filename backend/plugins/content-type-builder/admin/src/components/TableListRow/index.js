@@ -5,8 +5,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {get, isEmpty, startCase} from 'lodash';
+import {get, startCase} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 import IcoContainer from 'components/IcoContainer';
 import ListRow from 'components/ListRow';
@@ -89,8 +88,8 @@ class TableListRow extends React.Component {
       message => (
         < span
       style = {
-      {
-        fontStyle: 'italic', color
+        {
+          'italic', color
       :
         '#787E8F', fontWeight
       :
@@ -136,7 +135,7 @@ class TableListRow extends React.Component {
     onClick = {this.handleGoTo}
     style = {
     {
-      height: '5.4rem'
+      '5.4rem'
     }
   }>
   <
@@ -151,7 +150,7 @@ class TableListRow extends React.Component {
     < span
     style = {
     {
-      width: spanStyle
+      spanStyle
     }
   }>
     {
@@ -188,16 +187,16 @@ class TableListRow extends React.Component {
     isOpen = {this.state.showWarning}
     toggleModal = {this.toggleModalWarning}
     content = {
-    {
-      message: 'content-type-builder.popUpWarning.bodyMessage.contentType.delete',
-    }
+      {
+        'content-type-builder.popUpWarning.bodyMessage.contentType.delete',
+      }
   }
     popUpWarningType = {'danger'}
     onConfirm = {this.handleDelete}
     />
     < /ListRow>
   )
-    ;
+
   }
 }
 

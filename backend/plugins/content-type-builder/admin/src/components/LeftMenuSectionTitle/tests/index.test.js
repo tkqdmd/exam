@@ -6,6 +6,6 @@ describe('<LeftMenuSectionTitle />', () => {
   it('should not crash', () => {
     shallow( < LeftMenuSectionTitle / >
   )
-    ;
+
   });
 });

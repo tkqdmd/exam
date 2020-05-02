@@ -5,68 +5,44 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
-import {createStructuredSelector} from 'reselect';
-import {capitalize, findIndex, get, isEmpty, isUndefined, toInteger, upperFirst} from 'lodash';
-import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import {findIndex, get, isEmpty, isUndefined, toInteger, upperFirst} from 'lodash';
+import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import {FormattedMessage} from 'react-intl';
 import cn from 'classnames';
-
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
 import PageFooter from 'components/PageFooter';
-import PluginHeader from 'components/PluginHeader';
 import PopUpWarning from 'components/PopUpWarning';
 import InputCheckbox from 'components/InputCheckbox';
 
 import getQueryParameters from 'utils/getQueryParameters';
 import storeData from 'utils/storeData';
-
-import pluginId from '../../pluginId';
 // Components from the plugin itself
 import AddFilterCTA from '../../components/AddFilterCTA';
 import FiltersPickWrapper from '../../components/FiltersPickWrapper/Loadable';
-import Filter from '../../components/Filter/Loadable';
 import Search from '../../components/Search';
 import Table from '../../components/Table';
-
 // App selectors
-import {makeSelectSchema} from '../App/selectors';
 
 import Div from './Div';
 import {
   addAttr,
   addFilter,
-  changeParams,
-  deleteData,
   deleteSeveralData,
-  getData,
   onChange,
-  onClickRemove,
   onClickSelect,
   onClickSelectAll,
   onToggleDeleteAll,
   onToggleFilters,
-  openFiltersWithSelections,
   removeAllFilters,
-  removeAttr,
   removeFilter,
-  resetDisplayedFields,
-  setDisplayedFields,
-  setParams,
-  submit,
 } from './actions';
-import reducer from './reducer';
-import saga from './saga';
-import makeSelectListPage from './selectors';
 import {
   generateFiltersFromSearch,
+  generateRedirectURI,
   generateSearchFromFilters,
   generateSearchFromParams,
-  generateRedirectURI,
 } from './utils';
 import styles from './styles.scss';
 
@@ -430,7 +406,7 @@ export class ListPage extends React.Component {
     < /div>
     < /DropdownItem>
   )
-    ;
+
   }
 
   renderDropdownHeader = msg => {
@@ -439,8 +415,8 @@ export class ListPage extends React.Component {
     onClick = {this.handleResetDisplayedFields} >
       < div
     style = {
-    {
-      display: 'flex', justifyContent
+        {
+          'flex', justifyContent
     :
       'space-between'
     }
@@ -454,7 +430,7 @@ export class ListPage extends React.Component {
       < /div>
       < /DropdownItem>
   )
-    ;
+
   }
 
   renderFilter = (filter, key) => {
@@ -468,7 +444,7 @@ export class ListPage extends React.Component {
     schema = {this.getCurrentSchema()}
     />
   )
-    ;
+
   }
 
   renderPluginHeader = () => {
@@ -495,29 +471,28 @@ export class ListPage extends React.Component {
       < PluginHeader
     actions = {pluginHeaderActions}
     description = {
-    {
-      id:
-        get(count, this.getCurrentModelName(), 0) > 1
+          {
+            get(count, this.getCurrentModelName(), 0) > 1
           ? 'content-manager.containers.List.pluginHeaderDescription'
           : 'content-manager.containers.List.pluginHeaderDescription.singular',
           values
-    :
-      {
-        label: get(count, this.getCurrentModelName(), 0),
-      }
-    ,
-    }
-  }
+          :
+        {
+          get(count, this.getCurrentModelName(), 0),
+        }
+          ,
+        }
+        }
     title = {
-    {
-      id: this.getCurrentModelName() || 'Content Manager',
-    }
+          {
+            this.getCurrentModelName() || 'Content Manager',
+          }
   }
     withDescriptionAnim = {this.showLoaders()}
     />
   )
-    ;
-  }
+
+      }
 
   renderPopUpWarningDeleteAll = () => {
     const {deleteSeveralData, listPage: {entriesToDelete, showWarningDeleteAll}, onToggleDeleteAll} = this.props;
@@ -527,9 +502,9 @@ export class ListPage extends React.Component {
     isOpen = {showWarningDeleteAll}
     toggleModal = {onToggleDeleteAll}
     content = {
-    {
-      title: 'content-manager.popUpWarning.title',
-        message
+          {
+            'content-manager.popUpWarning.title',
+            message
     :
       this.getPopUpDeleteAllMsg(),
         cancel
@@ -549,8 +524,8 @@ export class ListPage extends React.Component {
   }
     />
   )
-    ;
-  }
+
+      }
 
   render() {
     const {
@@ -707,8 +682,8 @@ export class ListPage extends React.Component {
     isOpen = {this.state.showWarning}
     toggleModal = {this.toggleModalWarning}
     content = {
-    {
-      title: 'content-manager.popUpWarning.title',
+      {
+        'content-manager.popUpWarning.title',
         message
     :
       'content-manager.popUpWarning.bodyMessage.contentType.delete',
@@ -735,8 +710,8 @@ export class ListPage extends React.Component {
     onChangeParams = {this.handleChangeParams}
     params = {listPage.params}
     style = {
-    {
-      marginTop: '2.9rem', padding
+      {
+        '2.9rem', padding
     :
       '0 15px 0 15px'
     }
@@ -748,8 +723,8 @@ export class ListPage extends React.Component {
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 ListPage.contextTypes = {

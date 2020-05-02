@@ -5,22 +5,16 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {isEmpty, isFunction} from 'lodash';
-import cn from 'classnames';
-
 // Design
 import Label from 'components/Label';
 import InputDescription from 'components/InputDescription';
 import InputErrors from 'components/InputErrors';
 import InputSpacer from 'components/InputSpacer';
-
 // Utils
 import validateInput from 'utils/inputsValidations';
 
 import Wysiwyg from '../Wysiwyg';
-
-import styles from './styles.scss';
 
 class WysiwygWithErrors extends React.Component { // eslint-disable-line react/prefer-stateless-function
   state = {errors: [], hasInitialValue: false};
@@ -159,8 +153,8 @@ class WysiwygWithErrors extends React.Component { // eslint-disable-line react/p
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 WysiwygWithErrors.defaultProps = {

@@ -7,7 +7,7 @@ describe('<RelationWrapper />', () => {
   it('should not crash', () => {
     shallow( < RelationWrapper / >
   )
-    ;
+
   });
 
   it('should render its children', () => {
@@ -18,7 +18,7 @@ describe('<RelationWrapper />', () => {
       < Child / >
       < /RelationWrapper>,
   )
-    ;
+
 
     expect(wrapper.find(Child)).toHaveLength(1);
   });

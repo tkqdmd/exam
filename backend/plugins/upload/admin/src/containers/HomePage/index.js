@@ -5,13 +5,8 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
-import {injectIntl} from 'react-intl';
-import {bindActionCreators, compose} from 'redux';
 import {isEmpty} from 'lodash';
-
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
@@ -20,35 +15,17 @@ import InputSearch from 'components/InputSearch';
 // import InputSelect from 'components/InputSelect';
 import PageFooter from 'components/PageFooter';
 import PluginHeader from 'components/PluginHeader';
-
 // Utils
 import getQueryParameters from 'utils/getQueryParameters';
-
-import pluginId from '../../pluginId';
-
 // Plugin's component
 import EntriesNumber from '../../components/EntriesNumber';
 import List from '../../components/List';
 import PluginInputFile from '../../components/PluginInputFile';
-
 // Actions
-import {
-  changeParams,
-  deleteData,
-  getData,
-  onDrop,
-  onSearch,
-  setParams,
-} from './actions';
-
+import {changeParams, deleteData,} from './actions';
 // Selectors
-import selectHomePage from './selectors';
-
 // Styles
 import styles from './styles.scss';
-
-import reducer from './reducer';
-import saga from './saga';
 
 export class HomePage extends React.Component {
   getChildContext = () => (
@@ -132,14 +109,14 @@ render()
   className = {styles.homePageUpload} >
     < PluginHeader
   title = {
-  {
-    id: 'upload.HomePage.title',
-  }
+    {
+      'upload.HomePage.title',
+    }
 }
   description = {
-  {
-    id: 'upload.HomePage.description',
-  }
+    {
+      'upload.HomePage.description',
+    }
 }
   overrideRendering = {this.renderInputSearch}
   />
@@ -181,8 +158,8 @@ render()
   < /div>
   < /ContainerFluid>
 )
-  ;
-}
+
+    }
 }
 
 HomePage.childContextTypes = {

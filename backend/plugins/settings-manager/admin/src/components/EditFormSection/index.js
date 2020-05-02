@@ -5,11 +5,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {map, isEmpty} from 'lodash';
+import {isEmpty, map} from 'lodash';
 import {FormattedMessage} from 'react-intl';
 // HOC Form
-import WithFormSection from '../WithFormSection';
 // nested form
 import EditFormSectionNested from '../EditFormSectionNested';
 
@@ -32,7 +30,7 @@ class EditFormSection extends React.Component { // eslint-disable-line react/pre
     div
     style = {
     {
-      height: '.2rem'
+      '.2rem'
     }
   }
     /> : '';
@@ -73,7 +71,7 @@ class EditFormSection extends React.Component { // eslint-disable-line react/pre
           key = {key}
           style = {
           {
-            width: '100%'
+            '100%'
           }
         }>
           {
@@ -89,8 +87,8 @@ class EditFormSection extends React.Component { // eslint-disable-line react/pre
           />
           < /div>
         )
-          ;
-        }
+
+            }
         return this.props.renderInput(item, key);
       })
     }
@@ -99,8 +97,8 @@ class EditFormSection extends React.Component { // eslint-disable-line react/pre
     < /div>
     < /div>
   )
-    ;
-  }
+
+      }
 }
 
 EditFormSection.propTypes = {

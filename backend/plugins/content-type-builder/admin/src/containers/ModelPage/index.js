@@ -5,50 +5,22 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators, compose} from 'redux';
 import {FormattedMessage} from 'react-intl';
 import {Redirect} from 'react-router-dom';
 import {get, isEqual, pickBy} from 'lodash';
 import {Prompt} from 'react-router';
-
-import Button from 'components/Button';
 import EmptyAttributesBlock from 'components/EmptyAttributesBlock';
 import PluginHeader from 'components/PluginHeader';
-import PopUpWarning from 'components/PopUpWarning';
-import {routerPropTypes} from 'commonPropTypes';
 
 import getQueryParameters from 'utils/getQueryParameters';
 
 import pluginId from '../../pluginId';
 
 import AttributeLi from '../../components/AttributeLi';
-import Block from '../../components/Block';
-import Flex from '../../components/Flex';
 import LeftMenu from '../../components/LeftMenu';
 import LeftMenuSection from '../../components/LeftMenuSection';
 import LeftMenuSectionTitle from '../../components/LeftMenuSectionTitle';
 import LeftMenuLink from '../../components/LeftMenuLink';
-import ListTitle from '../../components/ListTitle';
-import Ul from '../../components/Ul';
-
-import AttributeForm from '../AttributeForm';
-import AttributesModalPicker from '../AttributesPickerModal';
-import ModelForm from '../ModelForm';
-import RelationForm from '../RelationForm';
-
-import {
-  addAttributeToExistingContentType,
-  addAttributeToTempContentType,
-  clearTemporaryAttribute,
-  deleteModelAttribute,
-  onChangeAttribute,
-  resetEditExistingContentType,
-  resetEditTempContentType,
-  submitContentType,
-  submitTempContentType,
-} from '../App/actions';
 
 import CustomLink from './CustomLink';
 
@@ -461,7 +433,7 @@ export class ModelPage extends React.Component {
       to = {to}
       />
     )
-      ;
+
     });
 
     return links;
@@ -479,7 +451,7 @@ export class ModelPage extends React.Component {
     onClickOnTrashIcon = {this.handleClickOnTrashIcon}
     />
   )
-    ;
+
   };
 
   render() {
@@ -694,10 +666,10 @@ export class ModelPage extends React.Component {
       isOpen = {showWarning}
       toggleModal = {this.toggleModalWarning}
       content = {
-      {
-        message: `${pluginId}.popUpWarning.bodyMessage.attribute.delete`,
+        {
+          `${pluginId}.popUpWarning.bodyMessage.attribute.delete`,
       }
-    }
+      }
       popUpWarningType = "danger"
       onConfirm = {this.handleDeleteAttribute}
       />
@@ -724,8 +696,8 @@ export class ModelPage extends React.Component {
       />
       < /div>
     )
-    ;
-  }
+
+        }
 }
 
 ModelPage.contextTypes = {

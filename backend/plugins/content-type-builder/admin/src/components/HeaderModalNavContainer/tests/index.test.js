@@ -7,7 +7,7 @@ describe('<HeaderModalNavContainer />', () => {
   it('should not crash', () => {
     shallow( < HeaderModalNavContainer / >
   )
-    ;
+
   });
 
   it('should render its children', () => {

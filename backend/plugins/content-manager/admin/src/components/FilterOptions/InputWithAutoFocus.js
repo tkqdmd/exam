@@ -67,7 +67,7 @@ class InputWithAutoFocus extends React.Component {
   }
     />
   )
-    ;
+
   }
 }
 

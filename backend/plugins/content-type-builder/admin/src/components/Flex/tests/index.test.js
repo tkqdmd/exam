@@ -7,7 +7,7 @@ describe('<Flex />', () => {
   it('should not crash', () => {
     shallow( < Flex / >
   )
-    ;
+
   });
 
   it('should render his children', () => {

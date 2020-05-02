@@ -6,7 +6,6 @@
 
 import React from 'react';
 import {findIndex, get, isEmpty, map} from 'lodash';
-import PropTypes from 'prop-types';
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
 // or strapi/packages/strapi-helper-plugin/lib/src
@@ -38,13 +37,13 @@ class EditForm extends React.Component {
     customBootstrapClass = "col-md-6"
     inputDescription = {
     {
-      id: 'email.EditForm.Input.select.inputDescription'
+      'email.EditForm.Input.select.inputDescription'
     }
   }
     inputClassName = {styles.inputStyle}
     label = {
     {
-      id: 'email.EditForm.Input.select.label'
+      'email.EditForm.Input.select.label'
     }
   }
     name = "provider"
@@ -72,9 +71,9 @@ class EditForm extends React.Component {
     }
       key = {key}
       label = {
-      {
-        id: value.label
-      }
+        {
+          value.label
+        }
     }
       name = {key}
       onChange = {this.props.onChange}
@@ -82,7 +81,7 @@ class EditForm extends React.Component {
       type = {value.type === 'enum' ? 'select' : value.type}
       validations = {
       {
-        required: true
+        true
       }
     }
       value = {get(this.props.modifiedData, key, ''
@@ -99,8 +98,8 @@ class EditForm extends React.Component {
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 EditForm.defaultProps = {

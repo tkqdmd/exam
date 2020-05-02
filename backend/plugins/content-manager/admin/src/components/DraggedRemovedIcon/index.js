@@ -30,7 +30,7 @@ function DraggedRemovedIcon({isDragging, onRemove, withLongerHeight, ...rest}) {
   }
   />
 )
-  ;
+
 }
 
 DraggedRemovedIcon.defaultProps = {

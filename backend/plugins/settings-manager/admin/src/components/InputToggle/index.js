@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FormattedMessage} from 'react-intl';
 import styles from './styles.scss';
 
@@ -91,8 +90,8 @@ class InputToggle extends React.Component { // eslint-disable-line react/prefer-
       < /div>
       < /div>
   )
-    ;
-  }
+
+        }
 }
 
 InputToggle.propTypes = {

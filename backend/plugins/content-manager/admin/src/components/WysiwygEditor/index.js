@@ -18,7 +18,7 @@ class WysiwygEditor extends React.Component {
     ref = {this.props.setRef}
     />
   )
-    ;
+
   }
 }
 

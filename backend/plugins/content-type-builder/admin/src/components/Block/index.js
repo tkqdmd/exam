@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
 function Block({children}) {
@@ -15,8 +14,8 @@ function Block({children}) {
     {children}
     < /div>
 )
-  ;
-}
+
+      }
 
 Block.defaultProps = {
   children: null,

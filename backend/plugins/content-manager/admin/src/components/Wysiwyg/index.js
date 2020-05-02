@@ -4,22 +4,11 @@
  *
  */
 import React from 'react';
-import {
-  ContentState,
-  EditorState,
-  getDefaultKeyBinding,
-  genKey,
-  Modifier,
-  RichUtils,
-  SelectionState,
-} from 'draft-js';
-import PropTypes from 'prop-types';
+import {ContentState, EditorState, genKey, getDefaultKeyBinding, Modifier, RichUtils, SelectionState,} from 'draft-js';
 import {isEmpty, isNaN, replace, words} from 'lodash';
 import cn from 'classnames';
 
 import request from 'utils/request';
-
-import Controls from '../WysiwygInlineControls';
 import Drop from '../WysiwygDropUpload';
 import WysiwygBottomControls from '../WysiwygBottomControls';
 import WysiwygEditor from '../WysiwygEditor';
@@ -28,21 +17,8 @@ import CustomSelect from './customSelect';
 import PreviewControl from './previewControl';
 import PreviewWysiwyg from './previewWysiwyg';
 import ToggleMode from './toggleMode';
-import {CONTROLS} from './constants';
-import {
-  getBlockContent,
-  getBlockStyle,
-  getDefaultSelectionOffsets,
-  getKeyCommandData,
-  getOffSets,
-} from './helpers';
-import {
-  createNewBlock,
-  getNextBlocksList,
-  getSelectedBlocksList,
-  onTab,
-  updateSelection,
-} from './utils';
+import {getBlockContent, getBlockStyle, getDefaultSelectionOffsets, getKeyCommandData, getOffSets,} from './helpers';
+import {createNewBlock, getNextBlocksList, getSelectedBlocksList, onTab, updateSelection,} from './utils';
 import styles from './styles.scss';
 
 /* eslint-disable react/jsx-handler-names */
@@ -654,7 +630,7 @@ class Wysiwyg extends React.Component {
   onDragLeave = {this.handleDragLeave}
 />
 )
-  ;
+
 
   render() {
     const {editorState, isPreviewMode, isFullscreen} = this.state;
@@ -701,9 +677,9 @@ class Wysiwyg extends React.Component {
         disabled = {isPreviewMode}
         editorState = {editorState}
         handlers = {
-    {
-      addContent: this.addContent,
-        addOlBlock
+            {
+              this.addContent,
+              addOlBlock
     :
       this.addOlBlock,
         addSimpleBlockWithSelection
@@ -729,7 +705,7 @@ class Wysiwyg extends React.Component {
       < div
       style = {
       {
-        marginRight: '10px'
+        '10px'
       }
     }
       />
@@ -803,7 +779,7 @@ class Wysiwyg extends React.Component {
     }
       style = {
       {
-        marginTop: '0'
+        '0'
       }
     }
     >
@@ -821,8 +797,8 @@ class Wysiwyg extends React.Component {
   <
     /div>
   )
-    ;
-  }
+
+    }
 }
 
 Wysiwyg.childContextTypes = {

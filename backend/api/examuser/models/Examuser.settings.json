@@ -1,0 +1,21 @@
+{
+  "connection": "default",
+  "collectionName": "examusers",
+  "info": {
+    "name": "examuser",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "email": {
+      "type": "string"
+    },
+    "examCode": {
+      "type": "integer"
+    }
+  }
+}

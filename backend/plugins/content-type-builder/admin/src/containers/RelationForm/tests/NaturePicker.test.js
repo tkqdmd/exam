@@ -7,7 +7,7 @@ describe('<NaturePicker />', () => {
   it('should not crash', () => {
     shallow( < NaturePicker / >
   )
-    ;
+
   });
 
   it('should use the defaultProps', () => {

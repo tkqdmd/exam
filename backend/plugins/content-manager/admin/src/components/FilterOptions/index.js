@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {get} from 'lodash';
 import cn from 'classnames';
 
@@ -102,7 +101,7 @@ function FilterOptions({filter, filterToFocus, index, onChange, onClickAdd, onCl
     onClick = {onClickAdd}
     style = {
     {
-      marginLeft: isBool ? '14px' : '6px'
+      isBool ? '14px' : '6px'
     }
   }
     type = "button"
@@ -113,8 +112,8 @@ function FilterOptions({filter, filterToFocus, index, onChange, onClickAdd, onCl
   /div>
   < /Div>
 )
-  ;
-}
+
+    }
 
 FilterOptions.defaultProps = {
   filter: {},

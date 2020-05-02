@@ -6,6 +6,6 @@ describe('<NotFoundPage />', () => {
   it('should not crash', () => {
     shallow( < NotFoundPage / >
   )
-    ;
+
   });
 });
