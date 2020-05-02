@@ -4,8 +4,8 @@
  *
  */
 
-import { get } from 'lodash';
-import { getValidationsFromForm } from 'utils/formValidations';
+import {get} from 'lodash';
+import {getValidationsFromForm} from 'utils/formValidations';
 
 import {
   ADD_RELATION_ITEM,
@@ -27,7 +27,7 @@ import {
   UNSET_LOADER,
 } from './constants';
 
-export function addRelationItem({ key, value }) {
+export function addRelationItem({key, value}) {
   return {
     type: ADD_RELATION_ITEM,
     key,
@@ -35,7 +35,7 @@ export function addRelationItem({ key, value }) {
   };
 }
 
-export function changeData({ target }) {
+export function changeData({target}) {
   return {
     type: CHANGE_DATA,
     keys: target.name.split('.'),
@@ -69,7 +69,7 @@ export function getDataSucceeded(id, data, pluginHeaderTitle) {
 
 export function initModelProps(modelName, isCreating, source, attributes, displayedAttributes) {
   const formValidations = getValidationsFromForm(
-    Object.keys(attributes).map(attr => ({ name: attr, validations: get(attributes, attr, {}) })),
+    Object.keys(attributes).map(attr => ({name: attr, validations: get(attributes, attr, {})})),
     [],
   ).filter(field => {
     if (get(field, ['validations', 'required'], false) === true) {
@@ -120,7 +120,7 @@ export function onCancel() {
   };
 }
 
-export function onRemoveRelationItem({ key, index }) {
+export function onRemoveRelationItem({key, index}) {
   return {
     type: ON_REMOVE_RELATION_ITEM,
     key,

@@ -1,11 +1,11 @@
-import { get, includes, isArray, omit, set } from 'lodash';
-import { call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import {get, includes, isArray, omit, set} from 'lodash';
+import {call, fork, put, select, takeLatest} from 'redux-saga/effects';
 import auth from 'utils/auth';
 import request from 'utils/request';
 
-import { hideLoginErrorsInput, submitError, submitSucceeded } from './actions';
-import { SUBMIT } from './constants';
-import { makeSelectFormType, makeSelectModifiedData } from './selectors';
+import {hideLoginErrorsInput, submitError, submitSucceeded} from './actions';
+import {SUBMIT} from './constants';
+import {makeSelectFormType, makeSelectModifiedData} from './selectors';
 
 export function* submitForm(action) {
 
@@ -34,9 +34,9 @@ export function* submitForm(action) {
 
     }
 
-    const response = yield call(request, requestURL, { method: 'POST', body: omit(body, 'news') });
+    const response = yield call(request, requestURL, {method: 'POST', body: omit(body, 'news')});
 
-    if(get(response, 'user.role.name', '') === 'Administrator' || isRegister){
+    if (get(response, 'user.role.name', '') === 'Administrator' || isRegister) {
 
       yield call(auth.setToken, response.jwt, body.rememberMe);
       yield call(auth.setUserInfo, response.user, body.rememberMe);
@@ -58,7 +58,7 @@ export function* submitForm(action) {
     }
 
     yield put(submitSucceeded());
-  } catch(error) {
+  } catch (error) {
     const formType = yield select(makeSelectFormType());
 
     if (isArray(get(error, ['response', 'payload', 'message']))) {
@@ -68,7 +68,7 @@ export function* submitForm(action) {
           acc.id = `users-permissions.${key.id}`;
 
           return acc;
-        }, { id: '' });
+        }, {id: ''});
 
         acc.push(err);
 
@@ -79,22 +79,22 @@ export function* submitForm(action) {
 
       switch (formType) {
         case 'forgot-password':
-          formErrors = [{ name: 'email', errors }];
+          formErrors = [{name: 'email', errors}];
           break;
         case 'login':
-          formErrors = [{ name: 'identifier', errors }, { name: 'password', errors }];
+          formErrors = [{name: 'identifier', errors}, {name: 'password', errors}];
           yield put(hideLoginErrorsInput(true));
           break;
         case 'reset-password':
           if (errors[0].id === 'users-permissions.Auth.form.error.code.provide') {
             strapi.notification.error(errors[0].id);
           } else {
-            formErrors = [{ name: 'password', errors }];
+            formErrors = [{name: 'password', errors}];
           }
           break;
         case 'register': {
           const target = includes(get(errors, ['0', 'id']), 'username') ? 'username' : 'email';
-          formErrors = [{ name: target, errors }];
+          formErrors = [{name: target, errors}];
           break;
         }
         default:

@@ -6,21 +6,21 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
+import {bindActionCreators} from 'redux';
 import cn from 'classnames';
 
-import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 
-import { selectLocale } from '../LanguageProvider/selectors';
-import { changeLocale } from '../LanguageProvider/actions';
-import { languages } from '../../i18n';
+import {selectLocale} from '../LanguageProvider/selectors';
+import {changeLocale} from '../LanguageProvider/actions';
+import {languages} from '../../i18n';
 
 import styles from './styles.scss';
 
 export class LocaleToggle extends React.Component { // eslint-disable-line
-  state = { isOpen: false };
+  state = {isOpen: false};
 
   getFlagUrl = (locale) => {
     switch (locale) {
@@ -42,31 +42,55 @@ export class LocaleToggle extends React.Component { // eslint-disable-line
     }
   }
 
-  toggle = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+  toggle = () => this.setState(prevState => ({isOpen: !prevState.isOpen}));
 
   render() {
-    const { locale } = this.props;
+    const {locale} = this.props;
 
     return (
-      <div className={styles.localeToggle}>
-        <ButtonDropdown isOpen={this.state.isOpen} toggle={this.toggle}>
-          <DropdownToggle className={styles.localeDropdownContent}>
-            <span>{locale}</span>
-            <img src={this.getFlagUrl(locale)} alt={locale} />
-          </DropdownToggle>
-          <DropdownMenu className={cn(styles.localeDropdownMenu, this.props.isLogged ? '' : styles.localeDropdownMenuNotLogged)}>
-            {languages.map(language => (
-              <DropdownItem key={language} onClick={() => this.props.changeLocale(language)} className={cn(styles.localeToggleItem, locale === language ? styles.localeToggleItemActive : '')}>
-                {language.toUpperCase()}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </ButtonDropdown>
-      </div>
-    );
+      < div
+    className = {styles.localeToggle} >
+      < ButtonDropdown
+    isOpen = {this.state.isOpen}
+    toggle = {this.toggle} >
+      < DropdownToggle
+    className = {styles.localeDropdownContent} >
+      < span > {locale} < /span>
+      < img
+    src = {this.getFlagUrl(locale)}
+    alt = {locale}
+    />
+    < /DropdownToggle>
+    < DropdownMenu
+    className = {cn(styles.localeDropdownMenu, this.props.isLogged ? '' : styles.localeDropdownMenuNotLogged
+  )
+  }>
+    {
+      languages.map(language => (
+        < DropdownItem
+      key = {language}
+      onClick = {()
+    =>
+      this.props.changeLocale(language)
+    }
+      className = {cn(styles.localeToggleItem, locale === language ? styles.localeToggleItemActive : ''
+    )
+    }>
+      {
+        language.toUpperCase()
+      }
+    <
+      /DropdownItem>
+    ))
+    }
+  <
+    /DropdownMenu>
+    < /ButtonDropdown>
+    < /div>
+  )
+    ;
   }
 }
-
 
 
 LocaleToggle.propTypes = {
@@ -77,7 +101,7 @@ LocaleToggle.propTypes = {
 
 const mapStateToProps = createSelector(
   selectLocale(),
-  (locale) => ({ locale })
+  (locale) => ({locale})
 );
 
 function mapDispatchToProps(dispatch) {

@@ -1,11 +1,11 @@
 export const SELECT_OPTIONS = [
-  { id: 'components.Wysiwyg.selectOptions.title', value: '' },
-  { id: 'components.Wysiwyg.selectOptions.H1', value: '#' },
-  { id: 'components.Wysiwyg.selectOptions.H2', value: '##' },
-  { id: 'components.Wysiwyg.selectOptions.H3', value: '###' },
-  { id: 'components.Wysiwyg.selectOptions.H4', value: '####' },
-  { id: 'components.Wysiwyg.selectOptions.H5', value: '#####' },
-  { id: 'components.Wysiwyg.selectOptions.H6', value: '######' },
+  {id: 'components.Wysiwyg.selectOptions.title', value: ''},
+  {id: 'components.Wysiwyg.selectOptions.H1', value: '#'},
+  {id: 'components.Wysiwyg.selectOptions.H2', value: '##'},
+  {id: 'components.Wysiwyg.selectOptions.H3', value: '###'},
+  {id: 'components.Wysiwyg.selectOptions.H4', value: '####'},
+  {id: 'components.Wysiwyg.selectOptions.H5', value: '#####'},
+  {id: 'components.Wysiwyg.selectOptions.H6', value: '######'},
 ];
 
 export const CONTROLS = [

@@ -37,25 +37,37 @@ function getSrc(name) {
 }
 
 class SocialLink extends React.PureComponent {
-  state = { imgLoaded: false };
+  state = {imgLoaded: false};
 
-  handleImgLoaded = () => this.setState({ imgLoaded: true });
+  handleImgLoaded = () => this.setState({imgLoaded: true});
 
   render() {
-    const { link, name } = this.props;
-    const { imgLoaded } = this.state;
+    const {link, name} = this.props;
+    const {imgLoaded} = this.state;
 
     return (
-      <div className={cn(styles.socialLink, 'col-md-6 col-lg-6')}>
-        <a href={link} target="_blank">
-          <div>
-            {!imgLoaded && <div className={styles.spinner}><div /></div>}
-            <img src={getSrc(name)} onLoad={this.handleImgLoaded} />
-          </div>
-          <span>{name}</span>
-        </a>
-      </div>
-    );
+      < div
+    className = {cn(styles.socialLink, 'col-md-6 col-lg-6'
+  )
+  }>
+  <
+    a
+    href = {link}
+    target = "_blank" >
+      < div >
+      {
+    !imgLoaded && < div
+    className = {styles.spinner} > < div / > < /div>}
+      < img
+    src = {getSrc(name)}
+    onLoad = {this.handleImgLoaded}
+    />
+    < /div>
+    < span > {name} < /span>
+    < /a>
+    < /div>
+  )
+    ;
   }
 }
 

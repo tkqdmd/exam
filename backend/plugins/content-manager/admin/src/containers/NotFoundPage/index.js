@@ -10,18 +10,21 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 export default class NotFound extends React.Component {
   render() {
     return (
-      <div>
-        <div className="container">
-          <h1>
-            <FormattedMessage id="pageNotFound" />
-          </h1>
-        </div>
-      </div>
-    );
+      < div >
+      < div
+    className = "container" >
+      < h1 >
+      < FormattedMessage
+    id = "pageNotFound" / >
+      < /h1>
+      < /div>
+      < /div>
+  )
+    ;
   }
 }

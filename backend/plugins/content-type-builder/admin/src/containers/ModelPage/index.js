@@ -6,18 +6,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { FormattedMessage } from 'react-intl';
-import { Redirect } from 'react-router-dom';
-import { get, isEqual, pickBy } from 'lodash';
-import { Prompt } from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators, compose} from 'redux';
+import {FormattedMessage} from 'react-intl';
+import {Redirect} from 'react-router-dom';
+import {get, isEqual, pickBy} from 'lodash';
+import {Prompt} from 'react-router';
 
 import Button from 'components/Button';
 import EmptyAttributesBlock from 'components/EmptyAttributesBlock';
 import PluginHeader from 'components/PluginHeader';
 import PopUpWarning from 'components/PopUpWarning';
-import { routerPropTypes } from 'commonPropTypes';
+import {routerPropTypes} from 'commonPropTypes';
 
 import getQueryParameters from 'utils/getQueryParameters';
 
@@ -56,13 +56,14 @@ import styles from './styles.scss';
 import DocumentationSection from './DocumentationSection';
 
 /* eslint-disable react/sort-comp */
+
 /* eslint-disable no-extra-boolean-cast */
 export class ModelPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-  state = { attrToDelete: null, removePrompt: false, showWarning: false };
+  state = {attrToDelete: null, removePrompt: false, showWarning: false};
 
   componentDidMount() {
-    const { setTemporaryAttribute } = this.props;
+    const {setTemporaryAttribute} = this.props;
 
     if (
       this.getModalType() === 'attributeForm' &&
@@ -79,9 +80,9 @@ export class ModelPage extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      location: { search },
+      location: {search},
       match: {
-        params: { modelName },
+        params: {modelName},
       },
       resetEditExistingContentType,
     } = prevProps;
@@ -102,7 +103,7 @@ export class ModelPage extends React.Component {
   getAttributeType = () => getQueryParameters(this.getSearch(), 'attributeType');
 
   getFormData = () => {
-    const { modifiedData, newContentType } = this.props;
+    const {modifiedData, newContentType} = this.props;
 
     if (this.getActionType() === 'create' || this.isUpdatingTemporaryContentType()) {
       return newContentType;
@@ -114,7 +115,7 @@ export class ModelPage extends React.Component {
   getModalType = () => getQueryParameters(this.getSearch(), 'modalType');
 
   getModel = () => {
-    const { modifiedData, newContentType } = this.props;
+    const {modifiedData, newContentType} = this.props;
 
     if (this.isUpdatingTemporaryContentType()) {
       return newContentType;
@@ -128,7 +129,7 @@ export class ModelPage extends React.Component {
   getModelAttributesLength = () => Object.keys(this.getModelAttributes()).length;
 
   getModelDescription = () => {
-    const { initialData } = this.props;
+    const {initialData} = this.props;
 
     const description = get(initialData, [this.getModelName(), 'description'], null);
 
@@ -137,15 +138,15 @@ export class ModelPage extends React.Component {
     return !!description
       ? description
       : {
-          id: `${pluginId}.modelPage.contentHeader.emptyDescription.description`,
-        };
+        id: `${pluginId}.modelPage.contentHeader.emptyDescription.description`,
+      };
     /* eslint-enable indent */
   };
 
   getModelName = () => {
     const {
       match: {
-        params: { modelName },
+        params: {modelName},
       },
     } = this.props;
 
@@ -153,7 +154,7 @@ export class ModelPage extends React.Component {
   };
 
   getModelsNumber = () => {
-    const { models } = this.props;
+    const {models} = this.props;
 
     return models.length;
   };
@@ -187,13 +188,13 @@ export class ModelPage extends React.Component {
     const handleSubmit = this.isUpdatingTemporaryContentType()
       ? () => submitTempContentType(newContentType, this.context)
       : () => {
-          submitContentType(
-            this.getModelName(),
-            get(modifiedData, this.getModelName()),
-            this.context,
-            this.getSource(),
-          );
-        };
+        submitContentType(
+          this.getModelName(),
+          get(modifiedData, this.getModelName()),
+          this.context,
+          this.getSource(),
+        );
+      };
     /* istanbul ignore next */
     const handleCancel = this.isUpdatingTemporaryContentType()
       ? resetEditTempContentType
@@ -223,7 +224,7 @@ export class ModelPage extends React.Component {
   };
 
   getPluginHeaderTitle = () => {
-    const { modifiedData, newContentType } = this.props;
+    const {modifiedData, newContentType} = this.props;
     const name = this.getModelName();
 
     /* istanbul ignore if */
@@ -236,7 +237,7 @@ export class ModelPage extends React.Component {
 
   getSearch = () => {
     const {
-      location: { search },
+      location: {search},
     } = this.props;
 
     return search;
@@ -252,7 +253,7 @@ export class ModelPage extends React.Component {
   getSource = () => {
     const {
       match: {
-        params: { modelName },
+        params: {modelName},
       },
     } = this.props;
 
@@ -262,10 +263,10 @@ export class ModelPage extends React.Component {
   };
 
   handleClickEditAttribute = async (attributeName, type) => {
-    const { emitEvent } = this.context;
+    const {emitEvent} = this.context;
     const {
       canOpenModal,
-      history: { push },
+      history: {push},
       setTemporaryAttribute,
     } = this.props;
     const attributeType = ['integer', 'biginteger', 'float', 'decimal'].includes(type) ? 'number' : type;
@@ -278,7 +279,7 @@ export class ModelPage extends React.Component {
       emitEvent('willEditFieldOfContentType');
       push({
         search: `modalType=attributeForm&attributeType=${attributeType ||
-          'relation'}&settingType=base&actionType=edit&attributeName=${attributeName}`,
+        'relation'}&settingType=base&actionType=edit&attributeName=${attributeName}`,
       });
     } else {
       this.displayNotificationCTNotSaved();
@@ -286,8 +287,8 @@ export class ModelPage extends React.Component {
   };
 
   handleClickEditModelMainInfos = async () => {
-    const { emitEvent } = this.context;
-    const { canOpenModal } = this.props;
+    const {emitEvent} = this.context;
+    const {canOpenModal} = this.props;
 
     await this.wait();
 
@@ -304,13 +305,13 @@ export class ModelPage extends React.Component {
   handleClickOpenModalChooseAttributes = async () => {
     const {
       canOpenModal,
-      history: { push },
+      history: {push},
     } = this.props;
 
     await this.wait();
 
     if (canOpenModal || this.isUpdatingTemporaryContentType()) {
-      push({ search: 'modalType=chooseAttributes' });
+      push({search: 'modalType=chooseAttributes'});
     } else {
       this.displayNotificationCTNotSaved();
     }
@@ -319,7 +320,7 @@ export class ModelPage extends React.Component {
   handleClickOpenModalCreateCT = () => {
     const {
       canOpenModal,
-      history: { push },
+      history: {push},
     } = this.props;
 
     if (canOpenModal) {
@@ -332,11 +333,11 @@ export class ModelPage extends React.Component {
   };
 
   handleClickOnTrashIcon = attrToDelete => {
-    const { emitEvent } = this.context;
-    const { canOpenModal } = this.props;
+    const {emitEvent} = this.context;
+    const {canOpenModal} = this.props;
 
     if (canOpenModal || this.isUpdatingTemporaryContentType()) {
-      this.setState({ showWarning: true, attrToDelete });
+      this.setState({showWarning: true, attrToDelete});
       emitEvent('willDeleteFieldOfContentType');
     } else {
       this.displayNotificationCTNotSaved();
@@ -344,8 +345,8 @@ export class ModelPage extends React.Component {
   };
 
   handleDeleteAttribute = () => {
-    const { deleteModelAttribute } = this.props;
-    const { attrToDelete } = this.state;
+    const {deleteModelAttribute} = this.props;
+    const {attrToDelete} = this.state;
 
     /* istanbul ignore if */
     const keys = this.isUpdatingTemporaryContentType()
@@ -353,7 +354,7 @@ export class ModelPage extends React.Component {
       : ['modifiedData', this.getModelName(), 'attributes', attrToDelete];
 
     deleteModelAttribute(keys);
-    this.setState({ attrToDelete: null, showWarning: false });
+    this.setState({attrToDelete: null, showWarning: false});
   };
 
   handleSubmit = (shouldContinue = false) => {
@@ -361,8 +362,8 @@ export class ModelPage extends React.Component {
       addAttributeRelation,
       addAttributeToExistingContentType,
       addAttributeToTempContentType,
-      history: { push },
-      location: { search },
+      history: {push},
+      location: {search},
     } = this.props;
     const attributeType = getQueryParameters(search, 'attributeType');
 
@@ -377,12 +378,12 @@ export class ModelPage extends React.Component {
     }
     const nextSearch = shouldContinue ? 'modalType=chooseAttributes' : '';
 
-    push({ search: nextSearch });
+    push({search: nextSearch});
   };
 
   handleSubmitEdit = () => {
     const {
-      history: { push },
+      history: {push},
       saveEditedAttribute,
       saveEditedAttributeRelation,
     } = this.props;
@@ -394,29 +395,29 @@ export class ModelPage extends React.Component {
       saveEditedAttribute(attributeName, this.isUpdatingTemporaryContentType(), this.getModelName());
     }
 
-    push({ search: '' });
+    push({search: ''});
   };
 
   hasModelBeenModified = () => {
-    const { initialData, modifiedData } = this.props;
+    const {initialData, modifiedData} = this.props;
     const currentModel = this.getModelName();
 
     return !isEqual(initialData[currentModel], modifiedData[currentModel]) && this.getSearch() === '';
   };
 
   isUpdatingTemporaryContentType = (modelName = this.getModelName()) => {
-    const { models } = this.props;
+    const {models} = this.props;
     /* istanbul ignore next */
     const currentModel = models.find(model => model.name === modelName) || {
       isTemporary: true,
     };
 
-    const { isTemporary } = currentModel;
+    const {isTemporary} = currentModel;
 
     return isTemporary;
   };
 
-  setPrompt = () => this.setState({ removePrompt: false });
+  setPrompt = () => this.setState({removePrompt: false});
 
   isTryingToEditAnUnknownAttribute = () => {
     const hasAttribute = Object.keys(this.getModelAttributes()).indexOf(this.getAttributeName()) !== -1;
@@ -425,7 +426,7 @@ export class ModelPage extends React.Component {
   };
 
   shouldRedirect = () => {
-    const { models } = this.props;
+    const {models} = this.props;
 
     return (
       models.findIndex(model => model.name === this.getModelName()) === -1 ||
@@ -433,10 +434,10 @@ export class ModelPage extends React.Component {
     );
   };
 
-  toggleModalWarning = () => this.setState(prevState => ({ showWarning: !prevState.showWarning }));
+  toggleModalWarning = () => this.setState(prevState => ({showWarning: !prevState.showWarning}));
 
   wait = async () => {
-    this.setState({ removePrompt: true });
+    this.setState({removePrompt: true});
     return new Promise(resolve => setTimeout(resolve, 100));
   };
 
@@ -444,22 +445,23 @@ export class ModelPage extends React.Component {
     strapi.notification.info(`${pluginId}.notification.info.contentType.creating.notSaved`);
 
   renderLinks = () => {
-    const { models } = this.props;
+    const {models} = this.props;
     const links = models.map(model => {
-      const { isTemporary, name, source } = model;
+      const {isTemporary, name, source} = model;
       const base = `/plugins/${pluginId}/models/${name}`;
       const to = source ? `${base}&source=${source}` : base;
 
       return (
-        <LeftMenuLink
-          key={name}
-          icon="fa fa-caret-square-o-right"
-          isTemporary={isTemporary}
-          name={name}
-          source={source}
-          to={to}
-        />
-      );
+        < LeftMenuLink
+      key = {name}
+      icon = "fa fa-caret-square-o-right"
+      isTemporary = {isTemporary}
+      name = {name}
+      source = {source}
+      to = {to}
+      />
+    )
+      ;
     });
 
     return links;
@@ -469,14 +471,15 @@ export class ModelPage extends React.Component {
     const attributeInfos = get(this.getModelAttributes(), attribute, {});
 
     return (
-      <AttributeLi
-        key={attribute}
-        name={attribute}
-        attributeInfos={attributeInfos}
-        onClick={this.handleClickEditAttribute}
-        onClickOnTrashIcon={this.handleClickOnTrashIcon}
-      />
-    );
+      < AttributeLi
+    key = {attribute}
+    name = {attribute}
+    attributeInfos = {attributeInfos}
+    onClick = {this.handleClickEditAttribute}
+    onClickOnTrashIcon = {this.handleClickOnTrashIcon}
+    />
+  )
+    ;
   };
 
   render() {
@@ -487,8 +490,8 @@ export class ModelPage extends React.Component {
       clearTemporaryAttribute,
       clearTemporaryAttributeRelation,
       createTempContentType,
-      history: { push },
-      location: { pathname, search },
+      history: {push},
+      location: {pathname, search},
       models,
       modifiedData,
       onChangeAttribute,
@@ -504,13 +507,17 @@ export class ModelPage extends React.Component {
       temporaryAttributeRelation,
       updateTempContentType,
     } = this.props;
-    const { showWarning, removePrompt } = this.state;
+    const {showWarning, removePrompt} = this.state;
 
     if (this.shouldRedirect()) {
-      const { name, source } = models[0];
+      const {name, source} = models[0];
       const to = source ? `${name}&source=${source}` : name;
 
-      return <Redirect to={to} />;
+      return
+    <
+      Redirect
+      to = {to}
+      />;
     }
 
     const modalType = this.getModalType();
@@ -520,152 +527,204 @@ export class ModelPage extends React.Component {
     const icon = this.getSource() ? null : 'fa fa-pencil';
 
     return (
-      <div className={styles.modelpage}>
-        <FormattedMessage id={`${pluginId}.prompt.content.unsaved`}>
-          {msg => <Prompt when={this.hasModelBeenModified() && !removePrompt} message={msg} />}
-        </FormattedMessage>
-        <div className="container-fluid">
-          <div className="row">
-            <LeftMenu>
-              <LeftMenuSection>
-                <LeftMenuSectionTitle id={this.getSectionTitle()} />
-                <ul>
-                  {this.renderLinks()}
-                  <CustomLink onClick={this.handleClickOpenModalCreateCT} />
-                </ul>
-              </LeftMenuSection>
-              <LeftMenuSection>
-                <LeftMenuSectionTitle id={`${pluginId}.menu.section.documentation.name`} />
-                <DocumentationSection />
-              </LeftMenuSection>
-            </LeftMenu>
+      < div
+    className = {styles.modelpage} >
+      < FormattedMessage
+    id = {`${pluginId}.prompt.content.unsaved`
+  }>
+    {
+      msg =>
+    <
+      Prompt
+      when = {this.hasModelBeenModified() && !removePrompt}
+      message = {msg}
+      />}
+      < /FormattedMessage>
+      < div
+      className = "container-fluid" >
+        < div
+      className = "row" >
+        < LeftMenu >
+        < LeftMenuSection >
+        < LeftMenuSectionTitle
+      id = {this.getSectionTitle()}
+      />
+      < ul >
+      {this.renderLinks()}
+      < CustomLink
+      onClick = {this.handleClickOpenModalCreateCT}
+      />
+      < /ul>
+      < /LeftMenuSection>
+      < LeftMenuSection >
+      < LeftMenuSectionTitle
+      id = {`${pluginId}.menu.section.documentation.name`
+    }
+      />
+      < DocumentationSection / >
+      < /LeftMenuSection>
+      < /LeftMenu>
 
-            <div className="col-md-9">
-              <div className={styles.componentsContainer}>
-                <PluginHeader
-                  description={this.getModelDescription()}
-                  icon={icon}
-                  title={this.getPluginHeaderTitle()}
-                  actions={this.getPluginHeaderActions()}
-                  onClickIcon={this.handleClickEditModelMainInfos}
-                />
-                {this.getModelAttributesLength() === 0 ? (
-                  <EmptyAttributesBlock
-                    description="content-type-builder.home.emptyAttributes.description"
-                    id="openAddAttr"
-                    label="content-type-builder.button.attributes.add"
-                    onClick={this.handleClickOpenModalChooseAttributes}
-                    title="content-type-builder.home.emptyAttributes.title"
-                  />
-                ) : (
-                  <Block>
-                    <Flex>
-                      <ListTitle>
-                        {this.getModelAttributesLength()}
-                        &nbsp;
-                        <FormattedMessage
-                          id={`${listTitleMessageIdBasePrefix}.${
-                            this.getModelAttributesLength() > 1 ? 'plural' : 'singular'
-                          }`}
-                        />
-                        {this.getModelRelationShipsLength() > 0 && (
-                          <React.Fragment>
-                            &nbsp;
-                            <FormattedMessage id={`${listTitleMessageIdBasePrefix}.including`} />
-                            &nbsp;
-                            {this.getModelRelationShipsLength()}
-                            &nbsp;
-                            <FormattedMessage
-                              id={`${pluginId}.modelPage.contentType.list.relationShipTitle.${
-                                this.getModelRelationShipsLength() > 1 ? 'plural' : 'singular'
-                              }`}
-                            />
-                          </React.Fragment>
-                        )}
-                      </ListTitle>
-                      <div>
-                        <Button
-                          label={`${pluginId}.button.attributes.add`}
-                          onClick={this.handleClickOpenModalChooseAttributes}
-                          secondaryHotlineAdd
-                        />
-                      </div>
-                    </Flex>
-                    <div>
-                      <Ul id="attributesList">{Object.keys(this.getModelAttributes()).map(this.renderLi)}</Ul>
-                    </div>
-                  </Block>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        <AttributesModalPicker isOpen={modalType === 'chooseAttributes'} push={push} />
-        <AttributeForm
-          actionType={actionType}
-          activeTab={settingType}
-          alreadyTakenAttributes={Object.keys(this.getModelAttributes())}
-          attributeType={attributeType}
-          attributeToEditName={this.getAttributeName()}
-          isContentTypeTemporary={this.isUpdatingTemporaryContentType()}
-          isOpen={modalType === 'attributeForm' && attributeType !== 'relation'}
-          modifiedData={temporaryAttribute}
-          onCancel={clearTemporaryAttribute}
-          onChange={onChangeAttribute}
-          onSubmit={this.handleSubmit}
-          onSubmitEdit={this.handleSubmitEdit}
-          push={push}
+      < div
+      className = "col-md-9" >
+        < div
+      className = {styles.componentsContainer} >
+        < PluginHeader
+      description = {this.getModelDescription()}
+      icon = {icon}
+      title = {this.getPluginHeaderTitle()}
+      actions = {this.getPluginHeaderActions()}
+      onClickIcon = {this.handleClickEditModelMainInfos}
+      />
+      {
+        this.getModelAttributesLength() === 0 ? (
+          < EmptyAttributesBlock
+          description = "content-type-builder.home.emptyAttributes.description"
+        id = "openAddAttr"
+        label = "content-type-builder.button.attributes.add"
+        onClick = {this.handleClickOpenModalChooseAttributes}
+        title = "content-type-builder.home.emptyAttributes.title"
+          / >
+      ) :
+        (
+        < Block >
+        < Flex >
+        < ListTitle >
+        {this.getModelAttributesLength()}
+        & nbsp;
+      <
+        FormattedMessage
+        id = {`${listTitleMessageIdBasePrefix}.${
+          this.getModelAttributesLength() > 1 ? 'plural' : 'singular'
+        }`
+      }
         />
-        <ModelForm
-          actionType={actionType}
-          activeTab={settingType}
-          cancelNewContentType={cancelNewContentType}
-          connections={connections}
-          createTempContentType={createTempContentType}
-          currentData={modifiedData}
-          modifiedData={this.getFormData()}
-          modelToEditName={getQueryParameters(search, 'modelName')}
-          onChangeExistingContentTypeMainInfos={onChangeExistingContentTypeMainInfos}
-          onChangeNewContentTypeMainInfos={onChangeNewContentTypeMainInfos}
-          isOpen={modalType === 'model'}
-          isUpdatingTemporaryContentType={this.isUpdatingTemporaryContentType()}
-          pathname={pathname}
-          push={push}
-          resetExistingContentTypeMainInfos={resetExistingContentTypeMainInfos}
-          resetNewContentTypeMainInfos={resetNewContentTypeMainInfos}
-          updateTempContentType={updateTempContentType}
-        />
-        <PopUpWarning
-          isOpen={showWarning}
-          toggleModal={this.toggleModalWarning}
-          content={{
-            message: `${pluginId}.popUpWarning.bodyMessage.attribute.delete`,
-          }}
-          popUpWarningType="danger"
-          onConfirm={this.handleDeleteAttribute}
-        />
-        <RelationForm
-          actionType={actionType}
-          activeTab={settingType}
-          alreadyTakenAttributes={Object.keys(this.getModelAttributes())}
-          attributeToEditName={this.getAttributeName()}
-          initData={setTemporaryAttributeRelation}
-          isOpen={modalType === 'attributeForm' && attributeType === 'relation'}
-          isUpdatingTemporaryContentType={this.isUpdatingTemporaryContentType()}
-          models={models}
-          modelToEditName={this.getModelName()}
-          modifiedData={temporaryAttributeRelation}
-          onCancel={clearTemporaryAttributeRelation}
-          onChange={onChangeRelation}
-          onChangeRelationNature={onChangeRelationNature}
-          onChangeRelationTarget={onChangeRelationTarget}
-          onSubmit={this.handleSubmit}
-          onSubmitEdit={this.handleSubmitEdit}
-          push={push}
-          source={this.getSource()}
-        />
-      </div>
-    );
+        {
+          this.getModelRelationShipsLength() > 0 && (
+          < React.Fragment >
+          & nbsp;
+        <
+          FormattedMessage
+          id = {`${listTitleMessageIdBasePrefix}.including`
+        }
+          />
+          & nbsp;
+          {
+            this.getModelRelationShipsLength()
+          }
+        &
+          nbsp;
+        <
+          FormattedMessage
+          id = {`${pluginId}.modelPage.contentType.list.relationShipTitle.${
+            this.getModelRelationShipsLength() > 1 ? 'plural' : 'singular'
+          }`
+        }
+          />
+          < /React.Fragment>
+        )
+        }
+      <
+        /ListTitle>
+        < div >
+        < Button
+        label = {`${pluginId}.button.attributes.add`
+      }
+        onClick = {this.handleClickOpenModalChooseAttributes}
+        secondaryHotlineAdd
+        / >
+        < /div>
+        < /Flex>
+        < div >
+        < Ul
+        id = "attributesList" > {Object.keys(this.getModelAttributes()).map(this.renderLi)} < /Ul>
+          < /div>
+          < /Block>
+      )
+      }
+    <
+      /div>
+      < /div>
+      < /div>
+      < /div>
+      < AttributesModalPicker
+      isOpen = {modalType === 'chooseAttributes'
+    }
+      push = {push}
+      />
+      < AttributeForm
+      actionType = {actionType}
+      activeTab = {settingType}
+      alreadyTakenAttributes = {Object.keys(this.getModelAttributes())}
+      attributeType = {attributeType}
+      attributeToEditName = {this.getAttributeName()}
+      isContentTypeTemporary = {this.isUpdatingTemporaryContentType()}
+      isOpen = {modalType === 'attributeForm' && attributeType !== 'relation'
+    }
+      modifiedData = {temporaryAttribute}
+      onCancel = {clearTemporaryAttribute}
+      onChange = {onChangeAttribute}
+      onSubmit = {this.handleSubmit}
+      onSubmitEdit = {this.handleSubmitEdit}
+      push = {push}
+      />
+      < ModelForm
+      actionType = {actionType}
+      activeTab = {settingType}
+      cancelNewContentType = {cancelNewContentType}
+      connections = {connections}
+      createTempContentType = {createTempContentType}
+      currentData = {modifiedData}
+      modifiedData = {this.getFormData()}
+      modelToEditName = {getQueryParameters(search, 'modelName'
+    )
+    }
+      onChangeExistingContentTypeMainInfos = {onChangeExistingContentTypeMainInfos}
+      onChangeNewContentTypeMainInfos = {onChangeNewContentTypeMainInfos}
+      isOpen = {modalType === 'model'
+    }
+      isUpdatingTemporaryContentType = {this.isUpdatingTemporaryContentType()}
+      pathname = {pathname}
+      push = {push}
+      resetExistingContentTypeMainInfos = {resetExistingContentTypeMainInfos}
+      resetNewContentTypeMainInfos = {resetNewContentTypeMainInfos}
+      updateTempContentType = {updateTempContentType}
+      />
+      < PopUpWarning
+      isOpen = {showWarning}
+      toggleModal = {this.toggleModalWarning}
+      content = {
+      {
+        message: `${pluginId}.popUpWarning.bodyMessage.attribute.delete`,
+      }
+    }
+      popUpWarningType = "danger"
+      onConfirm = {this.handleDeleteAttribute}
+      />
+      < RelationForm
+      actionType = {actionType}
+      activeTab = {settingType}
+      alreadyTakenAttributes = {Object.keys(this.getModelAttributes())}
+      attributeToEditName = {this.getAttributeName()}
+      initData = {setTemporaryAttributeRelation}
+      isOpen = {modalType === 'attributeForm' && attributeType === 'relation'
+    }
+      isUpdatingTemporaryContentType = {this.isUpdatingTemporaryContentType()}
+      models = {models}
+      modelToEditName = {this.getModelName()}
+      modifiedData = {temporaryAttributeRelation}
+      onCancel = {clearTemporaryAttributeRelation}
+      onChange = {onChangeRelation}
+      onChangeRelationNature = {onChangeRelationNature}
+      onChangeRelationTarget = {onChangeRelationTarget}
+      onSubmit = {this.handleSubmit}
+      onSubmitEdit = {this.handleSubmitEdit}
+      push = {push}
+      source = {this.getSource()}
+      />
+      < /div>
+    )
+    ;
   }
 }
 
@@ -715,7 +774,7 @@ ModelPage.propTypes = {
   temporaryAttribute: PropTypes.object.isRequired,
   temporaryAttributeRelation: PropTypes.object.isRequired,
   updateTempContentType: PropTypes.func.isRequired,
-  ...routerPropTypes({ params: PropTypes.string }).isRequired,
+  ...routerPropTypes({params: PropTypes.string}).isRequired,
 };
 
 export function mapDispatchToProps(dispatch) {

@@ -9,7 +9,7 @@
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 
-const defaultJwtOptions = { expiresIn: '30d' };
+const defaultJwtOptions = {expiresIn: '30d'};
 
 module.exports = {
   getToken: function (ctx) {

@@ -4,11 +4,11 @@
  *
  */
 
-import { fromJS } from 'immutable';
-import { first, get, includes, split } from 'lodash';
+import {fromJS} from 'immutable';
+import {first, get, includes, split} from 'lodash';
 
 // Import supported languages from admin config.
-import { languages } from '../../config/languages.json';
+import {languages} from '../../config/languages.json';
 
 import {
   CHANGE_LOCALE,
@@ -18,7 +18,7 @@ import {
 const localStorageKey = 'strapi-admin-language';
 
 // Detect user language.
-const userLanguage = window.localStorage.getItem(localStorageKey) ||  window.navigator.language ||  window.navigator.userLanguage;
+const userLanguage = window.localStorage.getItem(localStorageKey) || window.navigator.language || window.navigator.userLanguage;
 
 let foundLanguage = includes(languages, userLanguage) && userLanguage;
 if (!foundLanguage) {
@@ -39,7 +39,7 @@ function languageProviderReducer(state = initialState, action) {
       // Set user language in local storage.
       window.localStorage.setItem(localStorageKey, action.locale);
       strapi.currentLanguage = action.locale;
-      
+
       return state
         .set('locale', action.locale);
     default:

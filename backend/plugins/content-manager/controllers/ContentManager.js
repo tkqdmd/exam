@@ -14,7 +14,7 @@ module.exports = {
       name: 'content-manager',
     });
 
-    const models = await pluginsStore.get({ key: 'schema' });
+    const models = await pluginsStore.get({key: 'schema'});
 
     ctx.body = {
       models,
@@ -45,7 +45,7 @@ module.exports = {
   },
 
   findOne: async ctx => {
-    const { source } = ctx.request.query;
+    const {source} = ctx.request.query;
 
     // Find an entry using `queries` system
     const entry = await strapi.plugins['content-manager'].services['contentmanager'].fetch(ctx.params, source, null, false);
@@ -59,42 +59,42 @@ module.exports = {
   },
 
   create: async ctx => {
-    const { source } = ctx.request.query;
+    const {source} = ctx.request.query;
 
     try {
       // Create an entry using `queries` system
       ctx.body = await strapi.plugins['content-manager'].services['contentmanager'].add(ctx.params, ctx.request.body, source);
 
       strapi.emit('didCreateFirstContentTypeEntry', ctx.params, source);
-    } catch(error) {
+    } catch (error) {
       strapi.log.error(error);
-      ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] : error.message);
+      ctx.badRequest(null, ctx.request.admin ? [{messages: [{id: error.message, field: error.field}]}] : error.message);
     }
   },
 
   update: async ctx => {
-    const { source } = ctx.request.query;
+    const {source} = ctx.request.query;
 
     try {
       // Return the last one which is the current model.
       ctx.body = await strapi.plugins['content-manager'].services['contentmanager'].edit(ctx.params, ctx.request.body, source);
-    } catch(error) {
+    } catch (error) {
       // TODO handle error update
       strapi.log.error(error);
-      ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: error.message, field: error.field }] }] : error.message);
+      ctx.badRequest(null, ctx.request.admin ? [{messages: [{id: error.message, field: error.field}]}] : error.message);
     }
   },
 
   updateSettings: async ctx => {
-    const { schema } = ctx.request.body;
+    const {schema} = ctx.request.body;
     const pluginStore = strapi.store({
       environment: '',
       type: 'plugin',
       name: 'content-manager'
     });
-    await pluginStore.set({ key: 'schema', value: schema });
+    await pluginStore.set({key: 'schema', value: schema});
 
-    return ctx.body = { ok: true };
+    return ctx.body = {ok: true};
   },
 
   delete: async ctx => {

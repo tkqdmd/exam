@@ -1,4 +1,4 @@
-import { isPlainObject, isFunction } from 'lodash';
+import {isPlainObject, isFunction} from 'lodash';
 
 export const bindLayout = function (object) {
   return Object.keys(object).reduce((acc, current) => {

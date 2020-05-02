@@ -1,28 +1,28 @@
 const _ = require('lodash');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 module.exports = {
-  find: async function(params, populate, raw = false) {
+  find: async function (params, populate, raw = false) {
     const model = this;
 
     const filters = convertRestQueryParams(params);
 
-    return this.query(buildQuery({ model, filters }))
+    return this.query(buildQuery({model, filters}))
       .fetchAll({
         withRelated: populate || this.associations.map(x => x.alias),
       })
       .then(data => (raw ? data.toJSON() : data));
   },
 
-  count: async function(params = {}) {
+  count: async function (params = {}) {
     const model = this;
 
-    const { where } = convertRestQueryParams(params);
+    const {where} = convertRestQueryParams(params);
 
-    return this.query(buildQuery({ model, filters: { where } })).count();
+    return this.query(buildQuery({model, filters: {where}})).count();
   },
 
-  search: async function(params, populate, raw = false) {
+  search: async function (params, populate, raw = false) {
     const associations = this.associations.map(x => x.alias);
     const searchText = Object.keys(this._attributes)
       .filter(attribute => attribute !== this.primaryKey && !associations.includes(attribute))
@@ -92,7 +92,7 @@ module.exports = {
       .then(data => (raw ? data.toJSON() : data));
   },
 
-  countSearch: async function(params = {}) {
+  countSearch: async function (params = {}) {
     const associations = this.associations.map(x => x.alias);
     const searchText = Object.keys(this._attributes)
       .filter(attribute => attribute !== this.primaryKey && !associations.includes(attribute))
@@ -142,7 +142,7 @@ module.exports = {
     }).count();
   },
 
-  findOne: async function(params, populate) {
+  findOne: async function (params, populate) {
     const record = await this.forge({
       [this.primaryKey]: params[this.primaryKey],
     }).fetch({
@@ -174,7 +174,7 @@ module.exports = {
     return data;
   },
 
-  create: async function(params) {
+  create: async function (params) {
     // Exclude relationships.
     const values = Object.keys(params.values).reduce((acc, current) => {
       if (this._attributes[current] && this._attributes[current].type) {
@@ -189,7 +189,7 @@ module.exports = {
       .catch(err => {
         if (err.detail) {
           const field = _.last(_.words(err.detail.split('=')[0]));
-          err = { message: `This ${field} is already taken`, field };
+          err = {message: `This ${field} is already taken`, field};
         }
 
         throw err;
@@ -213,20 +213,20 @@ module.exports = {
     });
   },
 
-  update: async function(params) {
+  update: async function (params) {
     // Call the business logic located in the hook.
     // This function updates no-relational and relational data.
     return this.updateRelations(params);
   },
 
-  delete: async function(params) {
+  delete: async function (params) {
     return await this.forge({
       [this.primaryKey]: params.id,
     }).destroy();
   },
 
-  deleteMany: async function(params) {
-    return await this.query(function(qb) {
+  deleteMany: async function (params) {
+    return await this.query(function (qb) {
       return qb.whereIn('id', params.id);
     }).destroy();
   },

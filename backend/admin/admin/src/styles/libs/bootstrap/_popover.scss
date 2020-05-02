@@ -41,6 +41,7 @@
     content: "";
     border-width: $popover-arrow-outer-width;
   }
+
   .arrow::after {
     content: "";
     border-width: $popover-arrow-outer-width;
@@ -156,16 +157,20 @@
       border-left-color: $popover-arrow-color;
     }
   }
+
   &.bs-popover-auto {
     &[x-placement^="top"] {
       @extend .bs-popover-top;
     }
+
     &[x-placement^="right"] {
       @extend .bs-popover-right;
     }
+
     &[x-placement^="bottom"] {
       @extend .bs-popover-bottom;
     }
+
     &[x-placement^="left"] {
       @extend .bs-popover-left;
     }

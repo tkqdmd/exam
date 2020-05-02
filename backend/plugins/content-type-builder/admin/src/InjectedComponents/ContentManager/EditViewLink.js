@@ -14,7 +14,14 @@ function EditViewLink(props) {
   const base = `${props.getContentTypeBuilderBaseUrl()}${props.getModelName()}`;
   const url = props.getSource() === 'users-permissions' ? `${base}&source=${props.getSource()}` : base;
 
-  return <NavLink {...props} url={url} />;
+  return
+<
+  NavLink
+  {...
+    props
+  }
+  url = {url}
+  />;
 }
 
 EditViewLink.propTypes = {

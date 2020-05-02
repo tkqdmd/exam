@@ -14,7 +14,7 @@ module.exports = {
    * @return {Object|Array}
    */
 
-  find: async (ctx, next, { populate } = {}) => {
+  find: async (ctx, next, {populate} = {}) => {
     if (ctx.query._q) {
       return strapi.services.examination.search(ctx.query);
     } else {
@@ -38,7 +38,7 @@ module.exports = {
    * @return {Number}
    */
 
-  count: async (ctx, next, { populate } = {}) => {
+  count: async (ctx, next, {populate} = {}) => {
     return strapi.services.examination.count(ctx.query, populate);
   },
 
@@ -59,7 +59,7 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.examination.edit(ctx.params, ctx.request.body) ;
+    return strapi.services.examination.edit(ctx.params, ctx.request.body);
   },
 
   /**

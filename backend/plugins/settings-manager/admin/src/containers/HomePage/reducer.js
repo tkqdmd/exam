@@ -4,8 +4,8 @@
  *
  */
 
-import { fromJS, Map, OrderedMap } from 'immutable';
-import { remove, sortBy } from 'lodash';
+import {fromJS, Map, OrderedMap} from 'immutable';
+import {remove, sortBy} from 'lodash';
 import {
   CONFIG_FETCH_SUCCEEDED,
   CHANGE_DEFAULT_LANGUAGE,
@@ -48,6 +48,7 @@ const initialState = fromJS({
   error: false,
   showLoader: false,
 });
+
 /* eslint-disable no-case-declarations */
 
 function homePageReducer(state = initialState, action) {
@@ -139,7 +140,7 @@ function homePageReducer(state = initialState, action) {
         .setIn(['modifiedData', 'database.defaultConnection'], defaultDbConnection);
     case NEW_LANGUAGE_POST:
       const sections = state.getIn(['configsDisplay', 'sections']);
-      sections.push({ active: false, name: state.getIn(['modifiedData', 'language.defaultLocale']) });
+      sections.push({active: false, name: state.getIn(['modifiedData', 'language.defaultLocale'])});
       const newSections = sortBy(sections, (o) => o.name);
       return state.setIn(['configsDisplay', 'sections'], newSections);
     case SET_ERRORS:

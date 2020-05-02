@@ -3,8 +3,8 @@
  * App actions
  *
  */
-import { cloneDeep, pick, set, camelCase } from 'lodash';
-import { fromJS, OrderedMap } from 'immutable';
+import {cloneDeep, pick, set, camelCase} from 'lodash';
+import {fromJS, OrderedMap} from 'immutable';
 import {
   ADD_ATTRIBUTE_RELATION,
   ADD_ATTRIBUTE_TO_EXISITING_CONTENT_TYPE,
@@ -122,7 +122,7 @@ export function getData() {
   };
 }
 
-export function getDataSucceeded({ allModels, models }, connections) {
+export function getDataSucceeded({allModels, models}, connections) {
   const initialData = allModels.reduce((acc, current) => {
     acc[current.name] = pick(current, ['name', 'collectionName', 'connection', 'description', 'mainField']);
     const attributes = OrderedMap(buildModelAttributes(current.attributes));
@@ -139,7 +139,7 @@ export function getDataSucceeded({ allModels, models }, connections) {
   };
 }
 
-export function onChangeExistingContentTypeMainInfos({ target }) {
+export function onChangeExistingContentTypeMainInfos({target}) {
   const value = target.name === 'name' ? camelCase(target.value.trim()).toLowerCase() : target.value;
 
   return {
@@ -149,7 +149,7 @@ export function onChangeExistingContentTypeMainInfos({ target }) {
   };
 }
 
-export function onChangeNewContentTypeMainInfos({ target }) {
+export function onChangeNewContentTypeMainInfos({target}) {
   const value = target.name === 'name' ? camelCase(target.value.trim()).toLowerCase() : target.value;
 
   return {
@@ -159,7 +159,7 @@ export function onChangeNewContentTypeMainInfos({ target }) {
   };
 }
 
-export function onChangeAttribute({ target }) {
+export function onChangeAttribute({target}) {
   const value = target.name.includes('name') ? target.value.split(' ').join('') : target.value;
 
   return {
@@ -169,7 +169,7 @@ export function onChangeAttribute({ target }) {
   };
 }
 
-export function onChangeRelation({ target }) {
+export function onChangeRelation({target}) {
   const value = target.name === 'unique' ? target.value : target.value.split(' ').join('');
 
   return {
@@ -268,7 +268,7 @@ export function setTemporaryAttributeRelation(target, isModelTemporary, source, 
 
 export function submitContentType(oldContentTypeName, data, context, source) {
   const attributes = formatModelAttributes(data.attributes);
-  const body = Object.assign(cloneDeep(data), { attributes });
+  const body = Object.assign(cloneDeep(data), {attributes});
 
   return {
     type: SUBMIT_CONTENT_TYPE,
@@ -287,7 +287,7 @@ export function submitContentTypeSucceeded() {
 
 export function submitTempContentType(data, context) {
   const attributes = formatModelAttributes(data.attributes);
-  const body = Object.assign(cloneDeep(data), { attributes });
+  const body = Object.assign(cloneDeep(data), {attributes});
 
   return {
     type: SUBMIT_TEMP_CONTENT_TYPE,
@@ -312,9 +312,9 @@ export function updateTempContentType() {
 export const buildModelAttributes = attributes => {
   const formattedAttributes = attributes.reduce((acc, current) => {
     if (current.params.type === 'enumeration') {
-      acc[current.name] = Object.assign(current.params, { enum: current.params.enum.join('\n') });
+      acc[current.name] = Object.assign(current.params, {enum: current.params.enum.join('\n')});
     } else if (current.params.nature === 'oneWay') {
-      acc[current.name] = Object.assign(current.params, { key: '-' });
+      acc[current.name] = Object.assign(current.params, {key: '-'});
     } else {
       acc[current.name] = current.params;
     }
@@ -356,7 +356,7 @@ export const formatModelAttributes = attributes =>
 
         return acc2;
       },
-      { name: current, params: {} },
+      {name: current, params: {}},
     );
 
     return acc.concat(attribute);

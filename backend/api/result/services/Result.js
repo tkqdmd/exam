@@ -12,7 +12,7 @@ const _ = require('lodash');
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 
 module.exports = {
@@ -31,8 +31,8 @@ module.exports = {
 
     const filters = convertRestQueryParams(params);
 
-    return Result.query(buildQuery({ model: Result, filters }))
-      .fetchAll({ withRelated })
+    return Result.query(buildQuery({model: Result, filters}))
+      .fetchAll({withRelated})
       .then(data => data.toJSON());
   },
 
@@ -63,7 +63,7 @@ module.exports = {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = convertRestQueryParams(params);
 
-    return Result.query(buildQuery({ model: Result, filters: _.pick(filters, 'where') })).count();
+    return Result.query(buildQuery({model: Result, filters: _.pick(filters, 'where')})).count();
   },
 
   /**
@@ -81,7 +81,7 @@ module.exports = {
     const entry = await Result.forge(data).save();
 
     // Create relational data and return the entry.
-    return Result.updateRelations({ id: entry.id , values: relations });
+    return Result.updateRelations({id: entry.id, values: relations});
   },
 
   /**
@@ -99,7 +99,7 @@ module.exports = {
     const entry = await Result.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Result.updateRelations(Object.assign(params, { values: relations }));
+    return Result.updateRelations(Object.assign(params, {values: relations}));
   },
 
   /**

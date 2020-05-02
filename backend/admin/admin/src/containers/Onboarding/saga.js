@@ -1,26 +1,29 @@
 import request from 'utils/request';
-import { all, call, fork, takeLatest, put } from 'redux-saga/effects';
+import {all, call, fork, takeLatest, put} from 'redux-saga/effects';
 
-import { GET_VIDEOS } from './constants';
-import { getVideosSucceeded, shouldOpenModal } from './actions';
+import {GET_VIDEOS} from './constants';
+import {getVideosSucceeded, shouldOpenModal} from './actions';
 
 function* getVideos() {
   try {
     const data = yield call(request, 'https://strapi.io/videos', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    },
-    false,
-    true,
-    { noAuth: true },
+      false,
+      true,
+      {noAuth: true},
     );
 
     const storedVideo = JSON.parse(localStorage.getItem('videos')) || null;
 
     const videos = data.map(video => {
-      const { end, startTime } = storedVideo ? storedVideo.find(v => v.order === video.order) : { end: false, startTime: 0};
+      const {end, startTime} = storedVideo ? storedVideo.find(v => v.order === video.order) : {
+        end: false,
+        startTime: 0
+      };
 
       return {
         ...video,
@@ -30,14 +33,14 @@ function* getVideos() {
         key: video.order,
         startTime,
       };
-    }).sort((a,b) => (a.order - b.order));
+    }).sort((a, b) => (a.order - b.order));
 
     localStorage.setItem('videos', JSON.stringify(videos));
 
     yield put(
       getVideosSucceeded(videos),
     );
-    
+
     const isFirstTime = JSON.parse(localStorage.getItem('onboarding')) || null;
 
     if (isFirstTime === null) {
@@ -46,7 +49,7 @@ function* getVideos() {
           resolve();
         }, 500);
       });
-      
+
       yield put(
         shouldOpenModal(true),
       );

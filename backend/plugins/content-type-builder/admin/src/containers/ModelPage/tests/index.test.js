@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { cloneDeep } from 'lodash';
-import { FormattedMessage } from 'react-intl';
-import { Redirect, BrowserRouter } from 'react-router-dom';
+import {shallow} from 'enzyme';
+import {cloneDeep} from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {Redirect, BrowserRouter} from 'react-router-dom';
 
 import mountWithIntl from 'testUtils/mountWithIntl';
 import formatMessagesWithPluginId from 'testUtils/formatMessages';
@@ -16,24 +16,29 @@ import AttributeLi from '../../../components/AttributeLi';
 import Block from '../../../components/Block';
 import LeftMenuLink from '../../../components/LeftMenuLink';
 
-import { clearTemporaryAttribute, onChangeAttribute } from '../../App/actions';
+import {clearTemporaryAttribute, onChangeAttribute} from '../../App/actions';
 
-import { ModelPage, mapDispatchToProps } from '../index';
+import {ModelPage, mapDispatchToProps} from '../index';
 
 // import CustomLink from '../CustomLink';
 import initialData from './initialData.json';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
 
-const context = { emitEvent: jest.fn() };
+const context = {emitEvent: jest.fn()};
 const renderComponent = (props = {}) =>
   mountWithIntl(
-    <BrowserRouter>
-      <ModelPage {...props} />
-    </BrowserRouter>,
-    messages,
-    context,
-  );
+  < BrowserRouter >
+  < ModelPage
+{...
+  props
+}
+/>
+< /BrowserRouter>,
+messages,
+  context,
+)
+;
 
 describe('<ModelPage />', () => {
   let props;
@@ -147,14 +152,22 @@ describe('<ModelPage />', () => {
   });
 
   it('should not crash', () => {
-    shallow(<ModelPage {...props} />);
+    shallow( < ModelPage
+    {...
+      props
+    }
+    />);
   });
 
   describe('CTB <ModelPage /> render', () => {
     it('should redirect the user if the modelName does not exist in its models props', () => {
       props.match.params.modelName = 'test';
 
-      const wrapper = shallow(<ModelPage {...props} />);
+      const wrapper = shallow( < ModelPage
+      {...
+        props
+      }
+      />);
       const redirect = wrapper.find(Redirect);
 
       expect(redirect.length).toEqual(1);
@@ -163,19 +176,31 @@ describe('<ModelPage />', () => {
       props.initialData.user.attributes = {};
       props.modifiedData.user.attributes = {};
 
-      const wrapper = shallow(<ModelPage {...props} />);
+      const wrapper = shallow( < ModelPage
+      {...
+        props
+      }
+      />);
 
       expect(wrapper.find(EmptyAttributesBlock)).toHaveLength(1);
     });
 
     it("should display the Block if the model's attributes are not empty", () => {
-      const wrapper = shallow(<ModelPage {...props} />);
+      const wrapper = shallow( < ModelPage
+      {...
+        props
+      }
+      />);
 
       expect(wrapper.find(Block)).toHaveLength(1);
     });
 
     it("should display a singular text if the model's attributes relationship is one", () => {
-      const wrapper = shallow(<ModelPage {...props} />);
+      const wrapper = shallow( < ModelPage
+      {...
+        props
+      }
+      />);
 
       expect(
         wrapper
@@ -188,7 +213,11 @@ describe('<ModelPage />', () => {
     it("should display a plural text if the model's attributes relationships is more than one", () => {
       props.match.params.modelName = 'role&source=users-permissions';
       props.match.path = `${basePath}/role&source=users-permissions`;
-      const wrapper = shallow(<ModelPage {...props} />);
+      const wrapper = shallow( < ModelPage
+      {...
+        props
+      }
+      />);
 
       expect(
         wrapper
@@ -204,7 +233,11 @@ describe('<ModelPage />', () => {
       props.match.params.modelName = 'product';
       props.match.path = `${basePath}/product`;
 
-      const wrapper = shallow(<ModelPage {...props} />);
+      const wrapper = shallow( < ModelPage
+      {...
+        props
+      }
+      />);
       const spyOnClick = jest.spyOn(wrapper.instance(), 'handleClickOpenModalChooseAttributes');
       wrapper.instance().forceUpdate();
 
@@ -218,7 +251,11 @@ describe('<ModelPage />', () => {
   describe('CTB <ModelPage /> instances', () => {
     describe('GetModel', () => {
       it('should return the correct model', () => {
-        const { getModel } = shallow(<ModelPage {...props} />).instance();
+        const {getModel} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModel()).toEqual(initialData.user);
       });
@@ -227,7 +264,11 @@ describe('<ModelPage />', () => {
         (props.location.pathname = `${basePath}/test1`), (props.match.params.modelName = 'test1');
         props.newContentType.name = 'test1';
 
-        const { getModel } = shallow(<ModelPage {...props} />).instance();
+        const {getModel} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModel()).toEqual(props.newContentType);
       });
@@ -235,7 +276,11 @@ describe('<ModelPage />', () => {
 
     describe('GetModelAttributes', () => {
       it("should return the model's attributes", () => {
-        const { getModelAttributes } = shallow(<ModelPage {...props} />).instance();
+        const {getModelAttributes} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModelAttributes()).toEqual(initialData.user.attributes);
       });
@@ -243,7 +288,11 @@ describe('<ModelPage />', () => {
 
     describe('GetModelAttributesLength', () => {
       it("should return the model's attributes length", () => {
-        const { getModelAttributesLength } = shallow(<ModelPage {...props} />).instance();
+        const {getModelAttributesLength} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModelAttributesLength()).toEqual(8);
       });
@@ -251,7 +300,11 @@ describe('<ModelPage />', () => {
 
     describe('GetModelDescription', () => {
       it("should return the model's description field", () => {
-        const { getModelDescription } = shallow(<ModelPage {...props} />).instance();
+        const {getModelDescription} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModelDescription()).toEqual('user model');
       });
@@ -259,7 +312,11 @@ describe('<ModelPage />', () => {
 
     describe('GetModelName', () => {
       it("should return the model's name field", () => {
-        const { getModelName } = shallow(<ModelPage {...props} />).instance();
+        const {getModelName} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModelName()).toEqual('user');
       });
@@ -267,7 +324,11 @@ describe('<ModelPage />', () => {
 
     describe('GetModelsNumber', () => {
       it('should return the number of models', () => {
-        const { getModelsNumber } = shallow(<ModelPage {...props} />).instance();
+        const {getModelsNumber} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModelsNumber()).toEqual(5);
       });
@@ -275,14 +336,18 @@ describe('<ModelPage />', () => {
 
     describe('GetModelRelationShips', () => {
       it('should return the model`s relations', () => {
-        const { getModelRelationShips } = shallow(<ModelPage {...props} />).instance();
+        const {getModelRelationShips} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
         const {
           user: {
-            attributes: { role },
+            attributes: {role},
           },
         } = initialData;
 
-        expect(getModelRelationShips()).toEqual({ role });
+        expect(getModelRelationShips()).toEqual({role});
       });
     });
 
@@ -291,14 +356,22 @@ describe('<ModelPage />', () => {
         props.match.params.modelName = 'product';
         props.match.path = `${basePath}/product`;
 
-        const { getModelRelationShipsLength } = shallow(<ModelPage {...props} />).instance();
+        const {getModelRelationShipsLength} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getModelRelationShipsLength()).toEqual(0);
       });
 
       it('should return 1 if there is 1 relations', () => {
-        const wrapper = shallow(<ModelPage {...props} />);
-        const { getModelRelationShipsLength } = wrapper.instance();
+        const wrapper = shallow( < ModelPage
+        {...
+          props
+        }
+        />);
+        const {getModelRelationShipsLength} = wrapper.instance();
 
         expect(getModelRelationShipsLength()).toEqual(1);
       });
@@ -306,18 +379,26 @@ describe('<ModelPage />', () => {
 
     describe('GetSectionTitle', () => {
       it('should return a singular string for the product', () => {
-        props.initialData = { user: props.initialData.user };
-        props.modifiedData = { user: props.initialData.user };
+        props.initialData = {user: props.initialData.user};
+        props.modifiedData = {user: props.initialData.user};
         props.models = [props.models[1]];
 
-        const { getSectionTitle } = shallow(<ModelPage {...props} />).instance();
+        const {getSectionTitle} = shallow( < ModelPage
+        {...
+          props
+        }
+        />).instance();
 
         expect(getSectionTitle()).toContain('singular');
       });
 
       it('should return a plural string for the user', () => {
-        const wrapper = shallow(<ModelPage {...props} />);
-        const { getSectionTitle } = wrapper.instance();
+        const wrapper = shallow( < ModelPage
+        {...
+          props
+        }
+        />);
+        const {getSectionTitle} = wrapper.instance();
 
         expect(getSectionTitle()).toContain('plural');
       });
@@ -325,7 +406,11 @@ describe('<ModelPage />', () => {
 
     describe('RenderLinks', () => {
       it('should render 5 links in the menu', () => {
-        const wrapper = shallow(<ModelPage {...props} />);
+        const wrapper = shallow( < ModelPage
+        {...
+          props
+        }
+        />);
         const links = wrapper.find(LeftMenuLink);
 
         expect(links).toHaveLength(5);
@@ -334,7 +419,11 @@ describe('<ModelPage />', () => {
 
     describe('RenderLi', () => {
       it('should render 8 attributes', () => {
-        const wrapper = shallow(<ModelPage {...props} />);
+        const wrapper = shallow( < ModelPage
+        {...
+          props
+        }
+        />);
         const links = wrapper.find(AttributeLi);
 
         expect(links).toHaveLength(8);
@@ -468,7 +557,7 @@ describe('<ModelPage /> lifecycle', () => {
       const wrapper = topCompo.find(ModelPage);
 
       const spyOnWait = jest.spyOn(wrapper.instance(), 'wait');
-      const { handleClickEditAttribute } = wrapper.instance();
+      const {handleClickEditAttribute} = wrapper.instance();
 
       handleClickEditAttribute('username', 'string');
 
@@ -488,7 +577,7 @@ describe('<ModelPage /> lifecycle', () => {
       const wrapper = topCompo.find(ModelPage);
 
       const spyOnWait = jest.spyOn(wrapper.instance(), 'wait');
-      const { handleClickEditAttribute } = wrapper.instance();
+      const {handleClickEditAttribute} = wrapper.instance();
 
       handleClickEditAttribute('username', 'float');
 
@@ -513,7 +602,7 @@ describe('<ModelPage /> lifecycle', () => {
 
       const spyOnWait = jest.spyOn(wrapper.instance(), 'wait');
       const spyOnDisplayNotification = jest.spyOn(wrapper.instance(), 'displayNotificationCTNotSaved');
-      const { handleClickEditModelMainInfos } = wrapper.instance();
+      const {handleClickEditModelMainInfos} = wrapper.instance();
 
       handleClickEditModelMainInfos();
 
@@ -532,7 +621,7 @@ describe('<ModelPage /> lifecycle', () => {
       const wrapper = topCompo.find(ModelPage);
 
       const spyOnWait = jest.spyOn(wrapper.instance(), 'wait');
-      const { handleClickEditModelMainInfos } = wrapper.instance();
+      const {handleClickEditModelMainInfos} = wrapper.instance();
 
       handleClickEditModelMainInfos();
 
@@ -556,7 +645,7 @@ describe('<ModelPage /> lifecycle', () => {
 
       const spyOnWait = jest.spyOn(wrapper.instance(), 'wait');
       const spyOnDisplayNotification = jest.spyOn(wrapper.instance(), 'displayNotificationCTNotSaved');
-      const { handleClickOpenModalChooseAttributes } = wrapper.instance();
+      const {handleClickOpenModalChooseAttributes} = wrapper.instance();
 
       handleClickOpenModalChooseAttributes();
 
@@ -574,7 +663,7 @@ describe('<ModelPage /> lifecycle', () => {
       const wrapper = topCompo.find(ModelPage);
 
       const spyOnWait = jest.spyOn(wrapper.instance(), 'wait');
-      const { handleClickOpenModalChooseAttributes } = wrapper.instance();
+      const {handleClickOpenModalChooseAttributes} = wrapper.instance();
 
       handleClickOpenModalChooseAttributes();
 
@@ -596,7 +685,7 @@ describe('<ModelPage /> lifecycle', () => {
 
       const wrapper = topCompo.find(ModelPage);
       const spyOnDisplayNotification = jest.spyOn(wrapper.instance(), 'displayNotificationCTNotSaved');
-      const { handleClickOpenModalCreateCT } = wrapper.instance();
+      const {handleClickOpenModalCreateCT} = wrapper.instance();
 
       handleClickOpenModalCreateCT();
 
@@ -609,7 +698,7 @@ describe('<ModelPage /> lifecycle', () => {
       topCompo = renderComponent(props);
 
       const wrapper = topCompo.find(ModelPage);
-      const { handleClickOpenModalCreateCT } = wrapper.instance();
+      const {handleClickOpenModalCreateCT} = wrapper.instance();
 
       handleClickOpenModalCreateCT();
 
@@ -626,7 +715,7 @@ describe('<ModelPage /> lifecycle', () => {
 
       const wrapper = topCompo.find(ModelPage);
       const spyOnDisplayNotification = jest.spyOn(wrapper.instance(), 'displayNotificationCTNotSaved');
-      const { handleClickOnTrashIcon } = wrapper.instance();
+      const {handleClickOnTrashIcon} = wrapper.instance();
 
       handleClickOnTrashIcon('username');
 
@@ -639,11 +728,11 @@ describe('<ModelPage /> lifecycle', () => {
       topCompo = renderComponent(props);
 
       const wrapper = topCompo.find(ModelPage);
-      const { handleClickOnTrashIcon } = wrapper.instance();
+      const {handleClickOnTrashIcon} = wrapper.instance();
 
       handleClickOnTrashIcon('username');
 
-      expect(wrapper.state()).toEqual({ showWarning: true, removePrompt: false, attrToDelete: 'username' });
+      expect(wrapper.state()).toEqual({showWarning: true, removePrompt: false, attrToDelete: 'username'});
       expect(context.emitEvent).toHaveBeenCalledWith('willDeleteFieldOfContentType');
     });
   });
@@ -678,10 +767,10 @@ describe('CTB <ModelPage />, mapDispatchToProps', () => {
     it('should dispatch the onChangeAttribute action when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
-      const target = { name: '' };
-      result.onChangeAttribute({ target });
+      const target = {name: ''};
+      result.onChangeAttribute({target});
 
-      expect(dispatch).toHaveBeenCalledWith(onChangeAttribute({ target }));
+      expect(dispatch).toHaveBeenCalledWith(onChangeAttribute({target}));
     });
   });
 });

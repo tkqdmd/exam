@@ -1,6 +1,7 @@
 .container {
   padding: 18px 30px;
 }
+
 .emptyAttributesView { /* stylelint-disable */
   height: 22.1rem;
   margin-top: -.1rem;
@@ -27,9 +28,11 @@
 
 .buttonContainer {
   margin-top: 4.6rem;
+
   > button {
     padding-right: 1.5rem;
     font-size: 1.3rem;
+
     > i {
       margin-right: 1rem !important;
     }

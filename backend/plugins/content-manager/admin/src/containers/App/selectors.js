@@ -1,5 +1,6 @@
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 import pluginId from '../../pluginId';
+
 /**
  * Direct selector to the list state domain
  */

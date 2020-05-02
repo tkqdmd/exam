@@ -6,8 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { get, isEmpty } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {get, isEmpty} from 'lodash';
 
 import Input from 'components/InputsIndex';
 
@@ -30,18 +30,18 @@ import formAdvanced from './advanced.json';
 
 import styles from './styles.scss';
 
-const NAVLINKS = [{ id: 'base', custom: 'relation' }, { id: 'advanced' }];
+const NAVLINKS = [{id: 'base', custom: 'relation'}, {id: 'advanced'}];
 
 class RelationForm extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
 
-  state = { didCheckErrors: false, formErrors: {}, showForm: false };
+  state = {didCheckErrors: false, formErrors: {}, showForm: false};
 
   getFormErrors = () => {
-    const { actionType, alreadyTakenAttributes, attributeToEditName, modifiedData } = this.props;
+    const {actionType, alreadyTakenAttributes, attributeToEditName, modifiedData} = this.props;
     const formValidations = {
-      name: { required: true, unique: true },
-      key: { required: true, unique: true },
+      name: {required: true, unique: true},
+      key: {required: true, unique: true},
     };
 
     const alreadyTakenAttributesUpdated = alreadyTakenAttributes.filter(attribute => {
@@ -55,19 +55,19 @@ class RelationForm extends React.Component {
     let formErrors = {};
 
     if (modifiedData.name === modifiedData.key) {
-      formErrors = { key: [{ id: `${pluginId}.error.attribute.key.taken` }] };
+      formErrors = {key: [{id: `${pluginId}.error.attribute.key.taken`}]};
     }
 
     formErrors = Object.keys(formValidations).reduce((acc, current) => {
-      const { required, unique } = formValidations[current];
+      const {required, unique} = formValidations[current];
       const value = modifiedData[current];
 
       if (required === true && !value) {
-        acc[current] = [{ id: `${pluginId}.error.validation.required` }];
+        acc[current] = [{id: `${pluginId}.error.validation.required`}];
       }
 
       if (unique === true && alreadyTakenAttributesUpdated.includes(value)) {
-        acc[current] = [{ id: `${pluginId}.error.attribute.key.taken` }];
+        acc[current] = [{id: `${pluginId}.error.attribute.key.taken`}];
       }
 
       return acc;
@@ -82,20 +82,20 @@ class RelationForm extends React.Component {
   };
 
   handleClick = model => {
-    const { actionType, modelToEditName, onChangeRelationTarget } = this.props;
+    const {actionType, modelToEditName, onChangeRelationTarget} = this.props;
 
     onChangeRelationTarget(model, modelToEditName, actionType === 'edit');
   };
 
   handleCancel = () => {
-    const { push } = this.props;
+    const {push} = this.props;
 
-    push({ search: '' });
+    push({search: ''});
   };
 
   handleGoTo = to => {
-    const { emitEvent } = this.context;
-    const { actionType, attributeToEditName, push } = this.props;
+    const {emitEvent} = this.context;
+    const {actionType, attributeToEditName, push} = this.props;
     const attributeName = actionType === 'edit' ? `&attributeName=${attributeToEditName}` : '';
 
     if (to === 'advanced') {
@@ -108,10 +108,10 @@ class RelationForm extends React.Component {
   };
 
   handleOnClosed = () => {
-    const { onCancel } = this.props;
+    const {onCancel} = this.props;
 
     onCancel();
-    this.setState({ formErrors: {}, showForm: false }); // eslint-disable-line react/no-unused-state
+    this.setState({formErrors: {}, showForm: false}); // eslint-disable-line react/no-unused-state
   };
 
   handleOnOpened = () => {
@@ -123,11 +123,11 @@ class RelationForm extends React.Component {
       models,
       modelToEditName,
     } = this.props;
-    const [{ name, source }] = models;
+    const [{name, source}] = models;
     const target = actionType === 'edit' ? modelToEditName : name;
 
     initData(target, isUpdatingTemporaryContentType, source, attributeToEditName, actionType === 'edit');
-    this.setState({ showForm: true });
+    this.setState({showForm: true});
   };
 
   handleSubmit = e => {
@@ -147,13 +147,13 @@ class RelationForm extends React.Component {
   };
 
   handleToggle = () => {
-    const { push } = this.props;
+    const {push} = this.props;
 
-    push({ search: '' });
+    push({search: ''});
   };
 
   submit = (shouldContinue = false) => {
-    const { actionType, onSubmit, onSubmitEdit } = this.props;
+    const {actionType, onSubmit, onSubmitEdit} = this.props;
 
     if (actionType === 'edit') {
       onSubmitEdit(shouldContinue);
@@ -163,125 +163,187 @@ class RelationForm extends React.Component {
   };
 
   renderAdvancedSettings = () => {
-    const { didCheckErrors } = this.state;
-    const { modifiedData, onChange } = this.props;
+    const {didCheckErrors} = this.state;
+    const {modifiedData, onChange} = this.props;
 
     return formAdvanced.map((input, i) => {
-      const divider = i === 0 ? <div className={styles.divider} /> : null;
+      const divider = i === 0 ?
+    <
+      div
+      className = {styles.divider}
+      /> : null;
 
       return (
-        <React.Fragment key={input.name}>
-          <Input
-            {...input}
-            addon={modifiedData[input.addon]}
-            didCheckErrors={didCheckErrors}
-            key={input.name}
-            onChange={onChange}
-            value={modifiedData[input.name]}
-          />
-          {divider}
-        </React.Fragment>
-      );
+        < React.Fragment
+      key = {input.name} >
+        < Input
+      {...
+        input
+      }
+      addon = {modifiedData[input.addon]}
+      didCheckErrors = {didCheckErrors}
+      key = {input.name}
+      onChange = {onChange}
+      value = {modifiedData[input.name]}
+      />
+      {
+        divider
+      }
+    <
+      /React.Fragment>
+    )
+      ;
     });
   };
 
   renderNavLink = (link, index) => {
-    const { activeTab } = this.props;
+    const {activeTab} = this.props;
 
     return (
-      <HeaderNavLink
-        isActive={activeTab === link.id}
-        key={link.id}
-        {...link}
-        onClick={this.handleGoTo}
-        nextTab={index === NAVLINKS.length - 1 ? 0 : index + 1}
-      />
-    );
+      < HeaderNavLink
+    isActive = {activeTab === link.id
+  }
+    key = {link.id}
+    {...
+      link
+    }
+    onClick = {this.handleGoTo}
+    nextTab = {index === NAVLINKS.length - 1 ? 0 : index + 1
+  }
+    />
+  )
+    ;
   };
 
   renderRelationForm = () => {
     const {
-      modifiedData: { key, name, nature, plugin, target },
+      modifiedData: {key, name, nature, plugin, target},
       models,
       modelToEditName,
       onChange,
       onChangeRelationNature,
       source,
     } = this.props;
-    const { formErrors, didCheckErrors } = this.state;
+    const {formErrors, didCheckErrors} = this.state;
 
     return (
-      <RelationWrapper>
-        <RelationBox
-          autoFocus
-          errors={get(formErrors, 'name', [])}
-          didCheckErrors={didCheckErrors}
-          main
-          modelName={modelToEditName}
-          onChange={onChange}
-          source={source}
-          value={name}
-        />
-        <NaturePicker
-          modelName={modelToEditName}
-          nature={nature}
-          name={name}
-          target={target}
-          onClick={onChangeRelationNature}
-        />
-        <RelationBox
-          errors={get(formErrors, 'key', [])}
-          didCheckErrors={didCheckErrors}
-          models={models}
-          nature={nature}
-          onChange={onChange}
-          onClick={this.handleClick}
-          selectedModel={target}
-          plugin={plugin}
-          value={key}
-        />
-      </RelationWrapper>
-    );
+      < RelationWrapper >
+      < RelationBox
+    autoFocus
+    errors = {get(formErrors, 'name', []
+  )
+  }
+    didCheckErrors = {didCheckErrors}
+    main
+    modelName = {modelToEditName}
+    onChange = {onChange}
+    source = {source}
+    value = {name}
+    />
+    < NaturePicker
+    modelName = {modelToEditName}
+    nature = {nature}
+    name = {name}
+    target = {target}
+    onClick = {onChangeRelationNature}
+    />
+    < RelationBox
+    errors = {get(formErrors, 'key', []
+  )
+  }
+    didCheckErrors = {didCheckErrors}
+    models = {models}
+    nature = {nature}
+    onChange = {onChange}
+    onClick = {this.handleClick}
+    selectedModel = {target}
+    plugin = {plugin}
+    value = {key}
+    />
+    < /RelationWrapper>
+  )
+    ;
   };
 
   render() {
-    const { actionType, activeTab, attributeToEditName, isOpen } = this.props;
-    const { showForm } = this.state;
+    const {actionType, activeTab, attributeToEditName, isOpen} = this.props;
+    const {showForm} = this.state;
     const titleContent = actionType === 'create' ? 'relation' : attributeToEditName;
     const content =
       activeTab === 'base' || !activeTab ? this.renderRelationForm() : this.renderAdvancedSettings();
 
     return (
-      <WrapperModal
-        isOpen={isOpen}
-        onClosed={this.handleOnClosed}
-        onOpened={this.handleOnOpened}
-        onToggle={this.handleToggle}
+      < WrapperModal
+    isOpen = {isOpen}
+    onClosed = {this.handleOnClosed}
+    onOpened = {this.handleOnOpened}
+    onToggle = {this.handleToggle}
       >
-        <HeaderModal>
-          <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>
-            <FormattedMessage id={`${pluginId}.popUpForm.${actionType || 'create'}`} />
-            &nbsp;
-            <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{titleContent}</span>
-            &nbsp;
-            <FormattedMessage id={`${pluginId}.popUpForm.field`} />
-          </div>
-          <HeaderModalNavContainer>{NAVLINKS.map(this.renderNavLink)}</HeaderModalNavContainer>
-        </HeaderModal>
-        <form onSubmit={this.handleSubmitAndContinue}>
-          <BodyModal>{showForm && content}</BodyModal>
-          <FooterModal>
-            <ButtonModalSecondary message={`${pluginId}.form.button.cancel`} onClick={this.handleCancel} />
-            <ButtonModalPrimary message={`${pluginId}.form.button.continue`} type="submit" add />
-            <ButtonModalPrimary
-              message={`${pluginId}.form.button.save`}
-              type="button"
-              onClick={this.handleSubmit}
-            />
-          </FooterModal>
-        </form>
-      </WrapperModal>
-    );
+      < HeaderModal >
+      < div
+    style = {
+    {
+      fontSize: '1.8rem', fontWeight
+    :
+      'bold'
+    }
+  }>
+  <
+    FormattedMessage
+    id = {`${pluginId}.popUpForm.${actionType || 'create'}`
+  }
+    />
+    & nbsp;
+  <
+    span
+    style = {
+    {
+      fontStyle: 'italic', textTransform
+    :
+      'capitalize'
+    }
+  }>
+    {
+      titleContent
+    }
+  <
+    /span>
+    & nbsp;
+  <
+    FormattedMessage
+    id = {`${pluginId}.popUpForm.field`
+  }
+    />
+    < /div>
+    < HeaderModalNavContainer > {NAVLINKS.map(this.renderNavLink)} < /HeaderModalNavContainer>
+    < /HeaderModal>
+    < form
+    onSubmit = {this.handleSubmitAndContinue} >
+      < BodyModal > {showForm && content
+  }<
+    /BodyModal>
+    < FooterModal >
+    < ButtonModalSecondary
+    message = {`${pluginId}.form.button.cancel`
+  }
+    onClick = {this.handleCancel}
+    />
+    < ButtonModalPrimary
+    message = {`${pluginId}.form.button.continue`
+  }
+    type = "submit"
+    add / >
+    < ButtonModalPrimary
+    message = {`${pluginId}.form.button.save`
+  }
+    type = "button"
+    onClick = {this.handleSubmit}
+    />
+    < /FooterModal>
+    < /form>
+    < /WrapperModal>
+  )
+    ;
   }
 }
 

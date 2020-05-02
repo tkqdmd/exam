@@ -1,4 +1,4 @@
-import { get, isEmpty, isObject } from 'lodash';
+import {get, isEmpty, isObject} from 'lodash';
 
 export default function checkFormValidity(settingType, data, providerToEdit = '') {
   const formErrors = [];
@@ -10,7 +10,7 @@ export default function checkFormValidity(settingType, data, providerToEdit = ''
 
       keys.forEach(key => {
         if (isProviderEnabled && isEmpty(get(data, key))) {
-          formErrors.push({ name: key, errors: [{ id: 'components.Input.error.validation.required' }] });
+          formErrors.push({name: key, errors: [{id: 'components.Input.error.validation.required'}]});
         }
       });
       break;
@@ -20,13 +20,16 @@ export default function checkFormValidity(settingType, data, providerToEdit = ''
         if (isObject(data.options[value])) {
           Object.keys(data.options[value]).forEach(subValue => {
             if (isEmpty(get(data, ['options', value, subValue]))) {
-              formErrors.push({ name: `options.${value}.${subValue}`, errors: [{ id: 'components.Input.error.validation.required' }] });
+              formErrors.push({
+                name: `options.${value}.${subValue}`,
+                errors: [{id: 'components.Input.error.validation.required'}]
+              });
             }
           });
         }
 
         if (value !== 'response_email' && isEmpty(get(data, ['options', value]))) {
-          formErrors.push({ name: `options.${value}`, errors: [{ id: 'components.Input.error.validation.required' }] });
+          formErrors.push({name: `options.${value}`, errors: [{id: 'components.Input.error.validation.required'}]});
         }
       });
       break;

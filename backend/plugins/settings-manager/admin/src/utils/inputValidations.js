@@ -1,4 +1,4 @@
-import { findIndex, mapKeys, forEach, includes, has, isUndefined, reject, isEmpty, size, remove, union } from 'lodash';
+import {findIndex, mapKeys, forEach, includes, has, isUndefined, reject, isEmpty, size, remove, union} from 'lodash';
 
 /*
 * @method : check invalid inputs
@@ -31,7 +31,10 @@ export function checkFormValidity(formData, formValidations, formErrors) {
 
     forEach(valueValidations.nestedValidations, (nestedValidations) => {
       if (nestedValidations.validations.required && !has(formData, nestedValidations.target)) {
-        errors.push({ target: nestedValidations.target, errors: [{ id: 'settings-manager.request.error.validation.required' }] });
+        errors.push({
+          target: nestedValidations.target,
+          errors: [{id: 'settings-manager.request.error.validation.required'}]
+        });
       }
     });
 
@@ -39,10 +42,13 @@ export function checkFormValidity(formData, formValidations, formErrors) {
       inputErrors = validate(value, valueValidations.validations);
     }
 
-    if (!isEmpty(inputErrors)) errors.push({ target: key, errors: inputErrors });
+    if (!isEmpty(inputErrors)) errors.push({target: key, errors: inputErrors});
 
     if (formData['security.xframe.value'] && formData['security.xframe.value'] === 'ALLOW-FROM' || formData['security.xframe.value'] === 'ALLOW-FROM.ALLOW-FROM ') {
-      errors.push({ target: 'security.xframe.value.nested', errors: [{ id: 'settings-manager.request.error.validation.required' }] });
+      errors.push({
+        target: 'security.xframe.value.nested',
+        errors: [{id: 'settings-manager.request.error.validation.required'}]
+      });
     }
   });
 
@@ -53,27 +59,27 @@ export function checkFormValidity(formData, formValidations, formErrors) {
 function validate(value, validations) {
   let errors = [];
   // Handle i18n
-  const requiredError = { id: 'settings-manager.request.error.validation.required' };
+  const requiredError = {id: 'settings-manager.request.error.validation.required'};
   mapKeys(validations, (validationValue, validationKey) => {
     switch (validationKey) {
       case 'maxLength':
         if (value.length > validationValue) {
-          errors.push({ id: 'settings-manager.request.error.validation.maxLength' });
+          errors.push({id: 'settings-manager.request.error.validation.maxLength'});
         }
         break;
       case 'minLength':
         if (value.length < validationValue) {
-          errors.push({ id: 'settings-manager.request.error.validation.minLength' });
+          errors.push({id: 'settings-manager.request.error.validation.minLength'});
         }
         break;
       case 'required':
         if (value.length === 0) {
-          errors.push({ id: 'settings-manager.request.error.validation.required' });
+          errors.push({id: 'settings-manager.request.error.validation.required'});
         }
         break;
       case 'regex':
         if (!new RegExp(validationValue).test(value)) {
-          errors.push({ id: 'settings-manager.request.error.validation.regex' });
+          errors.push({id: 'settings-manager.request.error.validation.regex'});
         }
         break;
       default:
@@ -114,14 +120,21 @@ export function getInputsValidationsFromConfigs(configs) {
           forEach(item.items, (subItem, key) => {
             if (!isUndefined(subItem.target) && !isUndefined(subItem.validations)) {
               if (has(subItem, 'items')) {
-                validations.nestedValidations.push({ target: subItem.target, validations: subItem.validations, nestedValidations: [] });
+                validations.nestedValidations.push({
+                  target: subItem.target,
+                  validations: subItem.validations,
+                  nestedValidations: []
+                });
                 forEach(subItem.items, (nestedSubItem) => {
                   if (!isUndefined(nestedSubItem.target)) {
-                    validations.nestedValidations[key].nestedValidations.push({ target: nestedSubItem.target, validations: nestedSubItem.validations });
+                    validations.nestedValidations[key].nestedValidations.push({
+                      target: nestedSubItem.target,
+                      validations: nestedSubItem.validations
+                    });
                   }
                 });
               } else {
-                validations.nestedValidations.push({ target: subItem.target, validations: subItem.validations });
+                validations.nestedValidations.push({target: subItem.target, validations: subItem.validations});
               }
             }
           });
@@ -153,10 +166,19 @@ export function getInputsValidationsFromConfigs(configs) {
 
 export function getRequiredInputsDb(data, dbExistsErrors) {
   const formErrors = [
-    { target: 'database.connections.${name}.name', errors: [{ id: 'settings-manager.request.error.validation.required' }] },
-    { target: 'database.connections.${name}.settings.host', errors: [{ id: 'settings-manager.request.error.validation.required' }] },
-    { target: 'database.connections.${name}.settings.port', errors: [{ id: 'settings-manager.request.error.validation.required' }] },
-    { target: 'database.connections.${name}.settings.database', errors: [{ id: 'settings-manager.request.error.validation.required' }] },
+    {target: 'database.connections.${name}.name', errors: [{id: 'settings-manager.request.error.validation.required'}]},
+    {
+      target: 'database.connections.${name}.settings.host',
+      errors: [{id: 'settings-manager.request.error.validation.required'}]
+    },
+    {
+      target: 'database.connections.${name}.settings.port',
+      errors: [{id: 'settings-manager.request.error.validation.required'}]
+    },
+    {
+      target: 'database.connections.${name}.settings.database',
+      errors: [{id: 'settings-manager.request.error.validation.required'}]
+    },
   ];
 
   // If size data === 2 user hasn't filled any input,

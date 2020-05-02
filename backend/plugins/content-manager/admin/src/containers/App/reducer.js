@@ -4,8 +4,8 @@
  *
  */
 
-import { fromJS, List } from 'immutable';
-import { difference, findIndex, get, range, upperFirst } from 'lodash';
+import {fromJS, List} from 'immutable';
+import {difference, findIndex, get, range, upperFirst} from 'lodash';
 import Manager from 'utils/Manager';
 import {
   BEGIN_MOVE,
@@ -79,7 +79,7 @@ function appReducer(state = initialState, action) {
           if (shouldUpdateListOnDrop && canDrop) {
             newList = list
               .insert(dropIndex, toAdd);
-        
+
             const addedElementName = state.get('addedElementName');
             const manager = createManager(state, newList, action.keys, dropIndex, layout);
             const arrayOfLastLineElements = manager.arrayOfEndLineElements;
@@ -98,18 +98,18 @@ function appReducer(state = initialState, action) {
             }
 
             const newManager = createManager(state, newList, action.keys, dropIndex, layout);
-            const { elements: previousStateLineEls } = getElementsOnALine(createManager(state, list, action.keys, dropIndex, layout), dropLine, list);
-            const { elements: currentStateLineEls } = getElementsOnALine(newManager, dropLine, newList);
+            const {elements: previousStateLineEls} = getElementsOnALine(createManager(state, list, action.keys, dropIndex, layout), dropLine, list);
+            const {elements: currentStateLineEls} = getElementsOnALine(newManager, dropLine, newList);
 
             if (dropLine !== initDragLine) {
               const diff = difference(previousStateLineEls, currentStateLineEls);
               const diffLineSize = newManager.getLineSize(diff);
               const lineToCreate = [...diff, ...manager.getColsToAdd(12 - diffLineSize)];
               let indexToInsert = dropIndex + 1;
-  
+
               lineToCreate.forEach(item => {
                 const canAdd = newList.indexOf(item) === -1;
-  
+
                 if (canAdd) {
                   newList = newList.insert(indexToInsert, item);
                 }
@@ -129,7 +129,7 @@ function appReducer(state = initialState, action) {
         })
         .update('draggedItemName', () => null)
         .update('hasMoved', () => false)
-        .update('hoverIndex', () =>  -1)
+        .update('hoverIndex', () => -1)
         .update('shouldUpdateListOnDrop', () => true)
         .update('shouldResetGrid', v => !v);
     case GET_MODEL_ENTRIES_SUCCEEDED:
@@ -172,12 +172,15 @@ function appReducer(state = initialState, action) {
           const arrayOfLastLineElements = manager.arrayOfEndLineElements;
           const itemInfos = manager.getAttrInfos(draggedItemIndex);
           const isFullSize = itemInfos.bootstrapCol === 12;
-          const dropLineBounds = { left: manager.getBound(false, action.hoverIndex), right: manager.getBound(true, action.hoverIndex) };
+          const dropLineBounds = {
+            left: manager.getBound(false, action.hoverIndex),
+            right: manager.getBound(true, action.hoverIndex)
+          };
           const hasMoved = state.get('hasMoved'); // Used only for non full-width elements
-          
+
           if (isFullSize && draggedItemIndex !== -1) {
             const upwards = action.dragIndex > action.hoverIndex;
-            const indexToDrop = upwards ? get(dropLineBounds, 'left.index', 0) : get(dropLineBounds, 'right.index', list.size -1);
+            const indexToDrop = upwards ? get(dropLineBounds, 'left.index', 0) : get(dropLineBounds, 'right.index', list.size - 1);
             updateHoverIndex = false;
             shouldUpdateListOnDrop = false;
 
@@ -214,7 +217,7 @@ function appReducer(state = initialState, action) {
           if (addedElementName) {
             return addedElementName;
           }
-          
+
           return name;
         })
         .update('hasMoved', () => true)
@@ -232,7 +235,7 @@ function appReducer(state = initialState, action) {
               if (current !== 'plugins') {
                 return acc.setIn([current, action.keys[1]], action.value);
               }
-              
+
               return acc
                 .get(current)
                 .keySeq()
@@ -241,8 +244,8 @@ function appReducer(state = initialState, action) {
                     .getIn([current, curr])
                     .keySeq()
                     .reduce((acc2, curr1) => {
-                  
-                      return acc2.setIn([ current, curr, curr1, action.keys[1]], action.value);
+
+                      return acc2.setIn([current, curr, curr1, action.keys[1]], action.value);
                     }, acc1);
                 }, acc);
             }, models);
@@ -267,14 +270,14 @@ function appReducer(state = initialState, action) {
       return state.updateIn(['modifiedSchema', 'models', ...action.keys.split('.'), 'listDisplay'], list => {
 
         // If the list is empty add the default Id attribute
-        if (list.size -1 === 0) {
+        if (list.size - 1 === 0) {
           const attrToAdd = state.getIn(['schema', 'models', ...action.keys.split('.'), 'listDisplay'])
             .filter(attr => {
               return attr.get('name') === '_id' || attr.get('name') === 'id';
             });
-          
+
           attrToAdd.setIn(['0', 'sortable'], () => true);
-          
+
           return list
             .delete(action.index)
             .push(attrToAdd.get('0'));
@@ -297,7 +300,7 @@ function appReducer(state = initialState, action) {
           const arrayOfLastLineElements = manager.arrayOfEndLineElements;
           const isRemovingAFullWidthNode = attrToRemoveInfos.bootstrapCol === 12;
           let newList;
-          
+
           if (isRemovingAFullWidthNode) { // If removing we need to add the corresponding missing col in the prev line
             const currentNodeLine = findIndex(arrayOfLastLineElements, ['index', attrToRemoveInfos.index]); // Used only to know if removing a full size element on the first line
 
@@ -321,7 +324,7 @@ function appReducer(state = initialState, action) {
                 newList = list
                   .delete(attrToRemoveInfos.index)
                   .insert(attrToRemoveInfos.index, colsToAdd[0]);
-              
+
                 if (colsToAdd.length > 1) {
                   newList = newList
                     .insert(attrToRemoveInfos.index, colsToAdd[1]);
@@ -329,9 +332,9 @@ function appReducer(state = initialState, action) {
               }
             }
           } else {
-            const nodeBounds = { left: manager.getBound(false), right: manager.getBound(true) }; // Retrieve the removed element's bounds
+            const nodeBounds = {left: manager.getBound(false), right: manager.getBound(true)}; // Retrieve the removed element's bounds
             const leftBoundIndex = get(nodeBounds, ['left', 'index'], 0) + 1;
-            const rightBoundIndex = get(nodeBounds, ['right', 'index'], list.size -1);
+            const rightBoundIndex = get(nodeBounds, ['right', 'index'], list.size - 1);
             const elementsOnLine = manager.getElementsOnALine(range(leftBoundIndex - 1, rightBoundIndex + 1));
             const currentLineColSize = manager.getLineSize(elementsOnLine);
             const isRemovingLine = currentLineColSize - attrToRemoveInfos.bootstrapCol === 0;
@@ -340,7 +343,7 @@ function appReducer(state = initialState, action) {
               newList = list
                 .delete(attrToRemoveInfos.index);
             } else {
-              const random = Math.floor(Math.random() * 1000); 
+              const random = Math.floor(Math.random() * 1000);
               newList = list
                 .delete(attrToRemoveInfos.index)
                 .insert(rightBoundIndex, `__col-md-${attrToRemoveInfos.bootstrapCol}__${random}`);

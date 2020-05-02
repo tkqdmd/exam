@@ -7,13 +7,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { trim } from 'lodash';
+import {trim} from 'lodash';
 
 import ext from './extensions.json';
 
 import styles from './styles.scss';
 
-function FileIcon({ fileType }) {
+function FileIcon({fileType}) {
   const iconType = (() => {
     switch (true) {
       case ext.archive.includes(trim(fileType, '.')):
@@ -36,19 +36,25 @@ function FileIcon({ fileType }) {
   })();
 
   return (
-    <div
-      className={(cn(
-        styles.fileIconContainer,
-        iconType === 'file-pdf-o' && styles.pdf,
-        iconType === 'file-archive-o' && styles.zip,
-        iconType === 'file-image-o' && styles.image,
-        iconType === 'file-video-o' && styles.video,
-        iconType === 'file-code-o' && styles.code,
-      ))}
-    >
-      <i className={`fa fa-${iconType}`} />
-    </div>
-  );
+    < div
+  className = {(cn(
+    styles.fileIconContainer,
+    iconType === 'file-pdf-o' && styles.pdf,
+    iconType === 'file-archive-o' && styles.zip,
+    iconType === 'file-image-o' && styles.image,
+    iconType === 'file-video-o' && styles.video,
+    iconType === 'file-code-o' && styles.code,
+  ))
+}
+>
+<
+  i
+  className = {`fa fa-${iconType}`
+}
+  />
+  < /div>
+)
+  ;
 }
 
 FileIcon.defaultProps = {

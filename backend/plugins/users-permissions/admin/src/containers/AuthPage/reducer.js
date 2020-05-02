@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, List, Map } from 'immutable';
+import {fromJS, List, Map} from 'immutable';
 import {
   HIDE_LOGIN_ERRORS_INPUT,
   ON_CHANGE_INPUT,

@@ -44,12 +44,14 @@
   > span:last-child {
     color: #1C5DE7;
   }
+
   -webkit-font-smoothing: antialiased;
 }
 
 .cardFooter {
   position: absolute;
-  bottom: 0; left: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   width: 100%;
   height: 45px;
@@ -72,7 +74,7 @@
   }
 }
 
-.settings{
+.settings {
   margin-top: 3px;
   color: #323740;
   font-size: 1.3rem;
@@ -113,6 +115,7 @@
   border: 1px solid #F3F3F7;
   border-radius: 3px;
   white-space: nowrap;
+
   > img {
     max-height: 36px;
     vertical-align: middle;
@@ -126,7 +129,7 @@
 }
 
 .pluginCard {
- 
+
 }
 
 .primary {
@@ -134,10 +137,10 @@
   color: white;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
-  
+
   &:active {
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,.15);
- }
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .15);
+  }
 }
 
 .secondary {

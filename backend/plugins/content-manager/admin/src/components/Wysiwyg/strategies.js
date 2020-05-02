@@ -32,4 +32,4 @@ function findVideoEntities(contentBlock, cb, contentState) {
 
 const isVideoType = (fileName) => /\.(mp4|mpg|mpeg|mov|avi)$/i.test(fileName);
 
-export { findAtomicEntities, findLinkEntities, findImageEntities, findVideoEntities };
+export {findAtomicEntities, findLinkEntities, findImageEntities, findVideoEntities};

@@ -1,21 +1,21 @@
-const { List } = require('immutable');
-const { flattenDeep, get, range } = require('lodash');
+const {List} = require('immutable');
+const {flattenDeep, get, range} = require('lodash');
 const Manager = require('./Manager');
 
 const stateUpdater = (obj, array, keys) => obj.updateIn(['modifiedSchema', 'models', ...keys.split('.'), 'fields'], () => array);
 const createManager = (obj, array, keys, dropIndex, layout) => new Manager(stateUpdater(obj, array, keys), array, keys, dropIndex, layout);
 const getElementsOnALine = (manager, line, list) => {
   const firstElIndex = line === 0 ? 0 : manager.arrayOfEndLineElements[line - 1].index + 1;
-  const lastElIndex = get(manager.arrayOfEndLineElements[line], 'index', list.size -1) + 1;
+  const lastElIndex = get(manager.arrayOfEndLineElements[line], 'index', list.size - 1) + 1;
   const elements = manager.getElementsOnALine(range(firstElIndex, lastElIndex));
 
-  return { elements, lastElIndex };
+  return {elements, lastElIndex};
 };
 const createArrayOfLastEls = (manager, list) => {
-  const { name, index, bootstrapCol } = manager.getAttrInfos(list.size - 1);
+  const {name, index, bootstrapCol} = manager.getAttrInfos(list.size - 1);
   const isFullSize = bootstrapCol === 12;
 
-  return manager.arrayOfEndLineElements.concat({ name, index, isFullSize });
+  return manager.arrayOfEndLineElements.concat({name, index, isFullSize});
 };
 const removeColsLine = (manager, list) => {
   let addedElsToRemove = [];
@@ -46,7 +46,7 @@ const reorderList = (manager, list) => {
   const lines = [];
 
   array.forEach((item, i) => {
-    const { elements } = getElementsOnALine(manager, i, list);
+    const {elements} = getElementsOnALine(manager, i, list);
     lines.push(elements);
   });
 
@@ -75,7 +75,7 @@ const deepTrimObject = attribute => {
       .reduce((acc, [key, value]) => {
         const trimmedObject = deepTrimObject(value);
 
-        return { ...acc, [key]: trimmedObject };
+        return {...acc, [key]: trimmedObject};
       }, {});
   }
 

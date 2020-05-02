@@ -29,5 +29,5 @@
   "notification.dropFile.success": "Your file has been uploaded",
   "notification.dropFiles.success": "{number} files have been uploaded",
   "Upload.status.sizeLimit": "{file} is bigger than configured limit size",
-  "Upload.status.disabled" : "File upload is disabled"
+  "Upload.status.disabled": "File upload is disabled"
 }

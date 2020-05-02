@@ -1,5 +1,5 @@
 // import { LOCATION_CHANGE } from 'react-router-redux';
-import { findIndex, get, isArray, isEmpty, includes, isNumber, isString, map } from 'lodash';
+import {findIndex, get, isArray, isEmpty, includes, isNumber, isString, map} from 'lodash';
 import {
   all,
   call,
@@ -15,7 +15,7 @@ import cleanData from 'utils/cleanData';
 import request from 'utils/request';
 import templateObject from 'utils/templateObject';
 
-import { makeSelectSchema } from '../App/selectors';
+import {makeSelectSchema} from '../App/selectors';
 import {
   getDataSucceeded,
   setFormErrors,
@@ -23,7 +23,7 @@ import {
   submitSuccess,
   unsetLoader,
 } from './actions';
-import { DELETE_DATA, GET_DATA, SUBMIT } from './constants';
+import {DELETE_DATA, GET_DATA, SUBMIT} from './constants';
 import {
   makeSelectFileRelations,
   makeSelectIsCreating,
@@ -35,14 +35,14 @@ import {
 function* dataGet(action) {
   try {
     const modelName = yield select(makeSelectModelName());
-    const params = { source: action.source };
+    const params = {source: action.source};
     const [response] = yield all([
-      call(request, `/content-manager/explorer/${modelName}/${action.id}`, { method: 'GET', params }),
+      call(request, `/content-manager/explorer/${modelName}/${action.id}`, {method: 'GET', params}),
     ]);
-    const pluginHeaderTitle = yield call(templateObject, { mainField: action.mainField }, response);
+    const pluginHeaderTitle = yield call(templateObject, {mainField: action.mainField}, response);
 
     yield put(getDataSucceeded(action.id, response, pluginHeaderTitle.mainField));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('content-manager.error.record.fetch');
   }
 }
@@ -55,7 +55,7 @@ function* deleteData() {
     const source = yield select(makeSelectSource());
     const requestUrl = `/content-manager/explorer/${currentModelName}/${id}`;
 
-    yield call(request, requestUrl, { method: 'DELETE', params: { source } });
+    yield call(request, requestUrl, {method: 'DELETE', params: {source}});
     strapi.notification.success('content-manager.success.record.delete');
     yield new Promise(resolve => {
       setTimeout(() => {
@@ -63,7 +63,7 @@ function* deleteData() {
       }, 300);
     });
     yield put(submitSuccess());
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('content-manager.error.record.delete');
   }
 }
@@ -76,7 +76,7 @@ export function* submit(action) {
   const source = yield select(makeSelectSource());
   const schema = yield select(makeSelectSchema());
   let shouldAddTranslationSuffix = false;
-  
+
   // Remove the updated_at & created_at fields so it is updated correctly when using Postgres or MySQL db
   const timestamps = get(schema, ['models', currentModelName, 'options', 'timestamps'], null);
   if (timestamps) {
@@ -120,7 +120,7 @@ export function* submit(action) {
           acc.append(current, JSON.stringify(data));
         }
       } else {
-        acc.append(current,  JSON.stringify(cleanedData));
+        acc.append(current, JSON.stringify(cleanedData));
       }
 
       return acc;
@@ -132,7 +132,7 @@ export function* submit(action) {
     // }
 
     const id = isCreating ? '' : record.id || record._id;
-    const params = { source };
+    const params = {source};
     // Change the request helper default headers so we can pass a FormData
     const headers = {
       'X-Forwarded-Host': 'strapi',
@@ -158,8 +158,8 @@ export function* submit(action) {
     // Redirect the user to the ListPage container
     yield put(submitSuccess());
 
-  } catch(err) {
-    action.context.emitEvent('didNotSaveEntry', { error: err });
+  } catch (err) {
+    action.context.emitEvent('didNotSaveEntry', {error: err});
     if (isArray(get(err, 'response.payload.message'))) {
       const errors = err.response.payload.message.reduce((acc, current) => {
         const error = current.messages.reduce((acc, current) => {
@@ -172,7 +172,7 @@ export function* submit(action) {
           acc.errorMessage = current.id;
 
           return acc;
-        }, { id: 'components.Input.error.custom-error', errorMessage: '' });
+        }, {id: 'components.Input.error.custom-error', errorMessage: ''});
         acc.push(error);
 
         return acc;
@@ -180,7 +180,7 @@ export function* submit(action) {
 
       const name = get(err.response.payload.message, ['0', 'messages', '0', 'field', '0']);
 
-      yield put(setFormErrors([{ name, errors }]));
+      yield put(setFormErrors([{name, errors}]));
     }
 
     const notifErrorPrefix = source === 'users-permissions' && shouldAddTranslationSuffix ? 'users-permissions.' : '';

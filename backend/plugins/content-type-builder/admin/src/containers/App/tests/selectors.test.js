@@ -1,6 +1,6 @@
-import { fromJS } from 'immutable';
+import {fromJS} from 'immutable';
 import pluginId from '../../../pluginId';
-import makeSelectApp, { makeSelectConnections, selectAppDomain } from '../selectors';
+import makeSelectApp, {makeSelectConnections, selectAppDomain} from '../selectors';
 
 const state = fromJS({
   connections: ['default'],

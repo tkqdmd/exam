@@ -25,7 +25,7 @@ html {
   -webkit-text-size-adjust: 100%; // 4
   -ms-text-size-adjust: 100%; // 4
   -ms-overflow-style: scrollbar; // 5
-  -webkit-tap-highlight-color: rgba(0,0,0,0); // 6
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 6
 }
 
 *,
@@ -36,7 +36,9 @@ html {
 
 // IE10+ doesn't honor `<meta name="viewport">` in some cases.
 @at-root {
-  @-ms-viewport { width: device-width; }
+  @-ms-viewport {
+    width: device-width;
+  }
 }
 
 // Shim for "new" HTML5 structural elements to display correctly (IE10, older browsers)
@@ -177,8 +179,13 @@ sup {
   vertical-align: baseline;
 }
 
-sub { bottom: -.25em; }
-sup { top: -.5em; }
+sub {
+  bottom: -.25em;
+}
+
+sup {
+  top: -.5em;
+}
 
 
 //

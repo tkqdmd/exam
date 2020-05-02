@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
 import RelationBox from '../RelationBox';
 
@@ -9,12 +9,16 @@ describe('<RelationBox />', () => {
       onChange: jest.fn(),
       value: '',
     };
-    shallow(<RelationBox {...props} />);
+    shallow( < RelationBox
+    {...
+      props
+    }
+    />);
   });
 
   it('should use the defaultProps', () => {
     const {
-      defaultProps: { onClick },
+      defaultProps: {onClick},
     } = RelationBox;
 
     expect(onClick).toBeDefined();

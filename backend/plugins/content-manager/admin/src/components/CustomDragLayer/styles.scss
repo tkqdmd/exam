@@ -12,13 +12,13 @@
   height: 30px !important;
   width: 100%;
   margin-bottom: 6px;
-  box-shadow: 0!important;
+  box-shadow: 0 !important;
   padding-left: 10px;
   justify-content: space-between;
   background: #E6F0FB !important;
   line-height: 30px;
   color: #333740;
-  border: 1px solid darken(#AED4FB, 20%)!important;
+  border: 1px solid darken(#AED4FB, 20%) !important;
   border-radius: 2px;
   // cursor: move !important;
 
@@ -29,6 +29,6 @@
   }
 
   > span:last-child {
-    background:#AED4FB;
+    background: #AED4FB;
   }
 }

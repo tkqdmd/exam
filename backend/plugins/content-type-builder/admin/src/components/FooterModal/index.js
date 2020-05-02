@@ -1,20 +1,22 @@
 /**
-*
-* FooterModal
-*
-*/
+ *
+ * FooterModal
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalFooter } from 'reactstrap';
+import {ModalFooter} from 'reactstrap';
 import styles from './styles.scss';
 
-function FooterModal({ children }) {
+function FooterModal({children}) {
   return (
-    <ModalFooter className={styles.footerModal}>
-      {children}
-    </ModalFooter>
-  );
+    < ModalFooter
+  className = {styles.footerModal} >
+    {children}
+    < /ModalFooter>
+)
+  ;
 }
 
 FooterModal.defaultProps = {

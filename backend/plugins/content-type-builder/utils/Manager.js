@@ -1,9 +1,9 @@
 // This file contains all the methods required to get the number of inputs
 // that will be displayed in the content manager edit view.
 // Since we want to keep the shape of the layout when we remove a field from
-// the content type builder form builder we duplicated this file already used in the content manager. 
-const { findIndex, pullAt, range } = require('lodash');
-const { List } = require('immutable');
+// the content type builder form builder we duplicated this file already used in the content manager.
+const {findIndex, pullAt, range} = require('lodash');
+const {List} = require('immutable');
 
 class Manager {
   constructor(state, list, keys, index, layout) {
@@ -18,7 +18,7 @@ class Manager {
 
   /**
    * Retrieve the bootstrap col index, name and type of a field
-   * @param {Number} index 
+   * @param {Number} index
    * @returns {Object}
    */
   getAttrInfos(index) {
@@ -45,7 +45,7 @@ class Manager {
   getColsToAdd(number) {
     let ret;
 
-    switch(number) {
+    switch (number) {
       case 12:
         ret = [];
         break;
@@ -80,11 +80,11 @@ class Manager {
   /**
    * Retrieve a field default bootstrap col
    * NOTE: will change if we add the customisation of an input's width
-   * @param {String} type 
+   * @param {String} type
    * @returns {Number}
    */
   getBootStrapCol(type) {
-    switch(type) {
+    switch (type) {
       case 'checkbox':
       case 'boolean':
       case 'date':
@@ -118,7 +118,7 @@ class Manager {
   }
 
   /**
-   * 
+   *
    * Retrieve the last element of each bootstrap line
    * @returns {Array}
    */
@@ -127,7 +127,7 @@ class Manager {
     let sum = 0;
 
     this.list.forEach((item, i) => {
-      let { bootstrapCol, index, name, type } = this.getAttrInfos(i);
+      let {bootstrapCol, index, name, type} = this.getAttrInfos(i);
 
       if (!type && name.includes('__col')) {
         bootstrapCol = parseInt(name.split('__')[1].split('-')[2], 10);
@@ -137,7 +137,7 @@ class Manager {
 
       if (sum === 12 || bootstrapCol === 12) {
         const isFullSize = bootstrapCol === 12;
-        array.push({ name, index, isFullSize });
+        array.push({name, index, isFullSize});
         sum = 0;
       }
 
@@ -146,15 +146,15 @@ class Manager {
       }
 
       if (i < this.list.size - 1) {
-        let { bootstrapCol: nextBootstrapCol, name: nextName, type: nextType } = this.getAttrInfos(i + 1);
-        
+        let {bootstrapCol: nextBootstrapCol, name: nextName, type: nextType} = this.getAttrInfos(i + 1);
+
         if (!nextType && nextName.includes('__col')) {
           nextBootstrapCol = parseInt(nextName.split('__')[1].split('-')[2], 10);
         }
 
         if (sum + nextBootstrapCol > 12) {
           const isFullSize = bootstrapCol === 12;
-          array.push({ name, index, isFullSize });
+          array.push({name, index, isFullSize});
           sum = 0;
         }
       }
@@ -164,9 +164,9 @@ class Manager {
   }
 
   /**
-   * 
+   *
    * Retrieve the field's type depending on its name
-   * @param {String} itemName 
+   * @param {String} itemName
    * @returns {String}
    */
   getType(itemName) {
@@ -179,15 +179,15 @@ class Manager {
    * @param {Number} itemIndex
    * @returns {String}
    */
-  getAttrName(itemIndex){
+  getAttrName(itemIndex) {
     return this.state
       .getIn(['schema', 'models', ...this.keys, 'fields', itemIndex]);
   }
 
   /**
    * Retrieve the line bootstrap col sum
-   * @param {Number} leftBound 
-   * @param {Number} rightBound 
+   * @param {Number} leftBound
+   * @param {Number} rightBound
    * @returns {Number}
    */
 
@@ -202,7 +202,7 @@ class Manager {
   }
 
   /**
-   * 
+   *
    * @param {Bool} dir sup or min
    * @param {Number} pivot the center
    * @returns {Object} the first sup or last sup
@@ -217,7 +217,7 @@ class Manager {
 
       if (cond) {
         hasResult = true;
-        result = dir === true ? item : { name: this.list.get(item.index + 1), index: item.index + 1, isFullSize: false };
+        result = dir === true ? item : {name: this.list.get(item.index + 1), index: item.index + 1, isFullSize: false};
       }
     });
 
@@ -229,7 +229,7 @@ class Manager {
     let sum = 0;
 
     this.arrayOfEndLineElements.forEach((item, i) => {
-      const firstLineItem = i === 0 ? 0 : this.arrayOfEndLineElements[i - 1].index +1;
+      const firstLineItem = i === 0 ? 0 : this.arrayOfEndLineElements[i - 1].index + 1;
       const lastLineItem = item.index + 1;
       const lineRange = firstLineItem === lastLineItem ? [firstLineItem] : range(firstLineItem, lastLineItem);
       const lineItems = this.getElementsOnALine(lineRange);
@@ -238,7 +238,7 @@ class Manager {
       if (lineSize < 10 && i < this.arrayOfEndLineElements.length - 1) {
         const colsToAdd = this.getColsToAdd(12 - lineSize);
         newList = newList.insert(lastLineItem + sum, colsToAdd[0]);
-        
+
         if (colsToAdd.length > 1) {
           newList = newList.insert(lastLineItem + sum, colsToAdd[1]);
         }

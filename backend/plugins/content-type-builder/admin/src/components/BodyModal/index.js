@@ -1,25 +1,34 @@
 /**
-*
-* BodyModal
-*
-*/
+ *
+ * BodyModal
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalBody } from 'reactstrap';
+import {ModalBody} from 'reactstrap';
 
 import styles from './styles.scss';
 
-function BodyModal({ children, ...rest }) {
+function BodyModal({children, ...rest}) {
   return (
-    <ModalBody className={styles.bodyModal} {...rest}>
-      <div className="container-fluid">
-        <div className="row">
-          {children}
-        </div>
-      </div>
-    </ModalBody>
-  );
+    < ModalBody
+  className = {styles.bodyModal}
+  {...
+    rest
+  }
+>
+<
+  div
+  className = "container-fluid" >
+    < div
+  className = "row" >
+    {children}
+    < /div>
+    < /div>
+    < /ModalBody>
+)
+  ;
 }
 
 /* istanbul ignore next */

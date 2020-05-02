@@ -6,9 +6,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { findIndex, get, isEmpty } from 'lodash';
+import {connect} from 'react-redux';
+import {bindActionCreators, compose} from 'redux';
+import {findIndex, get, isEmpty} from 'lodash';
 
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
@@ -59,13 +59,13 @@ class ConfigPage extends React.Component {
    * @return {Func}       calls the saga that gets the current settings
    */
   getSettings = (props) => {
-    const { match: { params: { env} } } = props;
+    const {match: {params: {env}}} = props;
     this.props.getSettings(env);
   }
 
   generateLinks = () => {
     const headerNavLinks = this.props.appEnvironments.reduce((acc, current) => {
-      const link = Object.assign(current, { to: `/plugins/email/configurations/${current.name}` });
+      const link = Object.assign(current, {to: `/plugins/email/configurations/${current.name}`});
       acc.push(link);
       return acc;
     }, []).sort(link => link.name === 'production');
@@ -79,7 +79,7 @@ class ConfigPage extends React.Component {
       if (isEmpty(get(this.props.modifiedData, current, ''))) {
         acc.push({
           name: current,
-          errors: [{ id: 'components.Input.error.validation.required' }],
+          errors: [{id: 'components.Input.error.validation.required'}],
         });
       }
       return acc;
@@ -109,27 +109,39 @@ class ConfigPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <ContainerFluid>
-            <PluginHeader
-              actions={this.pluginHeaderActions}
-              description={{ id: 'email.ConfigPage.description' }}
-              title={{ id: 'email.ConfigPage.title'}}
-            />
-            <HeaderNav links={this.generateLinks()} />
-            <EditForm
-              didCheckErrors={this.props.didCheckErrors}
-              formErrors={this.props.formErrors}
-              modifiedData={this.props.modifiedData}
-              onChange={this.props.onChange}
-              selectedProviderIndex={this.getSelectedProviderIndex()}
-              settings={this.props.settings}
-            />
-          </ContainerFluid>
-        </form>
-      </div>
-    );
+      < div >
+      < form
+    onSubmit = {this.handleSubmit} >
+      < ContainerFluid >
+      < PluginHeader
+    actions = {this.pluginHeaderActions}
+    description = {
+    {
+      id: 'email.ConfigPage.description'
+    }
+  }
+    title = {
+    {
+      id: 'email.ConfigPage.title'
+    }
+  }
+    />
+    < HeaderNav
+    links = {this.generateLinks()}
+    />
+    < EditForm
+    didCheckErrors = {this.props.didCheckErrors}
+    formErrors = {this.props.formErrors}
+    modifiedData = {this.props.modifiedData}
+    onChange = {this.props.onChange}
+    selectedProviderIndex = {this.getSelectedProviderIndex()}
+    settings = {this.props.settings}
+    />
+    < /ContainerFluid>
+    < /form>
+    < /div>
+  )
+    ;
   }
 }
 
@@ -176,8 +188,8 @@ const mapStateToProps = selectConfigPage();
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = strapi.injectReducer({ key: 'configPage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'configPage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'configPage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'configPage', saga, pluginId});
 
 export default compose(
   withReducer,

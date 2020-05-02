@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import pluginId from '../../pluginId';
 
@@ -17,14 +17,26 @@ import NotFoundPage from '../NotFoundPage';
 
 function App() {
   return (
-    <div className={pluginId}>
-      <Switch>
-        <Route path={`/plugins/${pluginId}/configurations/:env`} component={ConfigPage} exact />
-        <Route path={`/plugins/${pluginId}`} component={HomePage} exact />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
-  );
+    < div
+  className = {pluginId} >
+    < Switch >
+    < Route
+  path = {`/plugins/${pluginId}/configurations/:env`
+}
+  component = {ConfigPage}
+  exact / >
+  < Route
+  path = {`/plugins/${pluginId}`
+}
+  component = {HomePage}
+  exact / >
+  < Route
+  component = {NotFoundPage}
+  />
+  < /Switch>
+  < /div>
+)
+  ;
 }
 
 export default App;

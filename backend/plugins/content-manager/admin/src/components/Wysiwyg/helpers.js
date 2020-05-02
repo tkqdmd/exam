@@ -1,4 +1,5 @@
-import { trimEnd, trimStart } from 'lodash';
+import {trimEnd, trimStart} from 'lodash';
+
 /**
  * Override the editor css
  * @param  {[type]} block [description]
@@ -112,5 +113,5 @@ export function getKeyCommandData(command) {
       style = '';
   }
 
-  return { content, style };
+  return {content, style};
 }

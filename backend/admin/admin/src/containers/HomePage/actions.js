@@ -19,7 +19,7 @@ export function getArticlesSucceeded(articles) {
   };
 }
 
-export function onChange({ target }) {
+export function onChange({target}) {
   return {
     type: ON_CHANGE,
     value: target.value,

@@ -1,16 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
 import NaturePicker from '../NaturePicker';
 
 describe('<NaturePicker />', () => {
   it('should not crash', () => {
-    shallow(<NaturePicker />);
+    shallow( < NaturePicker / >
+  )
+    ;
   });
 
   it('should use the defaultProps', () => {
     const {
-      defaultProps: { onClick },
+      defaultProps: {onClick},
     } = NaturePicker;
 
     expect(onClick).toBeDefined();
@@ -23,7 +25,11 @@ describe('<NaturePicker />', () => {
       onClick: jest.fn(),
     };
 
-    const wrapper = shallow(<NaturePicker {...props} />);
+    const wrapper = shallow( < NaturePicker
+    {...
+      props
+    }
+    />);
     const img = wrapper.find('img').at(0);
 
     img.simulate('click');
@@ -38,7 +44,11 @@ describe('<NaturePicker />', () => {
       target: 'othertest',
     };
 
-    const wrapper = shallow(<NaturePicker {...props} />);
+    const wrapper = shallow( < NaturePicker
+    {...
+      props
+    }
+    />);
 
     const span = wrapper.find('span').at(0);
     const span1 = wrapper.find('span').at(1);
@@ -54,7 +64,11 @@ describe('<NaturePicker />', () => {
       target: 'othertest',
     };
 
-    const wrapper = shallow(<NaturePicker {...props} />);
+    const wrapper = shallow( < NaturePicker
+    {...
+      props
+    }
+    />);
 
     const span = wrapper.find('span').at(0);
     const span1 = wrapper.find('span').at(1);
@@ -70,7 +84,11 @@ describe('<NaturePicker />', () => {
       target: 'othertest',
     };
 
-    const wrapper = shallow(<NaturePicker {...props} />);
+    const wrapper = shallow( < NaturePicker
+    {...
+      props
+    }
+    />);
 
     const span = wrapper.find('span').at(0);
     const span1 = wrapper.find('span').at(1);
@@ -86,7 +104,11 @@ describe('<NaturePicker />', () => {
       target: 'othertest',
     };
 
-    const wrapper = shallow(<NaturePicker {...props} />);
+    const wrapper = shallow( < NaturePicker
+    {...
+      props
+    }
+    />);
 
     const span = wrapper.find('span').at(0);
     const span1 = wrapper.find('span').at(1);
@@ -102,7 +124,11 @@ describe('<NaturePicker />', () => {
       target: 'othertest',
     };
 
-    const wrapper = shallow(<NaturePicker {...props} />);
+    const wrapper = shallow( < NaturePicker
+    {...
+      props
+    }
+    />);
 
     const span = wrapper.find('span').at(0);
     const span1 = wrapper.find('span').at(1);

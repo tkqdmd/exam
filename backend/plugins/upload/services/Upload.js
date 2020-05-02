@@ -98,7 +98,7 @@ module.exports = {
     if (strapi.plugins['content-manager']) {
       return await strapi.plugins['content-manager'].services[
         'contentmanager'
-      ].add(
+        ].add(
         {
           model: 'file',
         },
@@ -118,7 +118,7 @@ module.exports = {
 
       return await strapi.plugins['content-manager'].services[
         'contentmanager'
-      ].edit(params, values, 'upload');
+        ].edit(params, values, 'upload');
     }
 
     return strapi.query('file', 'upload').update(_.assign(params, values));
@@ -166,14 +166,14 @@ module.exports = {
 
       await strapi.plugins['content-manager'].services['contentmanager'].delete(
         params,
-        { source: 'upload' },
+        {source: 'upload'},
       );
     }
 
     return strapi.query('file', 'upload').delete(params);
   },
 
-  uploadToEntity: async function(params, files, source) {
+  uploadToEntity: async function (params, files, source) {
     // Retrieve provider settings from database.
     const config = await strapi
       .store({
@@ -181,7 +181,7 @@ module.exports = {
         type: 'plugin',
         name: 'upload',
       })
-      .get({ key: 'provider' });
+      .get({key: 'provider'});
 
     const model =
       source && source !== 'content-manager'

@@ -1,19 +1,21 @@
 /**
-*
-* Flex
-*
-*/
+ *
+ * Flex
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
-function Flex({ children }) {
+function Flex({children}) {
   return (
-    <div className={styles.flex}>
-      {children}
-    </div>
-  );
+    < div
+  className = {styles.flex} >
+    {children}
+    < /div>
+)
+  ;
 }
 
 Flex.defaultProps = {

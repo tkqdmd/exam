@@ -19,9 +19,9 @@ module.exports = {
    * @return Promise or Error.
    */
 
-  composeMutationResolver: function(_schema, plugin, name, action) {
+  composeMutationResolver: function (_schema, plugin, name, action) {
     // Extract custom resolver or type description.
-    const { resolver: handler = {} } = _schema;
+    const {resolver: handler = {}} = _schema;
 
     const queryName = `${action}${_.capitalize(name)}`;
 
@@ -43,7 +43,7 @@ module.exports = {
       const resolver = _.get(handler, `Mutation.${queryName}.resolver`);
 
       if (_.isString(resolver) || _.isPlainObject(resolver)) {
-        const { handler = resolver } = _.isPlainObject(resolver) ? resolver : {};
+        const {handler = resolver} = _.isPlainObject(resolver) ? resolver : {};
 
         // Retrieve the controller's action to be executed.
         const [name, action] = handler.split('.');
@@ -147,7 +147,7 @@ module.exports = {
       policyUtils.get(policy, plugin, policiesFn, `GraphQL query "${queryName}"`, name)
     );
 
-    return async (obj, options, { context }) => {
+    return async (obj, options, {context}) => {
       // Hack to be able to handle permissions for each query.
       const ctx = Object.assign(_.clone(context), {
         request: Object.assign(_.clone(context.request), {

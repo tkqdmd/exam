@@ -1,7 +1,9 @@
 {
   "inputs": [
     {
-      "label": { "id": "content-manager.form.Input.search" },
+      "label": {
+        "id": "content-manager.form.Input.search"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
@@ -10,7 +12,9 @@
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.filters" },
+      "label": {
+        "id": "content-manager.form.Input.filters"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
@@ -19,7 +23,9 @@
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.bulkActions" },
+      "label": {
+        "id": "content-manager.form.Input.bulkActions"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
@@ -28,13 +34,22 @@
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.pageEntries" },
+      "label": {
+        "id": "content-manager.form.Input.pageEntries"
+      },
       "customBootstrapClass": "col-md-3",
       "didCheckErrors": false,
       "errors": [],
-      "inputDescription": { "id": "content-manager.form.Input.pageEntries.inputDescription" },
+      "inputDescription": {
+        "id": "content-manager.form.Input.pageEntries.inputDescription"
+      },
       "name": "generalSettings.pageEntries",
-      "selectOptions": ["10", "20", "50", "100"],
+      "selectOptions": [
+        "10",
+        "20",
+        "50",
+        "100"
+      ],
       "type": "select",
       "validations": {}
     }

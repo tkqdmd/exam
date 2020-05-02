@@ -11,7 +11,11 @@ import pluginTradsEn from '../../../translations/en.json';
 import CustomCheckbox from '../index';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
-const renderComponent = (props = {}) => mountWithIntl(<CustomCheckbox {...props} />, messages);
+const renderComponent = (props = {}) => mountWithIntl( < CustomCheckbox
+{...
+  props
+}
+/>, messages);
 
 describe('<CustomCheckbox />', () => {
   let props;
@@ -63,21 +67,21 @@ describe('<CustomCheckbox />', () => {
     const input = wrapper.find('input').first();
 
     expect(wrapper.state('isChecked')).toBeFalsy();
-    input.simulate('change', { target: { checked: true } });
+    input.simulate('change', {target: {checked: true}});
 
     expect(spyOnHandleChange).toHaveBeenCalled();
     expect(wrapper.state('isChecked')).toBeTruthy();
 
     const inputNumber = wrapper.find(InputNumber);
 
-    inputNumber.prop('onChange')({ target: { name: 'test', value: '1' } });
+    inputNumber.prop('onChange')({target: {name: 'test', value: '1'}});
 
-    expect(props.onChange).toHaveBeenCalledWith({ target: { name: 'test', type: 'number', value: 1 } });
+    expect(props.onChange).toHaveBeenCalledWith({target: {name: 'test', type: 'number', value: 1}});
     expect(spyOnHandleChangeNumber).toHaveBeenCalled();
 
-    input.simulate('change', { target: { checked: false } });
+    input.simulate('change', {target: {checked: false}});
     expect(spyOnHandleChange).toHaveBeenCalled();
-    expect(props.onChange).toHaveBeenCalledWith({ target: { name: 'test', value: null } });
+    expect(props.onChange).toHaveBeenCalledWith({target: {name: 'test', value: null}});
 
     wrapper.unmount();
   });

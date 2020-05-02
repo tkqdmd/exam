@@ -14,7 +14,13 @@ import React from 'react';
 import NotFound from 'components/NotFound';
 
 function NotFoundPage(props) {
-  return <NotFound {...props} />;
+  return
+<
+  NotFound
+  {...
+    props
+  }
+  />;
 }
 
 export default NotFoundPage;

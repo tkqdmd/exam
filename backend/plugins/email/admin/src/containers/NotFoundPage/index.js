@@ -15,6 +15,12 @@ import NotFound from 'components/NotFound';
 
 export default class NotFoundPage extends React.Component {
   render() {
-    return <NotFound {...this.props} />;
+    return
+  <
+    NotFound
+    {...
+      this.props
+    }
+    />;
   }
 }

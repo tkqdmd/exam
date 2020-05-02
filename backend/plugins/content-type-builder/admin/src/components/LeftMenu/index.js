@@ -1,8 +1,8 @@
 /**
-*
-* LeftMenu
-*
-*/
+ *
+ * LeftMenu
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -10,12 +10,19 @@ import cn from 'classnames';
 
 import styles from './styles.scss';
 
-function LeftMenu({ children }) {
+function LeftMenu({children}) {
   return (
-    <div className={cn(styles.pluginLeftMenu, 'col-md-3')}>
-      {children}
-    </div>
-  );
+    < div
+  className = {cn(styles.pluginLeftMenu, 'col-md-3'
+)
+}>
+  {
+    children
+  }
+<
+  /div>
+)
+  ;
 }
 
 LeftMenu.defaultProps = {

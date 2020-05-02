@@ -6,8 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { capitalize } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {capitalize} from 'lodash';
 
 import IcoContainer from 'components/IcoContainer';
 
@@ -29,7 +29,7 @@ const assets = [
   'text',
 ]
   .map(type => {
-    return { type, icon: require(`../../assets/images/icon_${type}.png`) };
+    return {type, icon: require(`../../assets/images/icon_${type}.png`)};
   })
   .reduce((acc, current) => {
     acc[current.type] = current.icon;
@@ -38,64 +38,107 @@ const assets = [
   }, {});
 
 function AttributeLi({
-  attributeInfos: { configurable, plugin, target, type },
-  name,
-  onClick,
-  onClickOnTrashIcon,
-}) {
+                       attributeInfos: {configurable, plugin, target, type},
+                       name,
+                       onClick,
+                       onClickOnTrashIcon,
+                     }) {
   const ico = ['integer', 'biginteger', 'float', 'decimal'].includes(type) ? 'number' : type;
   const src = target ? assets.relation : assets[ico];
   /* eslint-disable indent */
   /* istanbul ignore next */
   const icons =
     configurable === false
-      ? [{ icoType: 'lock' }]
+      ? [{icoType: 'lock'}]
       : [
-          { icoType: 'pencil', onClick: () => onClick(name, type) },
-          { icoType: 'trash', onClick: () => onClickOnTrashIcon(name) },
-        ];
+        {icoType: 'pencil', onClick: () => onClick(name, type)},
+        {icoType: 'trash', onClick: () => onClickOnTrashIcon(name)},
+      ];
   const relationStyle = target ? styles.relation : null;
   const configurableStyle = configurable === false ? null : styles.editable;
   /* eslint-enable indent */
 
   return (
-    <li
-      className={`${styles.attributeLi} ${relationStyle} ${configurableStyle}`}
-      onClick={() => {
-        if (configurable !== false) {
-          onClick(name, type);
-        }
-      }}
-    >
-      <div className={styles.flex}>
-        <div className={styles.nameContainer}>
-          <img src={src} alt={`icon-${ico}`} />
-          <div>{name}</div>
-        </div>
-        <div className={styles.relationContainer}>
-          {target ? (
-            <div>
-              <FormattedMessage id={`${pluginId}.modelPage.attribute.relationWith`} />
-              &nbsp;
-              <FormattedMessage id={`${pluginId}.from`}>
-                {msg => (
-                  <span style={{ fontStyle: 'italic' }}>
-                    {capitalize(target)}
-                    &nbsp;
-                    {plugin && `(${msg}: ${plugin})`}
-                  </span>
-                )}
-              </FormattedMessage>
-            </div>
-          ) : (
-            <FormattedMessage id={`${pluginId}.attribute.${type}`} />
-          )}
-        </div>
-        <div className={styles.mainField} />
-        <IcoContainer icons={icons} />
-      </div>
-    </li>
-  );
+    < li
+  className = {`${styles.attributeLi} ${relationStyle} ${configurableStyle}`
+}
+  onClick = {()
+=>
+  {
+    if (configurable !== false) {
+      onClick(name, type);
+    }
+  }
+}
+>
+<
+  div
+  className = {styles.flex} >
+    < div
+  className = {styles.nameContainer} >
+    < img
+  src = {src}
+  alt = {`icon-${ico}`
+}
+  />
+  < div > {name} < /div>
+  < /div>
+  < div
+  className = {styles.relationContainer} >
+    {
+      target ? (
+        < div >
+        < FormattedMessage id = {`${pluginId}.modelPage.attribute.relationWith`
+    }
+  />
+  & nbsp;
+<
+  FormattedMessage
+  id = {`${pluginId}.from`
+}>
+  {
+    msg => (
+      < span
+    style = {
+    {
+      fontStyle: 'italic'
+    }
+  }>
+    {
+      capitalize(target)
+    }
+  &
+    nbsp;
+    {
+      plugin && `(${msg}: ${plugin})`
+    }
+  <
+    /span>
+  )
+  }
+<
+  /FormattedMessage>
+  < /div>
+) :
+  (
+  < FormattedMessage
+  id = {`${pluginId}.attribute.${type}`
+}
+  />
+)
+}
+<
+  /div>
+  < div
+  className = {styles.mainField}
+  />
+  < IcoContainer
+  icons = {icons}
+  />
+  < /div>
+  < /li>
+)
+  ;
 }
 
 AttributeLi.defaultProps = {
@@ -105,8 +148,10 @@ AttributeLi.defaultProps = {
     target: null,
     type: null,
   },
-  onClick: () => {},
-  onClickOnTrashIcon: () => {},
+  onClick: () => {
+  },
+  onClickOnTrashIcon: () => {
+  },
 };
 
 AttributeLi.propTypes = {

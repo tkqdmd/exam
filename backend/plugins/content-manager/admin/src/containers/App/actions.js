@@ -4,7 +4,7 @@
  *
  */
 
-import { includes } from 'lodash';
+import {includes} from 'lodash';
 import {
   BEGIN_MOVE,
   EMPTY_STORE,
@@ -107,7 +107,7 @@ export function moveVariableAttrEditView(dragIndex, hoverIndex, keys) {
   };
 }
 
-export function onChange({ target }) {
+export function onChange({target}) {
   const value = includes(target.name, 'pageEntries') ? parseInt(target.value, 10) : target.value;
 
   return {
@@ -117,7 +117,7 @@ export function onChange({ target }) {
   };
 }
 
-export function onChangeInputType({ target }) {
+export function onChangeInputType({target}) {
   const value = target.value === true ? 'WYSIWYG' : '';
 
   return {
@@ -127,7 +127,7 @@ export function onChangeInputType({ target }) {
   };
 }
 
-export function onChangeSettings({ target }) {
+export function onChangeSettings({target}) {
   const value = includes(target.name, 'pageEntries') ? parseInt(target.value, 10) : target.value;
 
   return {

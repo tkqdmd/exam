@@ -32,7 +32,7 @@ import {
 
 export function* dataGet(action) {
   try {
-    const { _limit, _page, _sort, _q } = yield select(makeSelectParams());
+    const {_limit, _page, _sort, _q} = yield select(makeSelectParams());
     const filters = yield select(makeSelectFilters());
     const source = action.source;
     const currentModel = action.currentModel;
@@ -49,7 +49,7 @@ export function* dataGet(action) {
       return acc;
     }, {});
 
-    const _start = (_page - 1 ) * _limit;
+    const _start = (_page - 1) * _limit;
     const sortValue = _sort.includes('-') ? `${_sort.replace('-', '')}:DESC` : `${_sort}:ASC`;
     const params = Object.assign(filtersObj, {
       _limit,
@@ -61,19 +61,19 @@ export function* dataGet(action) {
     if (_q !== '') {
       params._q = _q;
     }
-    
+
     const response = yield all([
-      call(request, countURL, { method: 'GET', params }),
-      call(request, recordsURL, { method: 'GET', params }),
+      call(request, countURL, {method: 'GET', params}),
+      call(request, recordsURL, {method: 'GET', params}),
     ]);
 
     yield put(getDataSucceeded(response));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('notification.error');
   }
 }
 
-export function* dataDelete({ id, modelName, source, context }) {
+export function* dataDelete({id, modelName, source, context}) {
   try {
     const requestUrl = `/content-manager/explorer/${modelName}/${id}`;
     const params = {};
@@ -94,24 +94,24 @@ export function* dataDelete({ id, modelName, source, context }) {
     yield put(deleteDataSuccess(id));
 
     context.emitEvent('didDeleteEntry');
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('content-manager.error.record.delete');
   }
 }
 
-export function* dataDeleteAll({ entriesToDelete, model, source }) {
+export function* dataDeleteAll({entriesToDelete, model, source}) {
   try {
-    const params = Object.assign(entriesToDelete, source !== undefined ? { source } : {});
-    
+    const params = Object.assign(entriesToDelete, source !== undefined ? {source} : {});
+
     yield call(request, `/content-manager/explorer/deleteAll/${model}`, {
       method: 'DELETE',
       params,
     });
 
     yield put(deleteSeveralDataSuccess());
-    yield call(dataGet, { currentModel: model, source });
+    yield call(dataGet, {currentModel: model, source});
     strapi.notification.success('content-manager.success.record.delete');
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('content-manager.error.record.delete');
   }
 }

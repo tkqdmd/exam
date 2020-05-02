@@ -1,8 +1,8 @@
 const _ = require('lodash');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 module.exports = {
-  find: async function(params, populate, raw = false) {
+  find: async function (params, populate, raw = false) {
     const model = this;
     const filters = convertRestQueryParams(params);
 
@@ -15,18 +15,18 @@ module.exports = {
     return raw ? query.lean() : query;
   },
 
-  count: async function(params) {
+  count: async function (params) {
     const model = this;
 
     const filters = convertRestQueryParams(params);
 
     return buildQuery({
       model,
-      filters: { where: filters.where },
+      filters: {where: filters.where},
     }).count();
   },
 
-  search: async function(params, populate) {
+  search: async function (params, populate) {
     // eslint-disable-line  no-unused-vars
     const $or = Object.keys(this.attributes).reduce((acc, curr) => {
       switch (this.attributes[curr].type) {
@@ -35,17 +35,17 @@ module.exports = {
         case 'float':
         case 'decimal':
           if (!_.isNaN(_.toNumber(params.search))) {
-            return acc.concat({ [curr]: params.search });
+            return acc.concat({[curr]: params.search});
           }
 
           return acc;
         case 'string':
         case 'text':
         case 'password':
-          return acc.concat({ [curr]: { $regex: params.search, $options: 'i' } });
+          return acc.concat({[curr]: {$regex: params.search, $options: 'i'}});
         case 'boolean':
           if (params.search === 'true' || params.search === 'false') {
-            return acc.concat({ [curr]: params.search === 'true' });
+            return acc.concat({[curr]: params.search === 'true'});
           }
 
           return acc;
@@ -54,7 +54,7 @@ module.exports = {
       }
     }, []);
 
-    return this.find({ $or })
+    return this.find({$or})
       .limit(Number(params.limit))
       .sort(params.sort)
       .skip(Number(params.skip))
@@ -62,7 +62,7 @@ module.exports = {
       .lean();
   },
 
-  countSearch: async function(params = {}) {
+  countSearch: async function (params = {}) {
     // eslint-disable-line  no-unused-vars
     const $or = Object.keys(this.attributes).reduce((acc, curr) => {
       switch (this.attributes[curr].type) {
@@ -71,17 +71,17 @@ module.exports = {
         case 'float':
         case 'decimal':
           if (!_.isNaN(_.toNumber(params.search))) {
-            return acc.concat({ [curr]: params.search });
+            return acc.concat({[curr]: params.search});
           }
 
           return acc;
         case 'string':
         case 'text':
         case 'password':
-          return acc.concat({ [curr]: { $regex: params.search, $options: 'i' } });
+          return acc.concat({[curr]: {$regex: params.search, $options: 'i'}});
         case 'boolean':
           if (params.search === 'true' || params.search === 'false') {
-            return acc.concat({ [curr]: params.search === 'true' });
+            return acc.concat({[curr]: params.search === 'true'});
           }
 
           return acc;
@@ -90,10 +90,10 @@ module.exports = {
       }
     }, []);
 
-    return this.find({ $or }).countDocuments();
+    return this.find({$or}).countDocuments();
   },
 
-  findOne: async function(params, populate, raw = true) {
+  findOne: async function (params, populate, raw = true) {
     const query = this.findOne({
       [this.primaryKey]: params[this.primaryKey] || params.id,
     }).populate(populate || this.associations.map(x => x.alias).join(' '));
@@ -101,7 +101,7 @@ module.exports = {
     return raw ? query.lean() : query;
   },
 
-  create: async function(params) {
+  create: async function (params) {
     // Exclude relationships.
     const values = Object.keys(params.values).reduce((acc, current) => {
       if (this._attributes[current] && this._attributes[current].type) {
@@ -115,7 +115,7 @@ module.exports = {
       if (err.message) {
         const message = err.message.split('index:');
         const field = _.words(_.last(message).split('_')[0]);
-        err = { message: `This ${field} is already taken`, field };
+        err = {message: `This ${field} is already taken`, field};
       }
       throw err;
     });
@@ -143,20 +143,20 @@ module.exports = {
     });
   },
 
-  update: async function(params) {
+  update: async function (params) {
     // Call the business logic located in the hook.
     // This function updates no-relational and relational data.
     return this.updateRelations(params);
   },
 
-  delete: async function(params) {
+  delete: async function (params) {
     // Delete entry.
     return this.findOneAndDelete({
       [this.primaryKey]: params.id,
     });
   },
 
-  deleteMany: async function(params) {
+  deleteMany: async function (params) {
     return this.deleteMany({
       [this.primaryKey]: {
         $in: params[this.primaryKey] || params.id,

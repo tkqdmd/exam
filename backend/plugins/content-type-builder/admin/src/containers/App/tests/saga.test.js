@@ -3,10 +3,10 @@
  */
 
 /* eslint-disable redux-saga/yield-effects */
-import { all, fork, takeLatest, put } from 'redux-saga/effects';
-import defaultSaga, { deleteModel, getData, submitCT, submitTempCT } from '../saga';
+import {all, fork, takeLatest, put} from 'redux-saga/effects';
+import defaultSaga, {deleteModel, getData, submitCT, submitTempCT} from '../saga';
 
-import { deleteModelSucceeded, getDataSucceeded } from '../actions';
+import {deleteModelSucceeded, getDataSucceeded} from '../actions';
 import {
   DELETE_MODEL,
   GET_DATA,
@@ -35,17 +35,17 @@ const response = [
         attributes: [
           {
             name: 'type',
-            params: { type: 'string', required: true, configurable: false },
+            params: {type: 'string', required: true, configurable: false},
           },
           {
             name: 'controller',
-            params: { type: 'string', required: true, configurable: false },
+            params: {type: 'string', required: true, configurable: false},
           },
         ],
       },
     ],
   },
-  { connections: ['default'] },
+  {connections: ['default']},
 ];
 
 describe('CTB <App /> DeleteModel saga', () => {
@@ -53,25 +53,25 @@ describe('CTB <App /> DeleteModel saga', () => {
 
   beforeEach(() => {
     deleteModelGenerator = deleteModel({
-      context: { plugins: {}, updatePlugin: jest.fn() },
+      context: {plugins: {}, updatePlugin: jest.fn()},
       modelName: 'test',
     });
-    const callDescriptor = deleteModelGenerator.next({ ok: true }).value;
+    const callDescriptor = deleteModelGenerator.next({ok: true}).value;
 
     expect(callDescriptor).toMatchSnapshot();
   });
 
   it("should not dispatch the deleteModelSucceeded action if the server didn't restart", () => {
-    deleteModelGenerator.next({ ok: false }).value;
+    deleteModelGenerator.next({ok: false}).value;
 
     expect(strapi.notification.success).not.toHaveBeenCalled();
   });
 
   it('should dispatch the deleteModelSucceeded action if it requests the data successfully', () => {
-    const putDescriptor = deleteModelGenerator.next({ ok: true }).value;
+    const putDescriptor = deleteModelGenerator.next({ok: true}).value;
 
     expect(putDescriptor).toEqual(
-      put(deleteModelSucceeded('test', { plugins: {}, updatePlugin: jest.fn() })),
+      put(deleteModelSucceeded('test', {plugins: {}, updatePlugin: jest.fn()})),
     );
     expect(strapi.notification.success).toHaveBeenCalled();
   });
@@ -96,7 +96,7 @@ describe('CTB <App /> GetData saga', () => {
 
   it('should dispatch the getDataSucceeded action if it requests the data successfully', () => {
     const putDescriptor = getDataGenerator.next(response).value;
-    const [data, { connections }] = response;
+    const [data, {connections}] = response;
 
     expect(putDescriptor).toEqual(put(getDataSucceeded(data, connections)));
   });

@@ -1,10 +1,10 @@
-import { map, omit } from 'lodash';
+import {map, omit} from 'lodash';
 import request from 'utils/request';
 
 // This method is executed before the load of the plugin
 const bootstrap = plugin =>
   new Promise((resolve, reject) => {
-    request('/content-manager/models', { method: 'GET' })
+    request('/content-manager/models', {method: 'GET'})
       .then(models => {
         const menu = [
           {

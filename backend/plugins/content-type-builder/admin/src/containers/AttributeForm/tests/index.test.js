@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import mountWithIntl from 'testUtils/mountWithIntl';
 import formatMessagesWithPluginId from 'testUtils/formatMessages';
@@ -14,8 +14,12 @@ import CustomCheckbox from '../../../components/CustomCheckbox';
 import AttributeForm from '../index';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
-const context = { emitEvent: jest.fn() };
-const renderComponent = (props = {}) => mountWithIntl(<AttributeForm {...props} />, messages, context);
+const context = {emitEvent: jest.fn()};
+const renderComponent = (props = {}) => mountWithIntl( < AttributeForm
+{...
+  props
+}
+/>, messages, context);
 
 describe('<AttributeForm />', () => {
   let props;
@@ -49,7 +53,7 @@ describe('<AttributeForm />', () => {
     props.isOpen = true;
 
     wrapper = renderComponent(props);
-    wrapper.setState({ showForm: true });
+    wrapper.setState({showForm: true});
 
     const customs = wrapper.find(CustomCheckbox);
     const inputs = wrapper.find(Input);
@@ -57,7 +61,7 @@ describe('<AttributeForm />', () => {
     expect(customs).toHaveLength(2);
     expect(inputs).toHaveLength(3);
 
-    wrapper.setProps({ activeTab: 'base' });
+    wrapper.setProps({activeTab: 'base'});
 
     expect(wrapper.find(CustomCheckbox)).toHaveLength(0);
   });
@@ -72,7 +76,7 @@ describe('<AttributeForm />', () => {
 
     expect(title.prop('id')).toContain('create');
 
-    wrapper.setProps({ actionType: 'edit' });
+    wrapper.setProps({actionType: 'edit'});
 
     expect(
       wrapper
@@ -87,7 +91,7 @@ describe('<AttributeForm />', () => {
     wrapper = renderComponent(props);
 
     const {
-      defaultProps: { onCancel, onChange, push },
+      defaultProps: {onCancel, onChange, push},
     } = AttributeForm;
 
     expect(onCancel).toBeDefined();
@@ -101,11 +105,11 @@ describe('<AttributeForm />', () => {
   describe('instances', () => {
     describe('GetFormErrors', () => {
       it("should return an empty object if there is not field that contain the created field's name", () => {
-        props.modifiedData = { name: 'test' };
+        props.modifiedData = {name: 'test'};
 
         wrapper = renderComponent(props);
 
-        const { getFormErrors } = wrapper.instance();
+        const {getFormErrors} = wrapper.instance();
 
         expect(getFormErrors()).toEqual({});
       });
@@ -113,43 +117,43 @@ describe('<AttributeForm />', () => {
       it("should return an object with the input's name and an array of error if the name is empty", () => {
         wrapper = renderComponent(props);
 
-        const { getFormErrors } = wrapper.instance();
+        const {getFormErrors} = wrapper.instance();
 
-        expect(getFormErrors()).toEqual({ name: [{ id: `${pluginId}.error.validation.required` }] });
+        expect(getFormErrors()).toEqual({name: [{id: `${pluginId}.error.validation.required`}]});
       });
 
       it('should return a unique error if the name of the field is already taken', () => {
         props.alreadyTakenAttributes = ['test'];
-        props.modifiedData = { name: 'test' };
+        props.modifiedData = {name: 'test'};
 
         wrapper = renderComponent(props);
 
-        const { getFormErrors } = wrapper.instance();
+        const {getFormErrors} = wrapper.instance();
 
-        expect(getFormErrors()).toEqual({ name: [{ id: `${pluginId}.error.attribute.taken` }] });
+        expect(getFormErrors()).toEqual({name: [{id: `${pluginId}.error.attribute.taken`}]});
       });
 
       it('should not return a unique error if the use is editing a field', () => {
         props.alreadyTakenAttributes = ['test'];
         props.attributeToEditName = 'test';
         props.activeTab = 'advanced';
-        props.modifiedData = { name: 'test', minLength: '' };
+        props.modifiedData = {name: 'test', minLength: ''};
 
         wrapper = renderComponent(props);
 
-        const { getFormErrors } = wrapper.instance();
+        const {getFormErrors} = wrapper.instance();
 
-        expect(getFormErrors()).toEqual({ minLength: [{ id: `${pluginId}.error.validation.required` }] });
+        expect(getFormErrors()).toEqual({minLength: [{id: `${pluginId}.error.validation.required`}]});
       });
 
       it('should not return a unique error if the use is editing a field', () => {
         props.alreadyTakenAttributes = ['test'];
         props.attributeToEditName = 'test';
-        props.modifiedData = { name: 'test' };
+        props.modifiedData = {name: 'test'};
 
         wrapper = renderComponent(props);
 
-        const { getFormErrors } = wrapper.instance();
+        const {getFormErrors} = wrapper.instance();
 
         expect(getFormErrors()).toEqual({});
       });
@@ -158,11 +162,11 @@ describe('<AttributeForm />', () => {
     describe('HandleCancel', () => {
       it('should remove the search in the URL', () => {
         wrapper = renderComponent(props);
-        const { handleCancel } = wrapper.instance();
+        const {handleCancel} = wrapper.instance();
 
         handleCancel();
 
-        expect(props.push).toHaveBeenCalledWith({ search: '' });
+        expect(props.push).toHaveBeenCalledWith({search: ''});
       });
     });
 
@@ -171,7 +175,7 @@ describe('<AttributeForm />', () => {
         props.actionType = 'edit';
         props.attributeToEditName = 'name';
         wrapper = renderComponent(props);
-        const { handleGoTo } = wrapper.instance();
+        const {handleGoTo} = wrapper.instance();
 
         handleGoTo('base');
 
@@ -184,7 +188,7 @@ describe('<AttributeForm />', () => {
 
       it('should emit the event didSelectContentTypeFieldSettings if the user clicks on advanced seettings', () => {
         wrapper = renderComponent(props);
-        const { handleGoTo } = wrapper.instance();
+        const {handleGoTo} = wrapper.instance();
 
         handleGoTo('advanced');
 
@@ -198,8 +202,8 @@ describe('<AttributeForm />', () => {
     describe('HandleOnClosed', () => {
       it('should set the showForm state to false', () => {
         wrapper = renderComponent(props);
-        wrapper.setState({ formErrors: {}, showForm: true });
-        const { handleOnClosed } = wrapper.instance();
+        wrapper.setState({formErrors: {}, showForm: true});
+        const {handleOnClosed} = wrapper.instance();
 
         handleOnClosed();
 
@@ -210,8 +214,8 @@ describe('<AttributeForm />', () => {
     describe('HandleOnOpened', () => {
       it('should set the showForm state to false', () => {
         wrapper = renderComponent(props);
-        wrapper.setState({ showForm: false });
-        const { handleOnOpened } = wrapper.instance();
+        wrapper.setState({showForm: false});
+        const {handleOnOpened} = wrapper.instance();
 
         handleOnOpened();
 
@@ -221,11 +225,11 @@ describe('<AttributeForm />', () => {
 
     describe('HandleSubmit', () => {
       it('should call the onSubmit prop if there is no error in the form', () => {
-        props.modifiedData = { type: 'string', name: 'test' };
+        props.modifiedData = {type: 'string', name: 'test'};
 
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
         handleSubmit();
 
@@ -233,12 +237,12 @@ describe('<AttributeForm />', () => {
       });
 
       it('should call the onSubmitEdit prop if there is no error in the form', () => {
-        props.modifiedData = { type: 'string', name: 'test' };
+        props.modifiedData = {type: 'string', name: 'test'};
         props.actionType = 'edit';
 
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
         handleSubmit();
 
@@ -248,7 +252,7 @@ describe('<AttributeForm />', () => {
       it('should not submit if thee form has an error', () => {
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
         handleSubmit();
 
@@ -259,26 +263,26 @@ describe('<AttributeForm />', () => {
 
     describe('HandleSubmitAndContinue', () => {
       it('should call the onSubmit prop if there is no error in the form', () => {
-        props.modifiedData = { type: 'string', name: 'test' };
+        props.modifiedData = {type: 'string', name: 'test'};
 
         wrapper = renderComponent(props);
 
-        const { handleSubmitAndContinue } = wrapper.instance();
+        const {handleSubmitAndContinue} = wrapper.instance();
 
-        handleSubmitAndContinue({ preventDefault: jest.fn() });
+        handleSubmitAndContinue({preventDefault: jest.fn()});
 
         expect(props.onSubmit).toHaveBeenCalledWith(true);
       });
 
       it('should call the onSubmitEdit prop if there is no error in the form', () => {
-        props.modifiedData = { type: 'string', name: 'test' };
+        props.modifiedData = {type: 'string', name: 'test'};
         props.actionType = 'edit';
 
         wrapper = renderComponent(props);
 
-        const { handleSubmitAndContinue } = wrapper.instance();
+        const {handleSubmitAndContinue} = wrapper.instance();
 
-        handleSubmitAndContinue({ preventDefault: jest.fn() });
+        handleSubmitAndContinue({preventDefault: jest.fn()});
 
         expect(props.onSubmitEdit).toHaveBeenCalledWith(true);
         expect(context.emitEvent).toHaveBeenCalledWith('willAddMoreFieldToContentType');
@@ -287,9 +291,9 @@ describe('<AttributeForm />', () => {
       it('should not submit if thee form has an error', () => {
         wrapper = renderComponent(props);
 
-        const { handleSubmitAndContinue } = wrapper.instance();
+        const {handleSubmitAndContinue} = wrapper.instance();
 
-        handleSubmitAndContinue({ preventDefault: jest.fn() });
+        handleSubmitAndContinue({preventDefault: jest.fn()});
 
         expect(props.onSubmitEdit).not.toHaveBeenCalled();
         expect(props.onSubmit).not.toHaveBeenCalled();
@@ -300,11 +304,11 @@ describe('<AttributeForm />', () => {
       it('should clear the search so the modal can be closed', () => {
         wrapper = renderComponent(props);
 
-        const { handleToggle } = wrapper.instance();
+        const {handleToggle} = wrapper.instance();
 
         handleToggle();
 
-        expect(props.push).toHaveBeenCalledWith({ search: '' });
+        expect(props.push).toHaveBeenCalledWith({search: ''});
       });
     });
   });

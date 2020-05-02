@@ -67,7 +67,7 @@ class Edit extends React.PureComponent {
    * @return {Object}      Object containing the Input's label customBootstrapClass, ...
    */
   getInputLayout = (attr) => {
-    const { layout } = this.props;
+    const {layout} = this.props;
 
     return Object.keys(get(layout, ['attributes', attr], {})).reduce((acc, current) => {
       acc[current] = isFunction(layout.attributes[attr][current]) ?
@@ -84,7 +84,7 @@ class Edit extends React.PureComponent {
    * @return {Object}
    */
   getInputValidations = (attr) => {
-    const { formValidations } = this.props;
+    const {formValidations} = this.props;
     const index = findIndex(formValidations, ['name', attr]);
 
     return get(formValidations, [index, 'validations'], {});
@@ -116,8 +116,13 @@ class Edit extends React.PureComponent {
   renderAttr = (attr, key) => {
     if (attr.includes('__col-md')) {
       const className = attr.split('__')[1];
-      
-      return <div key={key} className={className} />;
+
+      return
+    <
+      div
+      key = {key}
+      className = {className}
+      />;
     }
 
     const details = get(this.props.schema, ['editDisplay', 'availableFields', attr]);
@@ -126,47 +131,68 @@ class Edit extends React.PureComponent {
     const appearance = get(layout, 'appearance');
     const type = !isEmpty(appearance) ? appearance.toLowerCase() : get(layout, 'type', getInputType(details.type));
     const inputDescription = get(details, 'description', null);
-    const inputStyle = type === 'textarea' ? { height: '196px' } : {};
+    const inputStyle = type === 'textarea' ? {height: '196px'} : {};
     let className = get(layout, 'className');
 
     if (type === 'toggle' && !className) {
       className = 'col-md-4';
     }
 
-    return (  
-      <Input
-        autoFocus={key === 0}
-        customBootstrapClass={className}
-        customInputs={{ json: InputJSONWithErrors, wysiwyg: WysiwygWithErrors }}
-        didCheckErrors={this.props.didCheckErrors}
-        disabled={!get(details, 'editable', true)}
-        errors={this.getInputErrors(attr)}
-        inputDescription={inputDescription}
-        inputStyle={inputStyle}
-        key={attr}
-        label={get(layout, 'label') || details.label || ''}
-        multiple={this.fileRelationAllowMultipleUpload(attr)}
-        name={attr}
-        onBlur={this.props.onBlur}
-        onChange={this.props.onChange}
-        placeholder={get(layout, 'placeholder') || details.placeholder || ''}
-        resetProps={this.props.resetProps}
-        selectOptions={get(this.props.attributes, [attr, 'enum'])}
-        type={type}
-        validations={this.getInputValidations(attr)}
-        value={this.props.record[attr]}
-      />
-    );
+    return (
+      < Input
+    autoFocus = {key === 0
+  }
+    customBootstrapClass = {className}
+    customInputs = {
+    {
+      json: InputJSONWithErrors, wysiwyg
+    :
+      WysiwygWithErrors
+    }
+  }
+    didCheckErrors = {this.props.didCheckErrors}
+    disabled = {
+    !get(details, 'editable', true)
+  }
+    errors = {this.getInputErrors(attr)}
+    inputDescription = {inputDescription}
+    inputStyle = {inputStyle}
+    key = {attr}
+    label = {get(layout, 'label'
+  ) ||
+    details.label || ''
+  }
+    multiple = {this.fileRelationAllowMultipleUpload(attr)}
+    name = {attr}
+    onBlur = {this.props.onBlur}
+    onChange = {this.props.onChange}
+    placeholder = {get(layout, 'placeholder'
+  ) ||
+    details.placeholder || ''
+  }
+    resetProps = {this.props.resetProps}
+    selectOptions = {get(this.props.attributes, [attr, 'enum'
+  ])
+  }
+    type = {type}
+    validations = {this.getInputValidations(attr)}
+    value = {this.props.record[attr]}
+    />
+  )
+    ;
   }
 
-  render(){
+  render() {
     return (
-      <div className={styles.form}>
-        <div className="row">
-          {this.orderAttributes().map(this.renderAttr)}
-        </div>
-      </div>
-    );
+      < div
+    className = {styles.form} >
+      < div
+    className = "row" >
+      {this.orderAttributes().map(this.renderAttr)}
+      < /div>
+      < /div>
+  )
+    ;
   }
 }
 
@@ -175,8 +201,10 @@ Edit.defaultProps = {
   formErrors: [],
   formValidations: [],
   layout: {},
-  onBlur: () => {},
-  onChange: () => {},
+  onBlur: () => {
+  },
+  onChange: () => {
+  },
   record: {},
   resetProps: false,
   schema: {},

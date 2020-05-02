@@ -4,12 +4,12 @@
  *
  */
 
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 import pluginId from '../../pluginId';
 
 /**
-* Direct selector to the listPage state domain
-*/
+ * Direct selector to the listPage state domain
+ */
 const selectEditPageDomain = () => state => state.get(`${pluginId}_editPage`);
 
 

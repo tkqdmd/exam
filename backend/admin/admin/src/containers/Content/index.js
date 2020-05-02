@@ -6,10 +6,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
 
-import { selectPlugins } from '../App/selectors';
+import {selectPlugins} from '../App/selectors';
 
 import styles from './styles.scss';
 
@@ -18,10 +18,12 @@ export class Content extends React.Component { // eslint-disable-line react/pref
     const style = this.props.showLeftMenu ? styles.content : styles.wrapper;
 
     return (
-      <div className={style}>
-        {React.Children.toArray(this.props.children)}
-      </div>
-    );
+      < div
+    className = {style} >
+      {React.Children.toArray(this.props.children)}
+      < /div>
+  )
+    ;
   }
 }
 
@@ -32,7 +34,7 @@ Content.propTypes = {
 
 const mapStateToProps = createSelector(
   selectPlugins(),
-  (plugins) => ({ plugins })
+  (plugins) => ({plugins})
 );
 
 function mapDispatchToProps(dispatch) {

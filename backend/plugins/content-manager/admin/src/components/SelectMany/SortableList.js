@@ -12,27 +12,40 @@ import SortableItem from './SortableItem';
 // CSS.
 import styles from './styles.scss';
 
-const SortableList = ({ items, isDraggingSibling, keys, moveAttr, moveAttrEnd, name, onClick, onRemove }) => {
+const SortableList = ({items, isDraggingSibling, keys, moveAttr, moveAttrEnd, name, onClick, onRemove}) => {
   return (
-    <div className={cn(styles.sortableList)}>
-      <ul id={`sortableListOf${name}`}>
-        {items.map((item, index) => (
-          <SortableItem
-            isDraggingSibling={isDraggingSibling}
-            key={item.value.id || item.value._id || `item-${index}`}
-            keys={keys}
-            index={index}
-            item={item}
-            moveAttr={moveAttr}
-            moveAttrEnd={moveAttrEnd}
-            onRemove={onRemove}
-            onClick={onClick}
-          />
-        ))}
-      </ul>
-      {items.length > 4 && <div className={styles.sortableListLong} />}
-    </div>
-  );
+    < div
+  className = {cn(styles.sortableList
+)
+}>
+<
+  ul
+  id = {`sortableListOf${name}`
+}>
+  {
+    items.map((item, index) => (
+      < SortableItem
+    isDraggingSibling = {isDraggingSibling}
+    key = {item.value.id || item.value._id || `item-${index}`}
+    keys = {keys}
+    index = {index}
+    item = {item}
+    moveAttr = {moveAttr}
+    moveAttrEnd = {moveAttrEnd}
+    onRemove = {onRemove}
+    onClick = {onClick}
+    />
+  ))
+  }
+<
+  /ul>
+  {
+    items.length > 4 && < div
+    className = {styles.sortableListLong}
+    />}
+    < /div>
+  )
+  ;
 };
 
 SortableList.propTypes = {

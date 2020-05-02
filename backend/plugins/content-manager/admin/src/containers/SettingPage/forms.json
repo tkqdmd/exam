@@ -1,7 +1,9 @@
 {
   "inputs": [
     {
-      "label": { "id": "content-manager.form.Input.search" },
+      "label": {
+        "id": "content-manager.form.Input.search"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
@@ -10,7 +12,9 @@
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.filters" },
+      "label": {
+        "id": "content-manager.form.Input.filters"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
@@ -19,7 +23,9 @@
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.bulkActions" },
+      "label": {
+        "id": "content-manager.form.Input.bulkActions"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
@@ -28,24 +34,39 @@
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.pageEntries" },
+      "label": {
+        "id": "content-manager.form.Input.pageEntries"
+      },
       "customBootstrapClass": "col-md-4",
       "didCheckErrors": false,
       "errors": [],
-      "inputDescription": { "id": "content-manager.form.Input.pageEntries.inputDescription" },
+      "inputDescription": {
+        "id": "content-manager.form.Input.pageEntries.inputDescription"
+      },
       "name": "pageEntries",
-      "selectOptions": ["10", "20", "50", "100"],
+      "selectOptions": [
+        "10",
+        "20",
+        "50",
+        "100"
+      ],
       "type": "select",
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.defaultSort" },
+      "label": {
+        "id": "content-manager.form.Input.defaultSort"
+      },
       "customBootstrapClass": "col-md-4 ml-md-auto",
       "didCheckErrors": false,
       "errors": [],
-      "style": { "marginRight": "-20px" },
+      "style": {
+        "marginRight": "-20px"
+      },
       "name": "defaultSort",
-      "selectOptions": ["_id"],
+      "selectOptions": [
+        "_id"
+      ],
       "type": "select",
       "validations": {}
     },
@@ -54,32 +75,41 @@
       "customBootstrapClass": "col-md-1",
       "didCheckErrors": false,
       "errors": [],
-      
       "name": "sort",
-      "selectOptions": ["ASC", "DESC"],
+      "selectOptions": [
+        "ASC",
+        "DESC"
+      ],
       "type": "select",
       "validations": {}
     }
-    
   ],
   "editList": [
     {
-      "label": { "id": "content-manager.form.Input.label" },
+      "label": {
+        "id": "content-manager.form.Input.label"
+      },
       "customBootstrapClass": "col-md-7",
       "didCheckErrors": false,
       "errors": [],
-      "inputDescription": { "id": "content-manager.form.Input.label.inputDescription" },
+      "inputDescription": {
+        "id": "content-manager.form.Input.label.inputDescription"
+      },
       "name": "label",
       "type": "string",
       "validations": {}
     },
     {
-      "label": { "id": "content-manager.form.Input.sort.field" },
+      "label": {
+        "id": "content-manager.form.Input.sort.field"
+      },
       "customBootstrapClass": "col-md-6",
       "didCheckErrors": false,
       "errors": [],
       "name": "sortable",
-      "style": { "marginTop": "18px" },
+      "style": {
+        "marginTop": "18px"
+      },
       "type": "toggle",
       "validations": {}
     }
@@ -87,7 +117,9 @@
   "editView": {
     "relationForm": [
       {
-        "label": { "id": "content-manager.form.Input.label" },
+        "label": {
+          "id": "content-manager.form.Input.label"
+        },
         "customBootstrapClass": "col-md-8",
         "didCheckErrors": false,
         "errors": [],
@@ -97,7 +129,9 @@
         "validations": {}
       },
       {
-        "label": { "id": "content-manager.form.Input.description" },
+        "label": {
+          "id": "content-manager.form.Input.description"
+        },
         "customBootstrapClass": "col-md-12",
         "didCheckErrors": false,
         "errors": [],
@@ -109,7 +143,9 @@
     ],
     "fieldForm": [
       {
-        "label": { "id": "content-manager.form.Input.label" },
+        "label": {
+          "id": "content-manager.form.Input.label"
+        },
         "customBootstrapClass": "col-md-8",
         "didCheckErrors": false,
         "errors": [],
@@ -119,7 +155,9 @@
         "validations": {}
       },
       {
-        "label": { "id": "content-manager.form.Input.disabled" },
+        "label": {
+          "id": "content-manager.form.Input.disabled"
+        },
         "customBootstrapClass": "col-md-4",
         "didCheckErrors": false,
         "errors": [],
@@ -128,7 +166,9 @@
         "validations": {}
       },
       {
-        "label": { "id": "content-manager.form.Input.description" },
+        "label": {
+          "id": "content-manager.form.Input.description"
+        },
         "customBootstrapClass": "col-md-12",
         "didCheckErrors": false,
         "errors": [],
@@ -138,7 +178,9 @@
         "validations": {}
       },
       {
-        "label": { "id": "content-manager.form.Input.placeholder" },
+        "label": {
+          "id": "content-manager.form.Input.placeholder"
+        },
         "customBootstrapClass": "col-md-12",
         "didCheckErrors": false,
         "errors": [],

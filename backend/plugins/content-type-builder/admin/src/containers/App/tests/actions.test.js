@@ -1,4 +1,4 @@
-import { fromJS, OrderedMap } from 'immutable';
+import {fromJS, OrderedMap} from 'immutable';
 import {
   addAttributeRelation,
   buildModelAttributes,
@@ -78,15 +78,15 @@ describe('Content Type Builder Action utils', () => {
       const attributes = [
         {
           name: 'type',
-          params: { type: 'string', required: true, configurable: false },
+          params: {type: 'string', required: true, configurable: false},
         },
         {
           name: 'controller',
-          params: { type: 'string', required: true, configurable: false },
+          params: {type: 'string', required: true, configurable: false},
         },
         {
           name: 'test',
-          params: { type: 'enumeration', enum: ['test', 'test1'] },
+          params: {type: 'enumeration', enum: ['test', 'test1']},
         },
         {
           name: 'otherTest',
@@ -129,10 +129,10 @@ describe('Content Type Builder Action utils', () => {
   describe('formatModelAttributes', () => {
     it('should generate an array of object', () => {
       const expected = [
-        { name: 'action', params: { type: 'string', required: true, configurable: false } },
-        { name: 'controller', params: { type: 'string', required: true, configurable: false } },
-        { name: 'enabled', params: { type: 'boolean', required: true, configurable: false } },
-        { name: 'policy', params: { type: 'boolean', configurable: false } },
+        {name: 'action', params: {type: 'string', required: true, configurable: false}},
+        {name: 'controller', params: {type: 'string', required: true, configurable: false}},
+        {name: 'enabled', params: {type: 'boolean', required: true, configurable: false}},
+        {name: 'policy', params: {type: 'boolean', configurable: false}},
         {
           name: 'role',
           params: {
@@ -157,7 +157,7 @@ describe('Content Type Builder Action utils', () => {
             targetColumnName: 'test',
           },
         },
-        { name: 'type', params: { type: 'string', required: true, configurable: true } },
+        {name: 'type', params: {type: 'string', required: true, configurable: true}},
         {
           name: 'price',
           params: {
@@ -168,7 +168,7 @@ describe('Content Type Builder Action utils', () => {
         },
         {
           name: 'otherTest',
-          params: { type: 'enumeration', enum: ['test', 'test1'] },
+          params: {type: 'enumeration', enum: ['test', 'test1']},
         },
       ];
       const data = {
@@ -388,11 +388,11 @@ describe('App actions', () => {
           attributes: [
             {
               name: 'type',
-              params: { type: 'string', required: true, configurable: false },
+              params: {type: 'string', required: true, configurable: false},
             },
             {
               name: 'controller',
-              params: { type: 'string', required: true, configurable: false },
+              params: {type: 'string', required: true, configurable: false},
             },
           ],
         },
@@ -428,7 +428,7 @@ describe('App actions', () => {
         connections,
       };
 
-      expect(getDataSucceeded({ models, allModels }, connections)).toEqual(expected);
+      expect(getDataSucceeded({models, allModels}, connections)).toEqual(expected);
     });
   });
 
@@ -536,14 +536,14 @@ describe('App actions', () => {
 
   describe('OnChangeRelation', () => {
     it('has a type ON_CHANGE_RELATION and returns the correct data', () => {
-      const target = { name: 'test', value: 'super test ' };
+      const target = {name: 'test', value: 'super test '};
       const expected = {
         type: ON_CHANGE_RELATION,
         keys: ['test'],
         value: 'supertest',
       };
 
-      expect(onChangeRelation({ target })).toEqual(expected);
+      expect(onChangeRelation({target})).toEqual(expected);
     });
   });
 
@@ -749,10 +749,10 @@ describe('App actions', () => {
         mainField: '',
         name: 'permission',
         attributes: [
-          { name: 'action', params: { type: 'string', required: true, configurable: false } },
-          { name: 'controller', params: { type: 'string', required: true, configurable: false } },
-          { name: 'enabled', params: { type: 'boolean', required: true, configurable: false } },
-          { name: 'policy', params: { type: 'boolean', configurable: false } },
+          {name: 'action', params: {type: 'string', required: true, configurable: false}},
+          {name: 'controller', params: {type: 'string', required: true, configurable: false}},
+          {name: 'enabled', params: {type: 'boolean', required: true, configurable: false}},
+          {name: 'policy', params: {type: 'boolean', configurable: false}},
           {
             name: 'role',
             params: {
@@ -764,7 +764,7 @@ describe('App actions', () => {
               target: 'role',
             },
           },
-          { name: 'type', params: { type: 'string', required: true, configurable: false } },
+          {name: 'type', params: {type: 'string', required: true, configurable: false}},
         ],
       };
       const context = {};
@@ -840,10 +840,10 @@ describe('App actions', () => {
         mainField: '',
         name: 'permission',
         attributes: [
-          { name: 'action', params: { type: 'string', required: true, configurable: false } },
-          { name: 'controller', params: { type: 'string', required: true, configurable: false } },
-          { name: 'enabled', params: { type: 'boolean', required: true, configurable: false } },
-          { name: 'policy', params: { type: 'boolean', configurable: false } },
+          {name: 'action', params: {type: 'string', required: true, configurable: false}},
+          {name: 'controller', params: {type: 'string', required: true, configurable: false}},
+          {name: 'enabled', params: {type: 'boolean', required: true, configurable: false}},
+          {name: 'policy', params: {type: 'boolean', configurable: false}},
           {
             name: 'role',
             params: {
@@ -855,7 +855,7 @@ describe('App actions', () => {
               target: 'role',
             },
           },
-          { name: 'type', params: { type: 'string', required: true, configurable: false } },
+          {name: 'type', params: {type: 'string', required: true, configurable: false}},
         ],
       };
       const context = {};

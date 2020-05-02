@@ -1,12 +1,12 @@
 /**
-*
-* InputSearchContainer
-*
-*/
+ *
+ * InputSearchContainer
+ *
+ */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { findIndex, has, includes, isEmpty, map, toLower } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {findIndex, has, includes, isEmpty, map, toLower} from 'lodash';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -27,21 +27,21 @@ class InputSearchContainer extends React.Component { // eslint-disable-line reac
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.didDeleteUser !== this.props.didDeleteUser) {
-      this.setState({ users: nextProps.values, filteredUsers: nextProps.values });
+      this.setState({users: nextProps.values, filteredUsers: nextProps.values});
     }
 
     if (nextProps.didGetUsers !== this.props.didGetUsers) {
-      this.setState({ users: nextProps.values, filteredUsers: nextProps.values });
+      this.setState({users: nextProps.values, filteredUsers: nextProps.values});
     }
 
     if (nextProps.didFetchUsers !== this.props.didFetchUsers) {
-      this.setState({ filteredUsers: nextProps.users, isAdding: true });
+      this.setState({filteredUsers: nextProps.users, isAdding: true});
     }
   }
 
-  handleBlur = () => this.setState({ isFocused: !this.state.isFocused });
+  handleBlur = () => this.setState({isFocused: !this.state.isFocused});
 
-  handleChange = ({ target }) => {
+  handleChange = ({target}) => {
     const filteredUsers = isEmpty(target.value) ?
       this.state.users
       : this.state.users.filter((user) => includes(toLower(user.name), toLower(target.value)));
@@ -51,13 +51,18 @@ class InputSearchContainer extends React.Component { // eslint-disable-line reac
     }
 
     if (isEmpty(target.value)) {
-      return this.setState({ value: target.value, isAdding: false, users: this.props.values, filteredUsers: this.props.values });
+      return this.setState({
+        value: target.value,
+        isAdding: false,
+        users: this.props.values,
+        filteredUsers: this.props.values
+      });
     }
 
-    this.setState({ value: target.value, filteredUsers });
+    this.setState({value: target.value, filteredUsers});
   }
 
-  handleFocus = () => this.setState({ isFocused: !this.state.isFocused });
+  handleFocus = () => this.setState({isFocused: !this.state.isFocused});
 
   handleClick = (item) => {
     if (this.state.isAdding) {
@@ -72,7 +77,7 @@ class InputSearchContainer extends React.Component { // eslint-disable-line reac
       // Reset the input focus
       this.searchInput.focus();
       // Empty the input and display users
-      this.setState({ value: '', isAdding: false, users, filteredUsers: users });
+      this.setState({value: '', isAdding: false, users, filteredUsers: users});
     } else {
       this.props.onClickDelete(item);
     }
@@ -80,41 +85,78 @@ class InputSearchContainer extends React.Component { // eslint-disable-line reac
 
   render() {
     return (
-      <div className={cn(styles.inputSearch, 'col-md-6')}>
-        <Label htmlFor={this.props.name} message={this.props.label} />
-        <div className={cn('input-group')}>
-          <span className={cn('input-group-addon', styles.addon, this.state.isFocused && styles.addonFocus,)} />
-          <FormattedMessage id="users-permissions.InputSearch.placeholder">
-            {(message) => (
-              <input
-                className={cn('form-control', !isEmpty(this.state.errors) ? 'is-invalid': '')}
-                id={this.props.name}
-                name={this.props.name}
-                onBlur={this.handleBlur}
-                onChange={this.handleChange}
-                onFocus={this.handleFocus}
-                value={this.state.value}
-                placeholder={message}
-                type="text"
-                ref={(input) => { this.searchInput = input; }}
-              />
-            )}
-          </FormattedMessage>
-        </div>
-        <div className={cn(styles.ulContainer, this.state.isFocused && styles.ulFocused)}>
-          <ul>
-            {map(this.state.filteredUsers, (user) => (
-              <InputSearchLi
-                key={user.id || user._id}
-                item={user}
-                isAdding={this.state.isAdding}
-                onClick={this.handleClick}
-              />
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
+      < div
+    className = {cn(styles.inputSearch, 'col-md-6'
+  )
+  }>
+  <
+    Label
+    htmlFor = {this.props.name}
+    message = {this.props.label}
+    />
+    < div
+    className = {cn('input-group'
+  )
+  }>
+  <
+    span
+    className = {cn('input-group-addon', styles.addon, this.state.isFocused && styles.addonFocus,
+  )
+  }
+    />
+    < FormattedMessage
+    id = "users-permissions.InputSearch.placeholder" >
+      {(message)
+  =>
+    (
+    < input
+    className = {cn('form-control',
+    !isEmpty(this.state.errors) ? 'is-invalid' : ''
+  )
+  }
+    id = {this.props.name}
+    name = {this.props.name}
+    onBlur = {this.handleBlur}
+    onChange = {this.handleChange}
+    onFocus = {this.handleFocus}
+    value = {this.state.value}
+    placeholder = {message}
+    type = "text"
+    ref = {(input)
+  =>
+    {
+      this.searchInput = input;
+    }
+  }
+    />
+  )
+  }
+  <
+    /FormattedMessage>
+    < /div>
+    < div
+    className = {cn(styles.ulContainer, this.state.isFocused && styles.ulFocused
+  )
+  }>
+  <
+    ul >
+    {map(this.state.filteredUsers,(user)
+  =>
+    (
+    < InputSearchLi
+    key = {user.id || user._id}
+    item = {user}
+    isAdding = {this.state.isAdding}
+    onClick = {this.handleClick}
+    />
+  ))
+  }
+  <
+    /ul>
+    < /div>
+    < /div>
+  )
+    ;
   }
 }
 

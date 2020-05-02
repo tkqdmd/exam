@@ -11,7 +11,7 @@ import getInjectors from './reducerInjectors';
  * @param {function} reducer A reducer that will be injected
  *
  */
-export default ({ key, reducer, pluginId }) => (WrappedComponent) => {
+export default ({key, reducer, pluginId}) => (WrappedComponent) => {
   class ReducerInjector extends React.Component {
     static WrappedComponent = WrappedComponent;
     static displayName = `withReducer(${(WrappedComponent.displayName || WrappedComponent.name || 'Component')})`;
@@ -20,7 +20,7 @@ export default ({ key, reducer, pluginId }) => (WrappedComponent) => {
     };
 
     componentWillMount() {
-      const { injectReducer } = this.injectors;
+      const {injectReducer} = this.injectors;
       const reducerName = pluginId ? `${pluginId}_${key}` : key;
 
       injectReducer(reducerName, reducer);
@@ -29,7 +29,13 @@ export default ({ key, reducer, pluginId }) => (WrappedComponent) => {
     injectors = getInjectors(this.context.store);
 
     render() {
-      return <WrappedComponent {...this.props} />;
+      return
+    <
+      WrappedComponent
+      {...
+        this.props
+      }
+      />;
     }
   }
 

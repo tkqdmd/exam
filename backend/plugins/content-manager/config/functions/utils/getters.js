@@ -42,7 +42,7 @@ const getApisUploadRelations = (data, sameArray) => sameArray.map(apiPath => {
   const relationsObject = _.get(data.models, relationPath, {});
   const relations = Object.keys(relationsObject)
     .filter(relationName => {
-      return _.get(data.models, [...relationPath, relationName, 'plugin' ]) === 'upload';
+      return _.get(data.models, [...relationPath, relationName, 'plugin']) === 'upload';
     });
 
   return relations.map(relation => `${apiPath.join('.')}.editDisplay.availableFields.${relation}`);
@@ -53,10 +53,9 @@ const getApisUploadRelations = (data, sameArray) => sameArray.map(apiPath => {
  * @param {String} attrPath
  * @returns {Array}
  */
-const getEditDisplayAvailableFieldsPath = attrPath => [..._.take(attrPath, attrPath.length -2), 'editDisplay', 'availableFields', attrPath[attrPath.length - 1]];
-const getEditDisplayDisplayedField = attrPath => [..._.take(attrPath, attrPath.length -2), 'editDisplay', 'displayedField'];
-const getEditDisplayFieldsPath = attrPath => [..._.take(attrPath, attrPath.length -2), 'editDisplay', 'fields'];
-
+const getEditDisplayAvailableFieldsPath = attrPath => [..._.take(attrPath, attrPath.length - 2), 'editDisplay', 'availableFields', attrPath[attrPath.length - 1]];
+const getEditDisplayDisplayedField = attrPath => [..._.take(attrPath, attrPath.length - 2), 'editDisplay', 'displayedField'];
+const getEditDisplayFieldsPath = attrPath => [..._.take(attrPath, attrPath.length - 2), 'editDisplay', 'fields'];
 
 
 module.exports = {

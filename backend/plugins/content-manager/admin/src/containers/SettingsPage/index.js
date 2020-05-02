@@ -4,11 +4,11 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import {connect} from 'react-redux';
+import {bindActionCreators, compose} from 'redux';
+import {createStructuredSelector} from 'reselect';
 import cn from 'classnames';
-import { get, sortBy } from 'lodash';
+import {get, sortBy} from 'lodash';
 import PropTypes from 'prop-types';
 
 import Input from 'components/InputsIndex';
@@ -20,8 +20,8 @@ import SettingsRow from '../../components/SettingsRow';
 
 import pluginId from '../../pluginId';
 
-import { onChange, onSubmit, onReset } from '../App/actions';
-import { makeSelectModifiedSchema, makeSelectSubmitSuccess } from '../App/selectors';
+import {onChange, onSubmit, onReset} from '../App/actions';
+import {makeSelectModifiedSchema, makeSelectSubmitSuccess} from '../App/selectors';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -29,7 +29,7 @@ import styles from './styles.scss';
 import forms from './forms.json';
 
 class SettingsPage extends React.PureComponent {
-  state = { showWarning: false, showWarningCancel: false };
+  state = {showWarning: false, showWarningCancel: false};
 
   componentDidUpdate(prevProps) {
     if (prevProps.submitSuccess !== this.props.submitSuccess) {
@@ -49,7 +49,7 @@ class SettingsPage extends React.PureComponent {
           return acc.concat(this.getModels(data[curr], `${destination}${curr}/`));
         }
 
-        return acc.concat([{ name: curr, destination: `${destination}${curr}` }]);
+        return acc.concat([{name: curr, destination: `${destination}${curr}`}]);
       }
 
       return acc.concat(this.getModels(data[curr], `${destination}${curr}/`));
@@ -80,14 +80,14 @@ class SettingsPage extends React.PureComponent {
   );
 
   getValue = (input) => {
-    const { schema: { generalSettings } } = this.props;
+    const {schema: {generalSettings}} = this.props;
     const value = get(generalSettings, input.name.split('.')[1], input.type === 'toggle' ? false : 10);
 
     return input.type === 'toggle' ? value : value.toString();
   }
 
   handleClick = (destination) => {
-    const { location: { pathname } } = this.props;
+    const {location: {pathname}} = this.props;
 
     this.props.history.push(`${pathname}/list-settings${destination}`);
   }
@@ -99,93 +99,145 @@ class SettingsPage extends React.PureComponent {
 
   handleReset = (e) => {
     e.preventDefault();
-    this.setState({ showWarningCancel: true });
+    this.setState({showWarningCancel: true});
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ showWarning: true });
+    this.setState({showWarning: true});
   }
 
-  toggle = () => this.setState(prevState => ({ showWarning: !prevState.showWarning }));
+  toggle = () => this.setState(prevState => ({showWarning: !prevState.showWarning}));
 
-  toggleWarningCancel = () => this.setState(prevState => ({ showWarningCancel: !prevState.showWarningCancel }));
+  toggleWarningCancel = () => this.setState(prevState => ({showWarningCancel: !prevState.showWarningCancel}));
 
   renderForm = input => (
-    <Input
-      key={input.name}
-      onChange={this.props.onChange}
-      value={this.getValue(input)}
-      {...input}
-    />
-  );
+    < Input
+  key = {input.name}
+  onChange = {this.props.onChange}
+  value = {this.getValue(input)} {
+...
+  input
+}
 
-  renderRow = model => <SettingsRow key={model.name} {...model} onClick={this.handleClick} />;
+/>
+)
+;
 
-  render() {
-    const { showWarning, showWarningCancel } = this.state;
-    const { onSubmit } = this.props;
+renderRow = model =>
+<
+SettingsRow
+key = {model.name}
+{...
+  model
+}
+onClick = {this.handleClick}
+/>;
 
-    return (
-      <div className={cn('container-fluid', styles.containerFluid)}>
-        <PluginHeader
-          actions={this.getPluginHeaderActions()}
-          title="Content Manager"
-          description={{ id: 'content-manager.containers.SettingsPage.pluginHeaderDescription' }}
-        />
-        <PopUpWarning
-          isOpen={showWarning}
-          toggleModal={this.toggle}
-          content={{
-            title: 'content-manager.popUpWarning.title',
-            message: 'content-manager.popUpWarning.warning.updateAllSettings',
-            cancel: 'content-manager.popUpWarning.button.cancel',
-            confirm: 'content-manager.popUpWarning.button.confirm',
-          }}
-          popUpWarningType="danger"
-          onConfirm={onSubmit}
-        />
-        <PopUpWarning
-          isOpen={showWarningCancel}
-          toggleModal={this.toggleWarningCancel}
-          content={{
-            title: 'content-manager.popUpWarning.title',
-            message: 'content-manager.popUpWarning.warning.cancelAllSettings',
-            cancel: 'content-manager.popUpWarning.button.cancel',
-            confirm: 'content-manager.popUpWarning.button.confirm',
-          }}
-          popUpWarningType="danger"
-          onConfirm={this.handleConfirmReset}
-        />
-        <div className={cn('row', styles.container)}>
-          <Block
-            description="content-manager.containers.SettingsPage.Block.generalSettings.description"
-            title="content-manager.containers.SettingsPage.Block.generalSettings.title"
-          >
-            <form onSubmit={this.handleSubmit} className={styles.ctmForm}>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="row">
-                    {forms.inputs.map(this.renderForm)}
-                  </div>
-                </div>
-              </div>
-            </form>
-          </Block>
-          {/* LIST */}
-          <Block
-            title="content-manager.containers.SettingsPage.Block.contentType.title"
-            description="content-manager.containers.SettingsPage.Block.contentType.description"
-          >
-            <div className={styles.contentTypesWrapper}>
-              {this.getModels().map(this.renderRow)}
-            </div>
-          </Block>
-          {/* LIST */}
-        </div>
-      </div>
-    );
+render()
+{
+  const {showWarning, showWarningCancel} = this.state;
+  const {onSubmit} = this.props;
+
+  return (
+    < div
+  className = {cn('container-fluid', styles.containerFluid
+)
+}>
+<
+  PluginHeader
+  actions = {this.getPluginHeaderActions()}
+  title = "Content Manager"
+  description = {
+  {
+    id: 'content-manager.containers.SettingsPage.pluginHeaderDescription'
   }
+}
+  />
+  < PopUpWarning
+  isOpen = {showWarning}
+  toggleModal = {this.toggle}
+  content = {
+  {
+    title: 'content-manager.popUpWarning.title',
+      message
+  :
+    'content-manager.popUpWarning.warning.updateAllSettings',
+      cancel
+  :
+    'content-manager.popUpWarning.button.cancel',
+      confirm
+  :
+    'content-manager.popUpWarning.button.confirm',
+  }
+}
+  popUpWarningType = "danger"
+  onConfirm = {onSubmit}
+  />
+  < PopUpWarning
+  isOpen = {showWarningCancel}
+  toggleModal = {this.toggleWarningCancel}
+  content = {
+  {
+    title: 'content-manager.popUpWarning.title',
+      message
+  :
+    'content-manager.popUpWarning.warning.cancelAllSettings',
+      cancel
+  :
+    'content-manager.popUpWarning.button.cancel',
+      confirm
+  :
+    'content-manager.popUpWarning.button.confirm',
+  }
+}
+  popUpWarningType = "danger"
+  onConfirm = {this.handleConfirmReset}
+  />
+  < div
+  className = {cn('row', styles.container
+)
+}>
+<
+  Block
+  description = "content-manager.containers.SettingsPage.Block.generalSettings.description"
+  title = "content-manager.containers.SettingsPage.Block.generalSettings.title"
+    >
+    < form
+  onSubmit = {this.handleSubmit}
+  className = {styles.ctmForm} >
+    < div
+  className = "row" >
+    < div
+  className = "col-md-12" >
+    < div
+  className = "row" >
+    {forms.inputs.map(this.renderForm)}
+    < /div>
+    < /div>
+    < /div>
+    < /form>
+    < /Block>
+  {/* LIST */
+  }
+<
+  Block
+  title = "content-manager.containers.SettingsPage.Block.contentType.title"
+  description = "content-manager.containers.SettingsPage.Block.contentType.description"
+    >
+    < div
+  className = {styles.contentTypesWrapper} >
+    {this.getModels().map(this.renderRow)}
+    < /div>
+    < /Block>
+  {/* LIST */
+  }
+<
+  /div>
+  < /div>
+)
+  ;
+}
 }
 
 SettingsPage.defaultProps = {};
@@ -215,8 +267,8 @@ const mapStateToProps = createStructuredSelector({
   submitSuccess: makeSelectSubmitSuccess(),
 });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = strapi.injectReducer({ key: 'settingsPage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'settingsPage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'settingsPage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'settingsPage', saga, pluginId});
 
 export default compose(
   withReducer,

@@ -1,14 +1,14 @@
 /**
-*
-* Policies
-*
-*/
+ *
+ * Policies
+ *
+ */
 
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { get, isEmpty, map, takeRight, toLower, without } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {get, isEmpty, map, takeRight, toLower, without} from 'lodash';
 
 import Input from 'components/InputsIndex';
 import BoundRoute from '../BoundRoute';
@@ -27,33 +27,69 @@ class Policies extends React.Component { // eslint-disable-line react/prefer-sta
     const routes = isEmpty(controllerRoutes) ? [] : controllerRoutes.filter(o => toLower(o.handler) === toLower(takeRight(path, 2).join('.')));
 
     return (
-      <div className={cn('col-md-5',styles.policies)}>
-        <div className="container-fluid">
-          <div className={cn('row', styles.inputWrapper)}>
-            <div className={cn('col-md-12', styles.header)}>
-              <FormattedMessage id={`${baseTitle}.${title}`} />
-            </div>
-            {!this.props.shouldDisplayPoliciesHint ? (
-              <Input
-                customBootstrapClass="col-md-12"
-                label={{ id: 'users-permissions.Policies.InputSelect.label' }}
-                name={this.props.inputSelectName}
-                onChange={this.handleChange}
-                selectOptions={this.props.selectOptions}
-                type="select"
-                validations={{}}
-                value={value}
-              />
-            ) : ''}
-          </div>
-          <div className="row">
-            {!this.props.shouldDisplayPoliciesHint ? (
-              map(routes, (route, key) => <BoundRoute key={key} route={route} />)
-            ) : ''}
-          </div>
-        </div>
-      </div>
-    );
+      < div
+    className = {cn('col-md-5', styles.policies
+  )
+  }>
+  <
+    div
+    className = "container-fluid" >
+      < div
+    className = {cn('row', styles.inputWrapper
+  )
+  }>
+  <
+    div
+    className = {cn('col-md-12', styles.header
+  )
+  }>
+  <
+    FormattedMessage
+    id = {`${baseTitle}.${title}`
+  }
+    />
+    < /div>
+    {
+      !this.props.shouldDisplayPoliciesHint ? (
+        < Input
+        customBootstrapClass = "col-md-12"
+      label = {
+      {
+        id: 'users-permissions.Policies.InputSelect.label'
+      }
+    }
+      name = {this.props.inputSelectName}
+      onChange = {this.handleChange}
+      selectOptions = {this.props.selectOptions}
+      type = "select"
+      validations = {
+      {
+      }
+    }
+      value = {value}
+      />
+    ) :
+      ''
+    }
+  <
+    /div>
+    < div
+    className = "row" >
+      {
+    !this.props.shouldDisplayPoliciesHint ? (
+      map(routes, (route, key) => < BoundRoute
+    key = {key}
+    route = {route}
+    />)
+  ) :
+    ''
+  }
+  <
+    /div>
+    < /div>
+    < /div>
+  )
+    ;
   }
 }
 

@@ -6,14 +6,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 
 import BlockerComponent from 'components/BlockerComponent';
 import ErrorBoundary from 'components/ErrorBoundary';
 
-import { selectPlugins } from '../App/selectors';
+import {selectPlugins} from '../App/selectors';
 
 export class PluginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -37,21 +37,35 @@ export class PluginPage extends React.Component { // eslint-disable-line react/p
         }
 
         return (
-          <ErrorBoundary key={plugin.id}>
-            <Elem {...this.props} {...blockerComponentProps} />
-          </ErrorBoundary>
-        );
+          < ErrorBoundary
+        key = {plugin.id} >
+          < Elem
+        {...
+          this.props
+        }
+        {...
+          blockerComponentProps
+        }
+        />
+        < /ErrorBoundary>
+      )
+        ;
       }
     });
 
     return (
-      <div>
-        <Helmet
-          title={`Strapi - ${pluginName}`}
-        />
-        {containers}
-      </div>
-    );
+      < div >
+      < Helmet
+    title = {`Strapi - ${pluginName}`
+  }
+    />
+    {
+      containers
+    }
+  <
+    /div>
+  )
+    ;
   }
 }
 
@@ -62,7 +76,7 @@ PluginPage.propTypes = {
 
 const mapStateToProps = createSelector(
   selectPlugins(),
-  (plugins) => ({ plugins })
+  (plugins) => ({plugins})
 );
 
 function mapDispatchToProps(dispatch) {

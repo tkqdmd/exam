@@ -12,11 +12,11 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { Switch, Route } from 'react-router-dom';
-import { get, includes, isFunction, map, omit } from 'lodash';
-import { bindActionCreators, compose } from 'redux';
+import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import {Switch, Route} from 'react-router-dom';
+import {get, includes, isFunction, map, omit} from 'lodash';
+import {bindActionCreators, compose} from 'redux';
 // Actions required for disabling and enabling the OverlayBlocker
 import {
   disableGlobalOverlayBlocker,
@@ -28,7 +28,7 @@ import OverlayBlocker from 'components/OverlayBlocker';
 // Utils
 import auth from 'utils/auth';
 
-import { pluginLoaded, updatePlugin } from '../App/actions';
+import {pluginLoaded, updatePlugin} from '../App/actions';
 
 import {
   makeSelectAppPlugins,
@@ -59,7 +59,7 @@ import Onboarding from '../Onboarding';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import PluginPage from '../PluginPage';
 
-import { emitEvent, getAdminData } from './actions';
+import {emitEvent, getAdminData} from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import selectAdminPage from './selectors';
@@ -72,7 +72,7 @@ const PLUGINS_TO_BLOCK_PRODUCTION = [
 
 export class AdminPage extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-  state = { hasAlreadyRegistereOtherPlugins: false };
+  state = {hasAlreadyRegistereOtherPlugins: false};
 
   getChildContext = () => ({
     currentEnvironment: this.props.adminPage.currentEnvironment,
@@ -88,10 +88,11 @@ export class AdminPage extends React.Component {
     this.checkLogin(this.props);
     ReactGA.initialize('UA-54313258-9');
   }
+
   componentDidUpdate(prevProps) {
     const {
-      adminPage: { uuid },
-      location: { pathname },
+      adminPage: {uuid},
+      location: {pathname},
       plugins,
     } = this.props;
 
@@ -102,7 +103,7 @@ export class AdminPage extends React.Component {
         ReactGA.pageview(pathname);
       }
     }
-    
+
     const hasAdminPath = ['users-permissions', 'hasAdminUser'];
 
     if (
@@ -157,7 +158,7 @@ export class AdminPage extends React.Component {
         plugin => {
           switch (true) {
             case isFunction(plugin.bootstrap) &&
-              isFunction(plugin.pluginRequirements):
+            isFunction(plugin.pluginRequirements):
               plugin
                 .pluginRequirements(plugin)
                 .then(plugin => {
@@ -180,12 +181,12 @@ export class AdminPage extends React.Component {
         },
       );
 
-      this.setState({ hasAlreadyRegistereOtherPlugins: true });
+      this.setState({hasAlreadyRegistereOtherPlugins: true});
     }
   };
 
   hasUserPluginInstalled = () => {
-    const { appPlugins } = this.props;
+    const {appPlugins} = this.props;
 
     return appPlugins.indexOf('users-permissions') !== -1;
   };
@@ -214,7 +215,7 @@ export class AdminPage extends React.Component {
   showLoading = () => {
     const {
       isAppLoading,
-      adminPage: { isLoading },
+      adminPage: {isLoading},
     } = this.props;
 
     return (
@@ -226,7 +227,7 @@ export class AdminPage extends React.Component {
 
   retrievePlugins = () => {
     const {
-      adminPage: { currentEnvironment },
+      adminPage: {currentEnvironment},
       plugins,
     } = this.props;
 
@@ -242,57 +243,117 @@ export class AdminPage extends React.Component {
     return plugins;
   };
 
-  renderMarketPlace = props => <Marketplace {...props} {...this.props} />;
+  renderMarketPlace = props =>
+<
+  Marketplace {
+...
+  props
+}
 
-  render() {
-    const { adminPage } = this.props;
-    const header = this.showLeftMenu() ? <Header /> : '';
-    const style = this.showLeftMenu() ? {} : { width: '100%' };
-    if (this.showLoading()) {
-      return <LoadingIndicatorPage />;
-    }
+{...
+  this.props
+}
+/>;
 
-    return (
-      <div className={styles.adminPage}>
-        {this.props.adminPage.uuid ? <FullStory org="GK708" /> : ''}
-        {this.showLeftMenu() && (
-          <LeftMenu
-            plugins={this.retrievePlugins()}
-            layout={adminPage.layout}
-            version={adminPage.strapiVersion}
-          />
-        )}
-        <CTAWrapper>
-          {this.shouldDisplayLogout() && <Logout />}
-          <LocaleToggle isLogged={this.shouldDisplayLogout() === true} />
-        </CTAWrapper>
-        <div className={styles.adminPageRightWrapper} style={style}>
-          {header}
-          <Content {...this.props} showLeftMenu={this.showLeftMenu()}>
-            <Switch>
-              <Route path="/" component={HomePage} exact />
-              <Route path="/plugins/:pluginId" component={PluginPage} />
-              <Route path="/plugins" component={ComingSoonPage} />
-              <Route path="/list-plugins" component={ListPluginsPage} exact />
-              <Route
-                path="/marketplace"
-                render={this.renderMarketPlace}
-                exact
-              />
-              <Route path="/configuration" component={ComingSoonPage} exact />
-              <Route path="" component={NotFoundPage} />
-              <Route path="404" component={NotFoundPage} />
-            </Switch>
-          </Content>
-        </div>
-        <OverlayBlocker
-          isOpen={this.props.blockApp && this.props.showGlobalAppBlocker}
-          {...this.props.overlayBlockerData}
-        />
-        {this.shouldDisplayLogout() && <Onboarding />}
-      </div>
-    );
+render()
+{
+  const {adminPage} = this.props;
+  const header = this.showLeftMenu() ?
+<
+  Header / >
+:
+  '';
+  const style = this.showLeftMenu() ? {} : {width: '100%'};
+  if (this.showLoading()) {
+    return
+  <
+    LoadingIndicatorPage / >;
   }
+
+  return (
+    < div
+  className = {styles.adminPage} >
+    {this.props.adminPage.uuid ? < FullStory
+  org = "GK708" / >
+:
+  ''
+}
+  {
+    this.showLeftMenu() && (
+    < LeftMenu
+    plugins = {this.retrievePlugins()}
+    layout = {adminPage.layout}
+    version = {adminPage.strapiVersion}
+    />
+  )
+  }
+<
+  CTAWrapper >
+  {this.shouldDisplayLogout() && < Logout / >}
+  < LocaleToggle
+  isLogged = {this.shouldDisplayLogout() === true}
+  />
+  < /CTAWrapper>
+  < div
+  className = {styles.adminPageRightWrapper}
+  style = {style} >
+    {header}
+    < Content
+  {...
+    this.props
+  }
+  showLeftMenu = {this.showLeftMenu()} >
+    < Switch >
+    < Route
+  path = "/"
+  component = {HomePage}
+  exact / >
+  < Route
+  path = "/plugins/:pluginId"
+  component = {PluginPage}
+  />
+  < Route
+  path = "/plugins"
+  component = {ComingSoonPage}
+  />
+  < Route
+  path = "/list-plugins"
+  component = {ListPluginsPage}
+  exact / >
+  < Route
+  path = "/marketplace"
+  render = {this.renderMarketPlace}
+  exact
+  / >
+  < Route
+  path = "/configuration"
+  component = {ComingSoonPage}
+  exact / >
+  < Route
+  path = ""
+  component = {NotFoundPage}
+  />
+  < Route
+  path = "404"
+  component = {NotFoundPage}
+  />
+  < /Switch>
+  < /Content>
+  < /div>
+  < OverlayBlocker
+  isOpen = {this.props.blockApp && this.props.showGlobalAppBlocker}
+  {...
+    this.props.overlayBlockerData
+  }
+  />
+  {
+    this.shouldDisplayLogout() && < Onboarding / >
+  }
+<
+  /div>
+)
+  ;
+}
 }
 
 AdminPage.childContextTypes = {
@@ -365,8 +426,8 @@ const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
-const withReducer = injectReducer({ key: 'adminPage', reducer });
-const withSaga = injectSaga({ key: 'adminPage', saga });
+const withReducer = injectReducer({key: 'adminPage', reducer});
+const withSaga = injectSaga({key: 'adminPage', saga});
 
 export default compose(
   withReducer,

@@ -1,12 +1,12 @@
 /**
-*
-* WithFormSection
-*
-*/
+ *
+ * WithFormSection
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findIndex, forEach, has, isObject , join, pullAt, split, includes} from 'lodash';
+import {findIndex, forEach, has, isObject, join, pullAt, split, includes} from 'lodash';
 
 import InputNumber from '../InputNumber';
 import InputText from '../InputText';
@@ -58,7 +58,7 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.section !== this.props.section || nextProps.cancelAction !== this.props.cancelAction) {
-      this.setState({ showNestedForm: false, hasNestedInput: false, inputWithNestedForm: '' });
+      this.setState({showNestedForm: false, hasNestedInput: false, inputWithNestedForm: ''});
       if (isObject(nextProps.section)) {
         this.checkForNestedForm(nextProps);
       }
@@ -67,23 +67,23 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
 
   checkForNestedForm(props) {
     forEach(props.section.items, (input) => {
-      if(has(input, 'items')) {
-        this.setState({ hasNestedInput: true, inputWithNestedForm: input.target });
+      if (has(input, 'items')) {
+        this.setState({hasNestedInput: true, inputWithNestedForm: input.target});
 
         if (props.values[input.target]) {
-          this.setState({ showNestedForm: true });
+          this.setState({showNestedForm: true});
         }
       }
     });
   }
 
-  handleChange = ({ target }) => {
+  handleChange = ({target}) => {
     // display nestedForm if the selected input has a nested form
     if (target.name === this.state.inputWithNestedForm) {
-      this.setState({ showNestedForm: target.value });
+      this.setState({showNestedForm: target.value});
     }
 
-    this.props.onChange({ target });
+    this.props.onChange({target});
   }
 
   renderInput = (props, key) => {
@@ -93,7 +93,7 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
     const selectOptions = props.type === 'enum' || props.type === 'select' ? props.items : [];
 
     // custom check for dynamic keys used for databases
-    const dynamicTarget = join(pullAt(split(props.target, '.'),['0', '1', '3', '4']), '.');
+    const dynamicTarget = join(pullAt(split(props.target, '.'), ['0', '1', '3', '4']), '.');
 
     // check if the input has a nested form so it is displayed on the entire line
     const customBootstrapClass = this.state.hasNestedInput ?
@@ -103,7 +103,7 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
       config[props.target] || config[dynamicTarget] || '';
 
     // custom handleChange props for nested input form
-    const handleChange = this.state.hasNestedInput ? this.handleChange :  this.props.onChange;
+    const handleChange = this.state.hasNestedInput ? this.handleChange : this.props.onChange;
     let hiddenLabel = includes(props.name, 'enabled');
 
     if (includes(config.showInputLabel, props.name)) hiddenLabel = false;
@@ -112,33 +112,37 @@ const WithFormSection = (InnerComponent) => class extends React.Component {
     const errors = errorIndex !== -1 ? this.props.formErrors[errorIndex].errors : [];
 
     return (
-      <Input
-        customBootstrapClass={customBootstrapClass}
-        key={key}
-        handleChange={handleChange}
-        name={props.name}
-        target={props.target}
-        isChecked={inputValue}
-        selectOptions={selectOptions}
-        validations={props.validations}
-        value={inputValue}
-        addRequiredInputDesign={this.props.addRequiredInputDesign}
-        hiddenLabel={hiddenLabel}
-        inputDescription={props.description}
-        errors={errors}
-      />
-    );
+      < Input
+    customBootstrapClass = {customBootstrapClass}
+    key = {key}
+    handleChange = {handleChange}
+    name = {props.name}
+    target = {props.target}
+    isChecked = {inputValue}
+    selectOptions = {selectOptions}
+    validations = {props.validations}
+    value = {inputValue}
+    addRequiredInputDesign = {this.props.addRequiredInputDesign}
+    hiddenLabel = {hiddenLabel}
+    inputDescription = {props.description}
+    errors = {errors}
+    />
+  )
+    ;
   }
 
   render() {
     return (
-      <InnerComponent
-        {...this.props}
-        showNestedForm={this.state.showNestedForm}
-        renderInput={this.renderInput}
-        styles={styles}
-      />
-    );
+      < InnerComponent
+    {...
+      this.props
+    }
+    showNestedForm = {this.state.showNestedForm}
+    renderInput = {this.renderInput}
+    styles = {styles}
+    />
+  )
+    ;
   }
 };
 

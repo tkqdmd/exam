@@ -33,12 +33,12 @@
   border-bottom: 3px solid #F0B41E;
 }
 
-.link{
-  &:hover, &:focus, &:active{
+.link {
+  &:hover, &:focus, &:active {
     text-decoration: none;
   }
 
-  &:hover{
+  &:hover {
     > span, p {
       color: lighten(#333740, 20%);
     }

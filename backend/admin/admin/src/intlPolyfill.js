@@ -1,7 +1,7 @@
 /**
  * Common configuration for the app in both dev an prod mode
  */
-import { translationMessages } from './i18n';
+import {translationMessages} from './i18n';
 import './public-path';
 import render from './renderApp';
 

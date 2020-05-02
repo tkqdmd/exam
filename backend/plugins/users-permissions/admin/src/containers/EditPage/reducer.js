@@ -4,8 +4,8 @@
  *
  */
 
-import { fromJS, List, Map } from 'immutable';
-import { map } from 'lodash';
+import {fromJS, List, Map} from 'immutable';
+import {map} from 'lodash';
 import {
   ADD_USER,
   GET_PERMISSIONS_SUCCEEDED,

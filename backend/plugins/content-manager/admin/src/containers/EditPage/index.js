@@ -5,9 +5,9 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import {connect} from 'react-redux';
+import {bindActionCreators, compose} from 'redux';
+import {createStructuredSelector} from 'reselect';
 import PropTypes from 'prop-types';
 import {
   cloneDeep,
@@ -21,7 +21,7 @@ import {
   replace,
 } from 'lodash';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import {DragDropContext} from 'react-dnd';
 import cn from 'classnames';
 
 // You can find these components in either
@@ -44,13 +44,13 @@ import CustomDragLayer from '../../components/CustomDragLayer';
 import Edit from '../../components/Edit';
 import EditRelations from '../../components/EditRelations';
 
-import { bindLayout } from '../../utils/bindLayout';
-import { checkFormValidity } from '../../utils/formValidations';
+import {bindLayout} from '../../utils/bindLayout';
+import {checkFormValidity} from '../../utils/formValidations';
 
 // App selectors
-import { makeSelectSchema } from '../App/selectors';
+import {makeSelectSchema} from '../App/selectors';
 
-import { generateRedirectURI } from '../ListPage/utils';
+import {generateRedirectURI} from '../ListPage/utils';
 import {
   addRelationItem,
   changeData,
@@ -72,7 +72,7 @@ import makeSelectEditPage from './selectors';
 import styles from './styles.scss';
 
 export class EditPage extends React.Component {
-  state = { showWarning: false, showWarningDelete: false };
+  state = {showWarning: false, showWarningDelete: false};
 
   componentDidMount() {
     this.initComponent(this.props);
@@ -201,7 +201,7 @@ export class EditPage extends React.Component {
     const title = get(this.getSchema(), 'editDisplay.displayedField');
     const valueToDisplay = get(this.props.editPage, ['initialRecord', title], null);
 
-    return isEmpty(toString(valueToDisplay)) ? null : truncate(valueToDisplay, { length: '24', separator: '.' });
+    return isEmpty(toString(valueToDisplay)) ? null : truncate(valueToDisplay, {length: '24', separator: '.'});
   };
 
   /**
@@ -272,14 +272,14 @@ export class EditPage extends React.Component {
     this.props.setFileRelations(fileRelations);
   };
 
-  handleAddRelationItem = ({ key, value }) => {
+  handleAddRelationItem = ({key, value}) => {
     this.props.addRelationItem({
       key,
       value,
     });
   };
 
-  handleBlur = ({ target }) => {
+  handleBlur = ({target}) => {
     const defaultValue = get(this.getModelAttribute(target.name), 'default');
 
     if (isEmpty(target.value) && defaultValue && target.value !== false) {
@@ -303,11 +303,11 @@ export class EditPage extends React.Component {
     const formErrors = cloneDeep(this.props.editPage.formErrors);
 
     if (errorIndex === -1 && !isEmpty(errors)) {
-      formErrors.push({ name: target.name, errors });
+      formErrors.push({name: target.name, errors});
     } else if (errorIndex !== -1 && isEmpty(errors)) {
       formErrors.splice(errorIndex, 1);
     } else if (!isEmpty(errors)) {
-      formErrors.splice(errorIndex, 1, { name: target.name, errors });
+      formErrors.splice(errorIndex, 1, {name: target.name, errors});
     }
 
     return this.props.setFormErrors(formErrors);
@@ -329,11 +329,11 @@ export class EditPage extends React.Component {
       value,
     };
 
-    this.props.changeData({ target });
+    this.props.changeData({target});
   };
 
   handleConfirm = () => {
-    const { showWarningDelete } = this.state;
+    const {showWarningDelete} = this.state;
 
     if (showWarningDelete) {
       this.props.deleteData();
@@ -346,7 +346,7 @@ export class EditPage extends React.Component {
 
   handleGoBack = () => this.props.history.goBack();
 
-  handleRedirect = ({ model, id, source = pluginId }) => {
+  handleRedirect = ({model, id, source = pluginId}) => {
     /* eslint-disable */
     switch (model) {
       case 'permission':
@@ -397,7 +397,7 @@ export class EditPage extends React.Component {
    * @type {boolean} current env is dev
    */
   isDevEnvironment = () => {
-    const { currentEnvironment } = this.context;
+    const {currentEnvironment} = this.context;
 
     return currentEnvironment === 'development';
   };
@@ -407,8 +407,8 @@ export class EditPage extends React.Component {
       relation =>
         get(this.getSchema(), ['relations', relation, 'plugin']) !== 'upload' &&
         (!get(this.getSchema(), ['relations', relation, 'nature'], '')
-          .toLowerCase()
-          .includes('morph') ||
+            .toLowerCase()
+            .includes('morph') ||
           !get(this.getSchema(), ['relations', relation, relation])),
     ).length === 0;
 
@@ -436,10 +436,23 @@ export class EditPage extends React.Component {
     };
 
     return (
-      <li key={`${pluginId}.link`}  onClick={() => this.context.emitEvent('willEditContentTypeLayoutFromEditView')}>
-        <NavLink {...message} url={url} />
-      </li>
-    );
+      < li
+    key = {`${pluginId}.link`
+  }
+    onClick = {()
+  =>
+    this.context.emitEvent('willEditContentTypeLayoutFromEditView')
+  }>
+  <
+    NavLink
+    {...
+      message
+    }
+    url = {url}
+    />
+    < /li>
+  )
+    ;
   };
 
   pluginHeaderActions = () => [
@@ -457,8 +470,8 @@ export class EditPage extends React.Component {
       type: 'submit',
       loader: this.props.editPage.showLoader,
       style: this.props.editPage.showLoader
-        ? { marginRight: '18px', flexGrow: 2 }
-        : { flexGrow: 2 },
+        ? {marginRight: '18px', flexGrow: 2}
+        : {flexGrow: 2},
       disabled: this.showLoaders(),
     },
   ];
@@ -468,14 +481,14 @@ export class EditPage extends React.Component {
     const subActions = this.isCreating()
       ? []
       : [
-          {
-            label: 'app.utils.delete',
-            kind: 'delete',
-            onClick: this.toggleDelete,
-            type: 'button',
-            disabled: this.showLoaders(),
-          },
-        ];
+        {
+          label: 'app.utils.delete',
+          kind: 'delete',
+          onClick: this.toggleDelete,
+          type: 'button',
+          disabled: this.showLoaders(),
+        },
+      ];
 
     return subActions;
     /* eslint-enable indent */
@@ -487,7 +500,7 @@ export class EditPage extends React.Component {
    */
   retrieveLinksContainerComponent = () => {
     // Should be retrieved from the global props (@soupette)
-    const { plugins } = this.context;
+    const {plugins} = this.context;
     const appPlugins = plugins.toJS();
     const componentToInject = Object.keys(appPlugins).reduce((acc, current) => {
       // Retrieve injected compos from plugin
@@ -506,10 +519,24 @@ export class EditPage extends React.Component {
           const Component = compo.component;
 
           return (
-            <li key={compo.key} onClick={() => this.context.emitEvent('willEditContentTypeFromEditView')}>
-              <Component {...this} {...compo.props} />
-            </li>
-          );
+            < li
+          key = {compo.key}
+          onClick = {()
+        =>
+          this.context.emitEvent('willEditContentTypeFromEditView')
+        }>
+        <
+          Component
+          {...
+            this
+          }
+          {...
+            compo.props
+          }
+          />
+          < /li>
+        )
+          ;
         });
 
       return [...acc, ...compos];
@@ -532,8 +559,8 @@ export class EditPage extends React.Component {
 
   showLoaders = () => {
     const {
-      editPage: { isLoading },
-      schema: { layout },
+      editPage: {isLoading},
+      schema: {layout},
     } = this.props;
 
     return (
@@ -543,7 +570,7 @@ export class EditPage extends React.Component {
   };
 
   toggle = () =>
-    this.setState(prevState => ({ showWarning: !prevState.showWarning }));
+    this.setState(prevState => ({showWarning: !prevState.showWarning}));
 
   toggleDelete = () =>
     this.setState(prevState => ({
@@ -561,7 +588,7 @@ export class EditPage extends React.Component {
   renderEdit = () => {
     const {
       editPage,
-      location: { search },
+      location: {search},
     } = this.props;
     const source = getQueryParameters(search, 'source');
     const basePath = `/plugins/${pluginId}/ctm-configurations/edit-settings`;
@@ -572,134 +599,189 @@ export class EditPage extends React.Component {
 
     if (this.showLoaders()) {
       return (
-        <div
-          className={
-            !this.shouldDisplayedRelations() ? 'col-lg-12' : 'col-lg-9'
-          }
-        >
-          <div className={styles.main_wrapper}>
-            <LoadingIndicator />
-          </div>
-        </div>
-      );
+        < div
+      className = {
+      !this.shouldDisplayedRelations() ? 'col-lg-12' : 'col-lg-9'
+    }
+    >
+    <
+      div
+      className = {styles.main_wrapper} >
+        < LoadingIndicator / >
+        < /div>
+        < /div>
+    )
+      ;
     }
 
     if (!this.hasDisplayedFields()) {
       return (
-        <div
-          className={
-            !this.shouldDisplayedRelations() ? 'col-lg-12' : 'col-lg-9'
-          }
-        >
-          <EmptyAttributesBlock
-            description={`${pluginId}.components.EmptyAttributesBlock.description`}
-            label={`${pluginId}.components.EmptyAttributesBlock.button`}
-            onClick={() => this.props.history.push(pathname)}
-          />
-        </div>
-      );
+        < div
+      className = {
+      !this.shouldDisplayedRelations() ? 'col-lg-12' : 'col-lg-9'
+    }
+    >
+    <
+      EmptyAttributesBlock
+      description = {`${pluginId}.components.EmptyAttributesBlock.description`
+    }
+      label = {`${pluginId}.components.EmptyAttributesBlock.button`
+    }
+      onClick = {()
+    =>
+      this.props.history.push(pathname)
+    }
+      />
+      < /div>
+    )
+      ;
     }
 
     return (
-      <div
-        className={
-          !this.shouldDisplayedRightSection() ? 'col-lg-12' : 'col-lg-9'
-        }
-      >
-        <div className={styles.main_wrapper}>
-          <Edit
-            attributes={this.getModelAttributes()}
-            didCheckErrors={editPage.didCheckErrors}
-            formValidations={editPage.formValidations}
-            formErrors={editPage.formErrors}
-            layout={this.getLayout()}
-            modelName={this.getModelName()}
-            onBlur={this.handleBlur}
-            onChange={this.handleChange}
-            record={editPage.record}
-            resetProps={editPage.resetProps}
-            schema={this.getSchema()}
-          />
-        </div>
-      </div>
-    );
+      < div
+    className = {
+    !this.shouldDisplayedRightSection() ? 'col-lg-12' : 'col-lg-9'
+  }
+  >
+  <
+    div
+    className = {styles.main_wrapper} >
+      < Edit
+    attributes = {this.getModelAttributes()}
+    didCheckErrors = {editPage.didCheckErrors}
+    formValidations = {editPage.formValidations}
+    formErrors = {editPage.formErrors}
+    layout = {this.getLayout()}
+    modelName = {this.getModelName()}
+    onBlur = {this.handleBlur}
+    onChange = {this.handleChange}
+    record = {editPage.record}
+    resetProps = {editPage.resetProps}
+    schema = {this.getSchema()}
+    />
+    < /div>
+    < /div>
+  )
+    ;
   };
 
   render() {
-    const { editPage, moveAttr, moveAttrEnd } = this.props;
-    const { showWarning, showWarningDelete } = this.state;
+    const {editPage, moveAttr, moveAttrEnd} = this.props;
+    const {showWarning, showWarningDelete} = this.state;
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <BackHeader onClick={this.handleGoBack} />
-          <CustomDragLayer />
-          <div className={cn('container-fluid', styles.containerFluid)}>
-            <PluginHeader
-              actions={this.pluginHeaderActions()}
-              subActions={this.pluginHeaderSubActions()}
-              title={{ id: this.getPluginHeaderTitle() }}
-              titleId="addNewEntry"
-            />
-            <PopUpWarning
-              isOpen={showWarning}
-              toggleModal={this.toggle}
-              content={{
-                title: `${pluginId}.popUpWarning.title`,
-                message: `${pluginId}.popUpWarning.warning.cancelAllSettings`,
-                cancel: `${pluginId}.popUpWarning.button.cancel`,
-                confirm: `${pluginId}.popUpWarning.button.confirm`,
-              }}
-              popUpWarningType="danger"
-              onConfirm={this.handleConfirm}
-            />
-            <PopUpWarning
-              isOpen={showWarningDelete}
-              toggleModal={this.toggleDelete}
-              content={{
-                title: `${pluginId}.popUpWarning.title`,
-                message: `${pluginId}.popUpWarning.bodyMessage.contentType.delete`,
-                cancel: `${pluginId}.popUpWarning.button.cancel`,
-                confirm: `${pluginId}.popUpWarning.button.confirm`,
-              }}
-              popUpWarningType="danger"
-              onConfirm={this.handleConfirm}
-            />
-            <div className="row">
-              {this.renderEdit()}
-              {this.shouldDisplayedRightSection() && (
-                <div className={cn('col-lg-3')}>
-                  {this.shouldDisplayedRelations() && (
-                    <div className={styles.sub_wrapper}>
-                      <EditRelations
-                        changeData={this.props.changeData}
-                        currentModelName={this.getModelName()}
-                        displayedRelations={this.getDisplayedRelations()}
-                        isDraggingSibling={editPage.isDraggingSibling}
-                        location={this.props.location}
-                        moveAttr={moveAttr}
-                        moveAttrEnd={moveAttrEnd}
-                        onAddRelationalItem={this.handleAddRelationItem}
-                        onRedirect={this.handleRedirect}
-                        onRemoveRelationItem={this.props.onRemoveRelationItem}
-                        record={editPage.record}
-                        schema={this.getSchema()}
-                      />
-                    </div>
-                  )}
+      < div >
+      < form
+    onSubmit = {this.handleSubmit} >
+      < BackHeader
+    onClick = {this.handleGoBack}
+    />
+    < CustomDragLayer / >
+    < div
+    className = {cn('container-fluid', styles.containerFluid
+  )
+  }>
+  <
+    PluginHeader
+    actions = {this.pluginHeaderActions()}
+    subActions = {this.pluginHeaderSubActions()}
+    title = {
+    {
+      id: this.getPluginHeaderTitle()
+    }
+  }
+    titleId = "addNewEntry"
+      / >
+      < PopUpWarning
+    isOpen = {showWarning}
+    toggleModal = {this.toggle}
+    content = {
+    {
+      title: `${pluginId}.popUpWarning.title`,
+        message
+    :
+      `${pluginId}.popUpWarning.warning.cancelAllSettings`,
+        cancel
+    :
+      `${pluginId}.popUpWarning.button.cancel`,
+        confirm
+    :
+      `${pluginId}.popUpWarning.button.confirm`,
+    }
+  }
+    popUpWarningType = "danger"
+    onConfirm = {this.handleConfirm}
+    />
+    < PopUpWarning
+    isOpen = {showWarningDelete}
+    toggleModal = {this.toggleDelete}
+    content = {
+    {
+      title: `${pluginId}.popUpWarning.title`,
+        message
+    :
+      `${pluginId}.popUpWarning.bodyMessage.contentType.delete`,
+        cancel
+    :
+      `${pluginId}.popUpWarning.button.cancel`,
+        confirm
+    :
+      `${pluginId}.popUpWarning.button.confirm`,
+    }
+  }
+    popUpWarningType = "danger"
+    onConfirm = {this.handleConfirm}
+    />
+    < div
+    className = "row" >
+      {this.renderEdit()}
+    {
+      this.shouldDisplayedRightSection() && (
+      < div
+      className = {cn('col-lg-3'
+    )
+    }>
+      {
+        this.shouldDisplayedRelations() && (
+        < div
+        className = {styles.sub_wrapper} >
+          < EditRelations
+        changeData = {this.props.changeData}
+        currentModelName = {this.getModelName()}
+        displayedRelations = {this.getDisplayedRelations()}
+        isDraggingSibling = {editPage.isDraggingSibling}
+        location = {this.props.location}
+        moveAttr = {moveAttr}
+        moveAttrEnd = {moveAttrEnd}
+        onAddRelationalItem = {this.handleAddRelationItem}
+        onRedirect = {this.handleRedirect}
+        onRemoveRelationItem = {this.props.onRemoveRelationItem}
+        record = {editPage.record}
+        schema = {this.getSchema()}
+        />
+        < /div>
+      )
+      }
 
-                  {this.isDevEnvironment() && (
-                    <div className={styles.links_wrapper}>
-                      <ul>{this.renderNavLinks()}</ul>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </form>
-      </div>
-    );
+      {
+        this.isDevEnvironment() && (
+        < div
+        className = {styles.links_wrapper} >
+          < ul > {this.renderNavLinks()} < /ul>
+          < /div>
+      )
+      }
+    <
+      /div>
+    )
+    }
+  <
+    /div>
+    < /div>
+    < /form>
+    < /div>
+  )
+    ;
   }
 }
 
@@ -765,8 +847,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = strapi.injectReducer({ key: 'editPage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'editPage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'editPage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'editPage', saga, pluginId});
 
 export default compose(
   withReducer,

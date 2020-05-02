@@ -4,8 +4,16 @@
  *
  */
 
-import { fromJS } from 'immutable';
-import { GET_VIDEOS_SUCCEEDED, SHOULD_OPEN_MODAL, ON_CLICK, SET_VIDEOS_DURATION, UPDATE_VIDEO_START_TIME, SET_VIDEO_END, REMOVE_VIDEOS } from './constants';
+import {fromJS} from 'immutable';
+import {
+  GET_VIDEOS_SUCCEEDED,
+  SHOULD_OPEN_MODAL,
+  ON_CLICK,
+  SET_VIDEOS_DURATION,
+  UPDATE_VIDEO_START_TIME,
+  SET_VIDEO_END,
+  REMOVE_VIDEOS
+} from './constants';
 
 const initialState = fromJS({
   videos: fromJS([]),
@@ -31,7 +39,7 @@ function onboardingReducer(state = initialState, action) {
     case SET_VIDEOS_DURATION:
       return state.updateIn(['videos', action.index, 'duration'], () => action.duration);
     case UPDATE_VIDEO_START_TIME: {
-      
+
       const storedVideos = JSON.parse(localStorage.getItem('videos'));
       const videos = state.updateIn(['videos'], list => {
         return list.reduce((acc, current, index) => {

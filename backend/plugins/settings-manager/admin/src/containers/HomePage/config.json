@@ -1,5 +1,7 @@
 {
   "customComponents": {
-    "list": ["languages"]
+    "list": [
+      "languages"
+    ]
   }
 }

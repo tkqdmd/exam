@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, Map } from 'immutable';
+import {fromJS, Map} from 'immutable';
 import {
   DELETE_PLUGIN_SUCCEEDED,
   GET_APP_CURRENT_ENV_SUCCEEDED,

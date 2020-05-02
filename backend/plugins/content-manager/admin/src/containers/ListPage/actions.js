@@ -45,7 +45,7 @@ export function addFilter(filter) {
   };
 }
 
-export function changeParams({ target }) {
+export function changeParams({target}) {
   return {
     type: CHANGE_PARAMS,
     keys: target.name.split('.'),
@@ -117,7 +117,7 @@ export function onClickRemove(index) {
   };
 }
 
-export function onClickSelect({ target }) {
+export function onClickSelect({target}) {
   return {
     type: ON_CLICK_SELECT,
     id: target.name,

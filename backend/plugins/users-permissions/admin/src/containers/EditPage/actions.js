@@ -3,8 +3,8 @@
  * EditPage actions
  *
  */
-import { fromJS, List, Map } from 'immutable';
-import { get, replace, toString } from 'lodash';
+import {fromJS, List, Map} from 'immutable';
+import {get, replace, toString} from 'lodash';
 import {
   ADD_USER,
   GET_PERMISSIONS,
@@ -65,14 +65,14 @@ export function getPolicies() {
 
 export function getPoliciesSucceeded(policies) {
   const formattedPolicies = policies.policies.reduce((acc, current) => {
-    acc.push({ value: current });
+    acc.push({value: current});
 
     return acc;
-  },[]);
+  }, []);
 
   return {
     type: GET_POLICIES_SUCCEEDED,
-    policies: [{ name: 'users-permissions.Policies.InputSelect.empty', value: '' }].concat(formattedPolicies),
+    policies: [{name: 'users-permissions.Policies.InputSelect.empty', value: ''}].concat(formattedPolicies),
   };
 }
 
@@ -124,7 +124,7 @@ export function onCancel() {
   };
 }
 
-export function onChangeInput({ target }) {
+export function onChangeInput({target}) {
   const keys = ['modifiedData'].concat(target.name.split('.'));
 
   return {

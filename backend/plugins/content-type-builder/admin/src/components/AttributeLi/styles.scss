@@ -1,6 +1,6 @@
 .attributeLi {
   min-height: 5.3rem;
-  margin-top: 0!important;
+  margin-top: 0 !important;
   list-style: none;
   font-size: 1.3rem;
   line-height: 5.3rem;
@@ -23,7 +23,7 @@
   justify-content: space-between;
   margin: 0 5.3rem 0 3.8rem;
   // border-bottom: 1px solid black;
-  border-bottom: 1px solid rgba(14,22,34,0.04);
+  border-bottom: 1px solid rgba(14, 22, 34, 0.04);
 }
 
 .nameContainer {
@@ -31,7 +31,7 @@
   width: 30rem;
   align-items: center;
 
-  > img{
+  > img {
     display: inline-block;
     width: 35px;
     height: 20px;
@@ -64,20 +64,23 @@
   display: flex;
   justify-content: flex-end;
   opacity: .75;
+
   > div {
     width: 23px;
     height: 100%;
     color: #0E1622;
-  >  i {
+
+    > i {
       z-index: 0;
       font-size: 1.1rem;
     }
   }
+
   > div:last-child {
     margin-left: 0;
   }
 }
 
 .relation {
-  background: linear-gradient(135deg, rgba(28,93,231,0.05) 0%, rgba(239,243,253,0) 100%);
+  background: linear-gradient(135deg, rgba(28, 93, 231, 0.05) 0%, rgba(239, 243, 253, 0) 100%);
 }

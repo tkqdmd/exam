@@ -8,21 +8,25 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { IntlProvider } from 'react-intl';
-import { defaultsDeep } from 'lodash';
-import { selectLocale } from './selectors';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
+import {IntlProvider} from 'react-intl';
+import {defaultsDeep} from 'lodash';
+import {selectLocale} from './selectors';
 
 export class LanguageProvider extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const messages = defaultsDeep(this.props.messages[this.props.locale], this.props.messages.en);
 
     return (
-      <IntlProvider locale={this.props.locale} defaultLocale="en" messages={messages}>
-        {React.Children.only(this.props.children)}
-      </IntlProvider>
-    );
+      < IntlProvider
+    locale = {this.props.locale}
+    defaultLocale = "en"
+    messages = {messages} >
+      {React.Children.only(this.props.children)}
+      < /IntlProvider>
+  )
+    ;
   }
 }
 
@@ -35,7 +39,7 @@ LanguageProvider.propTypes = {
 
 const mapStateToProps = createSelector(
   selectLocale(),
-  (locale) => ({ locale })
+  (locale) => ({locale})
 );
 
 function mapDispatchToProps(dispatch) {

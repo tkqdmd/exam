@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * SelectManyDraggedItem
  */
 
@@ -12,19 +12,39 @@ import Content from './Content';
 function SelectManyDraggedItem(props) {
   if (props.withLiWrapper) {
     return (
-      <li className={styles.sortableListItem} style={{ padding: '0 2px' }}>
-        <Content {...props} />
-      </li>
-    );
+      < li
+    className = {styles.sortableListItem}
+    style = {
+    {
+      padding: '0 2px'
+    }
+  }>
+  <
+    Content
+    {...
+      props
+    }
+    />
+    < /li>
+  )
+    ;
   }
 
-  return <Content {...props} />;
+  return
+<
+  Content
+  {...
+    props
+  }
+  />;
 }
 
 SelectManyDraggedItem.defaultProps = {
   index: 0,
-  onClick: () => {},
-  onRemove: () => {},
+  onClick: () => {
+  },
+  onRemove: () => {
+  },
   withLiWrapper: false,
 };
 

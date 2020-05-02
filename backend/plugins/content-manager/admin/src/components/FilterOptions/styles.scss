@@ -1,16 +1,19 @@
 .filterOptionsWrapper {
   display: flex;
-  input, select{
+
+  input, select {
     margin: 0px 5px !important;
   }
 }
 
 .filterOptionsInputWrapper {
   position: relative;
+
   &:before {
     content: '\f073';
     position: absolute;
-    left: 6px; top: 1px;
+    left: 6px;
+    top: 1px;
     width: 32px;
     height: 32px;
     border-radius: 3px 0px 0px 3px;
@@ -23,11 +26,13 @@
     z-index: 999;
     -webkit-font-smoothing: none;
   }
+
   input {
     width: 100%;
     padding-left: 42px;
     box-shadow: 0px 1px 1px rgba(104, 118, 142, 0.05);
-    &:focus{
+
+    &:focus {
       outline: none;
     }
   }

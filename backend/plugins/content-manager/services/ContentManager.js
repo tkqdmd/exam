@@ -8,7 +8,7 @@ const _ = require('lodash');
 
 module.exports = {
   fetchAll: async (params, query) => {
-    const { query: request, source, populate = [], ...filters } = query;
+    const {query: request, source, populate = [], ...filters} = query;
 
     const queryFilter = !_.isEmpty(request) ? {
       ...filters, // Filters is an object containing the limit/sort and start
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   search: async (params, query) => {
-    const { limit, skip, sort, source, _q, populate = [] } = query; // eslint-disable-line no-unused-vars
+    const {limit, skip, sort, source, _q, populate = []} = query; // eslint-disable-line no-unused-vars
     const filters = strapi.utils.models.convertParams(params.model, query);
 
     // Find entries using `queries` system
@@ -33,13 +33,13 @@ module.exports = {
   },
 
   countSearch: async (params, query) => {
-    const { source, _q } = query;
+    const {source, _q} = query;
 
-    return await strapi.query(params.model, source).countSearch({ search: _q });
+    return await strapi.query(params.model, source).countSearch({search: _q});
   },
 
   count: async (params, query) => {
-    const { source, ...filters } = query;
+    const {source, ...filters} = query;
 
     return await strapi.query(params.model, source).count(filters);
   },
@@ -150,7 +150,7 @@ module.exports = {
     });
   },
 
-  delete: async (params, { source }) => {
+  delete: async (params, {source}) => {
     const query = strapi.query(params.model, source);
     const primaryKey = query.primaryKey;
     const response = await query.findOne({
@@ -162,7 +162,7 @@ module.exports = {
     }
 
     params[primaryKey] = response[primaryKey];
-    
+
     params.values = Object.keys(response).reduce((acc, current) => {
       const association = (strapi.models[params.model] || strapi.plugins[source].models[params.model]).associations.filter(x => x.alias === current)[0];
 
@@ -186,8 +186,8 @@ module.exports = {
   },
 
   deleteMany: async (params, query) => {
-    const { source } = query;
-    const { model } = params;
+    const {source} = query;
+    const {model} = params;
 
     const primaryKey = strapi.query(model, source).primaryKey;
     const toRemove = Object.keys(query).reduce((acc, curr) => {
@@ -198,7 +198,7 @@ module.exports = {
       return acc;
     }, []);
 
-    const filter = { [`${primaryKey}_in`]: toRemove };
+    const filter = {[`${primaryKey}_in`]: toRemove};
     const entries = await strapi.query(model, source).find(filter, null, true);
     const associations = strapi.query(model, source).associations;
 

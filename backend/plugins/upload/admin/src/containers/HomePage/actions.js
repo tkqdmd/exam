@@ -19,7 +19,7 @@ import {
   UNSET_LOADING,
 } from './constants';
 
-export function changeParams({ target }) {
+export function changeParams({target}) {
   return {
     type: CHANGE_PARAMS,
     keys: target.name.split('.'),
@@ -61,7 +61,7 @@ export function getDataSuccess(data, entriesNumber) {
   };
 }
 
-export function onDrop({ dataTransfer: { files } }) {
+export function onDrop({dataTransfer: {files}}) {
   const formData = Object.keys(files).reduce((acc, current) => {
     acc.append('files', files[current]);
     return acc;
@@ -73,7 +73,7 @@ export function onDrop({ dataTransfer: { files } }) {
   };
 }
 
-export function onSearch({ target }) {
+export function onSearch({target}) {
   return {
     type: ON_SEARCH,
     value: target.value,

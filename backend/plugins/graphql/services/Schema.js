@@ -8,7 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { gql, makeExecutableSchema } = require('apollo-server-koa');
+const {gql, makeExecutableSchema} = require('apollo-server-koa');
 const _ = require('lodash');
 const graphql = require('graphql');
 const Query = require('./Query.js');
@@ -23,7 +23,7 @@ const schemaBuilder = {
    * @return String
    */
 
-  formatGQL: function(fields, description = {}, model = {}, type = 'field') {
+  formatGQL: function (fields, description = {}, model = {}, type = 'field') {
     const typeFields = JSON.stringify(fields, null, 2).replace(/['",]+/g, '');
     const lines = typeFields.split('\n');
 
@@ -130,9 +130,9 @@ const schemaBuilder = {
    * @return Schema
    */
 
-  generateSchema: function() {
+  generateSchema: function () {
     // Generate type definition and query/mutation for models.
-    let shadowCRUD = { definition: '', query: '', mutation: '', resolver: '' };
+    let shadowCRUD = {definition: '', query: '', mutation: '', resolver: ''};
 
     // build defaults schemas if shadowCRUD is enabled
     if (strapi.plugins.graphql.config.shadowCRUD !== false) {
@@ -140,7 +140,7 @@ const schemaBuilder = {
 
       const modelCruds = Resolvers.buildShadowCRUD(models);
       shadowCRUD = Object.keys(strapi.plugins).reduce((acc, plugin) => {
-        const { definition, query, mutation, resolver } = Resolvers.buildShadowCRUD(
+        const {definition, query, mutation, resolver} = Resolvers.buildShadowCRUD(
           Object.keys(strapi.plugins[plugin].models),
           plugin
         );
@@ -165,7 +165,7 @@ const schemaBuilder = {
     } = strapi.plugins.graphql.config._schema.graphql;
 
     // Polymorphic.
-    const { polymorphicDef, polymorphicResolver } = Types.addPolymorphicUnionType(
+    const {polymorphicDef, polymorphicResolver} = Types.addPolymorphicUnionType(
       definition,
       shadowCRUD.definition
     );
@@ -189,7 +189,7 @@ const schemaBuilder = {
         }
 
         if (_.isString(acc[type][resolver]) || _.isPlainObject(acc[type][resolver])) {
-          const { plugin = '' } = _.isPlainObject(acc[type][resolver]) ? acc[type][resolver] : {};
+          const {plugin = ''} = _.isPlainObject(acc[type][resolver]) ? acc[type][resolver] : {};
 
           switch (type) {
             case 'Mutation':
@@ -226,9 +226,9 @@ const schemaBuilder = {
       ${definition}
       ${shadowCRUD.definition}
       type Query {${shadowCRUD.query &&
-        this.formatGQL(shadowCRUD.query, resolver.Query, null, 'query')}${query}}
+    this.formatGQL(shadowCRUD.query, resolver.Query, null, 'query')}${query}}
       type Mutation {${shadowCRUD.mutation &&
-        this.formatGQL(shadowCRUD.mutation, resolver.Mutation, null, 'mutation')}${mutation}}
+    this.formatGQL(shadowCRUD.mutation, resolver.Mutation, null, 'mutation')}${mutation}}
       ${Types.addCustomScalar(resolvers)}
       ${Types.addInput()}
       ${polymorphicDef}

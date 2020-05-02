@@ -18,23 +18,27 @@
   font-family: Lato;
 
 }
+
 .errorsContainer {
   margin-top: -21px;
   margin-bottom: 18px;
   color: #ff203c;
 }
+
 .headerContainer {
   > span {
     line-height: 36px;
     font-size: 24px;
     font-weight: 600;
   }
+
   > img {
     margin-top: 1px;
     height: 40px;
   }
 
 }
+
 .headerDescription {
   width: 41.6rem;
   text-align: center;
@@ -71,9 +75,11 @@
 
 .linkContainer {
   padding-top: 1.8rem;
+
   > a {
     color: #262931;
     font-size: 13px;
+
     &:hover, &:active, &:focus {
       text-decoration: none;
       outline: 0;
@@ -91,7 +97,8 @@
 
 .logoContainer {
   position: absolute;
-  left: 30px; bottom: 30px;
+  left: 30px;
+  bottom: 30px;
 
   > img {
     height: 34px;
@@ -110,6 +117,7 @@
   color: #5A9E06;
   font-size: 13px;
   font-weight: 500;
+
   > p {
     margin-top: 17px;
     margin-bottom: 18px;

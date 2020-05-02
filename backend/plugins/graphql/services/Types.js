@@ -7,7 +7,7 @@
  */
 
 const _ = require('lodash');
-const { GraphQLUpload } = require('apollo-server-koa');
+const {GraphQLUpload} = require('apollo-server-koa');
 const graphql = require('graphql');
 const GraphQLJSON = require('graphql-type-json');
 const GraphQLDateTime = require('graphql-type-datetime');
@@ -25,13 +25,13 @@ module.exports = {
    * @return String
    */
 
-  convertType: function({
-    definition = {},
-    modelName = '',
-    attributeName = '',
-    rootType = 'query',
-    action = ''
-  }) {
+  convertType: function ({
+                           definition = {},
+                           modelName = '',
+                           attributeName = '',
+                           rootType = 'query',
+                           action = ''
+                         }) {
     // Type
     if (definition.type) {
       let type = 'String';
@@ -183,13 +183,13 @@ module.exports = {
     };
   },
 
-  addInput: function() {
+  addInput: function () {
     return `
       input InputID { id: ID!}
     `;
   },
 
-  generateInputModel: function(model, name) {
+  generateInputModel: function (model, name) {
     const globalId = model.globalId;
     const inputName = `${_.capitalize(name)}Input`;
 
@@ -197,35 +197,35 @@ module.exports = {
     return `
       input ${inputName} {
         ${Object.keys(model.attributes)
-          .map(attribute => {
-            return `${attribute}: ${this.convertType({
-              definition: model.attributes[attribute],
-              modelName: globalId,
-              attributeName: attribute,
-              rootType: 'mutation',
-            })}`;
-          })
-          .join('\n')}
+      .map(attribute => {
+        return `${attribute}: ${this.convertType({
+          definition: model.attributes[attribute],
+          modelName: globalId,
+          attributeName: attribute,
+          rootType: 'mutation',
+        })}`;
+      })
+      .join('\n')}
       }
 
       input edit${inputName} {
         ${Object.keys(model.attributes)
-          .map(attribute => {
-            return `${attribute}: ${this.convertType({
-              definition: model.attributes[attribute],
-              modelName: globalId,
-              attributeName: attribute,
-              rootType: 'mutation',
-              action: 'update'
-            })}`;
-          })
-          .join('\n')}
+      .map(attribute => {
+        return `${attribute}: ${this.convertType({
+          definition: model.attributes[attribute],
+          modelName: globalId,
+          attributeName: attribute,
+          rootType: 'mutation',
+          action: 'update'
+        })}`;
+      })
+      .join('\n')}
       }
     `;
     /* eslint-enable */
   },
 
-  generateInputPayloadArguments: function(model, name, type, resolver) {
+  generateInputPayloadArguments: function (model, name, type, resolver) {
     if (_.get(resolver, `Mutation.${type}${_.capitalize(name)}`) === false) {
       return '';
     }

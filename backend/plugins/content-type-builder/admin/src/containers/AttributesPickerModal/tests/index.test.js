@@ -1,5 +1,5 @@
 import React from 'react';
-import { fromJS } from 'immutable';
+import {fromJS} from 'immutable';
 
 import mountWithIntl from 'testUtils/mountWithIntl';
 import formatMessagesWithPluginId from 'testUtils/formatMessages';
@@ -19,7 +19,11 @@ const renderComponent = (
       'content-type-builder': {},
     },
   },
-) => mountWithIntl(<AttributesPickerModal {...props} />, messages, context);
+) => mountWithIntl( < AttributesPickerModal
+{...
+  props
+}
+/>, messages, context);
 
 describe('<AttributesPickerModal />', () => {
   let props;
@@ -55,8 +59,8 @@ describe('<AttributesPickerModal />', () => {
     const spyOnUpdateNodeToFocus = jest.spyOn(wrapper.instance(), 'updateNodeToFocus');
     const spyOnAddEventListener = jest.spyOn(wrapper.instance(), 'addEventListener');
 
-    wrapper.setState({ nodeToFocus: 1 });
-    wrapper.setProps({ isOpen: true });
+    wrapper.setState({nodeToFocus: 1});
+    wrapper.setProps({isOpen: true});
 
     expect(spyOnUpdateNodeToFocus).toHaveBeenCalledWith(0);
     expect(spyOnAddEventListener).toHaveBeenCalled();
@@ -71,7 +75,7 @@ describe('<AttributesPickerModal />', () => {
     const wrapper = renderComponent(props);
     const removeEventListener = jest.spyOn(wrapper.instance(), 'removeEventListener');
 
-    wrapper.setProps({ isOpen: false });
+    wrapper.setProps({isOpen: false});
 
     expect(removeEventListener).toHaveBeenCalled();
 
@@ -86,7 +90,7 @@ describe('<AttributesPickerModal />', () => {
       },
     };
     const wrapper = renderComponent(props, context);
-    const { getAttributes } = wrapper.instance();
+    const {getAttributes} = wrapper.instance();
 
     expect(getAttributes()).not.toContain({
       type: 'media',
@@ -103,7 +107,7 @@ describe('<AttributesPickerModal />', () => {
       },
     };
     const wrapper = renderComponent(props, context);
-    const { getAttributes } = wrapper.instance();
+    const {getAttributes} = wrapper.instance();
 
     expect(getAttributes()).toContainEqual({
       type: 'media',
@@ -122,7 +126,7 @@ describe('<AttributesPickerModal />', () => {
       }),
     };
     const wrapper = renderComponent(props, context);
-    const { getAttributes } = wrapper.instance();
+    const {getAttributes} = wrapper.instance();
 
     expect(getAttributes()).not.toBeNull();
   });
@@ -139,7 +143,7 @@ describe('<AttributesPickerModal />', () => {
   it('should handle the onClosed instance correctly', () => {
     const wrapper = renderComponent(props);
 
-    wrapper.setState({ isDisplayed: true });
+    wrapper.setState({isDisplayed: true});
     wrapper.instance().handleOnClosed();
 
     expect(wrapper.state('isDisplayed')).toEqual(false);
@@ -152,7 +156,7 @@ describe('<AttributesPickerModal />', () => {
 
     wrapper.instance().handleToggle();
 
-    expect(props.push).toHaveBeenCalledWith({ search: '' });
+    expect(props.push).toHaveBeenCalledWith({search: ''});
 
     wrapper.unmount();
   });
@@ -173,8 +177,8 @@ describe('<AttributesPickerModal />', () => {
     const spyOnHandleKeyDown = jest.spyOn(wrapper.instance(), 'handleKeyDown');
 
     wrapper.instance().forceUpdate();
-    wrapper.setProps({ isOpen: true });
-    map.keydown({ key: 'Tab' });
+    wrapper.setProps({isOpen: true});
+    map.keydown({key: 'Tab'});
 
     expect(spyOnHandleKeyDown).toHaveBeenCalled();
   });
@@ -183,7 +187,7 @@ describe('<AttributesPickerModal />', () => {
     describe('handleClick', () => {
       it('should handle the click correctly', () => {
         const wrapper = renderComponent(props);
-        const { handleClick } = wrapper.instance();
+        const {handleClick} = wrapper.instance();
 
         handleClick('test');
 

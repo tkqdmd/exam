@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * TableLoading
  */
 import React from 'react';
@@ -9,14 +9,17 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 import styles from './styles.scss';
 
-function TableLoading({ colspan }) {
+function TableLoading({colspan}) {
   return (
-    <tr className={styles.tableLoading}>
-      <td colSpan={colspan + 1}>
-        <LoadingIndicator />
-      </td>
-    </tr>
-  );
+    < tr
+  className = {styles.tableLoading} >
+    < td
+  colSpan = {colspan +1} >
+    < LoadingIndicator / >
+    < /td>
+    < /tr>
+)
+  ;
 }
 
 

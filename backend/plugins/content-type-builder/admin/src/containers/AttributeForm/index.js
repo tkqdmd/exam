@@ -6,8 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { get, isEmpty } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {get, isEmpty} from 'lodash';
 
 import Input from 'components/InputsIndex';
 
@@ -25,20 +25,20 @@ import WrapperModal from '../../components/WrapperModal';
 
 import supportedAttributes from './supportedAttributes.json';
 
-const NAVLINKS = [{ id: 'base' }, { id: 'advanced' }];
+const NAVLINKS = [{id: 'base'}, {id: 'advanced'}];
 
 class AttributeForm extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-  state = { didCheckErrors: false, formErrors: {}, showForm: false };
+  state = {didCheckErrors: false, formErrors: {}, showForm: false};
 
   getCurrentForm = () => {
-    const { activeTab, attributeType } = this.props;
+    const {activeTab, attributeType} = this.props;
 
     return get(supportedAttributes, [attributeType, activeTab, 'items'], []);
   };
 
   getFormErrors = () => {
-    const { alreadyTakenAttributes, attributeToEditName, modifiedData } = this.props;
+    const {alreadyTakenAttributes, attributeToEditName, modifiedData} = this.props;
 
     let formErrors = {};
     const formValidations = this.getFormValidations();
@@ -47,23 +47,23 @@ class AttributeForm extends React.Component {
     );
 
     if (isEmpty(modifiedData.name)) {
-      formErrors = { name: [{ id: `${pluginId}.error.validation.required` }] };
+      formErrors = {name: [{id: `${pluginId}.error.validation.required`}]};
     }
 
     if (alreadyTakenAttributesUpdated.includes(get(modifiedData, 'name', ''))) {
-      formErrors = { name: [{ id: `${pluginId}.error.attribute.taken` }] };
+      formErrors = {name: [{id: `${pluginId}.error.attribute.taken`}]};
     }
 
     formErrors = Object.keys(formValidations).reduce((acc, current) => {
-      const { custom, validations } = formValidations[current];
+      const {custom, validations} = formValidations[current];
       const value = modifiedData[current];
 
       if (!value && validations.required === true && custom !== true) {
-        acc[current] = [{ id: `${pluginId}.error.validation.required` }];
+        acc[current] = [{id: `${pluginId}.error.validation.required`}];
       }
 
       if (custom === true && validations.required === true && value === '') {
-        acc[current] = [{ id: `${pluginId}.error.validation.required` }];
+        acc[current] = [{id: `${pluginId}.error.validation.required`}];
       }
 
       return acc;
@@ -78,14 +78,14 @@ class AttributeForm extends React.Component {
   };
 
   getFormValidations = () => {
-    const { attributeType } = this.props;
+    const {attributeType} = this.props;
     const form = supportedAttributes[attributeType];
 
     return Object.keys(form).reduce((acc, current) => {
       return {
         ...acc,
         ...form[current].items.reduce((acc2, curr) => {
-          acc2[curr.name] = { validations: curr.validations, custom: curr.custom };
+          acc2[curr.name] = {validations: curr.validations, custom: curr.custom};
 
           return acc2;
         }, {}),
@@ -94,14 +94,14 @@ class AttributeForm extends React.Component {
   };
 
   handleCancel = () => {
-    const { push } = this.props;
+    const {push} = this.props;
 
-    push({ search: '' });
+    push({search: ''});
   };
 
   handleGoTo = to => {
-    const { emitEvent } = this.context;
-    const { actionType, attributeToEditName, attributeType, push } = this.props;
+    const {emitEvent} = this.context;
+    const {actionType, attributeToEditName, attributeType, push} = this.props;
     const attributeName = actionType === 'edit' ? `&attributeName=${attributeToEditName}` : '';
 
     if (to === 'advanced') {
@@ -114,13 +114,13 @@ class AttributeForm extends React.Component {
   };
 
   handleOnClosed = () => {
-    const { onCancel } = this.props;
+    const {onCancel} = this.props;
 
     onCancel();
-    this.setState({ formErrors: {}, showForm: false });
+    this.setState({formErrors: {}, showForm: false});
   };
 
-  handleOnOpened = () => this.setState({ showForm: true });
+  handleOnOpened = () => this.setState({showForm: true});
 
   handleSubmit = () => {
     if (isEmpty(this.getFormErrors())) {
@@ -134,7 +134,7 @@ class AttributeForm extends React.Component {
 
   handleSubmitAndContinue = e => {
     e.preventDefault();
-    const { emitEvent } = this.context;
+    const {emitEvent} = this.context;
 
     if (isEmpty(this.getFormErrors())) {
       if (this.props.actionType === 'create') {
@@ -148,96 +148,149 @@ class AttributeForm extends React.Component {
   };
 
   handleToggle = () => {
-    const { push } = this.props;
+    const {push} = this.props;
 
-    push({ search: '' });
+    push({search: ''});
   };
 
   renderInput = (input, index) => {
-    const { modifiedData, onChange } = this.props;
-    const { didCheckErrors, formErrors } = this.state;
-    const { custom, defaultValue, name } = input;
+    const {modifiedData, onChange} = this.props;
+    const {didCheckErrors, formErrors} = this.state;
+    const {custom, defaultValue, name} = input;
     const value = get(modifiedData, name, defaultValue);
 
     const errors = get(formErrors, name, []);
 
     if (custom) {
       return (
-        <CustomCheckbox
-          didCheckErrors={didCheckErrors}
-          errors={errors}
-          key={name}
-          {...input}
-          onChange={onChange}
-          value={value}
-        />
-      );
+        < CustomCheckbox
+      didCheckErrors = {didCheckErrors}
+      errors = {errors}
+      key = {name}
+      {...
+        input
+      }
+      onChange = {onChange}
+      value = {value}
+      />
+    )
+      ;
     }
 
     return (
-      <Input
-        autoFocus={index === 0}
-        didCheckErrors={didCheckErrors}
-        errors={errors}
-        key={name}
-        {...input}
-        onChange={onChange}
-        value={value}
-      />
-    );
+      < Input
+    autoFocus = {index === 0
+  }
+    didCheckErrors = {didCheckErrors}
+    errors = {errors}
+    key = {name}
+    {...
+      input
+    }
+    onChange = {onChange}
+    value = {value}
+    />
+  )
+    ;
   };
 
   renderNavLink = (link, index) => {
-    const { activeTab } = this.props;
+    const {activeTab} = this.props;
 
     return (
-      <HeaderNavLink
-        isActive={activeTab === link.id}
-        key={link.id}
-        {...link}
-        onClick={this.handleGoTo}
-        nextTab={index === NAVLINKS.length - 1 ? 0 : index + 1}
-      />
-    );
+      < HeaderNavLink
+    isActive = {activeTab === link.id
+  }
+    key = {link.id}
+    {...
+      link
+    }
+    onClick = {this.handleGoTo}
+    nextTab = {index === NAVLINKS.length - 1 ? 0 : index + 1
+  }
+    />
+  )
+    ;
   };
 
   render() {
-    const { actionType, attributeToEditName, attributeType, isOpen } = this.props;
-    const { showForm } = this.state;
+    const {actionType, attributeToEditName, attributeType, isOpen} = this.props;
+    const {showForm} = this.state;
     const currentForm = this.getCurrentForm();
     const titleContent = actionType === 'create' ? attributeType : attributeToEditName;
 
     return (
-      <WrapperModal
-        isOpen={isOpen}
-        onClosed={this.handleOnClosed}
-        onOpened={this.handleOnOpened}
-        onToggle={this.handleToggle}
+      < WrapperModal
+    isOpen = {isOpen}
+    onClosed = {this.handleOnClosed}
+    onOpened = {this.handleOnOpened}
+    onToggle = {this.handleToggle}
       >
-        <HeaderModal>
-          <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>
-            <FormattedMessage id={`${pluginId}.popUpForm.${actionType || 'create'}`} />
-            &nbsp;
-            <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{titleContent}</span>
-            &nbsp;
-            <FormattedMessage id={`${pluginId}.popUpForm.field`} />
-          </div>
-          <HeaderModalNavContainer>{NAVLINKS.map(this.renderNavLink)}</HeaderModalNavContainer>
-        </HeaderModal>
-        <form onSubmit={this.handleSubmitAndContinue}>
-          <BodyModal>{showForm && currentForm.map(this.renderInput)}</BodyModal>
-          <FooterModal>
-            <ButtonModalSecondary message={`${pluginId}.form.button.cancel`} onClick={this.handleCancel} />
-            <ButtonModalPrimary message={`${pluginId}.form.button.continue`} type="submit" add />
-            <ButtonModalPrimary
-              message={`${pluginId}.form.button.save`}
-              type="button"
-              onClick={this.handleSubmit}
-            />
-          </FooterModal>
-        </form>
-      </WrapperModal>
-    );
+      < HeaderModal >
+      < div
+    style = {
+    {
+      fontSize: '1.8rem', fontWeight
+    :
+      'bold'
+    }
+  }>
+  <
+    FormattedMessage
+    id = {`${pluginId}.popUpForm.${actionType || 'create'}`
+  }
+    />
+    & nbsp;
+  <
+    span
+    style = {
+    {
+      fontStyle: 'italic', textTransform
+    :
+      'capitalize'
+    }
+  }>
+    {
+      titleContent
+    }
+  <
+    /span>
+    & nbsp;
+  <
+    FormattedMessage
+    id = {`${pluginId}.popUpForm.field`
+  }
+    />
+    < /div>
+    < HeaderModalNavContainer > {NAVLINKS.map(this.renderNavLink)} < /HeaderModalNavContainer>
+    < /HeaderModal>
+    < form
+    onSubmit = {this.handleSubmitAndContinue} >
+      < BodyModal > {showForm && currentForm.map(this.renderInput)
+  }<
+    /BodyModal>
+    < FooterModal >
+    < ButtonModalSecondary
+    message = {`${pluginId}.form.button.cancel`
+  }
+    onClick = {this.handleCancel}
+    />
+    < ButtonModalPrimary
+    message = {`${pluginId}.form.button.continue`
+  }
+    type = "submit"
+    add / >
+    < ButtonModalPrimary
+    message = {`${pluginId}.form.button.save`
+  }
+    type = "button"
+    onClick = {this.handleSubmit}
+    />
+    < /FooterModal>
+    < /form>
+    < /WrapperModal>
+  )
+    ;
   }
 }
 
@@ -253,9 +306,12 @@ AttributeForm.defaultProps = {
   attributeType: 'string',
   isOpen: false,
   modifiedData: {},
-  onCancel: () => {},
-  onChange: () => {},
-  push: () => {},
+  onCancel: () => {
+  },
+  onChange: () => {
+  },
+  push: () => {
+  },
 };
 
 AttributeForm.propTypes = {

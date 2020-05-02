@@ -6,13 +6,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
+import {isEmpty} from 'lodash';
 
 import PluginHeader from 'components/PluginHeader';
 
 import getQueryParameters from 'utils/getQueryParameters';
 
-import { routerPropTypes } from 'commonPropTypes';
+import {routerPropTypes} from 'commonPropTypes';
 
 import EmptyContentTypeView from '../../components/EmptyContentTypeView';
 import TableList from '../../components/TableList';
@@ -28,9 +28,9 @@ class HomePage extends React.Component {
   handleClick = () => {
     const {
       canOpenModal,
-      history: { push },
+      history: {push},
     } = this.props;
-    const { emitEvent } = this.context;
+    const {emitEvent} = this.context;
 
     if (canOpenModal) {
       emitEvent('willCreateContentType');
@@ -50,8 +50,8 @@ class HomePage extends React.Component {
       createTempContentType,
       deleteModel,
       deleteTemporaryModel,
-      history: { push },
-      location: { pathname, search },
+      history: {push},
+      location: {pathname, search},
       models,
       modifiedData,
       newContentType,
@@ -61,48 +61,67 @@ class HomePage extends React.Component {
     const title = `${pluginId}.table.contentType.title.${availableNumber > 1 ? 'plural' : 'singular'}`;
     const renderViewContent =
       availableNumber === 0 ? (
-        <EmptyContentTypeView handleButtonClick={this.handleClick} /> // eslint-disable-line react/jsx-handler-names
-      ) : (
-        <TableList
-          canOpenModalAddContentType={canOpenModal}
-          availableNumber={availableNumber}
-          title={title}
-          buttonLabel={`${pluginId}.button.contentType.add`}
-          onButtonClick={this.handleClick}
-          onDelete={deleteModel}
-          deleteTemporaryModel={deleteTemporaryModel}
-          rowItems={this.props.models}
-          push={push}
-        />
-      );
+        < EmptyContentTypeView handleButtonClick = {this.handleClick}
+    /> /
+    / eslint-disable-line react/
+    jsx - handler - names
+  ) :
+    (
+    < TableList
+    canOpenModalAddContentType = {canOpenModal}
+    availableNumber = {availableNumber}
+    title = {title}
+    buttonLabel = {`${pluginId}.button.contentType.add`
+  }
+    onButtonClick = {this.handleClick}
+    onDelete = {deleteModel}
+    deleteTemporaryModel = {deleteTemporaryModel}
+    rowItems = {this.props.models}
+    push = {push}
+    />
+  )
+    ;
 
     return (
-      <div className={styles.homePage}>
-        <PluginHeader
-          title={{
-            id: `${pluginId}.home.contentTypeBuilder.name`,
-          }}
-          description={{
-            id: `${pluginId}.home.contentTypeBuilder.description`,
-          }}
-          actions={[]}
-        />
-        {renderViewContent}
-        <ModelForm
-          actionType="create"
-          activeTab={getQueryParameters(search, 'settingType')}
-          cancelNewContentType={cancelNewContentType}
-          connections={connections}
-          createTempContentType={createTempContentType}
-          currentData={modifiedData}
-          modifiedData={newContentType}
-          onChangeNewContentTypeMainInfos={onChangeNewContentTypeMainInfos}
-          isOpen={!isEmpty(search)}
-          pathname={pathname}
-          push={push}
-        />
-      </div>
-    );
+      < div
+    className = {styles.homePage} >
+      < PluginHeader
+    title = {
+    {
+      id: `${pluginId}.home.contentTypeBuilder.name`,
+    }
+  }
+    description = {
+    {
+      id: `${pluginId}.home.contentTypeBuilder.description`,
+    }
+  }
+    actions = {[]}
+    />
+    {
+      renderViewContent
+    }
+  <
+    ModelForm
+    actionType = "create"
+    activeTab = {getQueryParameters(search, 'settingType'
+  )
+  }
+    cancelNewContentType = {cancelNewContentType}
+    connections = {connections}
+    createTempContentType = {createTempContentType}
+    currentData = {modifiedData}
+    modifiedData = {newContentType}
+    onChangeNewContentTypeMainInfos = {onChangeNewContentTypeMainInfos}
+    isOpen = {
+    !isEmpty(search)
+  }
+    pathname = {pathname}
+    push = {push}
+    />
+    < /div>
+  )
+    ;
   }
 }
 

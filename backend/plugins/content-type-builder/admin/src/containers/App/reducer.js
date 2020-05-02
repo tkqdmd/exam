@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, List, Map, OrderedMap } from 'immutable';
+import {fromJS, List, Map, OrderedMap} from 'immutable';
 import pluralize from 'pluralize';
 import {
   ADD_ATTRIBUTE_RELATION,
@@ -92,9 +92,9 @@ export const shouldPluralizeName = nature => ['manyToMany', 'oneToMany'].include
 function appReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_ATTRIBUTE_RELATION: {
-      const { isModelTemporary, modelName } = action;
+      const {isModelTemporary, modelName} = action;
       const basePath = isModelTemporary ? ['newContentType'] : ['modifiedData', modelName];
-      const { key, name, nature, target } = state.get('temporaryAttributeRelation').toJS();
+      const {key, name, nature, target} = state.get('temporaryAttributeRelation').toJS();
 
       let newState = state.updateIn([...basePath, 'attributes', name], () => {
         const newAttribute = state.get('temporaryAttributeRelation').remove('name');
@@ -230,7 +230,7 @@ function appReducer(state = initialState, action) {
     case ON_CHANGE_RELATION:
       return state.updateIn(['temporaryAttributeRelation', ...action.keys], () => action.value);
     case ON_CHANGE_RELATION_NATURE: {
-      const { currentModel, nature } = action;
+      const {currentModel, nature} = action;
 
       return state
         .updateIn(['temporaryAttributeRelation', 'nature'], () => nature)
@@ -255,7 +255,7 @@ function appReducer(state = initialState, action) {
     }
     case ON_CHANGE_RELATION_TARGET: {
       const {
-        model: { source },
+        model: {source},
       } = action;
       const nature = state.getIn(['temporaryAttributeRelation', 'nature']);
       const name = shouldPluralizeName(nature) ? pluralize(action.model.name) : action.model.name;

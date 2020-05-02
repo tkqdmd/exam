@@ -6,8 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { get, isEmpty } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {get, isEmpty} from 'lodash';
 
 import Input from 'components/InputsIndex';
 
@@ -25,11 +25,11 @@ import WrapperModal from '../../components/WrapperModal';
 
 import forms from './forms.json';
 
-const NAVLINKS = [{ id: 'base' }, { id: 'advanced' }];
+const NAVLINKS = [{id: 'base'}, {id: 'advanced'}];
 
 class ModelForm extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-  state = { didCheckErrors: false, formErrors: {}, isVisible: false };
+  state = {didCheckErrors: false, formErrors: {}, isVisible: false};
 
   handleCancel = () => {
     const {
@@ -50,12 +50,12 @@ class ModelForm extends React.Component {
       resetExistingContentTypeMainInfos(modelToEditName);
     }
 
-    push({ search: '' });
+    push({search: ''});
   };
 
   handleGoTo = to => {
-    const { emitEvent } = this.context;
-    const { actionType, modelToEditName, push } = this.props;
+    const {emitEvent} = this.context;
+    const {actionType, modelToEditName, push} = this.props;
     const model = actionType === 'edit' ? `&modelName=${modelToEditName}` : '';
 
     if (to === 'advanced') {
@@ -67,9 +67,9 @@ class ModelForm extends React.Component {
     });
   };
 
-  handleOnOpened = () => this.setState({ isVisible: true });
+  handleOnOpened = () => this.setState({isVisible: true});
 
-  handleOnClosed = () => this.setState({ formErrors: {}, isVisible: false });
+  handleOnClosed = () => this.setState({formErrors: {}, isVisible: false});
 
   handleSubmit = e => {
     e.preventDefault();
@@ -91,12 +91,12 @@ class ModelForm extends React.Component {
 
     if (alreadyTakenContentTypeNames.includes(modifiedData.name)) {
       formErrors = {
-        name: [{ id: `${pluginId}.error.contentTypeName.taken` }],
+        name: [{id: `${pluginId}.error.contentTypeName.taken`}],
       };
     }
 
     if (modifiedData.name === '') {
-      formErrors = { name: [{ id: `${pluginId}.error.validation.required` }] };
+      formErrors = {name: [{id: `${pluginId}.error.validation.required`}]};
     }
 
     this.setState(prevState => ({
@@ -114,9 +114,9 @@ class ModelForm extends React.Component {
         });
       } else if (isUpdatingTemporaryContentType) {
         updateTempContentType();
-        push({ pathname, search: '' });
+        push({pathname, search: ''});
       } else {
-        push({ search: '' });
+        push({search: ''});
       }
     }
   };
@@ -131,7 +131,7 @@ class ModelForm extends React.Component {
       onChangeExistingContentTypeMainInfos,
       onChangeNewContentTypeMainInfos,
     } = this.props;
-    const { didCheckErrors, formErrors, isVisible } = this.state;
+    const {didCheckErrors, formErrors, isVisible} = this.state;
 
     if (!isVisible) {
       return null;
@@ -143,16 +143,23 @@ class ModelForm extends React.Component {
         ...input.inputDescription,
         params: {
           link: (
-            <FormattedMessage id={input.inputDescriptionParams.id}>
-              {msg => (
-                <a href={input.inputDescriptionParams.href} target="_blank">
-                  {msg}
-                </a>
-              )}
-            </FormattedMessage>
-          ),
-        },
-      };
+            < FormattedMessage id = {input.inputDescriptionParams.id} >
+          {msg
+    =>
+      (
+      < a
+      href = {input.inputDescriptionParams.href}
+      target = "_blank" >
+        {msg}
+        < /a>
+    )
+    }
+    <
+      /FormattedMessage>
+    ),
+    },
+    }
+      ;
     }
 
     const errors = get(formErrors, input.name, []);
@@ -166,68 +173,83 @@ class ModelForm extends React.Component {
         : `${modelToEditName}.${input.name}`;
 
     return (
-      <Input
-        key={input.name}
-        {...input}
-        didCheckErrors={didCheckErrors}
-        errors={errors}
-        name={name}
-        onChange={onChange}
-        selectOptions={connections}
-        value={get(modifiedData, [input.name], '')}
-      />
-    );
+      < Input
+    key = {input.name}
+    {...
+      input
+    }
+    didCheckErrors = {didCheckErrors}
+    errors = {errors}
+    name = {name}
+    onChange = {onChange}
+    selectOptions = {connections}
+    value = {get(modifiedData, [input.name], ''
+  )
+  }
+    />
+  )
+    ;
   };
 
   renderNavLinks = (link, index) => {
-    const { activeTab } = this.props;
+    const {activeTab} = this.props;
 
     return (
-      <HeaderNavLink
-        isActive={activeTab === link.id}
-        key={link.id}
-        {...link}
-        onClick={this.handleGoTo}
-        nextTab={index === NAVLINKS.length - 1 ? 0 : index + 1}
-      />
-    );
+      < HeaderNavLink
+    isActive = {activeTab === link.id
+  }
+    key = {link.id}
+    {...
+      link
+    }
+    onClick = {this.handleGoTo}
+    nextTab = {index === NAVLINKS.length - 1 ? 0 : index + 1
+  }
+    />
+  )
+    ;
   };
 
   render() {
-    const { actionType, activeTab, isOpen } = this.props;
+    const {actionType, activeTab, isOpen} = this.props;
     const currentForm = get(forms, activeTab, forms.base);
 
     return (
-      <WrapperModal
-        isOpen={isOpen}
-        onOpened={this.handleOnOpened}
-        onClosed={this.handleOnClosed}
-        onToggle={this.handleCancel}
+      < WrapperModal
+    isOpen = {isOpen}
+    onOpened = {this.handleOnOpened}
+    onClosed = {this.handleOnClosed}
+    onToggle = {this.handleCancel}
       >
-        <HeaderModal>
-          <HeaderModalTitle
-            title={`${pluginId}.popUpForm.${actionType ||
-              'create'}.contentType.header.title`}
-          />
-          <HeaderModalNavContainer>
-            {NAVLINKS.map(this.renderNavLinks)}
-          </HeaderModalNavContainer>
-        </HeaderModal>
-        <form onSubmit={this.handleSubmit}>
-          <BodyModal>{currentForm.items.map(this.renderInput)}</BodyModal>
-          <FooterModal>
-            <ButtonModalSecondary
-              message={`${pluginId}.form.button.cancel`}
-              onClick={this.handleCancel}
-            />
-            <ButtonModalPrimary
-              message={`${pluginId}.form.button.save`}
-              type="submit"
-            />
-          </FooterModal>
-        </form>
-      </WrapperModal>
-    );
+      < HeaderModal >
+      < HeaderModalTitle
+    title = {`${pluginId}.popUpForm.${actionType ||
+    'create'}.contentType.header.title`
+  }
+    />
+    < HeaderModalNavContainer >
+    {NAVLINKS.map(this.renderNavLinks)}
+    < /HeaderModalNavContainer>
+    < /HeaderModal>
+    < form
+    onSubmit = {this.handleSubmit} >
+      < BodyModal > {currentForm.items.map(this.renderInput)} < /BodyModal>
+      < FooterModal >
+      < ButtonModalSecondary
+    message = {`${pluginId}.form.button.cancel`
+  }
+    onClick = {this.handleCancel}
+    />
+    < ButtonModalPrimary
+    message = {`${pluginId}.form.button.save`
+  }
+    type = "submit"
+      / >
+      < /FooterModal>
+      < /form>
+      < /WrapperModal>
+  )
+    ;
   }
 }
 
@@ -238,21 +260,27 @@ ModelForm.contextTypes = {
 ModelForm.defaultProps = {
   actionType: 'create',
   activeTab: 'base',
-  cancelNewContentType: () => {},
+  cancelNewContentType: () => {
+  },
   connections: ['default'],
-  createTempContentType: () => {},
+  createTempContentType: () => {
+  },
   currentData: {},
   isOpen: false,
   isUpdatingTemporaryContentType: false,
   modelToEditName: '',
   modifiedData: {},
-  onChangeExistingContentTypeMainInfos: () => {},
+  onChangeExistingContentTypeMainInfos: () => {
+  },
   onSubmit: e => {
     e.preventDefault();
   },
-  resetExistingContentTypeMainInfos: () => {},
-  resetNewContentTypeMainInfos: () => {},
-  updateTempContentType: () => {},
+  resetExistingContentTypeMainInfos: () => {
+  },
+  resetNewContentTypeMainInfos: () => {
+  },
+  updateTempContentType: () => {
+  },
 };
 
 ModelForm.propTypes = {

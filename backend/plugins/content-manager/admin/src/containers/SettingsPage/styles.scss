@@ -1,5 +1,6 @@
 .containerFluid {
   padding: 18px 30px;
+
   > div:first-child {
     margin-bottom: 11px;
   }
@@ -7,6 +8,7 @@
 
 .container {
   padding-top: 18px;
+
   > div:last-child {
     > div {
       padding-bottom: 0 !important;
@@ -14,7 +16,7 @@
   }
 }
 
-.main_wrapper{
+.main_wrapper {
   background: #ffffff;
   padding: 22px 28px 0px;
   border-radius: 2px;
@@ -29,6 +31,7 @@
   padding-top: 9px;
   margin-left: -28px;
   margin-right: -28px;
+
   > div:last-child {
     > div {
 

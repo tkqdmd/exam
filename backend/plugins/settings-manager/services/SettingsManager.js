@@ -77,7 +77,7 @@ module.exports = {
               source: 'db',
               type: 'string',
               value: _.get(application, 'name', null),
-              validations : {
+              validations: {
                 maxLength: 255,
                 required: true
               }
@@ -88,7 +88,7 @@ module.exports = {
               source: 'db',
               type: 'string',
               value: _.get(application, 'description', null),
-              validations : {
+              validations: {
                 maxLength: 255,
                 required: true
               }
@@ -98,7 +98,7 @@ module.exports = {
               target: 'package.version',
               type: 'string',
               value: _.get(strapi.config, 'info.version', null),
-              validations : {
+              validations: {
                 regex: '^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$',
                 required: true
               }
@@ -159,7 +159,7 @@ module.exports = {
                 target: 'request.parser.multipart',
                 type: 'boolean',
                 value: _.get(strapi.config, `environments.${env}.request.parser.multipart`, null),
-                validations : {
+                validations: {
                   required: true
                 }
               }
@@ -175,7 +175,7 @@ module.exports = {
             target: 'request.router.prefix',
             type: 'string',
             value: _.get(strapi.config, `environments.${env}.request.router.prefix`, null),
-            validations : {
+            validations: {
               required: true
             }
           }
@@ -230,7 +230,7 @@ module.exports = {
                 target: 'response.poweredBy.value',
                 type: 'string',
                 value: _.get(strapi.config, `environments.${env}.response.poweredBy.value`, null),
-                validations : {
+                validations: {
                   required: true
                 }
               }
@@ -693,7 +693,7 @@ module.exports = {
       databasesUsed.push(model.connection);
     });
 
-    _.forEach(strapi.config.environments[env].database.connections, (connection, name) =>  databases.push({
+    _.forEach(strapi.config.environments[env].database.connections, (connection, name) => databases.push({
       connector: _.get(connection, 'connector'),
       letter: strapi.plugins['settings-manager'].services.settingsmanager.getClientLetter(_.get(connection, 'settings.client')),
       color: strapi.plugins['settings-manager'].services.settingsmanager.getClientColor(_.get(connection, 'settings.client')),
@@ -756,7 +756,9 @@ module.exports = {
     return _.flatten(_.map(model.sections, section => {
       let items = section.items;
 
-      _.forEach(items, item => { if (item.type === 'boolean' && _.has(item, 'items')) items = _.concat(items, item.items) });
+      _.forEach(items, item => {
+        if (item.type === 'boolean' && _.has(item, 'items')) items = _.concat(items, item.items)
+      });
 
       return items
     }));
@@ -765,7 +767,7 @@ module.exports = {
   cleanParams: (params, items) => {
     const cleanParams = {};
 
-    _.forEach(items, ({ target }) => _.has(params, target) ? _.set(cleanParams, target, _.get(params, target)) : '');
+    _.forEach(items, ({target}) => _.has(params, target) ? _.set(cleanParams, target, _.get(params, target)) : '');
 
     return cleanParams;
   },
@@ -786,13 +788,18 @@ module.exports = {
     let errors = [];
 
     const reformat = (value, format) => {
-      if (format === 'number') try { return parseFloat(number) } catch (e) { return null };
+      if (format === 'number') try {
+        return parseFloat(number)
+      } catch (e) {
+        return null
+      }
+      ;
       if (format === 'boolean') return value === 'true';
 
       return value;
     };
 
-    const checkType = (input, { type, target, items }) => {
+    const checkType = (input, {type, target, items}) => {
       if ((type === 'string' || type === 'text' || type === 'password') && !_.isString(input)) return errors.push({
         target: target,
         message: 'request.error.type.string'
@@ -808,16 +815,16 @@ module.exports = {
         message: 'request.error.type.boolean'
       });
 
-      if (type === 'select' && !_.find(items, { value: input })) return errors.push({
+      if (type === 'select' && !_.find(items, {value: input})) return errors.push({
         target: target,
         message: 'request.error.type.select'
       });
 
-      if (type === 'enum' && !_.find(items, { value: input })) {
+      if (type === 'enum' && !_.find(items, {value: input})) {
         const key = input.split('.')[0];
         input = _.drop(input.split('.')).join('.');
 
-        const item = _.find(items, { value: key });
+        const item = _.find(items, {value: key});
 
         if (!item) return errors.push({
           target: target,
@@ -866,7 +873,7 @@ module.exports = {
           message: 'request.error.validation.maxLength'
         });
 
-        if (key === 'minLength' && input.length  < value) errors.push({
+        if (key === 'minLength' && input.length < value) errors.push({
           target: item.target,
           message: 'request.error.validation.minLength'
         });
@@ -895,7 +902,7 @@ module.exports = {
       }
     }
 
-    await asyncForEach(items, async ({ target, source }) => {
+    await asyncForEach(items, async ({target, source}) => {
       if (_.has(params, target)) {
         let input = _.get(params, target, null);
         const [file, ...objPath] = target.split('.');

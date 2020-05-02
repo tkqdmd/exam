@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, List, Map } from 'immutable';
+import {fromJS, List, Map} from 'immutable';
 
 import {
   CANCEL_CHANGES,

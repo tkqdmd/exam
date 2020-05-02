@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * DragBox
  */
 
@@ -13,14 +13,19 @@ import DraggedRemovedIcon from '../DraggedRemovedIcon';
 import styles from './styles.scss';
 
 
-function DragBox({ name }) {
+function DragBox({name}) {
   return (
-    <div className={styles.dragBox}>
-      <img src={GrabIcon} alt="Grab Icon Active" />
-      <span>{name}</span>
-      <DraggedRemovedIcon isDragging />
-    </div>
-  );
+    < div
+  className = {styles.dragBox} >
+    < img
+  src = {GrabIcon}
+  alt = "Grab Icon Active" / >
+    < span > {name} < /span>
+    < DraggedRemovedIcon
+  isDragging / >
+  < /div>
+)
+  ;
 }
 
 DragBox.defaultProps = {

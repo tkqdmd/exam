@@ -6,6 +6,7 @@
     width: 90px;
     line-height: 5.8rem;
     z-index: 999;
+
     > button {
       width: 100%;
       padding-right: 30px;
@@ -33,6 +34,7 @@
       }
     }
   }
+
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,19 +62,19 @@
 .localeDropdownMenu {
   left: auto !important;
   right: -5px !important;
-  min-width: 90px!important;
+  min-width: 90px !important;
   max-height: 162px !important;
   overflow: auto !important;
   margin: 0 !important;
   padding: 0;
   line-height: 1.8rem;
-  border: none!important;
-  border-top-left-radius: 0!important;
-  border-top-right-radius: 0!important;
+  border: none !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
   overflow: hidden;
   box-shadow: 0 1px 4px 0px rgba(40, 42, 49, 0.05);
 
-  &:before{
+  &:before {
     content: '';
     position: absolute;
     top: -3px;
@@ -90,8 +92,9 @@
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.5;
+
     &:hover, &:focus, &:active {
-      background-color: #FAFAFB!important;
+      background-color: #FAFAFB !important;
       border-radius: 0px;
       cursor: pointer;
     }
@@ -101,6 +104,7 @@
     // height: 44px;
     line-height: 50px;
     margin-bottom: 4px;
+
     &:hover, &:active {
       color: #333740;
     }
@@ -109,13 +113,14 @@
   > button:not(:first-child) {
     height: 36px;
     line-height: 36px;
+
     > i {
       margin-left: 10px
     }
   }
 }
 
-.localeDropdownMenuNotLogged{
+.localeDropdownMenuNotLogged {
   background: transparent !important;
   box-shadow: none !important;
   border: 1px solid #e3e9f3 !important;
@@ -129,7 +134,7 @@
     }
   }
 
-  &:before{
+  &:before {
     box-shadow: none !important;
   }
 }
@@ -139,9 +144,11 @@
     max-height: 13.37px;
     margin-left: 9px;
   }
+
   &:active {
     color: black;
   }
+
   &:hover {
     background-color: #FAFAFB !important;
   }

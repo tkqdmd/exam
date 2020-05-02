@@ -3,16 +3,16 @@
  *  AdminPage selectors
  */
 
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 
 /**
-* Direct selector to the homePage state domain
-*/
+ * Direct selector to the homePage state domain
+ */
 const selectAdminPageDomain = () => state => state.get('adminPage');
 
 /**
-* Default selector used by HomePage
-*/
+ * Default selector used by HomePage
+ */
 
 const makeSelectUuid = () => createSelector(
   selectAdminPageDomain(),
@@ -25,4 +25,4 @@ const selectAdminPage = () => createSelector(
 );
 
 export default selectAdminPage;
-export { makeSelectUuid };
+export {makeSelectUuid};

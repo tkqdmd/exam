@@ -91,6 +91,7 @@ input editExaminationInput {
   private: Boolean
   startTime: DateTime
   endTime: DateTime
+  examTime: Int
 }
 
 input editFileInput {
@@ -119,7 +120,7 @@ input editQuestionInput {
 input editResultInput {
   point: Int
   datetime: DateTime
-  username: String
+  email: String
   examCode: Int
 }
 
@@ -159,6 +160,7 @@ type Examination {
   private: Boolean!
   startTime: DateTime!
   endTime: DateTime!
+  examTime: Int
   questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
 }
 
@@ -170,6 +172,7 @@ input ExaminationInput {
   private: Boolean!
   startTime: DateTime!
   endTime: DateTime!
+  examTime: Int
 }
 
 input FileInput {
@@ -278,14 +281,14 @@ type Result {
   updated_at: DateTime!
   point: Int!
   datetime: DateTime
-  username: String
+  email: String
   examCode: Int
 }
 
 input ResultInput {
   point: Int!
   datetime: DateTime
-  username: String
+  email: String
   examCode: Int
 }
 

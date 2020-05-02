@@ -1,20 +1,22 @@
 /**
-*
-* LeftMenuSection
-*
-*/
+ *
+ * LeftMenuSection
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-function LeftMenuSection({ children }) {
+function LeftMenuSection({children}) {
   return (
-    <div className={styles.leftMenuSection}>
-      {children}
-    </div>
-  );
+    < div
+  className = {styles.leftMenuSection} >
+    {children}
+    < /div>
+)
+  ;
 }
 
 LeftMenuSection.defaultProps = {

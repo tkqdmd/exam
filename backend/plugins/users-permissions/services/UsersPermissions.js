@@ -51,7 +51,7 @@ module.exports = {
   },
 
   deleteRole: async (roleID, publicRoleID) => {
-    const role = await strapi.query('role', 'users-permissions').findOne({ id: roleID }, ['users', 'permissions']);
+    const role = await strapi.query('role', 'users-permissions').findOne({id: roleID}, ['users', 'permissions']);
 
     if (!role) {
       throw new Error('Cannot found this role');
@@ -109,7 +109,7 @@ module.exports = {
     const generateActions = (data) => (
       Object.keys(data).reduce((acc, key) => {
         if (_.isFunction(data[key])) {
-          acc[key] = { enabled: false, policy: '' };
+          acc[key] = {enabled: false, policy: ''};
         }
 
         return acc;
@@ -123,7 +123,7 @@ module.exports = {
         });
 
         return acc;
-      }, { controllers: {} });
+      }, {controllers: {}});
 
     const pluginsPermissions = Object.keys(strapi.plugins).reduce((acc, key) => {
       const initialState = {
@@ -154,7 +154,7 @@ module.exports = {
   },
 
   getRole: async (roleID, plugins) => {
-    const role = await strapi.query('role', 'users-permissions').findOne({ id: roleID }, ['users', 'permissions']);
+    const role = await strapi.query('role', 'users-permissions').findOne({id: roleID}, ['users', 'permissions']);
 
     if (!role) {
       throw new Error('Cannot found this role');
@@ -178,12 +178,12 @@ module.exports = {
   },
 
   getRoles: async () => {
-    const roles = await strapi.query('role', 'users-permissions').find({ _sort: 'name' }, []);
+    const roles = await strapi.query('role', 'users-permissions').find({_sort: 'name'}, []);
 
     for (let i = 0; i < roles.length; ++i) {
       roles[i].id = roles[i].id || roles[i]._id;
 
-      roles[i].nb_users = await strapi.query('user', 'users-permissions').count({ 'role': roles[i].id });
+      roles[i].nb_users = await strapi.query('user', 'users-permissions').count({'role': roles[i].id});
     }
 
     return roles;
@@ -209,12 +209,12 @@ module.exports = {
       return acc;
     }, {});
 
-    return _.merge({ application: routes }, pluginsRoutes);
+    return _.merge({application: routes}, pluginsRoutes);
   },
 
   updatePermissions: async function (cb) {
     // fetch all the current permissions from the database, and format them into an array of actions.
-    const databasePermissions = await strapi.query('permission', 'users-permissions').find({ _limit: -1 });
+    const databasePermissions = await strapi.query('permission', 'users-permissions').find({_limit: -1});
     const actions = databasePermissions
       .map(permission => `${permission.type}.${permission.controller}.${permission.action}`);
 
@@ -256,7 +256,7 @@ module.exports = {
       const splitted = (str) => {
         const [type, controller, action] = str.split('.');
 
-        return { type, controller, action };
+        return {type, controller, action};
       };
 
       const defaultPolicy = (obj, role) => {
@@ -271,7 +271,7 @@ module.exports = {
         const isReload = obj.action === 'autoreload';
         const enabled = isCallback || isRegister || role.type === 'root' || isInit || isPassword || isNewPassword || isMe || isReload || isConnect || isConfirmation;
 
-        return Object.assign(obj, { enabled, policy: '' });
+        return Object.assign(obj, {enabled, policy: ''});
       };
 
       // Retrieve roles
@@ -290,7 +290,7 @@ module.exports = {
             toAdd
               .map(action => defaultPolicy(action, role))
               .map(action => strapi.query('permission', 'users-permissions')
-                .addPermission(Object.assign(action, { role: role.id || role._id }))
+                .addPermission(Object.assign(action, {role: role.id || role._id}))
               )
           )
         ).concat([
@@ -313,7 +313,6 @@ module.exports = {
       _limit: -1
     });
 
-  
 
     const value = permissions.reduce((acc, permission) => {
       const index = acc.toKeep.findIndex(element => element === `${permission.type}.controllers.${permission.controller}.${permission.action}.${permission.role[primaryKey]}`);
@@ -371,8 +370,8 @@ module.exports = {
   updateRole: async function (roleID, body) {
     const [role, root, authenticated] = await Promise.all([
       this.getRole(roleID, []),
-      strapi.query('role', 'users-permissions').findOne({ type: 'root' }, []),
-      strapi.query('role', 'users-permissions').findOne({ type: 'authenticated' }, [])
+      strapi.query('role', 'users-permissions').findOne({type: 'root'}, []),
+      strapi.query('role', 'users-permissions').findOne({type: 'authenticated'}, [])
     ]);
 
     const arrayOfPromises = Object.keys(body.permissions).reduce((acc, type) => {
@@ -442,7 +441,7 @@ module.exports = {
       strapi.reload.isWatching = false;
       if (!strapi.config.currentEnvironment.server.production) {
         // Rewrite actions.json file.
-        fs.writeFileSync(actionsPath, JSON.stringify({ actions: data }), 'utf8');
+        fs.writeFileSync(actionsPath, JSON.stringify({actions: data}), 'utf8');
       }
       // Set value to AST to avoid restart.
       _.set(strapi.plugins['users-permissions'], 'config.actions', data);
@@ -450,7 +449,7 @@ module.exports = {
       strapi.reload.isWatching = true;
 
       cb();
-    } catch(err) {
+    } catch (err) {
       strapi.log.error(err);
     }
   },

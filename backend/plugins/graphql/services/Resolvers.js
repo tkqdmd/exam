@@ -28,7 +28,7 @@ const buildShadowCRUD = (models, plugin) => {
     definition: '',
     query: {},
     mutation: {},
-    resolver: { Query: {}, Mutation: {} },
+    resolver: {Query: {}, Mutation: {}},
   };
 
   if (_.isEmpty(models)) {
@@ -70,7 +70,7 @@ const buildShadowCRUD = (models, plugin) => {
     }
 
     // Retrieve user customisation.
-    const { type = {}, resolver = {} } = _schema;
+    const {type = {}, resolver = {}} = _schema;
 
     // Convert our layer Model to the GraphQL DL.
     const attributes = Object.keys(model.attributes)

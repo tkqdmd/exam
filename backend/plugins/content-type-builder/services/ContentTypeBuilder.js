@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const generator = require('strapi-generate');
-const { fromJS, List, Map } = require('immutable');
+const {fromJS, List, Map} = require('immutable');
 const Manager = require('../utils/Manager.js');
 const {
   createManager,
@@ -21,8 +21,8 @@ module.exports = {
       name: 'content-manager',
     });
 
-    const schema = await pluginStore.get({ key: 'schema' });
-    const layout = _.get(schema.layout, model, { attributes: {} });
+    const schema = await pluginStore.get({key: 'schema'});
+    const layout = _.get(schema.layout, model, {attributes: {}});
 
     // If updating a content-type
     if (!_.isEmpty(layout)) {
@@ -75,7 +75,7 @@ module.exports = {
             }
           }
         } else {
-          const nodeBounds = { left: manager.getBound(false), right: manager.getBound(true) }; // Retrieve the removed element's bounds
+          const nodeBounds = {left: manager.getBound(false), right: manager.getBound(true)}; // Retrieve the removed element's bounds
           const leftBoundIndex = _.get(nodeBounds, ['left', 'index'], 0) + 1;
           const rightBoundIndex = _.get(nodeBounds, ['right', 'index'], prevList.size - 1);
           const elementsOnLine = manager.getElementsOnALine(_.range(leftBoundIndex - 1, rightBoundIndex + 1));
@@ -119,7 +119,7 @@ module.exports = {
 
     schema.layout[model] = layout;
 
-    await pluginStore.set({ key: 'schema', value: schema });
+    await pluginStore.set({key: 'schema', value: schema});
   },
 
   getModels: () => {
@@ -172,11 +172,11 @@ module.exports = {
       name: 'content-manager',
     });
 
-    const schema = await pluginStore.get({ key: 'schema' });
+    const schema = await pluginStore.get({key: 'schema'});
 
     const attributes = [];
     _.forEach(model.attributes, (params, attr) => {
-      const relation = _.find(model.associations, { alias: attr });
+      const relation = _.find(model.associations, {alias: attr});
 
       if (relation && !_.isArray(_.get(relation, relation.alias))) {
         if ((params.plugin === 'upload' && relation.model) || relation.collection === 'file') {
@@ -193,7 +193,7 @@ module.exports = {
           params.targetColumnName = _.get(
             (params.plugin ? strapi.plugins[params.plugin].models : strapi.models)[params.target].attributes[
               params.key
-            ],
+              ],
             'columnName',
             '',
           );
@@ -315,7 +315,7 @@ module.exports = {
         attrs[attribute.name] = _.omit(attribute.params, 'multiple');
 
         if (attribute.params.type === 'media') {
-          const via = _.findKey(strapi.plugins.upload.models.file.attributes, { collection: '*' });
+          const via = _.findKey(strapi.plugins.upload.models.file.attributes, {collection: '*'});
 
           attrs[attribute.name] = {
             [attribute.params.multiple ? 'collection' : 'model']: 'file',
@@ -516,7 +516,7 @@ module.exports = {
 
           const modelJSON = require(pathToModel);
 
-          _.forEach(relationsToCreate, ({ name, params }) => {
+          _.forEach(relationsToCreate, ({name, params}) => {
             const attr = {};
 
             switch (params.nature) {
@@ -600,7 +600,7 @@ module.exports = {
       if (fileName === 'routes.json') {
         const routesJSON = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
-        _.remove(routesJSON.routes, function(route) {
+        _.remove(routesJSON.routes, function (route) {
           return _.startsWith(_.toLower(route.handler), model);
         });
 

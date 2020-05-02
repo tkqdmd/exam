@@ -6,11 +6,11 @@
 
 /* eslint-disable react/no-find-dom-node */
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-import { DragSource, DropTarget } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
+import {findDOMNode} from 'react-dom';
+import {DragSource, DropTarget} from 'react-dnd';
+import {getEmptyImage} from 'react-dnd-html5-backend';
 import PropTypes from 'prop-types';
-import { flow, get } from 'lodash';
+import {flow, get} from 'lodash';
 import cn from 'classnames';
 
 import ItemTypes from '../../utils/ItemTypes';
@@ -22,7 +22,7 @@ import styles from './styles.scss';
 const sortableItemSource = {
   beginDrag: props => {
     return {
-      id: get(props, ['item', 'value', 'id' ]) || get(props, ['item', 'value', '_id'], ''),
+      id: get(props, ['item', 'value', 'id']) || get(props, ['item', 'value', '_id'], ''),
       index: props.index,
       data: props.item,
     };
@@ -78,7 +78,7 @@ const sortableItemTarget = {
     // but it's good here for the sake of performance
     // to avoid expensive index searches.
     monitor.getItem().index = hoverIndex;
-    
+
   },
 };
 
@@ -110,15 +110,29 @@ class SortableItem extends React.Component {
     return (
       connectDragSource(
         connectDropTarget(
-          <li
-            className={cn(styles.sortableListItem, !isDraggingSibling && styles.sortableListItemHover)}
-            style={{ opacity }}
-          >
-            <SelectManyDraggedItem index={index} item={item} onClick={onClick} onRemove={onRemove} />
-          </li>
-        ),
-      )
-    );
+        < li
+    className = {cn(styles.sortableListItem,
+    !isDraggingSibling && styles.sortableListItemHover
+  )
+  }
+    style = {
+    {
+      opacity
+    }
+  }
+  >
+  <
+    SelectManyDraggedItem
+    index = {index}
+    item = {item}
+    onClick = {onClick}
+    onRemove = {onRemove}
+    />
+    < /li>
+  ),
+  )
+  )
+    ;
   }
 }
 

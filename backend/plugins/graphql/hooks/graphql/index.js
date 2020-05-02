@@ -8,12 +8,12 @@
 const _ = require('lodash');
 const path = require('path');
 const glob = require('glob');
-const { ApolloServer } = require('apollo-server-koa');
+const {ApolloServer} = require('apollo-server-koa');
 const depthLimit = require('graphql-depth-limit');
 
 module.exports = strapi => {
   return {
-    beforeInitialize: async function() {
+    beforeInitialize: async function () {
       // Try to inject this hook just after the others hooks to skip the router processing.
       if (!_.get(strapi.config.hook.load, 'after')) {
         _.set(strapi.config.hook.load, 'after', []);
@@ -106,7 +106,7 @@ module.exports = strapi => {
 
       // Merge user API.
       Object.keys(strapi.api || {}).reduce((acc, current) => {
-        const { definition, query, mutation, type, resolver } = _.get(
+        const {definition, query, mutation, type, resolver} = _.get(
           strapi.api[current],
           'config.schema.graphql',
           {}
@@ -124,7 +124,7 @@ module.exports = strapi => {
 
       // Merge plugins API.
       Object.keys(strapi.plugins || {}).reduce((acc, current) => {
-        const { definition, query, mutation, type, resolver } = _.get(
+        const {definition, query, mutation, type, resolver} = _.get(
           strapi.plugins[current],
           'config.schema.graphql',
           {}
@@ -141,8 +141,8 @@ module.exports = strapi => {
       }, strapi.plugins.graphql.config._schema.graphql);
     },
 
-    initialize: function(cb) {
-      const { typeDefs, resolvers } = strapi.plugins.graphql.services.schema.generateSchema();
+    initialize: function (cb) {
+      const {typeDefs, resolvers} = strapi.plugins.graphql.services.schema.generateSchema();
 
       if (_.isEmpty(typeDefs)) {
         strapi.log.warn('GraphQL schema has not been generated because it\'s empty');
@@ -153,7 +153,7 @@ module.exports = strapi => {
       const serverParams = {
         typeDefs,
         resolvers,
-        context: ({ ctx }) => {
+        context: ({ctx}) => {
           // Initiliase loaders for this request.
           strapi.plugins.graphql.services.loaders.initializeLoader();
 

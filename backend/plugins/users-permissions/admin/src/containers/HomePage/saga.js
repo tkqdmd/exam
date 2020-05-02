@@ -1,5 +1,5 @@
 // import { LOCATION_CHANGE } from 'react-router-redux';
-import { findIndex, get } from 'lodash';
+import {findIndex, get} from 'lodash';
 import {
   takeLatest,
   put,
@@ -42,21 +42,21 @@ export function* dataDelete() {
     if (indexDataToDelete !== -1) {
       const id = dataToDelete.id;
       const requestURL = `/users-permissions/${endPointAPI}/${id}`;
-      const response = yield call(request, requestURL, { method: 'DELETE' });
+      const response = yield call(request, requestURL, {method: 'DELETE'});
 
       if (response.ok) {
         yield put(deleteDataSucceeded(indexDataToDelete));
         strapi.notification.success('users-permissions.notification.success.delete');
       }
     }
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('users-permissions.notification.error.delete');
   }
 }
 
 export function* dataFetch(action) {
   try {
-    const response = yield call(request, `/users-permissions/${action.endPoint}`, { method: 'GET' });
+    const response = yield call(request, `/users-permissions/${action.endPoint}`, {method: 'GET'});
 
     if (action.endPoint === 'advanced') {
       yield put(setForm(response));
@@ -64,7 +64,7 @@ export function* dataFetch(action) {
       const data = response[action.endPoint] || response;
       yield put(fetchDataSucceeded(data));
     }
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('users-permissions.notification.error.fetch');
   }
 }
@@ -72,7 +72,10 @@ export function* dataFetch(action) {
 export function* submitData(action) {
   try {
     const body = yield select(makeSelectModifiedData());
-    const opts = { method: 'PUT', body: (action.endPoint === 'advanced') ? get(body, ['advanced', 'settings'], {}) : body };
+    const opts = {
+      method: 'PUT',
+      body: (action.endPoint === 'advanced') ? get(body, ['advanced', 'settings'], {}) : body
+    };
 
     yield call(request, `/users-permissions/${action.endPoint}`, opts);
 
@@ -84,10 +87,11 @@ export function* submitData(action) {
 
     yield put(submitSucceeded());
     strapi.notification.success('users-permissions.notification.success.submit');
-  } catch(error) {
+  } catch (error) {
     strapi.notification.error('notification.error');
   }
 }
+
 // Individual exports for testing
 export function* defaultSaga() {
   // const loadDataWatcher = yield fork(takeLatest, FETCH_DATA, dataFetch);

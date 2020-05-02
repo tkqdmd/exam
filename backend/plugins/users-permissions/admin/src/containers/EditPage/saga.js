@@ -1,4 +1,4 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
+import {LOCATION_CHANGE} from 'react-router-redux';
 import {
   all,
   call,
@@ -33,10 +33,10 @@ import {
 
 export function* fetchUser(action) {
   try {
-    const data = yield call(request, `/users-permissions/search/${action.user}`, { method: 'GET' });
+    const data = yield call(request, `/users-permissions/search/${action.user}`, {method: 'GET'});
 
     yield put(getUserSucceeded(data));
-  } catch(error) {
+  } catch (error) {
     strapi.notification.error('users-permissions.notification.error.fetchUser');
   }
 }
@@ -51,7 +51,7 @@ export function* permissionsGet() {
     });
 
     yield put(getPermissionsSucceeded(response));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('users-permissions.EditPage.notification.permissions.error');
   }
 }
@@ -59,13 +59,13 @@ export function* permissionsGet() {
 export function* policiesGet() {
   try {
     const [policies, routes] = yield all([
-      call(request, '/users-permissions/policies', { method: 'GET' }),
-      call(request, '/users-permissions/routes', { method: 'GET' }),
+      call(request, '/users-permissions/policies', {method: 'GET'}),
+      call(request, '/users-permissions/routes', {method: 'GET'}),
     ]);
-    
+
     yield put(getPoliciesSucceeded(policies));
     yield put(getRoutesSucceeded(routes));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('users-permissions.EditPage.notification.policies.error');
   }
 }
@@ -80,7 +80,7 @@ export function* roleGet(action) {
     });
 
     yield put(getRoleSucceeded(role));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('users-permissions.EditPage.notification.role.error');
   }
 }
@@ -97,15 +97,15 @@ export function* submit(action) {
 
     const requestURL = actionType === 'POST' ? '/users-permissions/roles' : `/users-permissions/roles/${roleId}`;
     const response = yield call(request, requestURL, opts);
-    
+
     if (actionType === 'POST') {
       action.context.emitEvent('didCreateRole');
     }
-    
+
     if (response.ok) {
       yield put(submitSucceeded());
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error); // eslint-disable-line no-console
   }
 }

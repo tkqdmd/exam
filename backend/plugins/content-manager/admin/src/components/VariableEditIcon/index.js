@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * VariableEditIcon
  */
 
@@ -8,18 +8,24 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './styles.scss';
 
-function VariableEditIcon({ onClick, withLongerHeight, ...rest }) {
+function VariableEditIcon({onClick, withLongerHeight, ...rest}) {
   return (
-    <span
-      className={cn(withLongerHeight ? styles.editIconLonger : styles.editIcon)}
-      onClick={onClick}
-      {...rest}
-    />
-  );
+    < span
+  className = {cn(withLongerHeight ? styles.editIconLonger : styles.editIcon
+)
+}
+  onClick = {onClick}
+  {...
+    rest
+  }
+  />
+)
+  ;
 }
 
 VariableEditIcon.defaultProps = {
-  onClick: () => {},
+  onClick: () => {
+  },
   withLongerHeight: false,
 };
 

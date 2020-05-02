@@ -6,8 +6,8 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { isObject, size } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {isObject, size} from 'lodash';
 
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
@@ -23,7 +23,7 @@ import Wrapper from './Wrapper';
 import styles from './wrapperStyles.scss';
 
 class FiltersPickWrapper extends React.PureComponent {
-  state = { showInput: false };
+  state = {showInput: false};
 
   componentDidMount() {
     // Display the first filter
@@ -34,7 +34,7 @@ class FiltersPickWrapper extends React.PureComponent {
 
   // Since the component is never unmounted we need this hook
   componentDidUpdate(prevProps) {
-    const { appliedFilters, show } = this.props;
+    const {appliedFilters, show} = this.props;
 
     if (size(prevProps.appliedFilters) !== size(appliedFilters) && size(appliedFilters) === 0) {
       this.handleClickAdd();
@@ -49,12 +49,12 @@ class FiltersPickWrapper extends React.PureComponent {
     }
   }
 
-  mountInput = () => this.setState({ showInput: true });
+  mountInput = () => this.setState({showInput: true});
 
   unmountInput = () => {
     return new Promise(resolve => {
       setTimeout(() => {
-        this.setState({ showInput: false });
+        this.setState({showInput: false});
         resolve();
       }, 300);
     });
@@ -80,7 +80,7 @@ class FiltersPickWrapper extends React.PureComponent {
     },
   ]);
 
-  handleChange = ({ target }) => {
+  handleChange = ({target}) => {
     const split = target.name.split('.');
     let value = target.value;
 
@@ -91,7 +91,7 @@ class FiltersPickWrapper extends React.PureComponent {
       this.props.onChange(split[0], 'value', valueToChange);
     }
 
-    if (split[1] === 'value' && isObject(target.value) && target.value._isAMomentObject === true ) {
+    if (split[1] === 'value' && isObject(target.value) && target.value._isAMomentObject === true) {
       value = moment(target.value, 'YYYY-MM-DD HH:mm:ss').format();
     }
 
@@ -99,8 +99,8 @@ class FiltersPickWrapper extends React.PureComponent {
   }
 
   handleClickAdd = () => {
-    const { addFilter, schema } = this.props;
-    const filter = { attr: Object.keys(schema)[0], filter: '=', value: '' };
+    const {addFilter, schema} = this.props;
+    const filter = {attr: Object.keys(schema)[0], filter: '=', value: ''};
 
     return addFilter(filter);
   }
@@ -118,68 +118,107 @@ class FiltersPickWrapper extends React.PureComponent {
   }
 
   shouldDisplayAddButton = (index) => {
-    const { appliedFilters } = this.props;
+    const {appliedFilters} = this.props;
 
     return appliedFilters.length === 1 || index === appliedFilters.length - 1;
   }
 
   renderTitle = () => (
-    <FormattedMessage id="content-manager.components.FiltersPickWrapper.PluginHeader.title.filter">
-      {message => (
-        <span>
-          {this.props.modelName}&nbsp;-&nbsp;
-          <SpanStyled>
-            {message}
-          </SpanStyled>
-        </span>
-      )}
-    </FormattedMessage>
-  );
+    < FormattedMessage
+  id = "content-manager.components.FiltersPickWrapper.PluginHeader.title.filter" >
+    {message
+=> (
+<
+  span
+> {
+  this
+.
+  props
+.
+  modelName
+}
 
-  render() {
-    const { appliedFilters, filterToFocus, schema, show } = this.props;
-    const { showInput } = this.state;
-    const number = showInput ? (254 + ((size(appliedFilters) -1) * 44))   : 254;
+&
+nbsp;
+- & nbsp;
+<
+SpanStyled >
+{message}
+< /SpanStyled>
+< /span>
+)
+}
+<
+/FormattedMessage>
+)
+;
 
-    return (
-      <Div show={show} number={number} anim={showInput}>
-        <form onSubmit={this.handleSubmit} autoComplete="off">
-          <div>
-            <PluginHeader
-              actions={this.generateActions()}
-              description={{
-                id: 'content-manager.components.FiltersPickWrapper.PluginHeader.description',
-              }}
-              title={this.renderTitle()}
-            />
-            <Wrapper id="filterPickWrapper">
-              { showInput && appliedFilters.map((filter, key) => (
-                <FilterOptions
-                  key={key}
-                  filter={filter}
-                  filterToFocus={filterToFocus}
-                  index={key}
-                  onChange={this.handleChange}
-                  onClickAdd={this.handleClickAdd}
-                  onClickRemove={this.handleClickRemove}
-                  schema={schema}
-                  show={showInput}
-                  showAddButton={this.shouldDisplayAddButton(key)}
-                />
-              ))}
-              {!showInput && <div style={{height: '34px'}} />}
-            </Wrapper>
-          </div>
-          <Flex>
-            <span onClick={this.handleClickClose} className={styles.spanStyled}>
-              <FormattedMessage id="content-manager.components.FiltersPickWrapper.hide" />
-              &nbsp;
-            </span>
-          </Flex>
-        </form>
-      </Div>
-    );
+render()
+{
+  const {appliedFilters, filterToFocus, schema, show} = this.props;
+  const {showInput} = this.state;
+  const number = showInput ? (254 + ((size(appliedFilters) - 1) * 44)) : 254;
+
+  return (
+    < Div
+  show = {show}
+  number = {number}
+  anim = {showInput} >
+    < form
+  onSubmit = {this.handleSubmit}
+  autoComplete = "off" >
+    < div >
+    < PluginHeader
+  actions = {this.generateActions()}
+  description = {
+  {
+    id: 'content-manager.components.FiltersPickWrapper.PluginHeader.description',
   }
+}
+  title = {this.renderTitle()}
+  />
+  < Wrapper
+  id = "filterPickWrapper" >
+    {showInput && appliedFilters.map((filter, key) => (
+      < FilterOptions
+  key = {key}
+  filter = {filter}
+  filterToFocus = {filterToFocus}
+  index = {key}
+  onChange = {this.handleChange}
+  onClickAdd = {this.handleClickAdd}
+  onClickRemove = {this.handleClickRemove}
+  schema = {schema}
+  show = {showInput}
+  showAddButton = {this.shouldDisplayAddButton(key)}
+  />
+))
+}
+  {
+    !showInput && < div
+    style = {
+    {
+      height: '34px'
+    }
+  }
+    />}
+    < /Wrapper>
+    < /div>
+    < Flex >
+    < span
+    onClick = {this.handleClickClose}
+    className = {styles.spanStyled} >
+      < FormattedMessage
+    id = "content-manager.components.FiltersPickWrapper.hide" / >
+      & nbsp;
+  <
+    /span>
+    < /Flex>
+    < /form>
+    < /Div>
+  )
+  ;
+}
 }
 
 FiltersPickWrapper.contextTypes = {

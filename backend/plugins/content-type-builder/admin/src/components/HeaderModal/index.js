@@ -1,20 +1,22 @@
 /**
-*
-* HeaderModal
-*
-*/
+ *
+ * HeaderModal
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-function HeaderModal({ children }) {
+function HeaderModal({children}) {
   return (
-    <div className={styles.headerModal}>
-      {children}
-    </div>
-  );
+    < div
+  className = {styles.headerModal} >
+    {children}
+    < /div>
+)
+  ;
 }
 
 HeaderModal.defaultProps = {

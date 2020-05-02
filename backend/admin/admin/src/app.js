@@ -7,14 +7,14 @@
 
 /* eslint-disable */
 import 'babel-polyfill';
-import { findIndex } from 'lodash';
+import {findIndex} from 'lodash';
 import 'sanitize.css/sanitize.css';
 import 'whatwg-fetch';
 import {
   getAppPluginsSucceeded,
   unsetHasUserPlugin,
 } from './containers/App/actions';
-import { basename, store } from './createStore';
+import {basename, store} from './createStore';
 import './intlPolyfill';
 import './public-path';
 import './strapi';
@@ -23,7 +23,7 @@ const dispatch = store.dispatch;
 
 // Don't inject plugins in development mode.
 if (window.location.port !== '4000') {
-  fetch(`${strapi.remoteURL}/config/plugins.json`, { cache: 'no-cache' })
+  fetch(`${strapi.remoteURL}/config/plugins.json`, {cache: 'no-cache'})
     .then(response => {
       return response.json();
     })
@@ -58,7 +58,7 @@ if (window.location.port !== '4000') {
         };
 
         script.src = plugin.source[process.env.NODE_ENV].indexOf('://') === -1 ?
-          `${basename}${plugin.source[process.env.NODE_ENV]}`.replace('//', '/'): // relative
+          `${basename}${plugin.source[process.env.NODE_ENV]}`.replace('//', '/') : // relative
           plugin.source[process.env.NODE_ENV]; // absolute
 
         $body.appendChild(script);

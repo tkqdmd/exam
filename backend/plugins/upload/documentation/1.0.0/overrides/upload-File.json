@@ -62,7 +62,9 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "required": ["files"],
+                "required": [
+                  "files"
+                ],
                 "properties": {
                   "files": {
                     "type": "array",
@@ -253,7 +255,7 @@
           "related": {
             "type": "array",
             "items": {
-              "type":"string"
+              "type": "string"
             }
           }
         }

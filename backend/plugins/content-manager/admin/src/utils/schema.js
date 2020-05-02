@@ -1,4 +1,4 @@
-import { forEach, upperFirst, mapValues, pickBy, slice, findKey, keys, get, set } from 'lodash';
+import {forEach, upperFirst, mapValues, pickBy, slice, findKey, keys, get, set} from 'lodash';
 import pluralize from 'pluralize';
 
 /**
@@ -38,10 +38,10 @@ const generateSchema = (responses) => {
       schemaModel.relations = model.associations.reduce((acc, current) => {
         const displayedAttribute = current.plugin ?
           get(responses.plugins, [current.plugin, 'models', current.model || current.collection, 'info', 'mainField']) ||
-          findKey(get(responses.plugins, [current.plugin, 'models', current.model || current.collection, 'attributes']), { type : 'string'}) ||
+          findKey(get(responses.plugins, [current.plugin, 'models', current.model || current.collection, 'attributes']), {type: 'string'}) ||
           'id' :
           get(responses.models, [current.model || current.collection, 'info', 'mainField']) ||
-          findKey(get(responses.models, [current.model || current.collection, 'attributes']), { type : 'string'}) ||
+          findKey(get(responses.models, [current.model || current.collection, 'attributes']), {type: 'string'}) ||
           'id';
 
         acc[current.alias] = {

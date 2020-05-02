@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   padding: 1.6rem 2.9rem 0 2.9rem;
+
   > div {
     font-size: 1.8rem;
     font-weight: bold;
@@ -17,6 +18,7 @@
 .modalFooter {
   padding: 1.1rem 1rem 2.8rem 1rem;
   border: none;
+
   > button {
     height: 3rem;
     position: relative;
@@ -25,25 +27,28 @@
     margin-right: 1.8rem;
     cursor: pointer;
     font-family: Lato;
+
     &:focus {
       outline: 0;
     }
+
     > i {
       margin-right: 1.3rem;
     }
+
     &:hover {
-     &::after {
-       position: absolute;
-       width: 100%;
-       height: 100%;
-       top: 0;
-       left: 0;
-       border-radius: 0.3rem;
-       content: '';
-       opacity: 0.1;
-       background: #FFFFFF;
-     }
-   }
+      &::after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0.3rem;
+        content: '';
+        opacity: 0.1;
+        background: #FFFFFF;
+      }
+    }
   }
 }
 
@@ -52,6 +57,7 @@
   padding: 1.4rem 0 2.8rem 0;
   border-bottom: 1px solid #F6F6F6;
   position: relative;
+
   > button {
     margin-right: -2.5rem !important;
     color: #C3C5C8;
@@ -59,14 +65,17 @@
     font-size: 1.8rem;
     font-weight: 100;
     z-index: 999;
+
     &:hover, &:focus {
       color: #C3C5C8;
       opacity: 1;
-      outline: 0!important;
+      outline: 0 !important;
     }
+
     > span {
       display: none;
     }
+
     &:before {
       -webkit-font-smoothing: antialiased;
       content: '\F00d';
@@ -80,7 +89,7 @@
 
 .modalPosition {
   > div {
-    border:none;
+    border: none;
     border-radius: 2px;
     width: 74.5rem;
     padding-left: 0;
@@ -90,23 +99,26 @@
 
 .primary {
   height: 3rem;
-  font-family: Lato!important;
-  margin-left: 1.9rem!important;
+  font-family: Lato !important;
+  margin-left: 1.9rem !important;
   cursor: pointer;
   font-family: Lato;
+
   &:focus {
     outline: 0;
   }
-  border: none!important;
+
+  border: none !important;
   width: 15rem;
   line-height: 1.6rem;
   font-weight: 600;
   border-radius: 3px;
   background: linear-gradient(315deg, #0097F6 0%, #005EEA 100%);
   -webkit-font-smoothing: antialiased;
-  color: white!important;
+  color: white !important;
+
   &:hover, &:active {
-    border: none!important;
+    border: none !important;
     background: linear-gradient(315deg, #0097F6 0%, #005EEA 100%);
     color: white;
   }
@@ -153,11 +165,13 @@
   border: 0.1rem solid #F64D0A;
   cursor: pointer;
   background-color: transparent;
+
   &:hover, &:active {
     color: #F64D0A;
     background-color: white;
     border: 0.1rem solid #F64D0A;
   }
+
   height: 3rem;
   color: #F64D0A;
   border: 0.1rem solid #F64D0A;

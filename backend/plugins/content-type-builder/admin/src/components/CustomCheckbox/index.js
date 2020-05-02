@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import InputNumber from 'components/InputNumberWithErrors';
 
@@ -16,64 +16,102 @@ class CustomCheckbox extends React.Component {
     isChecked: this.props.value !== null && this.props.value !== undefined,
   };
 
-  handleChange = ({ target: { checked } }) => {
-    this.setState({ isChecked: checked });
+  handleChange = ({target: {checked}}) => {
+    this.setState({isChecked: checked});
 
-    const { name, onChange } = this.props;
+    const {name, onChange} = this.props;
     const value = checked ? '' : null;
-    const target = { name, value };
+    const target = {name, value};
 
-    onChange({ target });
+    onChange({target});
   };
 
-  handleInputNumberChange = ({ target: { value } }) => {
-    const { name, onChange } = this.props;
+  handleInputNumberChange = ({target: {value}}) => {
+    const {name, onChange} = this.props;
     const target = {
       name,
       type: 'number',
       value: parseInt(value, 10),
     };
 
-    onChange({ target });
+    onChange({target});
   };
 
   render() {
-    const { isChecked } = this.state;
-    const { didCheckErrors, errors, label, name, value } = this.props;
+    const {isChecked} = this.state;
+    const {didCheckErrors, errors, label, name, value} = this.props;
 
     // TODO: remove inline after migrating to Buffet
     return (
-      <div className='col-md-12' style={{ marginTop: -4, marginBottom: 9 }}>
-        <FormattedMessage id={label.id}>
-          {msg => (
-            <label
-              htmlFor={name}
-              style={{ fontWeight: '500', fontSize: 12, cursor: 'pointer' }}
-            >
-              <input
-                style={{ marginLeft: 0, marginRight: 13 }}
-                checked={isChecked}
-                name={name}
-                id={name}
-                onChange={this.handleChange}
-                type='checkbox'
-              />
-              {msg}
-            </label>
-          )}
-        </FormattedMessage>
-        {isChecked && (
-          <InputNumber
-            didCheckErrors={didCheckErrors}
-            errors={errors}
-            name={name}
-            onChange={this.handleInputNumberChange}
-            value={value || ''}
-            style={{ marginTop: -15 }}
-          />
-        )}
-      </div>
-    );
+      < div
+    className = 'col-md-12'
+    style = {
+    {
+      marginTop: -4, marginBottom
+    :
+      9
+    }
+  }>
+  <
+    FormattedMessage
+    id = {label.id} >
+      {msg
+  =>
+    (
+    < label
+    htmlFor = {name}
+    style = {
+    {
+      fontWeight: '500', fontSize
+    :
+      12, cursor
+    :
+      'pointer'
+    }
+  }
+  >
+  <
+    input
+    style = {
+    {
+      marginLeft: 0, marginRight
+    :
+      13
+    }
+  }
+    checked = {isChecked}
+    name = {name}
+    id = {name}
+    onChange = {this.handleChange}
+    type = 'checkbox'
+      / >
+      {msg}
+      < /label>
+  )
+  }
+  <
+    /FormattedMessage>
+    {
+      isChecked && (
+      < InputNumber
+      didCheckErrors = {didCheckErrors}
+      errors = {errors}
+      name = {name}
+      onChange = {this.handleInputNumberChange}
+      value = {value || ''
+    }
+      style = {
+      {
+        marginTop: -15
+      }
+    }
+      />
+    )
+    }
+  <
+    /div>
+  )
+    ;
   }
 }
 

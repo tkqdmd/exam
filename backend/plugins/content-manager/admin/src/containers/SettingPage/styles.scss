@@ -1,11 +1,12 @@
 .containerFluid {
   padding: 18px 30px;
+
   > div:first-child {
     margin-bottom: 11px;
   }
 }
 
-.main_wrapper{
+.main_wrapper {
   background: #ffffff;
   padding: 22px 28px 0px;
   border-radius: 2px;
@@ -16,7 +17,7 @@
   padding-top: 2.6rem;
 }
 
-.separatorHigher{
+.separatorHigher {
   margin-top: 19px;
   margin-bottom: 18px;
   border-top: 1px solid #F6F6F6;
@@ -24,6 +25,7 @@
 
 .draggedWrapper {
   display: flex;
+
   > div:first-child {
     height: 30px;
     width: 20px;
@@ -63,7 +65,7 @@
   min-height: 246px;
   padding: 24px 30px 0px;
   background-color: #FAFAFB;
-  border-radius: 2px; 
+  border-radius: 2px;
 }
 
 .dropDownNotAllowed {
@@ -76,6 +78,7 @@
 
 .dropdownWrapper {
   margin-left: 29px;
+
   > div {
     height: 30px;
     width: 100%;
@@ -84,6 +87,7 @@
     color: #333740;
     border: 1px solid #E3E9F3;
     border-radius: 2px;
+
     > button {
       position: relative;
       cursor: pointer;
@@ -96,11 +100,13 @@
       border: none;
       font-size: 13px;
       font-weight: 500;
+
       &:focus, &:active, &:hover, &:visited {
-        background-color: transparent!important;
+        background-color: transparent !important;
         box-shadow: none;
         color: #333740;
       }
+
       > p {
         height: 100%;
         margin-left: 20px;
@@ -109,6 +115,7 @@
         color: #007EFF !important;
         font-size: 13px !important;
       }
+
       &:before {
         position: absolute;
         top: 0px;
@@ -119,6 +126,7 @@
         color: #007EFF;
       }
     }
+
     > div {
       max-height: 180px;
       min-width: calc(100% + 2px);
@@ -132,16 +140,18 @@
       box-shadow: 0 2px 3px rgba(227, 233, 245, .5);
 
       overflow: scroll;
-      
+
       button {
         height: 30px;
-        padding-left:  10px !important;
+        padding-left: 10px !important;
         line-height: 26px;
         cursor: pointer;
         font-size: 13px !important;
+
         &:hover {
           background-color: #FAFAFB !important;
-        } 
+        }
+
         div {
           margin: 0;
           white-space: nowrap;
@@ -173,6 +183,7 @@
   padding-left: 15px !important;
   border: 1px dashed #E3E9F3;
   border-radius: 2px;
+
   > div {
     padding: 0 10px;
   }

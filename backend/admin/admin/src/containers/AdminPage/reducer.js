@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, Map } from 'immutable';
+import {fromJS, Map} from 'immutable';
 
 import {
   GET_ADMIN_DATA_SUCCEEDED,

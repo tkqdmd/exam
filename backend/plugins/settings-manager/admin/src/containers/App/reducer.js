@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, List } from 'immutable';
+import {fromJS, List} from 'immutable';
 import {
   ENVIRONMENTS_FETCH_SUCCEEDED,
   MENU_FETCH_SUCCEEDED,

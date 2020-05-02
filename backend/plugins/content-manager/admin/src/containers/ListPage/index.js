@@ -6,12 +6,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { capitalize, findIndex, get, isEmpty, isUndefined, toInteger, upperFirst } from 'lodash';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { FormattedMessage } from 'react-intl';
+import {connect} from 'react-redux';
+import {bindActionCreators, compose} from 'redux';
+import {createStructuredSelector} from 'reselect';
+import {capitalize, findIndex, get, isEmpty, isUndefined, toInteger, upperFirst} from 'lodash';
+import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import {FormattedMessage} from 'react-intl';
 import cn from 'classnames';
 
 // You can find these components in either
@@ -34,7 +34,7 @@ import Search from '../../components/Search';
 import Table from '../../components/Table';
 
 // App selectors
-import { makeSelectSchema } from '../App/selectors';
+import {makeSelectSchema} from '../App/selectors';
 
 import Div from './Div';
 import {
@@ -71,7 +71,7 @@ import {
 import styles from './styles.scss';
 
 export class ListPage extends React.Component {
-  state = { isOpen: false, showWarning: false, target: '' };
+  state = {isOpen: false, showWarning: false, target: ''};
 
   componentDidMount() {
     this.getData(this.props);
@@ -80,10 +80,10 @@ export class ListPage extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      location: { pathname, search },
+      location: {pathname, search},
     } = prevProps;
     const {
-      listPage: { didChangeDisplayedFields, filtersUpdated, displayedFields, params: { _sort } },
+      listPage: {didChangeDisplayedFields, filtersUpdated, displayedFields, params: {_sort}},
     } = this.props;
 
     if (pathname !== this.props.location.pathname) {
@@ -98,7 +98,7 @@ export class ListPage extends React.Component {
 
     if (prevProps.listPage.filtersUpdated !== filtersUpdated) {
       const updatedSearch = this.generateSearch();
-      this.props.history.push({ pathname, search: updatedSearch });
+      this.props.history.push({pathname, search: updatedSearch});
     }
 
     if (prevProps.listPage.didChangeDisplayedFields !== didChangeDisplayedFields) {
@@ -138,8 +138,8 @@ export class ListPage extends React.Component {
 
   getCurrentModelAttributes = () => {
     const primaryKey = this.getModelPrimaryKey();
-    const defaultAttr = { name: primaryKey, label: 'Id', type: 'string', searchable: true, sortable: true };
-    const attributes = Object.assign({ [primaryKey]: defaultAttr }, get(this.getCurrentModel(), ['attributes'], {}));
+    const defaultAttr = {name: primaryKey, label: 'Id', type: 'string', searchable: true, sortable: true};
+    const attributes = Object.assign({[primaryKey]: defaultAttr}, get(this.getCurrentModel(), ['attributes'], {}));
 
     return attributes;
   }
@@ -171,7 +171,7 @@ export class ListPage extends React.Component {
     const _page = toInteger(getQueryParameters(props.location.search, '_page')) || 1;
     const _sort = this.findPageSort(props); // TODO sort
     const _q = getQueryParameters(props.location.search, '_q') || '';
-    const params = { _limit, _page, _sort, _q };
+    const params = {_limit, _page, _sort, _q};
     const filters = generateFiltersFromSearch(props.location.search);
 
     this.props.setParams(params, filters);
@@ -179,7 +179,7 @@ export class ListPage extends React.Component {
   };
 
   getDataFromStore = (key) => {
-    return get(storeData.get(this.getCurrentModelName()),[this.getCurrentModelName(), key]);
+    return get(storeData.get(this.getCurrentModelName()), [this.getCurrentModelName(), key]);
   }
 
   /**
@@ -223,14 +223,14 @@ export class ListPage extends React.Component {
 
   generateSearch = () => {
     const {
-      listPage: { filters, params },
+      listPage: {filters, params},
     } = this.props;
 
     return `?${generateSearchFromParams(params)}&source=${this.getSource()}${generateSearchFromFilters(filters)}`;
   }
 
   areAllEntriesSelected = () => {
-    const { listPage: { entriesToDelete, records } } = this.props;
+    const {listPage: {entriesToDelete, records}} = this.props;
 
     return entriesToDelete.length === get(records, this.getCurrentModelName(), []).length && get(records, this.getCurrentModelName(), []).length > 0;
   };
@@ -252,7 +252,7 @@ export class ListPage extends React.Component {
     );
   };
 
-  handleChangeHeader = ({ target }) => {
+  handleChangeHeader = ({target}) => {
     const defaultSettingsDisplay = get(this.getCurrentModel(), ['listDisplay']);
     const attrIndex = this.findAttrIndex(target.name);
     const defaultSettingsAttrIndex = findIndex(defaultSettingsDisplay, ['name', target.name]);
@@ -286,7 +286,12 @@ export class ListPage extends React.Component {
       const searchable = attributes[target.name].type !== 'json' && attributes[target.name] !== 'array';
       const attrToAdd = defaultSettingsAttrIndex !== -1
         ? get(defaultSettingsDisplay, [defaultSettingsAttrIndex], {})
-        : Object.assign(attributes[target.name], { name: target.name, label: upperFirst(target.name), searchable, sortable: searchable });
+        : Object.assign(attributes[target.name], {
+          name: target.name,
+          label: upperFirst(target.name),
+          searchable,
+          sortable: searchable
+        });
 
       this.props.addAttr(attrToAdd, defaultSettingsAttrIndex);
     }
@@ -295,10 +300,10 @@ export class ListPage extends React.Component {
   handleChangeParams = e => {
     const {
       history,
-      listPage: { filters, params },
+      listPage: {filters, params},
     } = this.props;
     const _q = params._q !== '' ? `&_q=${params._q}` : '';
-    const searchEnd  = `&_sort=${params._sort}${_q}&source=${this.getSource()}${generateSearchFromFilters(filters)}`;
+    const searchEnd = `&_sort=${params._sort}${_q}&source=${this.getSource()}${generateSearchFromFilters(filters)}`;
     const search =
       e.target.name === 'params._limit'
         ? `_page=${params._page}&_limit=${e.target.value}${searchEnd}`
@@ -318,7 +323,7 @@ export class ListPage extends React.Component {
       value: sort,
     };
     const {
-      listPage: { filters, params },
+      listPage: {filters, params},
     } = this.props;
     const _q = params._q !== '' ? `&_q=${params._q}` : '';
     this.props.history.push({
@@ -328,14 +333,14 @@ export class ListPage extends React.Component {
       }&_sort=${sort}${_q}&source=${this.getSource()}${generateSearchFromFilters(filters)}`,
     });
 
-    this.props.changeParams({ target });
+    this.props.changeParams({target});
   };
 
   handleDelete = e => {
     e.preventDefault();
     e.stopPropagation();
     this.props.deleteData(this.state.target, this.getCurrentModelName(), this.getSource(), this.context);
-    this.setState({ showWarning: false });
+    this.setState({showWarning: false});
   };
 
   handleResetDisplayedFields = () => {
@@ -364,7 +369,7 @@ export class ListPage extends React.Component {
   };
 
   showLoaders = () => {
-    const { listPage: { isLoading, records, updatingParams } } = this.props;
+    const {listPage: {isLoading, records, updatingParams}} = this.props;
 
     return updatingParams || isLoading && get(records, this.getCurrentModelName()) === undefined;
   }
@@ -386,7 +391,7 @@ export class ListPage extends React.Component {
       this.context.emitEvent('willChangeDisplayedFields');
     }
 
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    this.setState(prevState => ({isOpen: !prevState.isOpen}));
   }
 
   toggleModalWarning = e => {
@@ -401,48 +406,69 @@ export class ListPage extends React.Component {
     if (this.props.listPage.entriesToDelete.length > 0) {
       this.props.onClickSelectAll();
     }
-    this.setState(prevState => ({ showWarning: !prevState.showWarning }));
+    this.setState(prevState => ({showWarning: !prevState.showWarning}));
 
   };
 
   renderDropdown = item => {
     return (
-      <DropdownItem
-        key={item}
-        toggle={false}
-        onClick={() => this.handleChangeHeader({ target: { name: item } })}
-      >
-        <div>
-          <InputCheckbox onChange={this.handleChangeHeader} name={item} value={this.isAttrInitiallyDisplayed(item)} />
-        </div>
-      </DropdownItem>
-    );
+      < DropdownItem
+    key = {item}
+    toggle = {false}
+    onClick = {()
+  =>
+    this.handleChangeHeader({target: {name: item}})
+  }
+  >
+  <
+    div >
+    < InputCheckbox
+    onChange = {this.handleChangeHeader}
+    name = {item}
+    value = {this.isAttrInitiallyDisplayed(item)}
+    />
+    < /div>
+    < /DropdownItem>
+  )
+    ;
   }
 
   renderDropdownHeader = msg => {
     return (
-      <DropdownItem onClick={this.handleResetDisplayedFields}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>
-            {msg}
-          </span>
-          <FormattedMessage id="content-manager.containers.Edit.reset" />
-        </div>
-      </DropdownItem>
-    );
+      < DropdownItem
+    onClick = {this.handleResetDisplayedFields} >
+      < div
+    style = {
+    {
+      display: 'flex', justifyContent
+    :
+      'space-between'
+    }
+  }>
+  <
+    span >
+    {msg}
+    < /span>
+    < FormattedMessage
+    id = "content-manager.containers.Edit.reset" / >
+      < /div>
+      < /DropdownItem>
+  )
+    ;
   }
 
   renderFilter = (filter, key) => {
     return (
-      <Filter
-        key={key}
-        filter={filter}
-        index={key}
-        onClick={this.props.onClickRemove}
-        onClickOpen={this.props.openFiltersWithSelections} // eslint-disable-line react/jsx-handler-names
-        schema={this.getCurrentSchema()}
-      />
-    );
+      < Filter
+    key = {key}
+    filter = {filter}
+    index = {key}
+    onClick = {this.props.onClickRemove}
+    onClickOpen = {this.props.openFiltersWithSelections} // eslint-disable-line react/jsx-handler-names
+    schema = {this.getCurrentSchema()}
+    />
+  )
+    ;
   }
 
   renderPluginHeader = () => {
@@ -463,47 +489,67 @@ export class ListPage extends React.Component {
         },
       },
     ];
-    const { listPage: { count } } = this.props;
+    const {listPage: {count}} = this.props;
 
     return (
-      <PluginHeader
-        actions={pluginHeaderActions}
-        description={{
-          id:
-          get(count, this.getCurrentModelName(), 0) > 1
-            ? 'content-manager.containers.List.pluginHeaderDescription'
-            : 'content-manager.containers.List.pluginHeaderDescription.singular',
-          values: {
-            label: get(count, this.getCurrentModelName(), 0),
-          },
-        }}
-        title={{
-          id: this.getCurrentModelName() || 'Content Manager',
-        }}
-        withDescriptionAnim={this.showLoaders()}
-      />
-    );
+      < PluginHeader
+    actions = {pluginHeaderActions}
+    description = {
+    {
+      id:
+        get(count, this.getCurrentModelName(), 0) > 1
+          ? 'content-manager.containers.List.pluginHeaderDescription'
+          : 'content-manager.containers.List.pluginHeaderDescription.singular',
+          values
+    :
+      {
+        label: get(count, this.getCurrentModelName(), 0),
+      }
+    ,
+    }
+  }
+    title = {
+    {
+      id: this.getCurrentModelName() || 'Content Manager',
+    }
+  }
+    withDescriptionAnim = {this.showLoaders()}
+    />
+  )
+    ;
   }
 
   renderPopUpWarningDeleteAll = () => {
-    const { deleteSeveralData, listPage: { entriesToDelete, showWarningDeleteAll }, onToggleDeleteAll } = this.props;
+    const {deleteSeveralData, listPage: {entriesToDelete, showWarningDeleteAll}, onToggleDeleteAll} = this.props;
 
     return (
-      <PopUpWarning
-        isOpen={showWarningDeleteAll}
-        toggleModal={onToggleDeleteAll}
-        content={{
-          title: 'content-manager.popUpWarning.title',
-          message: this.getPopUpDeleteAllMsg(),
-          cancel: 'content-manager.popUpWarning.button.cancel',
-          confirm: 'content-manager.popUpWarning.button.confirm',
-        }}
-        popUpWarningType="danger"
-        onConfirm={() => {
-          deleteSeveralData(entriesToDelete, this.getCurrentModelName(), this.getSource());
-        }}
-      />
-    );
+      < PopUpWarning
+    isOpen = {showWarningDeleteAll}
+    toggleModal = {onToggleDeleteAll}
+    content = {
+    {
+      title: 'content-manager.popUpWarning.title',
+        message
+    :
+      this.getPopUpDeleteAllMsg(),
+        cancel
+    :
+      'content-manager.popUpWarning.button.cancel',
+        confirm
+    :
+      'content-manager.popUpWarning.button.confirm',
+    }
+  }
+    popUpWarningType = "danger"
+    onConfirm = {()
+  =>
+    {
+      deleteSeveralData(entriesToDelete, this.getCurrentModelName(), this.getSource());
+    }
+  }
+    />
+  )
+    ;
   }
 
   render() {
@@ -528,113 +574,181 @@ export class ListPage extends React.Component {
       removeAllFilters,
       removeFilter,
     } = this.props;
-    const { isOpen } = this.state;
+    const {isOpen} = this.state;
 
     return (
-      <div>
-        <div className={cn('container-fluid', styles.containerFluid)}>
-          {this.showSearch() && (
-            <Search
-              changeParams={this.props.changeParams}
-              initValue={getQueryParameters(this.props.location.search, '_q') || ''}
-              model={this.getCurrentModelName()}
-              value={params._q}
-            />
-          )}
-          {this.renderPluginHeader()}
+      < div >
+      < div
+    className = {cn('container-fluid', styles.containerFluid
+  )
+  }>
+    {
+      this.showSearch() && (
+      < Search
+      changeParams = {this.props.changeParams}
+      initValue = {getQueryParameters(this.props.location.search, '_q'
+    ) ||
+      ''
+    }
+      model = {this.getCurrentModelName()}
+      value = {params._q}
+      />
+    )
+    }
+    {
+      this.renderPluginHeader()
+    }
 
-          <div className={cn(styles.wrapper)}>
-            {this.showFilters() && (
-              <React.Fragment>
-                <FiltersPickWrapper
-                  addFilter={addFilter}
-                  appliedFilters={appliedFilters}
-                  close={onToggleFilters}
-                  filterToFocus={filterToFocus}
-                  modelName={this.getCurrentModelName()}
-                  onChange={onChange}
-                  onSubmit={this.handleSubmit}
-                  removeAllFilters={removeAllFilters}
-                  removeFilter={removeFilter}
-                  schema={this.getCurrentSchema()}
-                  show={showFilter}
-                />
-                <div className={cn('row', styles.row)}>
-                  <div className="col-md-10">
-                    <Div
-                      decreaseMarginBottom={filters.length > 0}
-                    >
-                      <div className="row">
-                        <AddFilterCTA onClick={(e) => this.context.emitEvent('willFilterEntries') && onToggleFilters(e)} showHideText={showFilter} id="addFilterCTA" />
-                        {filters.map(this.renderFilter)}
-                      </div>
-                    </Div>
-                  </div>
-                  <div className="col-md-2">
-                    <div className={cn(isOpen ? styles.listPageDropdownWrapperOpen : styles.listPageDropdownWrapperClose, styles.listPageDropdownWrapper, )}>
-                      <ButtonDropdown isOpen={isOpen} toggle={this.toggle} direction="left">
-                        <DropdownToggle />
-                        <DropdownMenu>
-                          <FormattedMessage id="content-manager.containers.ListPage.displayedFields">
-                            {this.renderDropdownHeader}
-                          </FormattedMessage>
-                          {this.getAllModelFields().map(this.renderDropdown)}
-                        </DropdownMenu>
-                      </ButtonDropdown>
-                    </div>
-                  </div>
-                </div>
-              </React.Fragment>
-            )}
-            <div className={cn('row', styles.row)}>
-              <div className="col-md-12">
-                <Table
-                  deleteAllValue={this.areAllEntriesSelected()}
-                  entriesToDelete={entriesToDelete}
-                  enableBulkActions={this.showBulkActions()}
-                  filters={filters}
-                  handleDelete={this.toggleModalWarning}
-                  headers={this.getTableHeaders()}
-                  history={this.props.history}
-                  onChangeSort={this.handleChangeSort}
-                  onClickSelectAll={onClickSelectAll}
-                  onClickSelect={onClickSelect}
-                  onToggleDeleteAll={onToggleDeleteAll}
-                  primaryKey={this.getModelPrimaryKey()}
-                  records={get(records, this.getCurrentModelName(), [])}
-                  redirectUrl={this.generateRedirectURI()}
-                  route={this.props.match}
-                  routeParams={this.props.match.params}
-                  search={params._q}
-                  showLoader={this.showLoaders()}
-                  sort={params._sort}
-                />
-                <PopUpWarning
-                  isOpen={this.state.showWarning}
-                  toggleModal={this.toggleModalWarning}
-                  content={{
-                    title: 'content-manager.popUpWarning.title',
-                    message: 'content-manager.popUpWarning.bodyMessage.contentType.delete',
-                    cancel: 'content-manager.popUpWarning.button.cancel',
-                    confirm: 'content-manager.popUpWarning.button.confirm',
-                  }}
-                  popUpWarningType="danger"
-                  onConfirm={this.handleDelete}
-                />
-                {this.renderPopUpWarningDeleteAll()}
-                <PageFooter
-                  context={this.context}
-                  count={get(count, this.getCurrentModelName(), 0)}
-                  onChangeParams={this.handleChangeParams}
-                  params={listPage.params}
-                  style={{ marginTop: '2.9rem', padding: '0 15px 0 15px' }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  <
+    div
+    className = {cn(styles.wrapper
+  )
+  }>
+    {
+      this.showFilters() && (
+      < React.Fragment >
+      < FiltersPickWrapper
+      addFilter = {addFilter}
+      appliedFilters = {appliedFilters}
+      close = {onToggleFilters}
+      filterToFocus = {filterToFocus}
+      modelName = {this.getCurrentModelName()}
+      onChange = {onChange}
+      onSubmit = {this.handleSubmit}
+      removeAllFilters = {removeAllFilters}
+      removeFilter = {removeFilter}
+      schema = {this.getCurrentSchema()}
+      show = {showFilter}
+      />
+      < div
+      className = {cn('row', styles.row
+    )
+    }>
+    <
+      div
+      className = "col-md-10" >
+        < Div
+      decreaseMarginBottom = {filters.length > 0}
+        >
+        < div
+      className = "row" >
+        < AddFilterCTA
+      onClick = {(e)
+    =>
+      this.context.emitEvent('willFilterEntries') && onToggleFilters(e)
+    }
+      showHideText = {showFilter}
+      id = "addFilterCTA" / >
+        {filters.map(this.renderFilter)}
+        < /div>
+        < /Div>
+        < /div>
+        < div
+      className = "col-md-2" >
+        < div
+      className = {cn(isOpen ? styles.listPageDropdownWrapperOpen : styles.listPageDropdownWrapperClose, styles.listPageDropdownWrapper,
+    )
+    }>
+    <
+      ButtonDropdown
+      isOpen = {isOpen}
+      toggle = {this.toggle}
+      direction = "left" >
+        < DropdownToggle / >
+        < DropdownMenu >
+        < FormattedMessage
+      id = "content-manager.containers.ListPage.displayedFields" >
+        {this.renderDropdownHeader}
+        < /FormattedMessage>
+      {
+        this.getAllModelFields().map(this.renderDropdown)
+      }
+    <
+      /DropdownMenu>
+      < /ButtonDropdown>
+      < /div>
+      < /div>
+      < /div>
+      < /React.Fragment>
+    )
+    }
+  <
+    div
+    className = {cn('row', styles.row
+  )
+  }>
+  <
+    div
+    className = "col-md-12" >
+      < Table
+    deleteAllValue = {this.areAllEntriesSelected()}
+    entriesToDelete = {entriesToDelete}
+    enableBulkActions = {this.showBulkActions()}
+    filters = {filters}
+    handleDelete = {this.toggleModalWarning}
+    headers = {this.getTableHeaders()}
+    history = {this.props.history}
+    onChangeSort = {this.handleChangeSort}
+    onClickSelectAll = {onClickSelectAll}
+    onClickSelect = {onClickSelect}
+    onToggleDeleteAll = {onToggleDeleteAll}
+    primaryKey = {this.getModelPrimaryKey()}
+    records = {get(records, this.getCurrentModelName(), []
+  )
+  }
+    redirectUrl = {this.generateRedirectURI()}
+    route = {this.props.match}
+    routeParams = {this.props.match.params}
+    search = {params._q}
+    showLoader = {this.showLoaders()}
+    sort = {params._sort}
+    />
+    < PopUpWarning
+    isOpen = {this.state.showWarning}
+    toggleModal = {this.toggleModalWarning}
+    content = {
+    {
+      title: 'content-manager.popUpWarning.title',
+        message
+    :
+      'content-manager.popUpWarning.bodyMessage.contentType.delete',
+        cancel
+    :
+      'content-manager.popUpWarning.button.cancel',
+        confirm
+    :
+      'content-manager.popUpWarning.button.confirm',
+    }
+  }
+    popUpWarningType = "danger"
+    onConfirm = {this.handleDelete}
+    />
+    {
+      this.renderPopUpWarningDeleteAll()
+    }
+  <
+    PageFooter
+    context = {this.context}
+    count = {get(count, this.getCurrentModelName(), 0
+  )
+  }
+    onChangeParams = {this.handleChangeParams}
+    params = {listPage.params}
+    style = {
+    {
+      marginTop: '2.9rem', padding
+    :
+      '0 15px 0 15px'
+    }
+  }
+    />
+    < /div>
+    < /div>
+    < /div>
+    < /div>
+    < /div>
+  )
+    ;
   }
 }
 
@@ -705,7 +819,7 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = strapi.injectReducer({ key: 'listPage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'listPage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'listPage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'listPage', saga, pluginId});
 
 export default compose(withReducer, withSaga, withConnect)(ListPage);

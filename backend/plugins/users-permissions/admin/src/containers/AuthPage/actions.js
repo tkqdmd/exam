@@ -21,7 +21,7 @@ export function hideLoginErrorsInput(value) {
   };
 }
 
-export function onChangeInput({ target }) {
+export function onChangeInput({target}) {
   return {
     type: ON_CHANGE_INPUT,
     key: target.name,

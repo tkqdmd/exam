@@ -19,6 +19,7 @@
   @include hover-focus {
     text-decoration: none;
   }
+
   &:focus,
   &.focus {
     outline: 0;
@@ -80,12 +81,14 @@ fieldset[disabled] a.btn {
     background-color: transparent;
     @include box-shadow(none);
   }
+
   &,
   &:focus,
   &:active {
     border-color: transparent;
     box-shadow: none;
   }
+
   @include hover {
     border-color: transparent;
   }
@@ -94,6 +97,7 @@ fieldset[disabled] a.btn {
     text-decoration: $link-hover-decoration;
     background-color: transparent;
   }
+
   &:disabled {
     color: $btn-link-disabled-color;
 

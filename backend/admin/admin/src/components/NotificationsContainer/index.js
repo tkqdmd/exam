@@ -1,12 +1,12 @@
 /**
-*
-* NotificationsContainer
-*
-*/
+ *
+ * NotificationsContainer
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import Notification from '../Notification';
 
@@ -19,27 +19,35 @@ class NotificationsContainer extends React.Component { // eslint-disable-line re
     }
 
     const notifications = this.props.notifications.map((notification, i) => (
-      <CSSTransition
-        key={i}
-        classNames="notification"
-        timeout={{
-          enter: 500,
-          exit: 300,
-        }}
-      >
-        <Notification
-          key={notification.id}
-          onHideNotification={this.props.onHideNotification}
-          notification={notification}
-        />
-      </CSSTransition>
-    ));
+      < CSSTransition
+    key = {i}
+    classNames = "notification"
+    timeout = {
+    {
+      enter: 500,
+        exit
+    :
+      300,
+    }
+  }
+  >
+  <
+    Notification
+    key = {notification.id}
+    onHideNotification = {this.props.onHideNotification}
+    notification = {notification}
+    />
+    < /CSSTransition>
+  ))
+    ;
 
     return (
-      <TransitionGroup className={styles.notificationsContainer}>
-        {notifications}
-      </TransitionGroup>
-    );
+      < TransitionGroup
+    className = {styles.notificationsContainer} >
+      {notifications}
+      < /TransitionGroup>
+  )
+    ;
   }
 }
 

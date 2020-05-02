@@ -12,13 +12,14 @@
   .plugin {
     cursor: pointer;
     position: absolute;
-    top: 10px; left: calc(100% - 4px);
+    top: 10px;
+    left: calc(100% - 4px);
     display: inline-block;
     width: auto;
     height: 20px;
     transition: right 1s ease-in-out;
 
-    span{
+    span {
       display: inline-block;
       overflow: hidden;
       width: auto;
@@ -32,7 +33,7 @@
       transition: transform .3s ease-in-out;
       white-space: pre;
 
-      &:hover{
+      &:hover {
         transform: translateX(calc(-100% + 9px));
       }
     }

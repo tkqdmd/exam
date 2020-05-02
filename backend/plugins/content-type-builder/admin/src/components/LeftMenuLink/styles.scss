@@ -16,14 +16,17 @@ li:not(:first-child) {
   color: #2C3138 !important;
   text-decoration: none !important;
   line-height: 1.6rem;
+
   > div:first-child {
     width: 1.3rem;
     margin-right: 1rem;
     font-size: 11px;
+
     > i {
       color: #666B74;
     }
   }
+
   > span {
     display: block;
     width: 100%;
@@ -40,6 +43,7 @@ li:not(:first-child) {
   font-weight: bold;
   text-decoration: none;
   color: #2D3138 !important;
+
   > div {
     > i {
       color: #2D3138 !important
@@ -59,6 +63,7 @@ li:not(:first-child) {
   text-decoration: none !important;
   line-height: 1.6rem;
   cursor: pointer;
+
   > div {
     width: 1.3rem;
     margin-right: 1rem;

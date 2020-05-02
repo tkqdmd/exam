@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import pluginId from '../../pluginId';
 
 // Containers
@@ -31,15 +31,31 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={pluginId}>
-        <Switch>
-          <Route path={`/plugins/${pluginId}/auth/:authType/:id?`} component={AuthPage} exact />
-          <Route path={`/plugins/${pluginId}/:settingType/:actionType/:id?`} component={EditPage} exact />
-          <Route path={`/plugins/${pluginId}/:settingType`} component={HomePage} exact />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </div>
-    );
+      < div
+    className = {pluginId} >
+      < Switch >
+      < Route
+    path = {`/plugins/${pluginId}/auth/:authType/:id?`
+  }
+    component = {AuthPage}
+    exact / >
+    < Route
+    path = {`/plugins/${pluginId}/:settingType/:actionType/:id?`
+  }
+    component = {EditPage}
+    exact / >
+    < Route
+    path = {`/plugins/${pluginId}/:settingType`
+  }
+    component = {HomePage}
+    exact / >
+    < Route
+    component = {NotFoundPage}
+    />
+    < /Switch>
+    < /div>
+  )
+    ;
   }
 }
 

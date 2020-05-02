@@ -6,8 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import {FormattedMessage} from 'react-intl';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import cn from 'classnames';
 import moment from 'moment';
 
@@ -20,12 +20,12 @@ import styles from './styles.scss';
 
 /* eslint-disable react/no-string-refs */
 class Li extends React.Component {
-  state = { isOpen: false, copied: false };
+  state = {isOpen: false, copied: false};
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.copied !== this.state.copied && this.state.copied) {
       setTimeout(() => {
-        this.setState({ copied: false });
+        this.setState({copied: false});
       }, 3000);
     }
   }
@@ -33,7 +33,7 @@ class Li extends React.Component {
   getUnit = (value) => {
     let unit;
     let divider;
-    
+
     switch (true) {
       case value > 1000000:
         unit = 'GB';
@@ -52,7 +52,7 @@ class Li extends React.Component {
         divider = 1;
     }
 
-    return { divider, unit };
+    return {divider, unit};
   }
 
   handleClick = (e) => {
@@ -67,83 +67,141 @@ class Li extends React.Component {
   }
 
   renderLiCopied = () => (
-    <li className={cn(styles.liWrapper, styles.copied)}>
-      <div>
-        <div className={styles.checked}>
-          <div />
-        </div>
-        <div>
-          <FormattedMessage id="upload.Li.linkCopied" />
-        </div>
-      </div>
-    </li>
-  );
+    < li
+  className = {cn(styles.liWrapper, styles.copied
+)
+}
 
-  render() {
-    const { item } = this.props;
+>
+<
+div >
+< div
+className = {styles.checked} >
+  < div / >
+  < /div>
+  < div >
+  < FormattedMessage
+id = "upload.Li.linkCopied" / >
+  < /div>
+  < /div>
+  < /li>
+)
+;
 
-    if (this.state.copied) {
-      return this.renderLiCopied();
-    }
+render()
+{
+  const {item} = this.props;
 
-    const icons = [
-      // {
-      //   icoType: item.private ? 'lock' : 'unlock',
-      //   onClick: () => {},
-      // },
-      {
-        icoType: 'eye',
-        onClick: this.handleClick,
-      },
-      {
-        icoType: 'trash',
-        onClick: () => this.setState({ isOpen: true }),
-      },
-    ];
-
-    return (
-      <CopyToClipboard text={item.url} onCopy={() => this.setState({copied: true})}>
-        <li className={styles.liWrapper}>
-          <a href={item.url} target="_blank" style={{ display: 'none' }} id={item.hash}>nothing</a>
-          <div className={styles.liContainer}>
-            <div>
-              <div />
-              <FileIcon fileType={item.ext} />
-            </div>
-            {['hash', 'name', 'updatedAt', 'size', 'relatedTo', ''].map((value, key) => {
-              if (value === 'updatedAt') {
-                return (
-                  <div key={key} className={styles.truncate}>{moment(item[value]).format('YYYY/MM/DD - HH:mm')}</div>
-                );
-              }
-
-              if (value === 'size') {
-                const { divider, unit } = this.getUnit(item[value]);
-                const size = item[value]/divider;
-
-                return (
-                  <div key={key} className={styles.truncate}>{Math.round(size * 100) / 100 }&nbsp;{unit}</div>
-                );
-              }
-
-              if (value !== '') {
-                return (
-                  <div key={key} className={styles.truncate}>{item[value]}</div>
-                );
-              }
-
-              return <IcoContainer key={key} icons={icons} />;
-            })}
-          </div>
-          <PopUpWarning
-            isOpen={this.state.isOpen}
-            onConfirm={this.handleDelete}
-            toggleModal={() => this.setState({ isOpen: false })}
-          />
-        </li>
-      </CopyToClipboard>
-    );
+  if (this.state.copied) {
+    return this.renderLiCopied();
   }
+
+  const icons = [
+    // {
+    //   icoType: item.private ? 'lock' : 'unlock',
+    //   onClick: () => {},
+    // },
+    {
+      icoType: 'eye',
+      onClick: this.handleClick,
+    },
+    {
+      icoType: 'trash',
+      onClick: () => this.setState({isOpen: true}),
+    },
+  ];
+
+  return (
+    < CopyToClipboard
+  text = {item.url}
+  onCopy = {()
+=>
+  this.setState({copied: true})
+}>
+<
+  li
+  className = {styles.liWrapper} >
+    < a
+  href = {item.url}
+  target = "_blank"
+  style = {
+  {
+    display: 'none'
+  }
+}
+  id = {item.hash} > nothing < /a>
+    < div
+  className = {styles.liContainer} >
+    < div >
+    < div / >
+    < FileIcon
+  fileType = {item.ext}
+  />
+  < /div>
+  {
+    ['hash', 'name', 'updatedAt', 'size', 'relatedTo', ''].map((value, key) => {
+      if (value === 'updatedAt') {
+        return (
+          < div
+        key = {key}
+        className = {styles.truncate} > {moment(item[value]
+      ).
+        format('YYYY/MM/DD - HH:mm')
+      }<
+        /div>
+      )
+        ;
+      }
+
+      if (value === 'size') {
+        const {divider, unit} = this.getUnit(item[value]);
+        const size = item[value] / divider;
+
+        return (
+          < div
+        key = {key}
+        className = {styles.truncate} > {Math.round(size * 100) / 100} & nbsp;
+        {
+          unit
+        }
+      <
+        /div>
+      )
+        ;
+      }
+
+      if (value !== '') {
+        return (
+          < div
+        key = {key}
+        className = {styles.truncate} > {item[value]} < /div>
+      )
+        ;
+      }
+
+      return
+    <
+      IcoContainer
+      key = {key}
+      icons = {icons}
+      />;
+    })
+  }
+<
+  /div>
+  < PopUpWarning
+  isOpen = {this.state.isOpen}
+  onConfirm = {this.handleDelete}
+  toggleModal = {()
+=>
+  this.setState({isOpen: false})
+}
+  />
+  < /li>
+  < /CopyToClipboard>
+)
+  ;
+}
 }
 
 Li.contextTypes = {

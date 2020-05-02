@@ -6,11 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
-import { bindActionCreators, compose } from 'redux';
-import { isEmpty } from 'lodash';
+import {injectIntl} from 'react-intl';
+import {bindActionCreators, compose} from 'redux';
+import {isEmpty} from 'lodash';
 
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
@@ -63,9 +63,10 @@ export class HomePage extends React.Component {
       const _limit = parseInt(this.getURLParams('_limit'), 10);
       const _sort = this.getURLParams('_sort');
 
-      this.props.setParams({ _limit, _page, _sort });
+      this.props.setParams({_limit, _page, _sort});
     }
   }
+
   componentDidMount() {
     this.props.getData();
   }
@@ -82,14 +83,14 @@ export class HomePage extends React.Component {
   getURLParams = (type) => getQueryParameters(this.props.location.search, type);
 
   changeSort = (name) => {
-    const { params: { _limit, _page } } = this.props;
+    const {params: {_limit, _page}} = this.props;
     const target = {
       name: 'params._sort',
       value: name,
     };
     const search = `_page=${_page}&_limit=${_limit}&_sort=${name}`;
 
-    this.props.changeParams({ target });
+    this.props.changeParams({target});
     this.props.history.push({
       pathname: this.props.history.pathname,
       search,
@@ -97,7 +98,7 @@ export class HomePage extends React.Component {
   }
 
   handleChangeParams = (e) => {
-    const { history, params } = this.props;
+    const {history, params} = this.props;
     const search = e.target.name === 'params._limit' ?
       `_page=${params._page}&_limit=${e.target.value}&_sort=${params._sort}`
       : `_page=${e.target.value}&_limit=${params._limit}&_sort=${params._sort}`;
@@ -110,63 +111,78 @@ export class HomePage extends React.Component {
   }
 
   renderInputSearch = () => (
-    <InputSearch
-      autoFocus
-      name="search"
-      onChange={this.props.onSearch}
-      placeholder="upload.HomePage.InputSearch.placeholder"
-      style={{ marginTop: '-10px' }}
-      value={this.props.search}
-    />
-  )
+    < InputSearch
+  autoFocus
+  name = "search"
+  onChange = {this.props.onSearch}
+  placeholder = "upload.HomePage.InputSearch.placeholder"
+  style = { {
+  marginTop: '-10px'
+}
+}
+value = {this.props.search}
+/>
+)
 
-  render() {
-    return (
-      <ContainerFluid>
-        <div className={styles.homePageUpload}>
-          <PluginHeader
-            title={{
-              id: 'upload.HomePage.title',
-            }}
-            description={{
-              id: 'upload.HomePage.description',
-            }}
-            overrideRendering={this.renderInputSearch}
-          />
-        </div>
-        <PluginInputFile
-          name="files"
-          onDrop={this.props.onDrop}
-          showLoader={this.props.uploadFilesLoading}
-        />
-        <div className={styles.entriesWrapper}>
-          <div>
-            {/* NOTE: Prepare for bulk actions}
+render()
+{
+  return (
+    < ContainerFluid >
+    < div
+  className = {styles.homePageUpload} >
+    < PluginHeader
+  title = {
+  {
+    id: 'upload.HomePage.title',
+  }
+}
+  description = {
+  {
+    id: 'upload.HomePage.description',
+  }
+}
+  overrideRendering = {this.renderInputSearch}
+  />
+  < /div>
+  < PluginInputFile
+  name = "files"
+  onDrop = {this.props.onDrop}
+  showLoader = {this.props.uploadFilesLoading}
+  />
+  < div
+  className = {styles.entriesWrapper} >
+    < div >
+    {/* NOTE: Prepare for bulk actions}
               <InputSelect
               name="bulkAction"
               onChange={() => console.log('change')}
               selectOptions={[{ value: 'select all'}]}
               style={{ minWidth: '200px', height: '32px', marginTop: '-8px' }}
               />
-            */}
-          </div>
-          <EntriesNumber number={this.props.entriesNumber} />
-        </div>
-        <List
-          data={this.props.uploadedFiles}
-          changeSort={this.changeSort}
-          sort={this.props.params._sort}
-        />
-        <div className="col-md-12">
-          <PageFooter
-            count={this.props.entriesNumber}
-            onChangeParams={this.handleChangeParams}
-            params={this.props.params}
-          />
-        </div>
-      </ContainerFluid>
-    );
-  }
+            */
+    }
+    < /div>
+    < EntriesNumber
+  number = {this.props.entriesNumber}
+  />
+  < /div>
+  < List
+  data = {this.props.uploadedFiles}
+  changeSort = {this.changeSort}
+  sort = {this.props.params._sort}
+  />
+  < div
+  className = "col-md-12" >
+    < PageFooter
+  count = {this.props.entriesNumber}
+  onChangeParams = {this.handleChangeParams}
+  params = {this.props.params}
+  />
+  < /div>
+  < /ContainerFluid>
+)
+  ;
+}
 }
 
 HomePage.childContextTypes = {
@@ -221,8 +237,8 @@ const mapStateToProps = selectHomePage();
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = strapi.injectReducer({ key: 'homePage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'homePage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'homePage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'homePage', saga, pluginId});
 
 export default compose(
   withReducer,

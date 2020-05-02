@@ -21,22 +21,28 @@ class StyleButton extends React.Component {
 
   render() {
     return (
-      <div
-        className={cn(
-          this.props.active && styles.styleButtonActive,
-          styles.styleButton,
-          this.props.className && styles[this.props.className],
-          this.props.disabled && styles.styleButtonDisabled,
-        )}
-        onMouseDown={this.handleClick}
+      < div
+    className = {
+      cn(
+      this.props.active && styles.styleButtonActive,
+      styles.styleButton,
+      this.props.className && styles[this.props.className],
+      this.props.disabled && styles.styleButtonDisabled,
+  )
+  }
+    onMouseDown = {this.handleClick}
       >
-        {!this.props.hideLabel && this.props.label}
-      </div>
-    );
+      {
+    !this.props.hideLabel && this.props.label
+  }
+  <
+    /div>
+  )
+    ;
   }
 }
 
-const  WysiwygInlineControls = ({ buttons, disabled, editorState, handlers, onToggle, onToggleBlock }) => {
+const WysiwygInlineControls = ({buttons, disabled, editorState, handlers, onToggle, onToggleBlock}) => {
   const selection = editorState.getSelection();
   const blockType = editorState
     .getCurrentContent()
@@ -46,25 +52,32 @@ const  WysiwygInlineControls = ({ buttons, disabled, editorState, handlers, onTo
   const currentStyle = editorState.getCurrentInlineStyle();
 
   return (
-    <div className={cn(styles.wysiwygInlineControls)}>
-      {buttons.map(type => (
-        <StyleButton
-          key={type.label}
-          active={type.style === blockType || currentStyle.has(type.style)}
-          className={type.className}
-          disabled={disabled}
-          handler={type.handler}
-          handlers={handlers}
-          hideLabel={type.hideLabel || false}
-          label={type.label}
-          onToggle={onToggle}
-          onToggleBlock={onToggleBlock}
-          style={type.style}
-          text={type.text}
-        />
-      ))}
-    </div>
-  );
+    < div
+  className = {cn(styles.wysiwygInlineControls
+)
+}>
+  {
+    buttons.map(type => (
+      < StyleButton
+    key = {type.label}
+    active = {type.style === blockType || currentStyle.has(type.style)}
+    className = {type.className}
+    disabled = {disabled}
+    handler = {type.handler}
+    handlers = {handlers}
+    hideLabel = {type.hideLabel || false}
+    label = {type.label}
+    onToggle = {onToggle}
+    onToggleBlock = {onToggleBlock}
+    style = {type.style}
+    text = {type.text}
+    />
+  ))
+  }
+<
+  /div>
+)
+  ;
 };
 
 /* eslint-disable react/default-props-match-prop-types */
@@ -74,8 +87,10 @@ StyleButton.defaultProps = {
   disabled: false,
   hideLabel: false,
   label: '',
-  onToggle: () => {},
-  onToggleBlock: () => {},
+  onToggle: () => {
+  },
+  onToggleBlock: () => {
+  },
   style: '',
   text: '',
 };
@@ -95,8 +110,10 @@ StyleButton.propTypes = {
 WysiwygInlineControls.defaultProps = {
   buttons: [],
   disabled: false,
-  onToggle: () => {},
-  onToggleBlock: () => {},
+  onToggle: () => {
+  },
+  onToggleBlock: () => {
+  },
 };
 
 WysiwygInlineControls.propTypes = {

@@ -2,17 +2,21 @@ li.listItem {
   display: block;
   padding: 17px 15px;
   cursor: pointer;
+
   &:hover {
     background-color: #f7f8f8;
+
     .title {
       color: #0e7de7;
     }
   }
+
   .txtWrapper,
   .thumbWrapper {
     display: inline-block;
     vertical-align: middle;
   }
+
   .thumbWrapper {
     position: relative;
     width: 55px;
@@ -20,6 +24,7 @@ li.listItem {
     background-color: #d8d8d8;
     border-radius: 2px;
     overflow: hidden;
+
     .overlay {
       position: absolute;
       top: 0;
@@ -29,12 +34,14 @@ li.listItem {
       height: 100%;
       background-color: rgba(#0E7DE7, .8);
     }
+
     img {
       position: relative;
       z-index: 0;
       width: 100%;
       height: 100%;
     }
+
     .play {
       position: absolute;
       top: calc(50% - 10px);
@@ -47,6 +54,7 @@ li.listItem {
       line-height: 20px;
       border-radius: 50%;
       z-index: 2;
+
       &::before {
         content: '\f04b';
         display: inline-block;
@@ -60,20 +68,25 @@ li.listItem {
       }
     }
   }
+
   &.finished {
     .title {
       color: #919bae;
     }
+
     .thumbWrapper {
       .overlay {
         background-color: transparent;
       }
+
       img {
         opacity: 0.6;
       }
+
       .play {
         background-color: #5a9e06;
         border-color: #5a9e06;
+
         &::before {
           content: '\f00c';
           margin-left: 0;
@@ -86,12 +99,14 @@ li.listItem {
 
   .txtWrapper {
     padding: 0 15px;
+
     p {
       font-size: 14px;
       line-height: 24px;
       font-family: Lato;
       font-weight: 600;
     }
+
     .time {
       color: #919bae;
       font-family: Lato;
@@ -109,16 +124,19 @@ li.listItem {
 .videoModal {
   margin-right: auto !important;
   margin-left: auto !important;
+
   .videoModalHeader {
     padding-bottom: 0;
     border-bottom: 0;
+
     > h5 {
       font-family: Lato;
-      font-weight: bold!important;
-      font-size: 1.8rem!important;
+      font-weight: bold !important;
+      font-size: 1.8rem !important;
       line-height: 3.1rem;
       color: #333740;
     }
+
     > button {
       display: flex;
       position: absolute;
@@ -128,11 +146,13 @@ li.listItem {
       margin-right: 0;
       padding: 10px;
       cursor: pointer;
+
       span {
         line-height: 0.6em;
       }
     }
   }
+
   .videoPlayer {
     > button {
       top: 50%;

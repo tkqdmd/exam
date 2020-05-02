@@ -1,3 +1,4 @@
-function* defaultSaga() {}
+function* defaultSaga() {
+}
 
 export default defaultSaga;

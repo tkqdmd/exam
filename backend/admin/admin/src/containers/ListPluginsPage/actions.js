@@ -26,14 +26,14 @@ export function getPlugins() {
   };
 }
 
-export function getPluginsSucceeded({ plugins }) {
+export function getPluginsSucceeded({plugins}) {
   return {
     type: GET_PLUGINS_SUCCEEDED,
     plugins,
   };
 }
 
-export function onDeletePluginClick({ target }) {
+export function onDeletePluginClick({target}) {
   return {
     type: ON_DELETE_PLUGIN_CLICK,
     pluginToDelete: target.id,

@@ -1,14 +1,14 @@
 /**
-*
-* PluginLeftMenuLink
-*
-*/
+ *
+ * PluginLeftMenuLink
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
-import { get, isEmpty, findIndex } from 'lodash';
+import {NavLink} from 'react-router-dom';
+import {FormattedMessage} from 'react-intl';
+import {get, isEmpty, findIndex} from 'lodash';
 import styles from './styles.scss';
 
 class PluginLeftMenuLink extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -21,17 +21,17 @@ class PluginLeftMenuLink extends React.Component { // eslint-disable-line react/
 
   componentDidMount() {
     const environmentIndex = this.props.envParams ? findIndex(this.props.environments, ['name', this.props.envParams]) : 0;
-    this.setState({ environmentIndex });
+    this.setState({environmentIndex});
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.environmentIndex === -1 && nextProps.envParams) {
-      this.setState({ environmentIndex: findIndex(nextProps.environments, ['name', nextProps.envParams]) });
+      this.setState({environmentIndex: findIndex(nextProps.environments, ['name', nextProps.envParams])});
     }
 
     if (nextProps.envParams && nextProps.envParams !== this.props.envParams) {
       const environmentIndex = findIndex(nextProps.environments, ['name', nextProps.envParams]);
-      this.setState({ environmentIndex });
+      this.setState({environmentIndex});
     }
   }
 
@@ -45,15 +45,28 @@ class PluginLeftMenuLink extends React.Component { // eslint-disable-line react/
     }
 
     return (
-      <li className={styles.pluginLeftMenuLink}>
-        <NavLink className={styles.link} to={`/plugins/settings-manager/${url}`} activeClassName={styles.linkActive}>
-          <div>
-            <i className={`fa fa-${this.props.link.icon}`} />
-          </div>
-          <span><FormattedMessage id={`settings-manager.${this.props.link.name}`} /></span>
-        </NavLink>
-      </li>
-    );
+      < li
+    className = {styles.pluginLeftMenuLink} >
+      < NavLink
+    className = {styles.link}
+    to = {`/plugins/settings-manager/${url}`
+  }
+    activeClassName = {styles.linkActive} >
+      < div >
+      < i
+    className = {`fa fa-${this.props.link.icon}`
+  }
+    />
+    < /div>
+    < span > < FormattedMessage
+    id = {`settings-manager.${this.props.link.name}`
+  }
+    /></s
+    pan >
+    < /NavLink>
+    < /li>
+  )
+    ;
   }
 }
 

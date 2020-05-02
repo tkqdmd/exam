@@ -26,5 +26,5 @@
   "notification.dropFile.success": "Su archivo esta cargado",
   "notification.dropFiles.success": "{number} archivos han sido cargados",
   "Upload.status.sizeLimit": "{archivo} es más grande que el tamaño límite configurado",
-  "Upload.status.disabled" : "La carga de archivos está deshabilitada"
+  "Upload.status.disabled": "La carga de archivos está deshabilitada"
 }

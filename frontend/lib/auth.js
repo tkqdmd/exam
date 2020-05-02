@@ -36,8 +36,10 @@ export const setToken = token => {
     return;
   }
   Cookies.set("username", token.user.username);
+  Cookies.set("email", token.user.email);
   Cookies.set("jwt", token.jwt);
-
+  console.log(token);
+  
   if (Cookies.get("username")) {
     Router.push("/");
   }
@@ -49,7 +51,7 @@ export const unsetToken = () => {
   }
   Cookies.remove("jwt");
   Cookies.remove("username");
-  Cookies.remove("cart");
+  Cookies.remove("email");
 
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
@@ -68,6 +70,13 @@ export const getUserFromServerCookie = req => {
     username = username.split("=")[1];
   }
 
+  let email = req.headers.cookie
+    .split(";")
+    .find(user => user.trim().startsWith("email="));
+  if (email) {
+    email = email.split("=")[1];
+  }
+
   const jwtCookie = req.headers.cookie
     .split(";")
     .find(c => c.trim().startsWith("jwt="));
@@ -75,11 +84,11 @@ export const getUserFromServerCookie = req => {
     return undefined;
   }
   const jwt = jwtCookie.split("=")[1];
-  return jwtDecode(jwt), username;
+  return jwtDecode(jwt), username, email;
 };
 
 export const getUserFromLocalCookie = () => {
-  return Cookies.get("username");
+  return Cookies.get("email");
 };
 
 //these will be used if you expand to a provider such as Auth0

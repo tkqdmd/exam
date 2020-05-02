@@ -1,4 +1,4 @@
-.search{
+.search {
   position: fixed;
   top: 0;
   display: flex;
@@ -50,8 +50,8 @@
   margin-left: 20px;
   padding-right: 10px;
   padding-left: 30px;
-  background: rgba(0,126,255,0.08);
-  border: 1px solid rgba(0,126,255,0.24);
+  background: rgba(0, 126, 255, 0.08);
+  border: 1px solid rgba(0, 126, 255, 0.24);
   border-radius: 2px;
   line-height: 22px;
   color: #007EFF;
@@ -59,6 +59,7 @@
   font-weight: 400;
   line-height: 20px;
   -webkit-font-smoothing: antialiased;
+
   > img {
     position: absolute;
     top: 1px;

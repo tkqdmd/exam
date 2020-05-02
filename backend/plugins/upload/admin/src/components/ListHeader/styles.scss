@@ -12,37 +12,47 @@
   margin-left: 32px;
   margin-right: 32px;
   justify-content: space-between;
+
   span {
     letter-spacing: 0.3px;
   }
+
   > div:first-child {
     display: flex;
     width: 133px;
+
     > div:first-child {
       width: 51px;
     }
+
     > div:last-child {
       width: 82px;
     }
   }
+
   > div:nth-child(2) {
     width: calc(100% - 496px - 221px);
   }
+
   > div:nth-child(3) {
     width: calc(100% - 496px - 148px);
   }
+
   > div:nth-child(4) {
     width: 184px;
     flex-shrink: 0;
   }
+
   > div:nth-child(5) {
     width: 100px;
     flex-shrink: 0;
   }
+
   > div:nth-child(6) {
     width: 147px;
     flex-shrink: 0;
   }
+
   > div:nth-child(7) {
     width: 116px;
     flex-shrink: 0;
@@ -57,6 +67,7 @@
       font-family: 'FontAwesome';
     }
   }
+
   cursor: pointer;
 }
 
@@ -68,5 +79,6 @@
       font-family: 'FontAwesome';
     }
   }
+
   cursor: pointer;
 }

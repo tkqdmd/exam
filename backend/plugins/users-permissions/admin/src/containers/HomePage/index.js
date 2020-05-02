@@ -6,11 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
-import { bindActionCreators, compose } from 'redux';
+import {connect} from 'react-redux';
+import {injectIntl} from 'react-intl';
+import {bindActionCreators, compose} from 'redux';
 import cn from 'classnames';
-import { clone, get, includes, isEqual, isEmpty } from 'lodash';
+import {clone, get, includes, isEqual, isEmpty} from 'lodash';
 
 import HeaderNav from 'components/HeaderNav';
 import PluginHeader from 'components/PluginHeader';
@@ -49,7 +49,7 @@ import checkFormValidity from './checkFormValidity';
 const keyBoardShortCuts = [18, 78];
 
 export class HomePage extends React.Component {
-  state = { mapKey: {}, showModalEdit: false };
+  state = {mapKey: {}, showModalEdit: false};
 
   getChildContext = () => (
     {
@@ -66,7 +66,7 @@ export class HomePage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.dataToEdit !== this.props.dataToEdit) {
-      this.setState({ showModalEdit: !isEmpty(nextProps.dataToEdit) });
+      this.setState({showModalEdit: !isEmpty(nextProps.dataToEdit)});
     }
   }
 
@@ -101,11 +101,11 @@ export class HomePage extends React.Component {
     if (includes(keyBoardShortCuts, e.keyCode)) {
       const mapKey = clone(this.state.mapKey);
       mapKey[e.keyCode] = e.type === 'keydown';
-      this.setState({ mapKey });
+      this.setState({mapKey});
 
       // Check if user pressed option + n;
       if (mapKey[18] && mapKey[78]) {
-        this.setState({ mapKey: {} });
+        this.setState({mapKey: {}});
         this.handleButtonClick();
       }
     }
@@ -133,7 +133,7 @@ export class HomePage extends React.Component {
     }
 
     if (isEmpty(formErrors)) {
-      this.setState({ showModalEdit: false });
+      this.setState({showModalEdit: false});
       this.props.submit(this.props.match.params.settingType, this.context);
     } else {
       this.props.setFormErrors(formErrors);
@@ -175,57 +175,104 @@ export class HomePage extends React.Component {
   ];
 
   showLoaders = () => {
-    const { data, isLoading, modifiedData } = this.props;
+    const {data, isLoading, modifiedData} = this.props;
     const isAdvanded = this.getEndPoint() === 'advanced';
 
-    return isLoading && get(data, this.getEndPoint()) === undefined && !isAdvanded || isLoading && isAdvanded &&  get(modifiedData, this.getEndPoint()) === undefined;
+    return isLoading && get(data, this.getEndPoint()) === undefined && !isAdvanded || isLoading && isAdvanded && get(modifiedData, this.getEndPoint()) === undefined;
   }
 
   render() {
-    const { data, didCheckErrors, formErrors, modifiedData, initialData, match, dataToEdit } = this.props;
+    const {data, didCheckErrors, formErrors, modifiedData, initialData, match, dataToEdit} = this.props;
     const headerActions = match.params.settingType === 'advanced' && !isEqual(modifiedData, initialData) ?
       this.pluginHeaderActions : [];
     const noButtonList = match.params.settingType === 'email-templates' || match.params.settingType === 'providers';
     const component = match.params.settingType === 'advanced' ?
-      <EditForm onChange={this.props.onChange} values={get(modifiedData, this.getEndPoint(), {})} showLoaders={this.showLoaders()} /> : (
-        <List
-          data={get(data, this.getEndPoint(), [])}
-          deleteData={this.props.deleteData}
-          noButton={noButtonList}
-          onButtonClick={this.handleButtonClick}
-          settingType={match.params.settingType}
-          showLoaders={this.showLoaders()}
-          values={get(modifiedData, this.getEndPoint(), {})}
-        />
-      );
-
-    return (
-      <div>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div className={cn('container-fluid', styles.containerFluid)}>
-            <PluginHeader
-              title={{ id: 'users-permissions.HomePage.header.title' }}
-              description={{ id: 'users-permissions.HomePage.header.description' }}
-              actions={headerActions}
-            />
-            <HeaderNav links={this.headerNavLinks} />
-            {component}
-          </div>
-          <PopUpForm
-            actionType="edit"
-            isOpen={this.state.showModalEdit}
-            dataToEdit={dataToEdit}
-            didCheckErrors={didCheckErrors}
-            formErrors={formErrors}
-            onChange={this.props.onChange}
-            onSubmit={this.handleSubmit}
-            settingType={match.params.settingType}
-            values={get(modifiedData,[this.getEndPoint(), dataToEdit], {})}
-          />
-        </form>
-      </div>
-    );
+  <
+    EditForm
+    onChange = {this.props.onChange}
+    values = {get(modifiedData, this.getEndPoint(),
+    {
+    }
+  )
   }
+    showLoaders = {this.showLoaders()}
+    /> : (
+    < List
+    data = {get(data, this.getEndPoint(), []
+  )
+  }
+    deleteData = {this.props.deleteData}
+    noButton = {noButtonList}
+    onButtonClick = {this.handleButtonClick}
+    settingType = {match.params.settingType}
+    showLoaders = {this.showLoaders()}
+    values = {get(modifiedData, this.getEndPoint(),
+    {
+    }
+  )
+  }
+    />
+  );
+
+  return(
+
+<
+  div
+>
+<
+  form
+  onSubmit = {(e)
+=>
+  e
+.
+
+  preventDefault()
+}
+
+>
+<
+div
+className = {cn('container-fluid', styles.containerFluid
+)
+}>
+<
+PluginHeader
+title = {
+{
+  id: 'users-permissions.HomePage.header.title'
+}
+}
+description = {
+{
+  id: 'users-permissions.HomePage.header.description'
+}
+}
+actions = {headerActions}
+/>
+< HeaderNav
+links = {this.headerNavLinks}
+/>
+{
+  component
+}
+<
+/div>
+< PopUpForm
+actionType = "edit"
+isOpen = {this.state.showModalEdit}
+dataToEdit = {dataToEdit}
+didCheckErrors = {didCheckErrors}
+formErrors = {formErrors}
+onChange = {this.props.onChange}
+onSubmit = {this.handleSubmit}
+settingType = {match.params.settingType}
+values = {get(modifiedData, [this.getEndPoint(), dataToEdit], {})}
+/>
+< /form>
+< /div>
+)
+;
+}
 }
 
 HomePage.childContextTypes = {
@@ -283,8 +330,8 @@ function mapDispatchToProps(dispatch) {
 const mapStateToProps = selectHomePage();
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = strapi.injectReducer({ key: 'homePage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'homePage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'homePage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'homePage', saga, pluginId});
 
 export default compose(
   withReducer,

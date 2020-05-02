@@ -57,7 +57,7 @@ exports.connect = (provider, query) => {
         }).get();
 
         if (_.isEmpty(_.find(users, {provider})) && !advanced.allow_register) {
-          return resolve([null, [{ messages: [{ id: 'Auth.advanced.allow_register' }] }], 'Register action is actualy not available.']);
+          return resolve([null, [{messages: [{id: 'Auth.advanced.allow_register'}]}], 'Register action is actualy not available.']);
         }
 
         const user = _.find(users, {provider});
@@ -67,11 +67,11 @@ exports.connect = (provider, query) => {
         }
 
         if (!_.isEmpty(_.find(users, user => user.provider !== provider)) && advanced.unique_email) {
-          return resolve([null, [{ messages: [{ id: 'Auth.form.error.email.taken' }] }], 'Email is already taken.']);
+          return resolve([null, [{messages: [{id: 'Auth.form.error.email.taken'}]}], 'Email is already taken.']);
         }
 
         // Retrieve default role.
-        const defaultRole = await strapi.query('role', 'users-permissions').findOne({ type: advanced.default_role }, []);
+        const defaultRole = await strapi.query('role', 'users-permissions').findOne({type: advanced.default_role}, []);
 
         // Create the new user.
         const params = _.assign(profile, {
@@ -209,7 +209,7 @@ const getProfile = async (provider, query, callback) => {
     case 'microsoft': {
       const microsoft = new Purest({
         provider: 'microsoft',
-        config:{
+        config: {
           'microsoft': {
             'https://graph.microsoft.com': {
               '__domain': {
@@ -247,7 +247,10 @@ const getProfile = async (provider, query, callback) => {
         secret: grant.twitter.secret
       });
 
-      twitter.query().get('account/verify_credentials').auth(access_token, query.access_secret).qs({screen_name: query['raw[screen_name]'], include_email: 'true'}).request((err, res, body) => {
+      twitter.query().get('account/verify_credentials').auth(access_token, query.access_secret).qs({
+        screen_name: query['raw[screen_name]'],
+        include_email: 'true'
+      }).request((err, res, body) => {
         if (err) {
           callback(err);
         } else {

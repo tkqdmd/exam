@@ -1,11 +1,11 @@
 import 'whatwg-fetch';
-import { dropRight, take } from 'lodash';
+import {dropRight, take} from 'lodash';
 import removeMd from 'remove-markdown';
-import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import {all, call, fork, put, select, takeLatest} from 'redux-saga/effects';
 import request from 'utils/request';
-import { getArticlesSucceeded, submitSucceeded } from './actions';
-import { GET_ARTICLES, SUBMIT } from './constants';
-import { makeSelectBody } from './selectors';
+import {getArticlesSucceeded, submitSucceeded} from './actions';
+import {GET_ARTICLES, SUBMIT} from './constants';
+import {makeSelectBody} from './selectors';
 
 function* getArticles() {
   try {
@@ -63,4 +63,5 @@ function fetchArticles() {
     return resp.json ? resp.json() : resp;
   });
 }
+
 export default defaultSaga;

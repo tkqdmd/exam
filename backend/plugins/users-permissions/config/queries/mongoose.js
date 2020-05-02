@@ -1,8 +1,8 @@
 const _ = require('lodash');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 module.exports = {
-  find: async function(params, populate) {
+  find: async function (params, populate) {
     const model = this;
     const filters = convertRestQueryParams(params);
 
@@ -13,18 +13,18 @@ module.exports = {
     }).lean();
   },
 
-  count: async function(params) {
+  count: async function (params) {
     const model = this;
 
     const filters = convertRestQueryParams(params);
 
     return buildQuery({
       model,
-      filters: { where: filters.where },
+      filters: {where: filters.where},
     }).count();
   },
 
-  findOne: async function(params, populate) {
+  findOne: async function (params, populate) {
     const primaryKey = params[this.primaryKey] || params.id;
 
     if (primaryKey) {
@@ -38,7 +38,7 @@ module.exports = {
       .lean();
   },
 
-  create: async function(params) {
+  create: async function (params) {
     return this.create(
       Object.keys(params).reduce((acc, current) => {
         if (
@@ -54,7 +54,7 @@ module.exports = {
       if (err.message.indexOf('index:') !== -1) {
         const message = err.message.split('index:');
         const field = _.words(_.last(message).split('_')[0]);
-        const error = { message: `This ${field} is already taken`, field };
+        const error = {message: `This ${field} is already taken`, field};
 
         throw error;
       }
@@ -63,7 +63,7 @@ module.exports = {
     });
   },
 
-  update: async function(search, params = {}) {
+  update: async function (search, params = {}) {
     if (_.isEmpty(params)) {
       params = search;
     }
@@ -80,20 +80,20 @@ module.exports = {
       strict: false,
     }).catch(error => {
       const field = _.last(_.words(error.message.split('_')[0]));
-      const err = { message: `This ${field} is already taken`, field };
+      const err = {message: `This ${field} is already taken`, field};
 
       throw err;
     });
   },
 
-  delete: async function(params) {
+  delete: async function (params) {
     // Delete entry.
     return this.deleteOne({
       [this.primaryKey]: params[this.primaryKey] || params.id,
     });
   },
 
-  deleteMany: async function(params) {
+  deleteMany: async function (params) {
     // Delete entry.
     return this.deleteMany({
       [this.primaryKey]: {
@@ -102,19 +102,19 @@ module.exports = {
     });
   },
 
-  search: async function(params) {
+  search: async function (params) {
     const re = new RegExp(params.id);
 
     return this.find({
-      $or: [{ username: re }, { email: re }],
+      $or: [{username: re}, {email: re}],
     });
   },
 
-  addPermission: async function(params) {
+  addPermission: async function (params) {
     return this.create(params);
   },
 
-  removePermission: async function(params) {
+  removePermission: async function (params) {
     return this.remove(params);
   },
 };

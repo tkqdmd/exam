@@ -11,8 +11,12 @@ import pluginTradsEn from '../../../translations/en.json';
 import ModelForm from '../index';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
-const context = { emitEvent: jest.fn() };
-const renderComponent = (props = {}) => mountWithIntl(<ModelForm {...props} />, messages, context);
+const context = {emitEvent: jest.fn()};
+const renderComponent = (props = {}) => mountWithIntl( < ModelForm
+{...
+  props
+}
+/>, messages, context);
 
 describe('<ModelForm />', () => {
   let props;
@@ -87,7 +91,7 @@ describe('<ModelForm />', () => {
     expect(onChangeExistingContentTypeMainInfos).toBeDefined();
     expect(onChangeExistingContentTypeMainInfos()).toBe(undefined);
     expect(onSubmit).toBeDefined();
-    expect(onSubmit({ preventDefault: jest.fn() })).toBe(undefined);
+    expect(onSubmit({preventDefault: jest.fn()})).toBe(undefined);
     expect(resetExistingContentTypeMainInfos).toBeDefined();
     expect(resetExistingContentTypeMainInfos()).toBe(undefined);
     expect(resetNewContentTypeMainInfos).toBeDefined();
@@ -106,7 +110,7 @@ describe('<ModelForm />', () => {
 
   it('should show the inputs if the modal is fully opened', () => {
     wrapper = renderComponent(props);
-    wrapper.setState({ isVisible: true });
+    wrapper.setState({isVisible: true});
 
     const inputs = wrapper.find(Input);
 
@@ -118,10 +122,10 @@ describe('<ModelForm />', () => {
     props.isUpdatingTemporaryContentType = true;
 
     wrapper = renderComponent(props);
-    wrapper.setState({ isVisible: true });
+    wrapper.setState({isVisible: true});
 
     const input = wrapper.find(Input).at(0);
-    const { name } = input.props();
+    const {name} = input.props();
 
     expect(name).toBe('name');
 
@@ -136,10 +140,10 @@ describe('<ModelForm />', () => {
     props.modelToEditName = 'test';
 
     wrapper = renderComponent(props);
-    wrapper.setState({ isVisible: true });
+    wrapper.setState({isVisible: true});
 
     const input = wrapper.find(Input).at(0);
-    const { name } = input.props();
+    const {name} = input.props();
 
     expect(name).toBe('test.name');
 
@@ -153,7 +157,7 @@ describe('<ModelForm />', () => {
       it('should set the isVisible state to true', () => {
         wrapper = renderComponent(props);
 
-        const { handleOnOpened } = wrapper.instance();
+        const {handleOnOpened} = wrapper.instance();
 
         handleOnOpened();
 
@@ -164,9 +168,9 @@ describe('<ModelForm />', () => {
     describe('HandleOnClosed', () => {
       it('should set the isVisible state to true', () => {
         wrapper = renderComponent(props);
-        wrapper.setState({ isVisible: true });
+        wrapper.setState({isVisible: true});
 
-        const { handleOnClosed } = wrapper.instance();
+        const {handleOnClosed} = wrapper.instance();
 
         handleOnClosed();
 
@@ -180,7 +184,7 @@ describe('<ModelForm />', () => {
         props.modelToEditName = 'test';
         wrapper = renderComponent(props);
 
-        const { handleGoTo } = wrapper.instance();
+        const {handleGoTo} = wrapper.instance();
 
         handleGoTo('base');
 
@@ -194,7 +198,7 @@ describe('<ModelForm />', () => {
         props.actionType = 'create';
         wrapper = renderComponent(props);
 
-        const { handleGoTo } = wrapper.instance();
+        const {handleGoTo} = wrapper.instance();
 
         handleGoTo('advanced');
 
@@ -209,14 +213,14 @@ describe('<ModelForm />', () => {
       it('should call only the cancelNewContentType if the actionType is create', () => {
         wrapper = renderComponent(props);
 
-        const { handleCancel } = wrapper.instance();
+        const {handleCancel} = wrapper.instance();
 
         handleCancel();
 
         expect(props.cancelNewContentType).toHaveBeenCalled();
         expect(props.resetNewContentTypeMainInfos).not.toHaveBeenCalled();
         expect(props.resetExistingContentTypeMainInfos).not.toHaveBeenCalled();
-        expect(props.push).toHaveBeenCalledWith({ search: '' });
+        expect(props.push).toHaveBeenCalledWith({search: ''});
       });
 
       it('should call only the resetNewContentTypeMainInfos if the actionType is edit and if the user is editing a temporary ct', () => {
@@ -224,14 +228,14 @@ describe('<ModelForm />', () => {
         props.isUpdatingTemporaryContentType = true;
         wrapper = renderComponent(props);
 
-        const { handleCancel } = wrapper.instance();
+        const {handleCancel} = wrapper.instance();
 
         handleCancel();
 
         expect(props.cancelNewContentType).not.toHaveBeenCalled();
         expect(props.resetNewContentTypeMainInfos).toHaveBeenCalled();
         expect(props.resetExistingContentTypeMainInfos).not.toHaveBeenCalled();
-        expect(props.push).toHaveBeenCalledWith({ search: '' });
+        expect(props.push).toHaveBeenCalledWith({search: ''});
       });
 
       it('should call only the resetExistingContentTypeMainInfos if the actionType is edit and if the user is not editing a temporary ct', () => {
@@ -239,14 +243,14 @@ describe('<ModelForm />', () => {
         props.isUpdatingTemporaryContentType = false;
         wrapper = renderComponent(props);
 
-        const { handleCancel } = wrapper.instance();
+        const {handleCancel} = wrapper.instance();
 
         handleCancel();
 
         expect(props.cancelNewContentType).not.toHaveBeenCalled();
         expect(props.resetNewContentTypeMainInfos).not.toHaveBeenCalled();
         expect(props.resetExistingContentTypeMainInfos).toHaveBeenCalled();
-        expect(props.push).toHaveBeenCalledWith({ search: '' });
+        expect(props.push).toHaveBeenCalledWith({search: ''});
       });
     });
 
@@ -254,29 +258,29 @@ describe('<ModelForm />', () => {
       it('should not submit if the form is empty', () => {
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
-        handleSubmit({ preventDefault: jest.fn() });
+        handleSubmit({preventDefault: jest.fn()});
 
         expect(wrapper.state('formErrors')).toEqual({
-          name: [{ id: `${pluginId}.error.validation.required` }],
+          name: [{id: `${pluginId}.error.validation.required`}],
         });
         expect(wrapper.prop('push')).not.toHaveBeenCalled();
       });
 
       it('should not submit if the name of the CT is already taken', () => {
-        props.currentData = { test: {} };
+        props.currentData = {test: {}};
         props.modifiedData.name = 'test';
         props.modelToEditName = '';
         props.actionType = 'create';
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
-        handleSubmit({ preventDefault: jest.fn() });
+        handleSubmit({preventDefault: jest.fn()});
 
         expect(wrapper.state('formErrors')).toEqual({
-          name: [{ id: `${pluginId}.error.contentTypeName.taken` }],
+          name: [{id: `${pluginId}.error.contentTypeName.taken`}],
         });
         expect(wrapper.prop('push')).not.toHaveBeenCalled();
       });
@@ -285,9 +289,9 @@ describe('<ModelForm />', () => {
         props.modifiedData.name = 'test';
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
-        handleSubmit({ preventDefault: jest.fn() });
+        handleSubmit({preventDefault: jest.fn()});
 
         expect(wrapper.state('formErrors')).toEqual({});
         expect(props.push).toHaveBeenCalledWith({
@@ -302,13 +306,13 @@ describe('<ModelForm />', () => {
         props.modifiedData.name = 'test';
         props.actionType = 'edit';
         props.isUpdatingTemporaryContentType = true;
-        props.currentData = { test: {} };
+        props.currentData = {test: {}};
         props.modelToEditName = 'test';
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
-        handleSubmit({ preventDefault: jest.fn() });
+        handleSubmit({preventDefault: jest.fn()});
 
         expect(wrapper.state('formErrors')).toEqual({});
         expect(props.push).toHaveBeenCalledWith({
@@ -322,13 +326,13 @@ describe('<ModelForm />', () => {
         props.modifiedData.name = 'test';
         props.actionType = 'edit';
         props.isUpdatingTemporaryContentType = false;
-        props.currentData = { test: {} };
+        props.currentData = {test: {}};
         props.modelToEditName = 'test';
         wrapper = renderComponent(props);
 
-        const { handleSubmit } = wrapper.instance();
+        const {handleSubmit} = wrapper.instance();
 
-        handleSubmit({ preventDefault: jest.fn() });
+        handleSubmit({preventDefault: jest.fn()});
 
         expect(wrapper.state('formErrors')).toEqual({});
         expect(props.push).toHaveBeenCalledWith({

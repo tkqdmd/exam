@@ -6,17 +6,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { findIndex, get, snakeCase, isEmpty, map, sortBy } from 'lodash';
+import {FormattedMessage} from 'react-intl';
+import {findIndex, get, snakeCase, isEmpty, map, sortBy} from 'lodash';
 
 import LeftMenuLink from '../LeftMenuLink';
 
 import styles from './styles.scss';
 import messages from './messages.json';
 
-function LeftMenuLinkContainer({ layout, plugins }) {
+function LeftMenuLinkContainer({layout, plugins}) {
   const pluginsObject = plugins.toJS();
-  
+
   // Generate the list of sections
   const pluginsSections = Object.keys(pluginsObject).reduce((acc, current) => {
     pluginsObject[current].leftMenuSections.forEach((section = {}) => {
@@ -39,7 +39,7 @@ function LeftMenuLinkContainer({ layout, plugins }) {
 
     return acc;
   }, {});
-  
+
   const linkSections = Object.keys(pluginsSections).map((current, j) => {
     const contentTypesToShow = get(layout, 'contentTypesToShow');
     const contentTypes = contentTypesToShow
@@ -49,21 +49,31 @@ function LeftMenuLinkContainer({ layout, plugins }) {
       : pluginsSections[current].links;
 
     return (
-      <div key={j}>
-        <p className={styles.title}>{pluginsSections[current].name}</p>
-        <ul className={styles.list}>
-          {sortBy(contentTypes, 'label').map((link, i) => (
-            <LeftMenuLink
-              key={`${i}-${link.label}`}
-              icon={link.icon || 'caret-right'}
-              label={link.label}
-              destination={`/plugins/${link.plugin}/${link.destination}`}
-              source={link.source}
-            />
-          ))}
-        </ul>
-      </div>
-    );
+      < div
+    key = {j} >
+      < p
+    className = {styles.title} > {pluginsSections[current].name} < /p>
+      < ul
+    className = {styles.list} >
+      {sortBy(contentTypes, 'label'
+  ).
+    map((link, i) => (
+      < LeftMenuLink
+    key = {`${i}-${link.label}`
+  }
+    icon = {link.icon || 'caret-right'}
+    label = {link.label}
+    destination = {`/plugins/${link.plugin}/${link.destination}`
+  }
+    source = {link.source}
+    />
+  ))
+  }
+  <
+    /ul>
+    < /div>
+  )
+    ;
   });
 
   // Check if the plugins list is empty or not and display plugins by name
@@ -75,54 +85,87 @@ function LeftMenuLinkContainer({ layout, plugins }) {
         const destination = plugin.id === 'content-manager' ? `${basePath}/ctm-configurations` : basePath;
 
         return (
-          <LeftMenuLink
-            key={get(plugin, 'id')}
-            icon={get(plugin, 'icon') || 'plug'}
-            label={get(plugin, 'name')}
-            destination={destination}
-          />
-        );
+          < LeftMenuLink
+        key = {get(plugin, 'id'
+      )
+      }
+        icon = {get(plugin, 'icon'
+      ) ||
+        'plug'
+      }
+        label = {get(plugin, 'name'
+      )
+      }
+        destination = {destination}
+        />
+      )
+        ;
       }
     })
   ) : (
-    <li className={styles.noPluginsInstalled}>
-      <FormattedMessage {...messages.noPluginsInstalled} />.
-    </li>
-  );
+    < li
+  className = {styles.noPluginsInstalled} >
+    < FormattedMessage
+  {...
+    messages.noPluginsInstalled
+  }
+  />.
+  < /li>
+)
+  ;
 
   const hasSettingsManager = get(pluginsObject, 'settings-manager', null);
 
   return (
-    <div className={styles.leftMenuLinkContainer}>
-      {linkSections}
-      <div>
-        <p className={styles.title}>
-          <FormattedMessage {...messages.plugins} />
-        </p>
-        <ul className={styles.list}>{pluginsLinks}</ul>
-      </div>
-      <div>
-        <p className={styles.title}>
-          <FormattedMessage {...messages.general} />
-        </p>
-        <ul className={styles.list}>
-          <LeftMenuLink icon="list" label={messages.listPlugins.id} destination="/list-plugins" />
-          <LeftMenuLink
-            icon="shopping-basket"
-            label={messages.installNewPlugin.id}
-            destination="/marketplace"
-          />
-          {hasSettingsManager && (
-            <LeftMenuLink
-              icon="gear"
-              label={messages.configuration.id}
-              destination="/plugins/settings-manager"
-            />
-          )}
-        </ul>
-      </div>
-    </div>
-  );
+    < div
+  className = {styles.leftMenuLinkContainer} >
+    {linkSections}
+    < div >
+    < p
+  className = {styles.title} >
+    < FormattedMessage
+  {...
+    messages.plugins
+  }
+  />
+  < /p>
+  < ul
+  className = {styles.list} > {pluginsLinks} < /ul>
+    < /div>
+    < div >
+    < p
+  className = {styles.title} >
+    < FormattedMessage
+  {...
+    messages.general
+  }
+  />
+  < /p>
+  < ul
+  className = {styles.list} >
+    < LeftMenuLink
+  icon = "list"
+  label = {messages.listPlugins.id}
+  destination = "/list-plugins" / >
+    < LeftMenuLink
+  icon = "shopping-basket"
+  label = {messages.installNewPlugin.id}
+  destination = "/marketplace"
+    / >
+    {hasSettingsManager && (
+    < LeftMenuLink
+  icon = "gear"
+  label = {messages.configuration.id}
+  destination = "/plugins/settings-manager"
+    / >
+)
+}
+<
+  /ul>
+  < /div>
+  < /div>
+)
+  ;
 }
 
 LeftMenuLinkContainer.defaultProps = {

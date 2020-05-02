@@ -1,19 +1,21 @@
 /**
-*
-* Block
-*
-*/
+ *
+ * Block
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
-function Block({ children }) {
+function Block({children}) {
   return (
-    <div className={styles.block}>
-      {children}
-    </div>
-  );
+    < div
+  className = {styles.block} >
+    {children}
+    < /div>
+)
+  ;
 }
 
 Block.defaultProps = {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
-import { App, mapDispatchToProps } from '../index';
-import { getData } from '../actions';
+import {App, mapDispatchToProps} from '../index';
+import {getData} from '../actions';
 
 import Loader from '../Loader';
 
@@ -42,7 +42,7 @@ describe('<App />', () => {
           source: 'users-permissions',
           isTemporary: false,
         },
-        { icon: 'fa-cube', name: 'product', description: 'super api', fields: 6, isTemporary: false },
+        {icon: 'fa-cube', name: 'product', description: 'super api', fields: 6, isTemporary: false},
       ],
       modifiedData: {},
       onChangeExistingContentTypeMainInfos: jest.fn(),
@@ -56,24 +56,40 @@ describe('<App />', () => {
   });
 
   it('should not crash', () => {
-    shallow(<App {...props} />);
+    shallow( < App
+    {...
+      props
+    }
+    />);
   });
 
   it('should render the Loader if the prop isLoading is true', () => {
-    const wrapper = shallow(<App {...props} />);
+    const wrapper = shallow( < App
+    {...
+      props
+    }
+    />);
 
     expect(wrapper.find(Loader)).toHaveLength(1);
   });
 
   it('should not render the Loader if isLoading is false', () => {
     props.isLoading = false;
-    const wrapper = shallow(<App {...props} />);
+    const wrapper = shallow( < App
+    {...
+      props
+    }
+    />);
 
     expect(wrapper.find(Loader)).toHaveLength(0);
   });
 
   it('should call the resetProps when the component unmounts', () => {
-    const wrapper = shallow(<App {...props} />);
+    const wrapper = shallow( < App
+    {...
+      props
+    }
+    />);
 
     wrapper.unmount();
 
@@ -83,8 +99,12 @@ describe('<App />', () => {
   describe('<App />, instances', () => {
     describe('CanOpenModal', () => {
       it('should return true if all models have isTemporary to false', () => {
-        const wrapper = shallow(<App {...props} />);
-        const { canOpenModal } = wrapper.instance();
+        const wrapper = shallow( < App
+        {...
+          props
+        }
+        />);
+        const {canOpenModal} = wrapper.instance();
 
         expect(canOpenModal()).toBeTruthy();
       });
@@ -97,8 +117,12 @@ describe('<App />', () => {
           fields: 6,
           isTemporary: true,
         });
-        const wrapper = shallow(<App {...props} />);
-        const { canOpenModal } = wrapper.instance();
+        const wrapper = shallow( < App
+        {...
+          props
+        }
+        />);
+        const {canOpenModal} = wrapper.instance();
 
         expect(canOpenModal()).toBeFalsy();
       });
@@ -106,10 +130,16 @@ describe('<App />', () => {
 
     describe('renderRoute', () => {
       it('should return a route', () => {
-        const renderedComponent = shallow(<App {...props} />);
-        const FakeComponent = () => <div />;
-        const route = { to: '/content-type-builder', component: FakeComponent };
-        const { renderRoute } = renderedComponent.instance();
+        const renderedComponent = shallow( < App
+        {...
+          props
+        }
+        />);
+        const FakeComponent = () =>
+      <
+        div / >;
+        const route = {to: '/content-type-builder', component: FakeComponent};
+        const {renderRoute} = renderedComponent.instance();
 
         expect(renderRoute(route)).not.toBeNull();
       });

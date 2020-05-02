@@ -1,28 +1,28 @@
 const _ = require('lodash');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 module.exports = {
-  find: async function(params, populate) {
+  find: async function (params, populate) {
     const model = this;
 
     const filters = convertRestQueryParams(params);
 
-    return this.query(buildQuery({ model, filters }))
+    return this.query(buildQuery({model, filters}))
       .fetchAll({
         withRelated: populate || this.associations.map(x => x.alias),
       })
       .then(data => data.toJSON());
   },
 
-  count: async function(params = {}) {
+  count: async function (params = {}) {
     const model = this;
 
-    const { where } = convertRestQueryParams(params);
+    const {where} = convertRestQueryParams(params);
 
-    return this.query(buildQuery({ model, filters: { where } })).count();
+    return this.query(buildQuery({model, filters: {where}})).count();
   },
 
-  findOne: async function(params, populate) {
+  findOne: async function (params, populate) {
     const primaryKey = params[this.primaryKey] || params._id;
 
     if (primaryKey) {
@@ -38,7 +38,7 @@ module.exports = {
     return record ? record.toJSON() : record;
   },
 
-  create: async function(params) {
+  create: async function (params) {
     return this.forge()
       .save(
         Object.keys(params).reduce((acc, current) => {
@@ -55,14 +55,14 @@ module.exports = {
       .catch(err => {
         if (err.detail) {
           const field = _.last(_.words(err.detail.split('=')[0]));
-          err = { message: `This ${field} is already taken`, field };
+          err = {message: `This ${field} is already taken`, field};
         }
 
         throw err;
       });
   },
 
-  update: async function(search, params = {}) {
+  update: async function (search, params = {}) {
     if (_.isEmpty(params)) {
       params = search;
     }
@@ -87,35 +87,35 @@ module.exports = {
       })
       .catch(err => {
         const field = _.last(_.words(err.detail.split('=')[0]));
-        const error = { message: `This ${field} is already taken`, field };
+        const error = {message: `This ${field} is already taken`, field};
 
         throw error;
       });
   },
 
-  delete: async function(params) {
+  delete: async function (params) {
     return await this.forge({
       [this.primaryKey]: params[this.primaryKey] || params.id,
     }).destroy();
   },
 
-  deleteMany: async function(params) {
+  deleteMany: async function (params) {
     return await this.query(qb => {
       qb.whereIn(this.primaryKey, params[this.primaryKey] || params.id);
     }).destroy();
   },
 
-  search: async function(params) {
-    return this.query(function(qb) {
+  search: async function (params) {
+    return this.query(function (qb) {
       qb.where('username', 'LIKE', `%${params.id}%`).orWhere('email', 'LIKE', `%${params.id}%`);
     }).fetchAll();
   },
 
-  addPermission: async function(params) {
+  addPermission: async function (params) {
     return this.forge(params).save();
   },
 
-  removePermission: async function(params) {
+  removePermission: async function (params) {
     const value = params[this.primaryKey]
       ? {
         [this.primaryKey]: params[this.primaryKey] || params.id,

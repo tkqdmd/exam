@@ -5,7 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import {get} from 'lodash';
 
 import InputDate from 'components/InputDate/Loadable';
 import InputNumber from 'components/InputNumber/Loadable';
@@ -47,19 +47,27 @@ class InputWithAutoFocus extends React.Component {
   }
 
   render() {
-    const { filter, inputStyle, name, onChange, schema } = this.props;
+    const {filter, inputStyle, name, onChange, schema} = this.props;
     const Input = getInputType(get(schema, [filter.attr, 'type'], 'string'));
 
     return (
-      <Input
-        inputRef={input => this.inputEl = input}
-        name={name}
-        onChange={onChange}
-        selectOptions={['true', 'false']}
-        style={inputStyle}
-        value={get(filter, 'value')}
-      />
-    );
+      < Input
+    inputRef = {input
+  =>
+    this.inputEl = input
+  }
+    name = {name}
+    onChange = {onChange}
+    selectOptions = {['true', 'false'
+  ]
+  }
+    style = {inputStyle}
+    value = {get(filter, 'value'
+  )
+  }
+    />
+  )
+    ;
   }
 }
 

@@ -1,10 +1,10 @@
 /**
- * 
+ *
  * SettingsRow
  */
 
 import React from 'react';
-import { upperFirst } from 'lodash';
+import {upperFirst} from 'lodash';
 import PropTypes from 'prop-types';
 
 import IcoContainer from 'components/IcoContainer';
@@ -12,20 +12,36 @@ import IcoContainer from 'components/IcoContainer';
 import styles from './styles.scss';
 
 
-function SettingsRow({ destination, name, onClick }) {
+function SettingsRow({destination, name, onClick}) {
   return (
-    <div className={styles.settingsRow} id={name} onClick={() => onClick(destination)}>
-      <div>
-        <div className={styles.frame}>
-          <div className={styles.icon}>
-            <i className="fa fa-cube"></i>
-          </div>
-          {upperFirst(name)}
-        </div>
-        <IcoContainer icons={[{ icoType: 'cog', onClick: () => onClick(destination) }]} />
-      </div>
-    </div>
-  );
+    < div
+  className = {styles.settingsRow}
+  id = {name}
+  onClick = {()
+=>
+  onClick(destination)
+}>
+<
+  div >
+  < div
+  className = {styles.frame} >
+    < div
+  className = {styles.icon} >
+    < i
+  className = "fa fa-cube" > < /i>
+    < /div>
+  {
+    upperFirst(name)
+  }
+<
+  /div>
+  < IcoContainer
+  icons = {[{icoType: 'cog', onClick: () => onClick(destination)}]}
+  />
+  < /div>
+  < /div>
+)
+  ;
 }
 
 SettingsRow.propTypes = {

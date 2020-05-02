@@ -7,19 +7,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { bindActionCreators, compose } from 'redux';
+import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import {bindActionCreators, compose} from 'redux';
 import 'flag-icon-css/css/flag-icon.css';
-import { Switch, Route } from 'react-router-dom';
-import { isEmpty } from 'lodash';
+import {Switch, Route} from 'react-router-dom';
+import {isEmpty} from 'lodash';
 
 import pluginId from '../../pluginId';
 
 import HomePage from '../HomePage';
 
-import { menuFetch, environmentsFetch } from './actions';
-import { makeSelectLoading, makeSelectSections } from './selectors';
+import {menuFetch, environmentsFetch} from './actions';
+import {makeSelectLoading, makeSelectSections} from './selectors';
 import styles from './styles.scss';
 
 import reducer from './reducer';
@@ -54,14 +54,27 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={`${pluginId} ${styles.app}`}>
-        <Switch>
-          <Route path="/plugins/settings-manager/:slug/:env" component={HomePage} />
-          <Route path="/plugins/settings-manager/:slug" component={HomePage} />
-          <Route path="/plugins/settings-manager" component={HomePage} />
-        </Switch>
-      </div>
-    );
+      < div
+    className = {`${pluginId} ${styles.app}`
+  }>
+  <
+    Switch >
+    < Route
+    path = "/plugins/settings-manager/:slug/:env"
+    component = {HomePage}
+    />
+    < Route
+    path = "/plugins/settings-manager/:slug"
+    component = {HomePage}
+    />
+    < Route
+    path = "/plugins/settings-manager"
+    component = {HomePage}
+    />
+    < /Switch>
+    < /div>
+  )
+    ;
   }
 }
 
@@ -97,8 +110,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = strapi.injectReducer({ key: 'global', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'global', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'global', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'global', saga, pluginId});
 
 export default compose(
   withReducer,

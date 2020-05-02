@@ -4,8 +4,8 @@
 *
 */
 
-import { includes, forEach, has, remove, get, split } from 'lodash';
-import { getInputsValidationsFromConfigs } from '../../utils/inputValidations';
+import {includes, forEach, has, remove, get, split} from 'lodash';
+import {getInputsValidationsFromConfigs} from '../../utils/inputValidations';
 import translations from '../../translations/en.json';
 import {
   CONFIG_FETCH,
@@ -112,7 +112,7 @@ export function languagesFetchSucceeded(appLanguages, listLanguages) {
   });
 
   // Init the react-select
-  const selectedLanguage = { 'language.defaultLocale': selectOptionsObject.items[0].value };
+  const selectedLanguage = {'language.defaultLocale': selectOptionsObject.items[0].value};
 
   return {
     type: LANGUAGES_FETCH_SUCCEEDED,

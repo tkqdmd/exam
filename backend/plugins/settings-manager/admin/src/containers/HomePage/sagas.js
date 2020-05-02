@@ -1,5 +1,5 @@
 // import { LOCATION_CHANGE } from 'react-router-redux';
-import { forEach, set, map, replace } from 'lodash';
+import {forEach, set, map, replace} from 'lodash';
 import {
   all,
   call,
@@ -12,7 +12,7 @@ import {
 } from 'redux-saga/effects';
 import request from 'utils/request';
 // selectors
-import { makeSelectModifiedData } from './selectors';
+import {makeSelectModifiedData} from './selectors';
 import {
   CONFIG_FETCH,
   EDIT_SETTINGS,
@@ -54,20 +54,23 @@ export function* editDatabase(action) {
       body,
     };
     const requestUrl = `/settings-manager/configurations/databases/${action.apiUrl}`;
-    
+
     action.context.emitEvent('willEditDatabaseSettings');
-    
+
     const resp = yield call(request, requestUrl, opts, true);
 
     if (resp.ok) {
       action.context.emitEvent('didEditDatabaseSettings');
-      
+
       strapi.notification.success('settings-manager.strapi.notification.success.databaseEdit');
       yield put(databaseActionSucceeded());
     }
-  } catch(error) {
+  } catch (error) {
     action.context.emitEvent('didNotEditDatabaseSettings');
-    const formErrors = map(error.response.payload.message, err => ({ target: err.target, errors: map(err.messages, mess => ({ id: `settings-manager.${mess.id}`})) }));
+    const formErrors = map(error.response.payload.message, err => ({
+      target: err.target,
+      errors: map(err.messages, mess => ({id: `settings-manager.${mess.id}`}))
+    }));
 
     yield put(databaseActionError(formErrors));
     strapi.notification.error('settings-manager.strapi.notification.error');
@@ -76,7 +79,7 @@ export function* editDatabase(action) {
 
 export function* deleteDatabase(action) {
   try {
-    const opts = { method: 'DELETE' };
+    const opts = {method: 'DELETE'};
     const requestUrl = `/settings-manager/configurations/databases/${action.databaseToDelete}/${action.endPoint}`;
 
     const resp = yield call(request, requestUrl, opts, true);
@@ -85,7 +88,7 @@ export function* deleteDatabase(action) {
       yield call(action.context.disableGlobalOverlayBlocker);
       strapi.notification.success('settings-manager.strapi.notification.success.databaseDeleted');
     }
-  } catch(error) {
+  } catch (error) {
     yield call(action.context.disableGlobalOverlayBlocker);
     yield put(databaseActionError([]));
     strapi.notification.error('settings-manager.strapi.notification.error');
@@ -103,7 +106,7 @@ export function* deleteLanguage(action) {
     if (resp.ok) {
       strapi.notification.success('settings-manager.strapi.notification.success.languageDelete');
     }
-  } catch(error) {
+  } catch (error) {
     yield put(languageActionError());
     strapi.notification.error('settings-manager.strapi.notification.error');
   }
@@ -118,7 +121,7 @@ export function* fetchConfig(action) {
 
     const data = yield call(request, requestUrl, opts);
     yield put(configFetchSucceded(data));
-  } catch(error) {
+  } catch (error) {
     strapi.notification.error('settings-manager.strapi.notification.error');
   }
 }
@@ -137,7 +140,7 @@ export function* fetchDatabases(action) {
       call(request, requestUrlAppDatabases, opts),
     ]);
     yield put(databasesFetchSucceeded(listDatabasesData, appDatabaseData));
-  } catch(error) {
+  } catch (error) {
     strapi.notification.error('settings-manager.strapi.notification.error');
   }
 }
@@ -155,7 +158,7 @@ export function* fetchLanguages() {
       call(request, requestUrlListLanguages, opts),
     ]);
     yield put(languagesFetchSucceeded(appLanguagesData, listLanguagesData));
-  } catch(error) {
+  } catch (error) {
     strapi.notification.error('settings-manager.strapi.notification.error');
   }
 }
@@ -177,7 +180,7 @@ export function* postLanguage() {
       yield put(languageActionSucceeded());
       strapi.notification.success('settings-manager.strapi.notification.success.languageAdd');
     }
-  } catch(error) {
+  } catch (error) {
     yield put(languageActionError());
     strapi.notification.error('settings-manager.strapi.notification.error');
   }
@@ -204,12 +207,12 @@ export function* postDatabase(action) {
       yield put(databaseActionSucceeded());
       strapi.notification.success('settings-manager.strapi.notification.success.databaseAdd');
     }
-  } catch(error) {
+  } catch (error) {
     action.context.emitEvent('didNotAddDatabaseSettings')
     const formErrors = map(error.response.payload.message, (err) => {
       const target = err.target ? replace(err.target, err.target.split('.')[2], '${name}') : 'database.connections.${name}.name';
       return (
-        { target, errors: map(err.messages, mess => ({ id: `settings-manager.${mess.id}`})) }
+        {target, errors: map(err.messages, mess => ({id: `settings-manager.${mess.id}`}))}
       );
     });
 
@@ -227,19 +230,19 @@ export function* settingsEdit(action) {
       body: action.newSettings,
       method: 'PUT',
     };
-    
-    action.context.emitEvent('willEditSettings', { category : action.endPoint });
-    
+
+    action.context.emitEvent('willEditSettings', {category: action.endPoint});
+
     const requestUrl = `/settings-manager/configurations/${action.endPoint}`;
     const resp = yield  call(request, requestUrl, opts, true);
 
     if (resp.ok) {
-      action.context.emitEvent('didEditSettings', { category : action.endPoint });
+      action.context.emitEvent('didEditSettings', {category: action.endPoint});
       yield put(editSettingsSucceeded());
       strapi.notification.success('settings-manager.strapi.notification.success.settingsEdit');
     }
   } catch (error) {
-    action.context.emitEvent('didNotEditSettings', { error });
+    action.context.emitEvent('didNotEditSettings', {error});
     strapi.notification.error('settings-manager.strapi.notification.error');
   } finally {
     yield put(unsetLoader());
@@ -255,7 +258,7 @@ export function* fetchSpecificDatabase(action) {
     const data = yield call(request, requestUrl, opts);
 
     yield put(specificDatabaseFetchSucceeded(data));
-  } catch(error) {
+  } catch (error) {
     strapi.notification.error('settings-manager.strapi.notification.error');
   }
 }

@@ -4,7 +4,7 @@
  *
  */
 
-import { dispatch } from 'app';
+import {dispatch} from 'app';
 
 import {
   SHOW_NOTIFICATION,

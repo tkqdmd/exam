@@ -6,7 +6,7 @@
 
 const _ = require('lodash');
 const pluralize = require('pluralize');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 const Schema = require('./Schema.js');
 const GraphQLQuery = require('./Query.js');
@@ -99,7 +99,7 @@ const fieldResolver = (field, key) => {
  *
  * @return {Object}
  */
-const createFieldsResolver = function(fields, resolverFn, typeCheck) {
+const createFieldsResolver = function (fields, resolverFn, typeCheck) {
   const resolver = Object.keys(fields).reduce((acc, fieldKey) => {
     const field = fields[fieldKey];
     // Check if the field is of the correct type
@@ -139,7 +139,7 @@ const createFieldsResolver = function(fields, resolverFn, typeCheck) {
  * // => String
  *
  */
-const extractType = function(_type, attributeType) {
+const extractType = function (_type, attributeType) {
   return isPrimitiveType(_type)
     ? _type.replace('!', '')
     : isEnumType(attributeType)
@@ -169,15 +169,15 @@ const extractType = function(_type, attributeType) {
  *   age: function ageResolver() { .... }
  * }
  */
-const createAggregationFieldsResolver = function(model, fields, operation, typeCheck) {
+const createAggregationFieldsResolver = function (model, fields, operation, typeCheck) {
   return createFieldsResolver(
     fields,
     async (filters, options, context, fieldResolver, fieldKey) => {
       // eslint-disable-line no-unused-vars
-      return buildQuery({ model, filters, aggregate: true })
+      return buildQuery({model, filters, aggregate: true})
         .group({
           _id: null,
-          [fieldKey]: { [`$${operation}`]: `$${fieldKey}` },
+          [fieldKey]: {[`$${operation}`]: `$${fieldKey}`},
         })
         .exec()
         .then(result => _.get(result, [0, fieldKey]));
@@ -189,7 +189,7 @@ const createAggregationFieldsResolver = function(model, fields, operation, typeC
 /**
  * Correctly format the data returned by the group by
  */
-const preProcessGroupByData = function({ result, fieldKey, filters, model }) {
+const preProcessGroupByData = function ({result, fieldKey, filters, model}) {
   const _result = _.toArray(result);
   return _.map(_result, value => {
     return {
@@ -218,7 +218,7 @@ const preProcessGroupByData = function({ result, fieldKey, filters, model }) {
  *   email: function emailResolver() { .... }
  * }
  */
-const createGroupByFieldsResolver = function(model, fields, name) {
+const createGroupByFieldsResolver = function (model, fields, name) {
   const resolver = async (filters, options, context, fieldResolver, fieldKey) => {
     const params = {
       ...GraphQLQuery.convertToParams(_.omit(filters, 'where')),
@@ -248,8 +248,8 @@ const createGroupByFieldsResolver = function(model, fields, name) {
  *
  * @return {String}
  */
-const generateConnectionFieldsTypes = function(fields, model) {
-  const { globalId, attributes } = model;
+const generateConnectionFieldsTypes = function (fields, model) {
+  const {globalId, attributes} = model;
   const primitiveFields = getFieldsByTypes(fields, isNotOfTypeArray, (type, name) =>
     extractType(type, (attributes[name] || {}).type)
   );
@@ -269,8 +269,8 @@ const generateConnectionFieldsTypes = function(fields, model) {
     .join('\n\n');
 };
 
-const formatConnectionGroupBy = function(fields, model, name) {
-  const { globalId } = model;
+const formatConnectionGroupBy = function (fields, model, name) {
+  const {globalId} = model;
   const groupByGlobalId = `${globalId}GroupBy`;
 
   // Extract all primitive fields and change their types
@@ -293,8 +293,8 @@ const formatConnectionGroupBy = function(fields, model, name) {
   };
 };
 
-const formatConnectionAggregator = function(fields, model) {
-  const { globalId } = model;
+const formatConnectionAggregator = function (fields, model) {
+  const {globalId} = model;
 
   // Extract all fields of type Integer and Float and change their type to Float
   const numericFields = getFieldsByTypes(fields, isNumberType, () => 'Float');
@@ -440,8 +440,8 @@ const formatConnectionAggregator = function(fields, model) {
  *  }
  *
  */
-const formatModelConnectionsGQL = function(fields, model, name, modelResolver) {
-  const { globalId } = model;
+const formatModelConnectionsGQL = function (fields, model, name, modelResolver) {
+  const {globalId} = model;
 
   const connectionGlobalId = `${globalId}Connection`;
   const aggregatorFormat = formatConnectionAggregator(fields, model, name);

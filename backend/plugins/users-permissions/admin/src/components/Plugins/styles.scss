@@ -4,20 +4,24 @@
 
 .pluginsContainer {
   padding-top: 1.9rem;
+
   > div {
     border-bottom: 1px solid white;
 
-    &:last-child{
+    &:last-child {
       border-bottom: none;
     }
   }
+
   > div:not(:first-child) {
-    background: linear-gradient(315deg, rgba(255,255,255,0) 0%, rgba(227, 233, 243, 0.54) 100%);
+    background: linear-gradient(315deg, rgba(255, 255, 255, 0) 0%, rgba(227, 233, 243, 0.54) 100%);
+
     > div {
       line-height: 5.2rem;
     }
+
     > div:nth-child(2) {
-      >div:first-child {
+      > div:first-child {
         min-height: 1.8rem;
         background: #ffffff;
       }
@@ -36,6 +40,7 @@
     font-weight: 600;
     line-height: 2.1rem;
   }
+
   > div:last-child {
     margin-top: 0rem;
     color: #787E8F;
@@ -51,6 +56,6 @@
 
 .pluginsGradient {
   > div:first-child {
-    background: linear-gradient(315deg, rgba(255,255,255,0) 0%, rgba(227, 233, 243, 0.54) 100%) !important;
+    background: linear-gradient(315deg, rgba(255, 255, 255, 0) 0%, rgba(227, 233, 243, 0.54) 100%) !important;
   }
 }

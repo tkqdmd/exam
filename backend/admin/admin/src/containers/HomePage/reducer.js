@@ -3,9 +3,9 @@
  * HomePage reducer
  */
 
-import { fromJS, List, Map } from 'immutable';
+import {fromJS, List, Map} from 'immutable';
 
-import { GET_ARTICLES_SUCCEEDED, ON_CHANGE, SUBMIT_SUCCEEDED } from './constants';
+import {GET_ARTICLES_SUCCEEDED, ON_CHANGE, SUBMIT_SUCCEEDED} from './constants';
 
 const initialState = fromJS({
   articles: List([

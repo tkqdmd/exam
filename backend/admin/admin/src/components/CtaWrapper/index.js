@@ -6,8 +6,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CTAWrapper({ children }) {
-  return <div style={style}>{children}</div>;
+function CTAWrapper({children}) {
+  return
+<
+  div
+  style = {style} > {children} < /div>;
 }
 
 const style = {

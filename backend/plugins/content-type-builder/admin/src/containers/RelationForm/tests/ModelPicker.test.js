@@ -1,16 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { DropdownToggle, DropdownItem } from 'reactstrap';
+import {shallow} from 'enzyme';
+import {DropdownToggle, DropdownItem} from 'reactstrap';
 import ModelPicker from '../ModelPicker';
 
 describe('<ModelPicker />', () => {
   it('should not crash', () => {
-    shallow(<ModelPicker />);
+    shallow( < ModelPicker / >
+  )
+    ;
   });
 
   it('should use the defaultProps', () => {
     const {
-      defaultProps: { onClick },
+      defaultProps: {onClick},
     } = ModelPicker;
 
     expect(onClick).toBeDefined();
@@ -32,7 +34,11 @@ describe('<ModelPicker />', () => {
       onClick: jest.fn(),
     };
 
-    const wrapper = shallow(<ModelPicker {...props} />);
+    const wrapper = shallow( < ModelPicker
+    {...
+      props
+    }
+    />);
     const dropItem = wrapper.find(DropdownItem);
 
     expect(dropItem).toHaveLength(1);
@@ -49,7 +55,11 @@ describe('<ModelPicker />', () => {
       onClick: jest.fn(),
     };
 
-    const wrapper = shallow(<ModelPicker {...props} />);
+    const wrapper = shallow( < ModelPicker
+    {...
+      props
+    }
+    />);
     const dropToggle = wrapper.find(DropdownToggle);
 
     expect(dropToggle.find('p').text()).toContain('test');

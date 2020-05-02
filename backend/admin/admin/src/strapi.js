@@ -2,18 +2,18 @@
  * Common configuration for the app in both dev an prod mode
  */
 
-import { merge, isFunction } from 'lodash';
+import {merge, isFunction} from 'lodash';
 import {
   freezeApp,
   pluginLoaded,
   unfreezeApp,
   updatePlugin,
 } from './containers/App/actions';
-import { showNotification } from './containers/NotificationProvider/actions';
+import {showNotification} from './containers/NotificationProvider/actions';
 import injectReducer from './utils/injectReducer';
 import injectSaga from './utils/injectSaga';
-import { history, store } from './createStore';
-import { translationMessages, languages } from './i18n';
+import {history, store} from './createStore';
+import {translationMessages, languages} from './i18n';
 import './public-path';
 
 const isPluginAllowedToRegister = (plugin) => plugin.id === 'users-permissions' || plugin.id === 'email';
@@ -93,7 +93,7 @@ window.strapi = Object.assign(window.strapi || {}, {
   }),
   router: history,
   languages,
-  currentLanguage: window.localStorage.getItem('strapi-admin-language') ||  window.navigator.language ||  window.navigator.userLanguage || 'en',
+  currentLanguage: window.localStorage.getItem('strapi-admin-language') || window.navigator.language || window.navigator.userLanguage || 'en',
   lockApp,
   unlockApp,
   injectReducer,

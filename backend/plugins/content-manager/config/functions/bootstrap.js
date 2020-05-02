@@ -45,7 +45,7 @@ module.exports = async cb => {
   const tempLayout = Object.keys(strapi.models)
     .filter(m => m !== 'core_store')
     .reduce((acc, current) => {
-      acc[current] = { attributes: {} };
+      acc[current] = {attributes: {}};
 
       return acc;
     }, pluginsLayout);
@@ -198,29 +198,29 @@ module.exports = async cb => {
             'info',
             'mainField',
           ]) ||
-            _.findKey(
-              _.get(pluginsModel, [
-                current.plugin,
-                'models',
-                current.model || current.collection,
-                'attributes',
-              ]),
-              { type: 'string' }
-            ) ||
-            'id'
+          _.findKey(
+            _.get(pluginsModel, [
+              current.plugin,
+              'models',
+              current.model || current.collection,
+              'attributes',
+            ]),
+            {type: 'string'}
+          ) ||
+          'id'
           : _.get(models, [
             current.model || current.collection,
             'info',
             'mainField',
           ]) ||
-            _.findKey(
-              _.get(models, [
-                current.model || current.collection,
-                'attributes',
-              ]),
-              { type: 'string' }
-            ) ||
-            'id';
+          _.findKey(
+            _.get(models, [
+              current.model || current.collection,
+              'attributes',
+            ]),
+            {type: 'string'}
+          ) ||
+          'id';
 
         acc[current.alias] = {
           ...current,
@@ -309,13 +309,13 @@ module.exports = async cb => {
 
   try {
     // Retrieve the previous schema from the db
-    const prevSchema = await pluginStore.get({ key: 'schema' });
+    const prevSchema = await pluginStore.get({key: 'schema'});
 
     // If no schema stored
     if (!prevSchema) {
       _.set(schema, 'layout', tempLayout);
 
-      pluginStore.set({ key: 'schema', value: schema });
+      pluginStore.set({key: 'schema', value: schema});
 
       return cb();
     } else {
@@ -414,7 +414,7 @@ module.exports = async cb => {
       if (_.includes(currentAttr, displayedField)) {
         _.set(prevSchema.models, displayedFieldPath, primaryKey);
       }
-      
+
       // Update the displayed fields
       const updatedListDisplay = prevListDisplay.filter(
         obj => obj.name !== currentAttr.join()
@@ -447,7 +447,7 @@ module.exports = async cb => {
     // Here we just need to add the data from the current schema Object
     apisToAdd.map(apiPath => {
       const api = _.get(schema.models, apiPath);
-      const { search, filters, bulkActions, pageEntries, options } = _.get(
+      const {search, filters, bulkActions, pageEntries, options} = _.get(
         prevSchema,
         'generalSettings'
       );
@@ -521,7 +521,7 @@ module.exports = async cb => {
       );
     });
 
-    await pluginStore.set({ key: 'schema', value: prevSchema });
+    await pluginStore.set({key: 'schema', value: prevSchema});
   } catch (err) {
     console.log('error', err); // eslint-disable-line no-console
   }

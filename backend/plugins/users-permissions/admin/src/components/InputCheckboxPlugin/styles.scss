@@ -21,6 +21,7 @@
 .label {
   margin-left: 9px;
   cursor: pointer;
+
   > input {
     display: none;
     margin-right: 9px;
@@ -29,9 +30,11 @@
   &:before {
     content: '';
     position: absolute;
-    left:15px; top: 6px;
-    width: 14px; height: 14px;
-    border: 1px solid rgba(16,22,34,0.15);
+    left: 15px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(16, 22, 34, 0.15);
     background-color: #FDFDFD;
     border-radius: 3px;
   }
@@ -41,7 +44,8 @@
   &:after {
     content: '\f00c';
     position: absolute;
-    top: 0; left: 17px;
+    top: 0;
+    left: 17px;
     font-size: 10px;
     font-family: 'FontAwesome';
     font-weight: 100;

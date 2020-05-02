@@ -1,4 +1,4 @@
-import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import {all, call, fork, put, select, takeLatest} from 'redux-saga/effects';
 import request from 'utils/request';
 import {
   getSettingsSucceeded,
@@ -17,12 +17,12 @@ export function* settingsGet(action) {
   try {
     const requestURL = `/upload/settings/${action.env}`;
     const response = yield all([
-      call(request, requestURL, { method: 'GET' }),
-      call(request, '/upload/environments', { method: 'GET' }),
+      call(request, requestURL, {method: 'GET'}),
+      call(request, '/upload/environments', {method: 'GET'}),
     ]);
 
     yield put(getSettingsSucceeded(response[0], response[1].environments));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('notification.error');
   }
 }
@@ -40,12 +40,12 @@ export function* submit() {
       };
     }
     const requestURL = `/upload/settings/${env}`;
-    yield call(request, requestURL, { method: 'PUT', body });
+    yield call(request, requestURL, {method: 'PUT', body});
 
     // Update reducer with optimisticResponse
     strapi.notification.success('upload.notification.config.success');
     yield put(submitSucceeded(body));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('notification.error');
     // TODO handle error PUT
   }

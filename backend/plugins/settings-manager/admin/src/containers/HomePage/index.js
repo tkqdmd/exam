@@ -6,9 +6,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import {connect} from 'react-redux';
+import {bindActionCreators, compose} from 'redux';
+import {createStructuredSelector} from 'reselect';
 import {
   endsWith,
   find,
@@ -24,9 +24,9 @@ import {
   size,
   toNumber,
 } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import Helmet from 'react-helmet';
-import { router } from 'app';
+import {router} from 'app';
 
 import InputSelect from 'strapi-helper-plugin/lib/src/components/InputSelect';
 
@@ -40,11 +40,11 @@ import RowDatabase from '../../components/RowDatabase';
 import RowLanguage from '../../components/RowLanguage';
 import PluginLeftMenu from '../../components/PluginLeftMenu';
 
-import { checkFormValidity, getRequiredInputsDb } from '../../utils/inputValidations';
-import { formatLanguageLocale } from '../../utils/getFlag';
+import {checkFormValidity, getRequiredInputsDb} from '../../utils/inputValidations';
+import {formatLanguageLocale} from '../../utils/getFlag';
 import sendUpdatedParams from '../../utils/sendUpdatedParams';
 // App selectors
-import { makeSelectSections, makeSelectEnvironments } from '../App/selectors';
+import {makeSelectSections, makeSelectEnvironments} from '../App/selectors';
 import selectHomePage from './selectors';
 import {
   cancelChanges,
@@ -98,7 +98,7 @@ export class HomePage extends React.Component {
     } else {
       router.push(
         `/plugins/settings-manager/${get(this.props.menuSections, ['0', 'items', '0', 'slug']) ||
-          'application'}`,
+        'application'}`,
       );
     }
   }
@@ -159,7 +159,7 @@ export class HomePage extends React.Component {
   };
 
   emptyDbModifiedData = () => {
-    this.setState({ toggleDefaultConnection: false });
+    this.setState({toggleDefaultConnection: false});
     this.props.emptyDbModifiedData();
   };
 
@@ -169,7 +169,7 @@ export class HomePage extends React.Component {
     // this.setState({ modal: !this.state.modal });
   };
 
-  handleDefaultLanguageChange = ({ target }) => {
+  handleDefaultLanguageChange = ({target}) => {
     // create new object configsDisplay based on store property configsDisplay
     const configsDisplay = {
       name: this.props.home.configsDisplay.name,
@@ -183,10 +183,10 @@ export class HomePage extends React.Component {
     forEach(this.props.home.configsDisplay.sections, (section, key) => {
       // set all Language active state to false
       if (key !== activeLanguageIndex) {
-        configsDisplay.sections.push({ name: section.name, active: false });
+        configsDisplay.sections.push({name: section.name, active: false});
       } else {
         // set the new language active state to true
-        configsDisplay.sections.push({ name: section.name, active: true });
+        configsDisplay.sections.push({name: section.name, active: true});
       }
     });
 
@@ -198,7 +198,7 @@ export class HomePage extends React.Component {
 
     // Edit the new config
     this.props.editSettings(
-      { 'language.defaultLocale': join(defaultLanguageArray, '_') },
+      {'language.defaultLocale': join(defaultLanguageArray, '_')},
       'i18n',
       this.context,
     );
@@ -219,7 +219,7 @@ export class HomePage extends React.Component {
     }
   }
 
-  handleChange = ({ target }) => {
+  handleChange = ({target}) => {
     let value = target.type === 'number' && target.value !== '' ? toNumber(target.value) : target.value;
     let name = target.name;
 
@@ -235,11 +235,11 @@ export class HomePage extends React.Component {
       if (name === this.props.home.dbNameTarget) {
         const formErrors =
           value === this.props.home.addDatabaseSection.sections[1].items[0].value
-            ? [{ target: name, errors: [{ id: 'settings-manager.request.error.database.exist' }] }]
+            ? [{target: name, errors: [{id: 'settings-manager.request.error.database.exist'}]}]
             : [];
         this.props.setErrors(formErrors);
       } else if (endsWith(name, '.settings.client')) {
-        const item = find(this.props.home.addDatabaseSection.sections[0].items[1].items, { value });
+        const item = find(this.props.home.addDatabaseSection.sections[0].items[1].items, {value});
         this.props.changeInput('database.connections.${name}.settings.port', item.port);
         this.props.changeInput(
           `database.connections.${
@@ -254,7 +254,7 @@ export class HomePage extends React.Component {
     this.props.changeInput(name, value);
   };
 
-  handleChangeLanguage = ({ target: { value } }) => {
+  handleChangeLanguage = ({target: {value}}) => {
     this.props.changeInput('language.defaultLocale', value);
   };
 
@@ -264,9 +264,9 @@ export class HomePage extends React.Component {
     const value = this.state.toggleDefaultConnection
       ? this.props.home.addDatabaseSection.sections[1].items[0].value
       : this.props.home.modifiedData[this.props.home.dbNameTarget];
-    const target = { name: 'database.defaultConnection', value };
-    this.handleChange({ target });
-    this.setState({ toggleDefaultConnection: !this.state.toggleDefaultConnection });
+    const target = {name: 'database.defaultConnection', value};
+    this.handleChange({target});
+    this.setState({toggleDefaultConnection: !this.state.toggleDefaultConnection});
   };
 
   handleSubmit = e => {
@@ -319,218 +319,266 @@ export class HomePage extends React.Component {
 
   // custom Row rendering for the component List with params slug === languages
   renderRowLanguage = (props, key, liStyles) => (
-    <RowLanguage
-      key={key}
-      {...props}
-      liStyles={liStyles}
-      onDeleteLanguage={this.handleLanguageDelete}
-      listLanguages={this.props.home.listLanguages}
-      onDefaultLanguageChange={this.handleDefaultLanguageChange}
-    />
-  );
+    < RowLanguage
+  key = {key} {
+...
+  props
+}
 
-  renderListTitle = () => {
-    const availableContentNumber = size(this.props.home.configsDisplay.sections);
-    const title =
-      availableContentNumber > 1
-        ? `list.${this.props.match.params.slug}.title.plural`
-        : `list.${this.props.match.params.slug}.title.singular`;
-    const titleDisplay = title ? <FormattedMessage id={`settings-manager.${title}`} /> : '';
+liStyles = {liStyles}
+onDeleteLanguage = {this.handleLanguageDelete}
+listLanguages = {this.props.home.listLanguages}
+onDefaultLanguageChange = {this.handleDefaultLanguageChange}
+/>
+)
+;
 
-    return (
-      <span>
-        {availableContentNumber}&nbsp;{titleDisplay}
-      </span>
-    );
-  };
+renderListTitle = () => {
+  const availableContentNumber = size(this.props.home.configsDisplay.sections);
+  const title =
+    availableContentNumber > 1
+      ? `list.${this.props.match.params.slug}.title.plural`
+      : `list.${this.props.match.params.slug}.title.singular`;
+  const titleDisplay = title ?
+<
+  FormattedMessage
+  id = {`settings-manager.${title}`
+}
+  /> : '';
 
-  renderListButtonLabel = () => `list.${this.props.match.params.slug}.button.label`;
-
-  renderPopUpFormDatabase = (section, props, popUpStyles) =>
-    map(section.items, (item, key) => {
-      const isActive =
-        props.values[this.props.home.dbNameTarget] ===
-        this.props.home.modifiedData['database.defaultConnection'] ? (
-          <div className={popUpStyles.rounded}>
-            <i className="fa fa-check" />
-          </div>
-        ) : (
-          ''
-        );
-
-      if (item.name === 'form.database.item.default') {
-        return (
-          <div
-            key={key}
-            className={popUpStyles.defaultConnection}
-            id={item.target}
-            onClick={this.handleSetDefaultConnectionDb}
-          >
-            <FormattedMessage id={`settings-manager.${item.name}`} />
-            {isActive}
-          </div>
-        );
-      }
-      return props.renderInput(item, key);
-    });
-
-  renderPopUpFormLanguage = section =>
-    map(section.items, item => {
-      const value =
-        this.props.home.modifiedData[item.target] || this.props.home.selectOptions.options[0].value;
-
-      return (
-        <div className={`col-md-6`} key={item.name}>
-          <div className={styles.modalLanguageLabel}>
-            <FormattedMessage id={`settings-manager.${item.name}`} />
-          </div>
-          <InputSelect
-            name={item.target}
-            value={value}
-            selectOptions={this.props.home.selectOptions.options}
-            onChange={this.handleChangeLanguage}
-            validations={{}}
-          />
-          <div className={styles.popUpSpacer} />
-        </div>
-      );
-    });
-
-  renderRowDatabase = (props, key) => (
-    <RowDatabase
-      key={key}
-      data={props}
-      getDatabase={this.getDatabase}
-      onDeleteDatabase={this.handleDatabaseDelete}
-      sections={this.props.home.specificDatabase.sections}
-      values={this.props.home.modifiedData}
-      onChange={this.handleChange}
-      renderPopUpForm={this.renderPopUpFormDatabase}
-      onSubmit={this.handleSubmitEditDatabase}
-      formErrors={this.props.home.formErrors}
-      error={this.props.home.error}
-      resetToggleDefaultConnection={this.resetToggleDefaultConnection}
-    />
-  );
-
-  renderComponent = () => {
-    // check if  settingName (params.slug) has a custom view display
-    let specificComponent = findKey(this.customComponents, value =>
-      includes(value, this.props.match.params.slug),
-    );
-
-    if (!specificComponent) {
-      // Check if params env : render HeaderNav component
-      specificComponent = !this.props.match.params.env
-        ? 'defaultComponent'
-        : 'defaultComponentWithEnvironments';
-    }
-
-    // if custom view display render specificComponent
-    const Component = this.components[specificComponent];
-    const addRequiredInputDesign = this.props.match.params.slug === 'databases';
-    const listTitle = ['languages', 'databases'].includes(this.props.match.params.slug)
-      ? this.renderListTitle()
-      : '';
-    const listButtonLabel = ['languages', 'databases'].includes(this.props.match.params.slug)
-      ? this.renderListButtonLabel()
-      : '';
-
-    // check if HeaderNav component needs to render a form or a list
-    const renderListComponent = this.props.match.params.slug === 'databases';
-
-    let handleListPopUpSubmit;
-    // sections is the props used by EditForm in case of list of table rendering we need to change its value
-    let sections;
-    let renderPopUpForm = false;
-    let renderRow = false;
-    let actionBeforeOpenPopUp;
-    let addListTitleMarginTop;
-
-    switch (this.props.match.params.slug) {
-      case 'languages':
-        sections = this.props.home.listLanguages.sections;
-
-        // custom rendering for PopUpForm
-        renderPopUpForm = this.renderPopUpFormLanguage;
-        renderRow = this.renderRowLanguage;
-        handleListPopUpSubmit = this.props.newLanguagePost;
-        break;
-      case 'databases':
-        sections = this.props.home.addDatabaseSection.sections;
-        renderPopUpForm = this.renderPopUpFormDatabase;
-        handleListPopUpSubmit = this.addConnection;
-        renderRow = this.renderRowDatabase;
-        actionBeforeOpenPopUp = this.emptyDbModifiedData;
-        addListTitleMarginTop = true;
-        break;
-      default:
-        sections = this.props.home.configsDisplay.sections;
-    }
-
-    // Custom selectOptions for languages
-    const selectOptions = this.props.match.params.slug === 'languages' ? this.props.home.listLanguages : [];
-    return (
-      <Component
-        sections={sections}
-        listItems={this.props.home.configsDisplay.sections}
-        values={this.props.home.modifiedData}
-        onChange={this.handleChange}
-        onCancel={this.handleCancel}
-        onSubmit={this.handleSubmit}
-        links={this.props.environments}
-        path={this.props.location.pathname}
-        slug={this.props.match.params.slug}
-        renderRow={renderRow}
-        listTitle={listTitle}
-        listButtonLabel={listButtonLabel}
-        handlei18n
-        handleListPopUpSubmit={handleListPopUpSubmit}
-        selectOptions={selectOptions}
-        renderPopUpForm={renderPopUpForm}
-        renderListComponent={renderListComponent}
-        cancelAction={this.props.home.cancelAction}
-        actionBeforeOpenPopUp={actionBeforeOpenPopUp}
-        addRequiredInputDesign={addRequiredInputDesign}
-        addListTitleMarginTop={addListTitleMarginTop}
-        formErrors={this.props.home.formErrors}
-        error={this.props.home.error}
-        showLoader={this.props.home.showLoader}
-      />
-    );
-  };
-
-  // Set the toggleDefaultConnection to false
-  resetToggleDefaultConnection = () => this.setState({ toggleDefaultConnection: false });
-
-  // Hide database modal
-  toggle = () => this.setState({ modal: !this.state.modal });
-
-  render() {
-    return (
-      <div className="container-fluid">
-        <div className="row">
-          <PluginLeftMenu
-            sections={this.props.menuSections}
-            environments={this.props.environments}
-            envParams={this.props.match.params.env}
-          />
-          <div className={`${styles.home} col-md-9`}>
-            <Helmet
-              title="Settings Manager"
-              meta={[{ name: 'Settings Manager Plugin', content: 'Modify your app settings' }]}
-            />
-            <ContentHeader
-              name={this.props.home.configsDisplay.name}
-              description={this.props.home.configsDisplay.description}
-            />
-
-            {this.renderComponent()}
-          </div>
-        </div>
-      </div>
-    );
+  return (
+    < span >
+    {availableContentNumber} & nbsp;
+  {
+    titleDisplay
   }
+<
+  /span>
+)
+  ;
+};
+
+renderListButtonLabel = () => `list.${this.props.match.params.slug}.button.label`;
+
+renderPopUpFormDatabase = (section, props, popUpStyles) =>
+  map(section.items, (item, key) => {
+    const isActive =
+      props.values[this.props.home.dbNameTarget] ===
+      this.props.home.modifiedData['database.defaultConnection'] ? (
+        < div className = {popUpStyles.rounded} >
+        < i
+    className = "fa fa-check" / >
+      < /div>
+  ) :
+    (
+      ''
+    );
+
+    if (item.name === 'form.database.item.default') {
+      return (
+        < div
+      key = {key}
+      className = {popUpStyles.defaultConnection}
+      id = {item.target}
+      onClick = {this.handleSetDefaultConnectionDb}
+        >
+        < FormattedMessage
+      id = {`settings-manager.${item.name}`
+    }
+      />
+      {
+        isActive
+      }
+    <
+      /div>
+    )
+      ;
+    }
+    return props.renderInput(item, key);
+  });
+
+renderPopUpFormLanguage = section =>
+  map(section.items, item => {
+    const value =
+      this.props.home.modifiedData[item.target] || this.props.home.selectOptions.options[0].value;
+
+    return (
+      < div
+    className = {`col-md-6`
+  }
+    key = {item.name} >
+      < div
+    className = {styles.modalLanguageLabel} >
+      < FormattedMessage
+    id = {`settings-manager.${item.name}`
+  }
+    />
+    < /div>
+    < InputSelect
+    name = {item.target}
+    value = {value}
+    selectOptions = {this.props.home.selectOptions.options}
+    onChange = {this.handleChangeLanguage}
+    validations = {
+    {
+    }
+  }
+    />
+    < div
+    className = {styles.popUpSpacer}
+    />
+    < /div>
+  )
+    ;
+  });
+
+renderRowDatabase = (props, key) => (
+  < RowDatabase
+key = {key}
+data = {props}
+getDatabase = {this.getDatabase}
+onDeleteDatabase = {this.handleDatabaseDelete}
+sections = {this.props.home.specificDatabase.sections}
+values = {this.props.home.modifiedData}
+onChange = {this.handleChange}
+renderPopUpForm = {this.renderPopUpFormDatabase}
+onSubmit = {this.handleSubmitEditDatabase}
+formErrors = {this.props.home.formErrors}
+error = {this.props.home.error}
+resetToggleDefaultConnection = {this.resetToggleDefaultConnection}
+/>
+)
+;
+
+renderComponent = () => {
+  // check if  settingName (params.slug) has a custom view display
+  let specificComponent = findKey(this.customComponents, value =>
+    includes(value, this.props.match.params.slug),
+  );
+
+  if (!specificComponent) {
+    // Check if params env : render HeaderNav component
+    specificComponent = !this.props.match.params.env
+      ? 'defaultComponent'
+      : 'defaultComponentWithEnvironments';
+  }
+
+  // if custom view display render specificComponent
+  const Component = this.components[specificComponent];
+  const addRequiredInputDesign = this.props.match.params.slug === 'databases';
+  const listTitle = ['languages', 'databases'].includes(this.props.match.params.slug)
+    ? this.renderListTitle()
+    : '';
+  const listButtonLabel = ['languages', 'databases'].includes(this.props.match.params.slug)
+    ? this.renderListButtonLabel()
+    : '';
+
+  // check if HeaderNav component needs to render a form or a list
+  const renderListComponent = this.props.match.params.slug === 'databases';
+
+  let handleListPopUpSubmit;
+  // sections is the props used by EditForm in case of list of table rendering we need to change its value
+  let sections;
+  let renderPopUpForm = false;
+  let renderRow = false;
+  let actionBeforeOpenPopUp;
+  let addListTitleMarginTop;
+
+  switch (this.props.match.params.slug) {
+    case 'languages':
+      sections = this.props.home.listLanguages.sections;
+
+      // custom rendering for PopUpForm
+      renderPopUpForm = this.renderPopUpFormLanguage;
+      renderRow = this.renderRowLanguage;
+      handleListPopUpSubmit = this.props.newLanguagePost;
+      break;
+    case 'databases':
+      sections = this.props.home.addDatabaseSection.sections;
+      renderPopUpForm = this.renderPopUpFormDatabase;
+      handleListPopUpSubmit = this.addConnection;
+      renderRow = this.renderRowDatabase;
+      actionBeforeOpenPopUp = this.emptyDbModifiedData;
+      addListTitleMarginTop = true;
+      break;
+    default:
+      sections = this.props.home.configsDisplay.sections;
+  }
+
+  // Custom selectOptions for languages
+  const selectOptions = this.props.match.params.slug === 'languages' ? this.props.home.listLanguages : [];
+  return (
+    < Component
+  sections = {sections}
+  listItems = {this.props.home.configsDisplay.sections}
+  values = {this.props.home.modifiedData}
+  onChange = {this.handleChange}
+  onCancel = {this.handleCancel}
+  onSubmit = {this.handleSubmit}
+  links = {this.props.environments}
+  path = {this.props.location.pathname}
+  slug = {this.props.match.params.slug}
+  renderRow = {renderRow}
+  listTitle = {listTitle}
+  listButtonLabel = {listButtonLabel}
+  handlei18n
+  handleListPopUpSubmit = {handleListPopUpSubmit}
+  selectOptions = {selectOptions}
+  renderPopUpForm = {renderPopUpForm}
+  renderListComponent = {renderListComponent}
+  cancelAction = {this.props.home.cancelAction}
+  actionBeforeOpenPopUp = {actionBeforeOpenPopUp}
+  addRequiredInputDesign = {addRequiredInputDesign}
+  addListTitleMarginTop = {addListTitleMarginTop}
+  formErrors = {this.props.home.formErrors}
+  error = {this.props.home.error}
+  showLoader = {this.props.home.showLoader}
+  />
+)
+  ;
+};
+
+// Set the toggleDefaultConnection to false
+resetToggleDefaultConnection = () => this.setState({toggleDefaultConnection: false});
+
+// Hide database modal
+toggle = () => this.setState({modal: !this.state.modal});
+
+render()
+{
+  return (
+    < div
+  className = "container-fluid" >
+    < div
+  className = "row" >
+    < PluginLeftMenu
+  sections = {this.props.menuSections}
+  environments = {this.props.environments}
+  envParams = {this.props.match.params.env}
+  />
+  < div
+  className = {`${styles.home} col-md-9`
+}>
+<
+  Helmet
+  title = "Settings Manager"
+  meta = {[{name: 'Settings Manager Plugin', content: 'Modify your app settings'}]}
+  />
+  < ContentHeader
+  name = {this.props.home.configsDisplay.name}
+  description = {this.props.home.configsDisplay.description}
+  />
+
+  {
+    this.renderComponent()
+  }
+<
+  /div>
+  < /div>
+  < /div>
+)
+  ;
+}
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -596,8 +644,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = strapi.injectReducer({ key: 'homePage', reducer, pluginId });
-const withSaga = strapi.injectSaga({ key: 'homePage', saga, pluginId });
+const withReducer = strapi.injectReducer({key: 'homePage', reducer, pluginId});
+const withSaga = strapi.injectSaga({key: 'homePage', saga, pluginId});
 
 export default compose(
   withReducer,

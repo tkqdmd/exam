@@ -10,7 +10,7 @@ const generateFiltersFromSearch = search => search
     const arr = curr.split('=');
     const split = arr[0].split('_');
     const filter = split.length > 1 ? `_${split[1]}` : '=';
-    acc.push({ attr: split[0], filter, value: decodeURIComponent(arr[1]) });
+    acc.push({attr: split[0], filter, value: decodeURIComponent(arr[1])});
 
     return acc;
   }, []);
@@ -50,11 +50,11 @@ const generateSearchFromParams = params =>
     return acc;
   }, '');
 
-  /**
-* Generate the redirect URI when editing an entry
-* @type {String}
-*/
-const generateRedirectURI = function ({ model, search } = {}) {
+/**
+ * Generate the redirect URI when editing an entry
+ * @type {String}
+ */
+const generateRedirectURI = function ({model, search} = {}) {
   return `?redirectUrl=/plugins/content-manager/${(model || this.getCurrentModelName()).toLowerCase()}${(search || this.generateSearch())}`;
 };
 

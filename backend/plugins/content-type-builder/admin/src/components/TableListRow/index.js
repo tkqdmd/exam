@@ -6,8 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, isEmpty, startCase } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import {get, isEmpty, startCase} from 'lodash';
+import {FormattedMessage} from 'react-intl';
 import IcoContainer from 'components/IcoContainer';
 import ListRow from 'components/ListRow';
 import PopUpWarning from 'components/PopUpWarning';
@@ -17,6 +17,7 @@ import pluginId from '../../pluginId';
 import styles from '../TableList/styles.scss';
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-curly-brace-presence */
+
 /* eslint-disable indent */
 
 class TableListRow extends React.Component {
@@ -35,7 +36,7 @@ class TableListRow extends React.Component {
     const {
       deleteTemporaryModel,
       onDelete,
-      rowItem: { name, isTemporary },
+      rowItem: {name, isTemporary},
     } = this.props;
 
     if (isTemporary) {
@@ -44,13 +45,13 @@ class TableListRow extends React.Component {
       onDelete(name, this.context);
     }
 
-    this.setState({ showWarning: false });
+    this.setState({showWarning: false});
   };
 
   handleEdit = () => {
     const {
       push,
-      rowItem: { name, source },
+      rowItem: {name, source},
     } = this.props;
 
     push({
@@ -60,7 +61,7 @@ class TableListRow extends React.Component {
   };
 
   handleGoTo = () => {
-    const { push } = this.props;
+    const {push} = this.props;
 
     push(
       `/plugins/${pluginId}/models/${this.props.rowItem.name}${
@@ -69,11 +70,11 @@ class TableListRow extends React.Component {
     );
   };
 
-  toggleModalWarning = () => this.setState({ showWarning: !this.state.showWarning });
+  toggleModalWarning = () => this.setState({showWarning: !this.state.showWarning});
 
   handleShowModalWarning = () => {
     if (this.props.canOpenModalAddContentType || this.props.rowItem.isTemporary === true) {
-      this.setState({ showWarning: !this.state.showWarning });
+      this.setState({showWarning: !this.state.showWarning});
     } else {
       strapi.notification.info(`${pluginId}.notification.info.contentType.creating.notSaved`);
     }
@@ -82,19 +83,37 @@ class TableListRow extends React.Component {
   render() {
     const name = get(this.props.rowItem, 'name', 'default');
     const pluginSource = this.props.rowItem.source ? (
-      <FormattedMessage id={`${pluginId}.from`}>
-        {message => (
-          <span style={{ fontStyle: 'italic', color: '#787E8F', fontWeight: '500' }}>
-            ({message}: {this.props.rowItem.source})
-          </span>
-        )}
-      </FormattedMessage>
-    ) : (
+      < FormattedMessage id = {`${pluginId}.from`
+  }>
+    {
+      message => (
+        < span
+      style = {
+      {
+        fontStyle: 'italic', color
+      :
+        '#787E8F', fontWeight
+      :
+        '500'
+      }
+    }>
+      ({message}: {this.props.rowItem.source})
+    <
+      /span>
+    )
+    }
+  <
+    /FormattedMessage>
+  ) :
+    (
       ''
     );
     const temporary = this.props.rowItem.isTemporary ? (
-      <FormattedMessage id={`${pluginId}.contentType.temporaryDisplay`} />
-    ) : (
+      < FormattedMessage id = {`${pluginId}.contentType.temporaryDisplay`
+  }
+    />
+  ) :
+    (
       ''
     );
     const description = isEmpty(this.props.rowItem.description)
@@ -104,41 +123,81 @@ class TableListRow extends React.Component {
     const icons = this.props.rowItem.source
       ? []
       : [
-          { icoType: 'pencil', onClick: this.handleEdit },
-          {
-            icoType: 'trash',
-            onClick: this.handleShowModalWarning,
-            id: `delete${name}`,
-          },
-        ];
+        {icoType: 'pencil', onClick: this.handleEdit},
+        {
+          icoType: 'trash',
+          onClick: this.handleShowModalWarning,
+          id: `delete${name}`,
+        },
+      ];
 
     return (
-      <ListRow onClick={this.handleGoTo} style={{ height: '5.4rem' }}>
-        <div className={`col-md-4 ${styles.italic} ${styles.nameContainer}`}>
-          <i className={`fa ${this.props.rowItem.icon}`} />
-          <span style={{ width: spanStyle }}>
-            {startCase(this.props.rowItem.name)} &nbsp;{pluginSource}
-          </span>
-          &nbsp;{temporary}
-        </div>
-        <div className={`col-md-5 text-center ${styles.descriptionContainer}`}>
-          <div>{description}</div>
-        </div>
-        <div className='col-md-2 text-center'>{this.props.rowItem.fields}</div>
-        <div className='col-md-1'>
-          <IcoContainer icons={icons} />
-        </div>
-        <PopUpWarning
-          isOpen={this.state.showWarning}
-          toggleModal={this.toggleModalWarning}
-          content={{
-            message: 'content-type-builder.popUpWarning.bodyMessage.contentType.delete',
-          }}
-          popUpWarningType={'danger'}
-          onConfirm={this.handleDelete}
-        />
-      </ListRow>
-    );
+      < ListRow
+    onClick = {this.handleGoTo}
+    style = {
+    {
+      height: '5.4rem'
+    }
+  }>
+  <
+    div
+    className = {`col-md-4 ${styles.italic} ${styles.nameContainer}`
+  }>
+  <
+    i
+    className = {`fa ${this.props.rowItem.icon}`
+  }
+    />
+    < span
+    style = {
+    {
+      width: spanStyle
+    }
+  }>
+    {
+      startCase(this.props.rowItem.name)
+    }
+  &
+    nbsp;
+    {
+      pluginSource
+    }
+  <
+    /span>
+    & nbsp;
+    {
+      temporary
+    }
+  <
+    /div>
+    < div
+    className = {`col-md-5 text-center ${styles.descriptionContainer}`
+  }>
+  <
+    div > {description} < /div>
+    < /div>
+    < div
+    className = 'col-md-2 text-center' > {this.props.rowItem.fields} < /div>
+      < div
+    className = 'col-md-1' >
+      < IcoContainer
+    icons = {icons}
+    />
+    < /div>
+    < PopUpWarning
+    isOpen = {this.state.showWarning}
+    toggleModal = {this.toggleModalWarning}
+    content = {
+    {
+      message: 'content-type-builder.popUpWarning.bodyMessage.contentType.delete',
+    }
+  }
+    popUpWarningType = {'danger'}
+    onConfirm = {this.handleDelete}
+    />
+    < /ListRow>
+  )
+    ;
   }
 }
 

@@ -1,4 +1,4 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
+import {LOCATION_CHANGE} from 'react-router-redux';
 import {
   all,
   call,
@@ -12,13 +12,13 @@ import {
 
 import request from 'utils/request';
 
-import { selectLocale } from '../LanguageProvider/selectors';
+import {selectLocale} from '../LanguageProvider/selectors';
 import {
   getAvailableAndInstalledPluginsSucceeded,
   downloadPluginSucceeded,
 } from './actions';
-import { DOWNLOAD_PLUGIN, GET_AVAILABLE_AND_INSTALLED_PLUGINS } from './constants';
-import { makeSelectPluginToDownload } from './selectors';
+import {DOWNLOAD_PLUGIN, GET_AVAILABLE_AND_INSTALLED_PLUGINS} from './constants';
+import {makeSelectPluginToDownload} from './selectors';
 
 export function* pluginDownload() {
   try {
@@ -45,7 +45,7 @@ export function* pluginDownload() {
       yield put(downloadPluginSucceeded());
       window.location.reload();
     }
-  } catch(err) {
+  } catch (err) {
     // Hide the global OverlayBlocker
     strapi.unlockApp();
     strapi.notification.error('notification.error');
@@ -66,13 +66,13 @@ export function* getData() {
         lang: locale,
       },
     };
-    const [availablePlugins, { plugins }] = yield all([
+    const [availablePlugins, {plugins}] = yield all([
       call(request, 'https://marketplace.strapi.io/plugins', opts),
-      call(request, '/admin/plugins', { method: 'GET' }),
+      call(request, '/admin/plugins', {method: 'GET'}),
     ]);
 
     yield put(getAvailableAndInstalledPluginsSucceeded(availablePlugins, Object.keys(plugins)));
-  } catch(err) {
+  } catch (err) {
     strapi.notification.error('notification.error');
   }
 }

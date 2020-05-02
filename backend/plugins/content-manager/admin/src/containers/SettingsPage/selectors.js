@@ -1,14 +1,14 @@
 /**
- * 
+ *
  * SettingsPage selectors
  */
 
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 import pluginId from '../../pluginId';
 
 /**
-* Direct selector to the settingsPage state domain
-*/
+ * Direct selector to the settingsPage state domain
+ */
 const selectSettingsPageDomain = () => state => state.get(`${pluginId}_settingsPage`);
 
 

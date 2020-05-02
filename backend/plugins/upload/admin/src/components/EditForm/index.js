@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { findIndex, get, isEmpty, map } from 'lodash';
+import {findIndex, get, isEmpty, map} from 'lodash';
 import PropTypes from 'prop-types';
 // You can find these components in either
 // ./node_modules/strapi-helper-plugin/lib/src
@@ -14,7 +14,7 @@ import Input from 'components/InputsIndex';
 
 import styles from './styles.scss';
 
-class EditForm extends React.Component  {
+class EditForm extends React.Component {
   getProviderForm = () => get(this.props.settings, ['providers', this.props.selectedProviderIndex, 'auth'], {});
 
   generateSelectOptions = () => (
@@ -30,64 +30,122 @@ class EditForm extends React.Component  {
 
   render() {
     return (
-      <div className={styles.editForm}>
-        <div className="row">
-          <Input
-            customBootstrapClass="col-md-6"
-            inputDescription={{ id: 'upload.EditForm.Input.select.inputDescription' }}
-            inputClassName={styles.inputStyle}
-            label={{ id: 'upload.EditForm.Input.select.label' }}
-            name="provider"
-            onChange={this.props.onChange}
-            selectOptions={this.generateSelectOptions()}
-            type="select"
-            value={get(this.props.modifiedData, 'provider')}
-          />
-        </div>
-        {!isEmpty(this.getProviderForm()) && (
-          <div className={styles.subFormWrapper}>
-            <div className="row">
-              {map(this.getProviderForm(), (value, key) => (
-                <Input
-                  didCheckErrors={this.props.didCheckErrors}
-                  errors={get(this.props.formErrors, [findIndex(this.props.formErrors, ['name', key]), 'errors'])}
-                  key={key}
-                  label={{ id: value.label }}
-                  name={key}
-                  onChange={this.props.onChange}
-                  selectOptions={value.values}
-                  type={value.type === 'enum' ? 'select' : value.type}
-                  validations={{ required: true }}
-                  value={get(this.props.modifiedData, key, '')}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        <div className={styles.separator} />
-        <div className="row">
-          <Input
-            inputClassName={styles.inputStyle}
-            label={{ id: 'upload.EditForm.Input.number.label' }}
-            name="sizeLimit"
-            onChange={this.props.onChange}
-            type="number"
-            step={0.01}
-            value={get(this.props.modifiedData, 'sizeLimit', 1) / 1000}
-          />
-        </div>
-        <div className={styles.separator} style={{ marginTop: '-4px'}} />
-        <div className="row">
-          <Input
-            label={{ id: 'upload.EditForm.Input.toggle.label' }}
-            name="enabled"
-            onChange={this.props.onChange}
-            type="toggle"
-            value={get(this.props.modifiedData, 'enabled', false)}
-          />
-        </div>
-      </div>
-    );
+      < div
+    className = {styles.editForm} >
+      < div
+    className = "row" >
+      < Input
+    customBootstrapClass = "col-md-6"
+    inputDescription = {
+    {
+      id: 'upload.EditForm.Input.select.inputDescription'
+    }
+  }
+    inputClassName = {styles.inputStyle}
+    label = {
+    {
+      id: 'upload.EditForm.Input.select.label'
+    }
+  }
+    name = "provider"
+    onChange = {this.props.onChange}
+    selectOptions = {this.generateSelectOptions()}
+    type = "select"
+    value = {get(this.props.modifiedData, 'provider'
+  )
+  }
+    />
+    < /div>
+    {
+      !isEmpty(this.getProviderForm()) && (
+      < div
+      className = {styles.subFormWrapper} >
+        < div
+      className = "row" >
+        {map(this.getProviderForm(),(value, key)
+    =>
+      (
+      < Input
+      didCheckErrors = {this.props.didCheckErrors}
+      errors = {get(this.props.formErrors, [findIndex(this.props.formErrors, ['name', key]), 'errors'
+    ])
+    }
+      key = {key}
+      label = {
+      {
+        id: value.label
+      }
+    }
+      name = {key}
+      onChange = {this.props.onChange}
+      selectOptions = {value.values}
+      type = {value.type === 'enum' ? 'select' : value.type}
+      validations = {
+      {
+        required: true
+      }
+    }
+      value = {get(this.props.modifiedData, key, ''
+    )
+    }
+      />
+    ))
+    }
+    <
+      /div>
+      < /div>
+    )
+    }
+  <
+    div
+    className = {styles.separator}
+    />
+    < div
+    className = "row" >
+      < Input
+    inputClassName = {styles.inputStyle}
+    label = {
+    {
+      id: 'upload.EditForm.Input.number.label'
+    }
+  }
+    name = "sizeLimit"
+    onChange = {this.props.onChange}
+    type = "number"
+    step = {0.01}
+    value = {get(this.props.modifiedData, 'sizeLimit', 1
+  ) /
+    1000
+  }
+    />
+    < /div>
+    < div
+    className = {styles.separator}
+    style = {
+    {
+      marginTop: '-4px'
+    }
+  }
+    />
+    < div
+    className = "row" >
+      < Input
+    label = {
+    {
+      id: 'upload.EditForm.Input.toggle.label'
+    }
+  }
+    name = "enabled"
+    onChange = {this.props.onChange}
+    type = "toggle"
+    value = {get(this.props.modifiedData, 'enabled', false
+  )
+  }
+    />
+    < /div>
+    < /div>
+  )
+    ;
   }
 }
 

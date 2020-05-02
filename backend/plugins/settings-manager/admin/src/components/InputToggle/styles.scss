@@ -7,6 +7,7 @@
 .inputToggle { /* stylelint-disable */
   margin-top: .2rem;
   margin-bottom: 1rem;
+
   > button {
     // display and box model
     width: 5.3rem;
@@ -26,17 +27,21 @@
     letter-spacing: 0.1rem;
     font-family: Lato;
     cursor: pointer;
+
     &:first-of-type {
       border-right: none;
       // box-shadow: inset -1px 1 3px 0 rgba(0,0,0,0.1);
     }
+
     &:nth-of-type(2) {
       border-left: none;
       // box-shadow: inset -4px 0 0px -2px rgba(0,0,0,0.05), inset 0px -4px 0px -2px rgba(0,0,0,0.05), 0px -4px 0px -2px rgba(0,0,0,0.05);
     }
+
     &:hover {
       z-index: 0 !important;
     }
+
     &:focus {
       outline: 0;
       box-shadow: 0 0 0;
@@ -45,15 +50,15 @@
 }
 
 .gradientOff {
-  background-image: linear-gradient( to bottom right, #F65A1D, #F68E0E );
+  background-image: linear-gradient(to bottom right, #F65A1D, #F68E0E);
   color: white !important;
-  box-shadow: inset -1px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .gradientOn {
-  background-image: linear-gradient( to bottom right, #005EEA, #0097F6);
+  background-image: linear-gradient(to bottom right, #005EEA, #0097F6);
   color: white !important;
-  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .toggleLabel {

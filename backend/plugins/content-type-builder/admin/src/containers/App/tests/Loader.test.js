@@ -5,7 +5,9 @@ import Loader from '../Loader';
 
 describe('<Loader />', () => {
   it('should not crash', () => {
-    const tree = renderer.create(<Loader />).toJSON();
+    const tree = renderer.create( < Loader / >
+  ).
+    toJSON();
 
     expect(tree).toMatchSnapshot();
   });

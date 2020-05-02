@@ -1,14 +1,14 @@
 /**
- * 
+ *
  * DraggedRemovedIcon
- * 
+ *
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 
-function DraggedRemovedIcon({ isDragging, onRemove, withLongerHeight, ...rest }) {
+function DraggedRemovedIcon({isDragging, onRemove, withLongerHeight, ...rest}) {
   let className;
 
   if (isDragging && withLongerHeight) {
@@ -22,17 +22,21 @@ function DraggedRemovedIcon({ isDragging, onRemove, withLongerHeight, ...rest })
   }
 
   return (
-    <span
-      className={className}
-      onClick={onRemove}
-      {...rest}
-    />
-  );
+    < span
+  className = {className}
+  onClick = {onRemove}
+  {...
+    rest
+  }
+  />
+)
+  ;
 }
 
 DraggedRemovedIcon.defaultProps = {
   isDragging: false,
-  onRemove: () => {},
+  onRemove: () => {
+  },
   withLongerHeight: false,
 };
 

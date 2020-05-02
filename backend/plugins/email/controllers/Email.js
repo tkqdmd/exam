@@ -15,12 +15,12 @@ module.exports = {
       environment: strapi.config.environment,
       type: 'plugin',
       name: 'email'
-    }).get({ key: 'provider' });
+    }).get({key: 'provider'});
 
     // Verify if the file email is enable.
     if (config.enabled === false) {
       strapi.log.error('Email is disabled');
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Email.status.disabled' }] }] : 'Emailis disabled');
+      return ctx.badRequest(null, ctx.request.admin ? [{messages: [{id: 'Email.status.disabled'}]}] : 'Emailis disabled');
     }
 
     // Something is wrong
@@ -37,14 +37,14 @@ module.exports = {
   },
 
   getEnvironments: async (ctx) => {
-    const environments =  _.map(_.keys(strapi.config.environments), environment => {
+    const environments = _.map(_.keys(strapi.config.environments), environment => {
       return {
         name: environment,
         active: (strapi.config.environment === environment)
       };
     });
 
-    ctx.send({ environments });
+    ctx.send({environments});
   },
 
   getSettings: async (ctx) => {

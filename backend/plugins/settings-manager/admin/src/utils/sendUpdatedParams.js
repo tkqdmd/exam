@@ -1,4 +1,4 @@
-import { forEach, includes, replace, trimStart, split, unset } from 'lodash';
+import {forEach, includes, replace, trimStart, split, unset} from 'lodash';
 
 export default function sendUpdatedParams(isCreatingNewFields) {
   const prevSettings = this.props.home.initialData;
@@ -11,9 +11,7 @@ export default function sendUpdatedParams(isCreatingNewFields) {
 
     if (isCreatingNewFields && value && key !== 'security.xframe.value.nested') {
       body[key] = value;
-    }
-
-    else if (key === 'security.xframe.value.nested' && prevSettings['security.xframe.value.nested'] !== this.props.home.modifiedData['security.xframe.value.nested'] && this.props.home.modifiedData['security.xframe.value'] === 'ALLOW-FROM') {
+    } else if (key === 'security.xframe.value.nested' && prevSettings['security.xframe.value.nested'] !== this.props.home.modifiedData['security.xframe.value.nested'] && this.props.home.modifiedData['security.xframe.value'] === 'ALLOW-FROM') {
 
       const xFrameValue = `ALLOW-FROM.ALLOW-FROM ${trimStart(replace(this.props.home.modifiedData['security.xframe.value.nested'], 'ALLOW-FROM', ''))}`;
       body['security.xframe.value'] = xFrameValue;

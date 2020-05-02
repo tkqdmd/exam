@@ -1,6 +1,6 @@
 .modelPage { /* stylelint-disable */
   min-height: calc(100vh - 6rem);
-  background: rgba(14,22,34,0.02);
+  background: rgba(14, 22, 34, 0.02);
 }
 
 .componentsContainer {
@@ -43,6 +43,7 @@
   text-decoration: none !important;
   line-height: 1.6rem;
   cursor: pointer;
+
   > div {
     width: 1.3rem;
     margin-right: 1rem;

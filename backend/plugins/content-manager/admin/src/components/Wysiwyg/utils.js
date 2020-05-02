@@ -4,12 +4,12 @@
  *
  */
 
-import { ContentBlock, EditorState, genKey, Modifier } from 'draft-js';
-import { List } from 'immutable';
-import { DEFAULT_INDENTATION } from './constants';
+import {ContentBlock, EditorState, genKey, Modifier} from 'draft-js';
+import {List} from 'immutable';
+import {DEFAULT_INDENTATION} from './constants';
 
 export function createNewBlock(text = '', type = 'unstyled', key = genKey()) {
-  return new ContentBlock({ key, type, text, charaterList: List([]) });
+  return new ContentBlock({key, type, text, charaterList: List([])});
 }
 
 export function getNextBlocksList(editorState, startKey) {

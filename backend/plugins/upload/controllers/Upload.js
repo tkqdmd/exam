@@ -15,26 +15,31 @@ module.exports = {
       environment: strapi.config.environment,
       type: 'plugin',
       name: 'upload'
-    }).get({ key: 'provider' });
+    }).get({key: 'provider'});
 
     // Verify if the file upload is enable.
     if (config.enabled === false) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Upload.status.disabled' }] }] : 'File upload is disabled');
+      return ctx.badRequest(null, ctx.request.admin ? [{messages: [{id: 'Upload.status.disabled'}]}] : 'File upload is disabled');
     }
 
     // Extract optional relational data.
-    const { refId, ref, source, field, path } = ctx.request.body.fields;
-    const { files = {} } = ctx.request.body.files;
+    const {refId, ref, source, field, path} = ctx.request.body.fields;
+    const {files = {}} = ctx.request.body.files;
 
     if (_.isEmpty(files)) {
-      return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Upload.status.empty' }] }] : 'Files are empty');
+      return ctx.badRequest(null, ctx.request.admin ? [{messages: [{id: 'Upload.status.empty'}]}] : 'Files are empty');
     }
 
     // Transform stream files to buffer
     const buffers = await strapi.plugins.upload.services.upload.bufferize(ctx.request.body.files.files);
     const enhancedFiles = buffers.map(file => {
       if (file.size > config.sizeLimit) {
-        return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Upload.status.sizeLimit', values: {file: file.name} }] }] : `${file.name} file is bigger than limit size!`);
+        return ctx.badRequest(null, ctx.request.admin ? [{
+          messages: [{
+            id: 'Upload.status.sizeLimit',
+            values: {file: file.name}
+          }]
+        }] : `${file.name} file is bigger than limit size!`);
       }
 
       // Add details to the file to be able to create the relationships.
@@ -82,14 +87,14 @@ module.exports = {
   },
 
   getEnvironments: async (ctx) => {
-    const environments =  _.map(_.keys(strapi.config.environments), environment => {
+    const environments = _.map(_.keys(strapi.config.environments), environment => {
       return {
         name: environment,
         active: (strapi.config.environment === environment)
       };
     });
 
-    ctx.send({ environments });
+    ctx.send({environments});
   },
 
   getSettings: async (ctx) => {

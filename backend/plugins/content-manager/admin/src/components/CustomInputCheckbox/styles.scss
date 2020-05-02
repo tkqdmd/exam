@@ -4,6 +4,7 @@
 
 .customLabel {
   cursor: pointer;
+
   > input {
     display: none;
   }
@@ -13,9 +14,11 @@
   &:before {
     content: '';
     position: absolute;
-    left:15px; top: 5px;
-    width: 14px; height: 14px;
-    border: 1px solid rgba(16,22,34,0.15);
+    left: 15px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(16, 22, 34, 0.15);
     background-color: #FDFDFD;
     border-radius: 3px;
   }
@@ -25,9 +28,11 @@
   &:before {
     content: '';
     position: absolute;
-    left:15px; top: 19px;
-    width: 14px; height: 14px;
-    border: 1px solid rgba(16,22,34,0.15);
+    left: 15px;
+    top: 19px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(16, 22, 34, 0.15);
     background-color: #FDFDFD;
     border-radius: 3px;
   }
@@ -37,7 +42,8 @@
   &:after {
     content: '\f00c';
     position: absolute;
-    top: 5px; left: 17px;
+    top: 5px;
+    left: 17px;
     font-size: 10px;
     font-family: 'FontAwesome';
     font-weight: 100;
@@ -51,7 +57,8 @@
   &:after {
     content: '\f00c';
     position: absolute;
-    top: 0px; left: 17px;
+    top: 0px;
+    left: 17px;
     font-size: 10px;
     font-family: 'FontAwesome';
     font-weight: 100;
@@ -65,7 +72,8 @@
   &:after {
     content: '\f068';
     position: absolute;
-    top: 5px; left: 18px;
+    top: 5px;
+    left: 18px;
     font-size: 10px;
     font-family: 'FontAwesome';
     font-weight: 100;

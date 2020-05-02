@@ -4,8 +4,8 @@
  *
  */
 
-import { fromJS, List, Map } from 'immutable';
-import { toString } from 'lodash';
+import {fromJS, List, Map} from 'immutable';
+import {toString} from 'lodash';
 
 // ListPage constants
 import {

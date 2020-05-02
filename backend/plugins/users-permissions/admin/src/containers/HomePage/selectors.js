@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 import pluginId from '../../pluginId';
 
 /**
@@ -16,8 +16,8 @@ const selectHomePage = () => createSelector(
 );
 
 /**
-* Other specific selectors
-*/
+ * Other specific selectors
+ */
 
 const makeSelectAllData = () => createSelector(
   selectHomePageDomain(),

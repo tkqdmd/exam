@@ -17,9 +17,11 @@ li:not(:first-child) {
   color: #2C3138 !important;
   text-decoration: none !important;
   line-height: 1.6rem;
+
   > div {
     width: 1.3rem;
     margin-right: 1rem;
+
     > i {
       color: #666B74;
       // color: blue;
@@ -34,6 +36,7 @@ li:not(:first-child) {
   font-weight: bold;
   text-decoration: none;
   color: #2D3138 !important;
+
   > div {
 
     > i {

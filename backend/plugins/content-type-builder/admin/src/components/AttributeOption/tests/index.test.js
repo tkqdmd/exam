@@ -10,7 +10,11 @@ import AttributeOption from '../index';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
 
-const renderComponent = (props = {}) => mountWithIntl(<AttributeOption {...props} />, messages);
+const renderComponent = (props = {}) => mountWithIntl( < AttributeOption
+{...
+  props
+}
+/>, messages);
 
 describe('<AttributeOption />', () => {
   it('should not crash', () => {
@@ -30,7 +34,7 @@ describe('<AttributeOption />', () => {
 
     wrapper.instance().forceUpdate();
 
-    wrapper.setProps({ isDisplayed: true });
+    wrapper.setProps({isDisplayed: true});
 
     expect(spyOnFocusNode).toHaveBeenCalled();
     expect(spyOnFocusAction).toHaveBeenCalled();
@@ -49,7 +53,7 @@ describe('<AttributeOption />', () => {
 
     wrapper.instance().forceUpdate();
 
-    wrapper.setProps({ nodeToFocus: 1 });
+    wrapper.setProps({nodeToFocus: 1});
 
     expect(spyOnFocusNode).toHaveBeenCalled();
     expect(spyOnFocusAction).toHaveBeenCalled();
@@ -67,7 +71,7 @@ describe('<AttributeOption />', () => {
   });
 
   it('should use the defaultProps', () => {
-    const { defaultProps } = AttributeOption;
+    const {defaultProps} = AttributeOption;
 
     expect(defaultProps.onBlur).toBeFalsy();
 

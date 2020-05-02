@@ -6,9 +6,9 @@
 
 import React from 'react';
 import Select from 'react-select';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import PropTypes from 'prop-types';
-import { cloneDeep, includes, isArray, isNull, isUndefined, get, findIndex, isEmpty } from 'lodash';
+import {cloneDeep, includes, isArray, isNull, isUndefined, get, findIndex, isEmpty} from 'lodash';
 
 // Utils.
 import request from 'utils/request';
@@ -63,7 +63,7 @@ class SelectMany extends React.PureComponent {
     }
     // Request URL
     const requestUrl = `/content-manager/explorer/${this.props.relation.model ||
-      this.props.relation.collection}`;
+    this.props.relation.collection}`;
 
     // Call our request helper (see 'utils/request')
     return request(requestUrl, {
@@ -74,15 +74,15 @@ class SelectMany extends React.PureComponent {
         /* eslint-disable indent */
         const options = isArray(response)
           ? response.map(item => ({
-              value: item,
-              label: templateObject({ mainField: this.props.relation.displayedAttribute }, item).mainField,
-            }))
+            value: item,
+            label: templateObject({mainField: this.props.relation.displayedAttribute}, item).mainField,
+          }))
           : [
-              {
-                value: response,
-                label: response[this.props.relation.displayedAttribute],
-              },
-            ];
+            {
+              value: response,
+              label: response[this.props.relation.displayedAttribute],
+            },
+          ];
         /* eslint-enable indent */
         const newOptions = cloneDeep(this.state.options);
         options.map(option => {
@@ -137,7 +137,7 @@ class SelectMany extends React.PureComponent {
     // Add removed value from available option;
     const toAdd = {
       value: values[index],
-      label: templateObject({ mainField: this.props.relation.displayedAttribute }, values[index]).mainField,
+      label: templateObject({mainField: this.props.relation.displayedAttribute}, values[index]).mainField,
     };
 
     this.setState(prevState => ({
@@ -160,64 +160,82 @@ class SelectMany extends React.PureComponent {
   };
 
   render() {
-    const description = this.props.relation.description ? <p>{this.props.relation.description}</p> : '';
+    const description = this.props.relation.description ?
+  <
+    p > {this.props.relation.description} < /p> : '';
     const value = get(this.props.record, this.props.relation.alias) || [];
 
     /* eslint-disable jsx-a11y/label-has-for */
     return (
-      <div className={`form-group ${styles.selectMany} ${value.length > 4 && styles.selectManyUpdate}`}>
-        <label htmlFor={this.props.relation.alias}>
-          {get(this.props.relation, 'label', this.props.relation.alias)} <span>({value.length})</span>
-        </label>
-        {description}
-        <Select
-          className={`${styles.select}`}
-          id={this.props.relation.alias}
-          isLoading={this.state.isLoading}
-          onChange={this.handleChange}
-          onInputChange={this.handleInputChange}
-          onMenuScrollToBottom={this.handleBottomScroll}
-          options={this.state.options}
-          placeholder={<FormattedMessage id="content-manager.containers.Edit.addAnItem" />}
-        />
-        <SortableList
-          items={
-            /* eslint-disable indent */
-            isNull(value) || isUndefined(value) || value.size === 0
-              ? null
-              : value.map(item => {
-                  if (item) {
-                    return {
-                      value: get(item, 'value') || item,
-                      label:
-                        get(item, 'label') ||
-                        templateObject({ mainField: this.props.relation.displayedAttribute }, item)
-                          .mainField ||
-                        item.id,
-                    };
-                  }
-                })
-          }
-          /* eslint-enable indent */
-          isDraggingSibling={this.props.isDraggingSibling}
-          keys={this.props.relation.alias}
-          moveAttr={this.props.moveAttr}
-          moveAttrEnd={this.props.moveAttrEnd}
-          name={this.props.relation.alias}
-          onRemove={this.handleRemove}
-          distance={1}
-          onClick={this.handleClick}
-        />
-      </div>
-    );
+      < div
+    className = {`form-group ${styles.selectMany} ${value.length > 4 && styles.selectManyUpdate}`
+  }>
+  <
+    label
+    htmlFor = {this.props.relation.alias} >
+      {get(this.props.relation, 'label', this.props.relation.alias
+  )
+  } <
+    span > ({value.length}) < /span>
+    < /label>
+    {
+      description
+    }
+  <
+    Select
+    className = {`${styles.select}`
+  }
+    id = {this.props.relation.alias}
+    isLoading = {this.state.isLoading}
+    onChange = {this.handleChange}
+    onInputChange = {this.handleInputChange}
+    onMenuScrollToBottom = {this.handleBottomScroll}
+    options = {this.state.options}
+    placeholder = { < FormattedMessage
+    id = "content-manager.containers.Edit.addAnItem" / >
+  }
+    />
+    < SortableList
+    items = {
+      /* eslint-disable indent */
+      isNull(value) || isUndefined(value) || value.size === 0
+      ? null
+      : value.map(item => {
+        if (item) {
+          return {
+            value: get(item, 'value') || item,
+            label:
+              get(item, 'label') ||
+              templateObject({mainField: this.props.relation.displayedAttribute}, item)
+                .mainField ||
+              item.id,
+          };
+        }
+      })
+  }
+    /* eslint-enable indent */
+    isDraggingSibling = {this.props.isDraggingSibling}
+    keys = {this.props.relation.alias}
+    moveAttr = {this.props.moveAttr}
+    moveAttrEnd = {this.props.moveAttrEnd}
+    name = {this.props.relation.alias}
+    onRemove = {this.handleRemove}
+    distance = {1}
+    onClick = {this.handleClick}
+    />
+    < /div>
+  )
+    ;
     /* eslint-disable jsx-a11y/label-has-for */
   }
 }
 
 SelectMany.defaultProps = {
   isDraggingSibling: false,
-  moveAttr: () => {},
-  moveAttrEnd: () => {},
+  moveAttr: () => {
+  },
+  moveAttrEnd: () => {
+  },
 };
 
 SelectMany.propTypes = {

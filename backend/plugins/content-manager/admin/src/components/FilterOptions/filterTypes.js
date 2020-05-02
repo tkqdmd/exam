@@ -1,5 +1,5 @@
 const getFilters = (type) => {
-  switch(type) {
+  switch (type) {
     case 'string':
     case 'text':
     case 'password':
@@ -96,7 +96,7 @@ const getFilters = (type) => {
           value: '_ne',
         },
       ];
-    
+
   }
 };
 

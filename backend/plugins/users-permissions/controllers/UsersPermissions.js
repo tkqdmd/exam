@@ -17,34 +17,34 @@ module.exports = {
    */
   createRole: async (ctx) => {
     if (_.isEmpty(ctx.request.body)) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Cannot be empty' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Cannot be empty'}]}]);
     }
 
     try {
       await strapi.plugins['users-permissions'].services.userspermissions.createRole(ctx.request.body);
 
-      ctx.send({ ok: true });
-    } catch(err) {
-      ctx.badRequest(null, [{ messages: [{ id: 'An error occured' }] }]);
+      ctx.send({ok: true});
+    } catch (err) {
+      ctx.badRequest(null, [{messages: [{id: 'An error occured'}]}]);
     }
   },
 
   deleteProvider: async ctx => {
-    const { provider } = ctx.params;
+    const {provider} = ctx.params;
 
     if (!provider) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Bad request' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Bad request'}]}]);
     }
 
     // TODO handle dynamic
-    ctx.send({ ok: true });
+    ctx.send({ok: true});
   },
 
   deleteRole: async ctx => {
     // Fetch root and public role.
     const [root, publicRole] = await Promise.all([
-      strapi.query('role', 'users-permissions').findOne({ type: 'root' }),
-      strapi.query('role', 'users-permissions').findOne({ type: 'public' })
+      strapi.query('role', 'users-permissions').findOne({type: 'root'}),
+      strapi.query('role', 'users-permissions').findOne({type: 'public'})
     ]);
 
     const rootID = root.id || root._id;
@@ -53,32 +53,32 @@ module.exports = {
     const roleID = ctx.params.role;
 
     if (!roleID) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Bad request' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Bad request'}]}]);
     }
 
     // Prevent from removing the root role.
     if (roleID.toString() === rootID.toString() || roleID.toString() === publicRoleID.toString()) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Unauthorized' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Unauthorized'}]}]);
     }
 
     try {
       await strapi.plugins['users-permissions'].services.userspermissions.deleteRole(roleID, publicRoleID);
 
-      ctx.send({ ok: true });
-    } catch(err) {
-      ctx.badRequest(null, [{ messages: [{ id: 'Bad request' }] }]);
+      ctx.send({ok: true});
+    } catch (err) {
+      ctx.badRequest(null, [{messages: [{id: 'Bad request'}]}]);
     }
   },
 
   getPermissions: async (ctx) => {
     try {
-      const { lang } = ctx.query;
+      const {lang} = ctx.query;
       const plugins = await strapi.plugins['users-permissions'].services.userspermissions.getPlugins(lang);
       const permissions = await strapi.plugins['users-permissions'].services.userspermissions.getActions(plugins);
 
-      ctx.send({ permissions });
-    } catch(err) {
-      ctx.badRequest(null, [{ message: [{ id: 'Not Found' }] }]);
+      ctx.send({permissions});
+    } catch (err) {
+      ctx.badRequest(null, [{message: [{id: 'Not Found'}]}]);
     }
   },
 
@@ -89,25 +89,25 @@ module.exports = {
   },
 
   getRole: async (ctx) => {
-    const { id } = ctx.params;
-    const { lang } = ctx.query;
+    const {id} = ctx.params;
+    const {lang} = ctx.query;
     const plugins = await strapi.plugins['users-permissions'].services.userspermissions.getPlugins(lang);
     const role = await strapi.plugins['users-permissions'].services.userspermissions.getRole(id, plugins);
 
     if (_.isEmpty(role)) {
-      return ctx.badRequest(null, [{ messages: [{ id: `Role don't exist` }] }]);
+      return ctx.badRequest(null, [{messages: [{id: `Role don't exist`}]}]);
     }
 
-    ctx.send({ role });
+    ctx.send({role});
   },
 
   getRoles: async (ctx) => {
     try {
       const roles = await strapi.plugins['users-permissions'].services.userspermissions.getRoles();
 
-      ctx.send({ roles });
-    } catch(err) {
-      ctx.badRequest(null, [{ messages: [{ id: 'Not found' }] }]);
+      ctx.send({roles});
+    } catch (err) {
+      ctx.badRequest(null, [{messages: [{id: 'Not found'}]}]);
     }
   },
 
@@ -115,9 +115,9 @@ module.exports = {
     try {
       const routes = await strapi.plugins['users-permissions'].services.userspermissions.getRoutes();
 
-      ctx.send({ routes });
-    } catch(err) {
-      ctx.badRequest(null, [{ messages: [{ id: 'Not found' }] }]);
+      ctx.send({routes});
+    } catch (err) {
+      ctx.badRequest(null, [{messages: [{id: 'Not found'}]}]);
     }
   },
 
@@ -131,9 +131,9 @@ module.exports = {
   },
 
   init: async (ctx) => {
-    const role = await strapi.query('role', 'users-permissions').findOne({ type: 'root' }, ['users']);
+    const role = await strapi.query('role', 'users-permissions').findOne({type: 'root'}, ['users']);
 
-    ctx.send({ hasAdmin: !_.isEmpty(role.users) });
+    ctx.send({hasAdmin: !_.isEmpty(role.users)});
   },
 
   searchUsers: async (ctx) => {
@@ -144,18 +144,18 @@ module.exports = {
 
   updateRole: async function (ctx) {
     // Fetch root role.
-    const root = await strapi.query('role', 'users-permissions').findOne({ type: 'root' });
+    const root = await strapi.query('role', 'users-permissions').findOne({type: 'root'});
 
     const roleID = ctx.params.role;
     const rootID = root.id || root._id;
 
     // Prevent from updating the root role.
     if (roleID === rootID) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Unauthorized' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Unauthorized'}]}]);
     }
 
     if (_.isEmpty(ctx.request.body)) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Bad request' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Bad request'}]}]);
     }
 
     try {
@@ -163,9 +163,9 @@ module.exports = {
 
       strapi.emit('didOpenAccessToFetchContentTypeEntries', ctx.request.body);
 
-      ctx.send({ ok: true });
+      ctx.send({ok: true});
     } catch (error) {
-      ctx.badRequest(null, [{ messages: [{ id: 'An error occurred' }] }]);
+      ctx.badRequest(null, [{messages: [{id: 'An error occurred'}]}]);
     }
   },
 
@@ -180,7 +180,7 @@ module.exports = {
 
   updateEmailTemplate: async (ctx) => {
     if (_.isEmpty(ctx.request.body)) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Cannot be empty' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Cannot be empty'}]}]);
     }
 
     await strapi.store({
@@ -190,7 +190,7 @@ module.exports = {
       key: 'email'
     }).set({value: ctx.request.body['email-templates']});
 
-    ctx.send({ ok: true });
+    ctx.send({ok: true});
   },
 
   getAdvancedSettings: async (ctx) => {
@@ -207,7 +207,7 @@ module.exports = {
 
   updateAdvancedSettings: async (ctx) => {
     if (_.isEmpty(ctx.request.body)) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Cannot be empty' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Cannot be empty'}]}]);
     }
 
     await strapi.store({
@@ -217,7 +217,7 @@ module.exports = {
       key: 'advanced'
     }).set({value: ctx.request.body});
 
-    ctx.send({ ok: true });
+    ctx.send({ok: true});
   },
 
   getProviders: async (ctx) => {
@@ -231,7 +231,7 @@ module.exports = {
 
   updateProviders: async (ctx) => {
     if (_.isEmpty(ctx.request.body)) {
-      return ctx.badRequest(null, [{ messages: [{ id: 'Cannot be empty' }] }]);
+      return ctx.badRequest(null, [{messages: [{id: 'Cannot be empty'}]}]);
     }
 
     await strapi.store({
@@ -241,6 +241,6 @@ module.exports = {
       key: 'grant'
     }).set({value: ctx.request.body.providers});
 
-    ctx.send({ ok: true });
+    ctx.send({ok: true});
   }
 };

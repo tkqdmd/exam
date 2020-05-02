@@ -1,12 +1,12 @@
 /**
-*
-* EditFormSectionNested
-*
-*/
+ *
+ * EditFormSectionNested
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { has, map, forEach } from 'lodash';
+import {has, map, forEach} from 'lodash';
 
 // HOC
 import EditFormSectionSubNested from '../EditFormSectionSubNested';
@@ -22,6 +22,7 @@ class EditFormSectionNested extends React.Component { // eslint-disable-line rea
       inputWithNestedForm: '',
     };
   }
+
   componentDidMount() {
     // check if there is inside a section an input that requires nested input to display it on the entire line
     // TODO add logic in withform section HOC
@@ -41,12 +42,12 @@ class EditFormSectionNested extends React.Component { // eslint-disable-line rea
       if (input.type === 'enum') {
         forEach(input.items, (item) => {
           if (has(item, 'items')) {
-            this.setState({ hasNestedInput: true, inputWithNestedForm: input.target, section: item.items });
+            this.setState({hasNestedInput: true, inputWithNestedForm: input.target, section: item.items});
 
             if (props.values[input.target] === item.value) {
-              this.setState({ showNestedForm: true });
+              this.setState({showNestedForm: true});
             } else {
-              this.setState({ showNestedForm: false });
+              this.setState({showNestedForm: false});
             }
           }
         });
@@ -56,28 +57,48 @@ class EditFormSectionNested extends React.Component { // eslint-disable-line rea
 
   render() {
     return (
-      <div className={`${this.props.styles.padded} ${this.props.styles.nesTedFormContainer}`}>
-        <div className="row">
-          {map(this.props.section, (item, key) => {
-            if (this.state.showNestedForm) {
-              return (
-                <div key={key} style={{width: '100%'}}>
-                  {this.props.renderInput(item, key)}
-                  <EditFormSectionSubNested
-                    section={this.state.section}
-                    values={this.props.values}
-                    onChange={this.props.onChange}
-                    formErrors={this.props.formErrors}
-                  />
-                </div>
-              );
-            }
+      < div
+    className = {`${this.props.styles.padded} ${this.props.styles.nesTedFormContainer}`
+  }>
+  <
+    div
+    className = "row" >
+      {map(this.props.section,(item, key)
+  =>
+    {
+      if (this.state.showNestedForm) {
+        return (
+          < div
+        key = {key}
+        style = {
+        {
+          width: '100%'
+        }
+      }>
+        {
+          this.props.renderInput(item, key)
+        }
+      <
+        EditFormSectionSubNested
+        section = {this.state.section}
+        values = {this.props.values}
+        onChange = {this.props.onChange}
+        formErrors = {this.props.formErrors}
+        />
+        < /div>
+      )
+        ;
+      }
 
-            return this.props.renderInput(item, key);
-          })}
-        </div>
-      </div>
-    );
+      return this.props.renderInput(item, key);
+    }
+  )
+  }
+  <
+    /div>
+    < /div>
+  )
+    ;
   }
 }
 

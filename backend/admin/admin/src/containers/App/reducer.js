@@ -4,7 +4,7 @@ import {
   ENABLE_GLOBAL_OVERLAY_BLOCKER,
 } from 'constants/overlayBlocker';
 
-import { fromJS, List } from 'immutable';
+import {fromJS, List} from 'immutable';
 
 import {
   FREEZE_APP,

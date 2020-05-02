@@ -2,7 +2,8 @@
   &:after {
     content: '\f00c';
     position: absolute;
-    top: 0px; left: 2px;
+    top: 0px;
+    left: 2px;
     font-size: 10px;
     font-family: 'FontAwesome';
     font-weight: 100;
@@ -31,6 +32,7 @@
 
 .inputCheckbox {
   font-size: 13px;
+
   > div {
     margin-bottom: 0 !important;
   }
@@ -50,10 +52,11 @@
   &:before {
     content: '';
     position: absolute;
-    left:0px;
+    left: 0px;
     top: 1px;
-    width: 14px; height: 14px;
-    border: 1px solid rgba(16,22,34,0.15);
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(16, 22, 34, 0.15);
     background-color: #FDFDFD;
     border-radius: 3px;
   }

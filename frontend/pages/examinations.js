@@ -19,10 +19,63 @@ class Examinations extends React.Component {
     super(props)
     this.state = {
       items: [],
+      time: {}, 
+      seconds: 1,
+      started: false,
     }
+    this.timer = 0;
     this.submitExam = this.submitExam.bind(this);
+    this.startExamTime = this.startExamTime.bind(this);
+    this.countDown = this.countDown.bind(this);
   }
   
+  startExamTime (){
+    var examination = this.props.data.examination;
+    this.setState({
+      seconds: examination.examTime*60,
+      time: this.secondsToTime(examination.examTime*60),
+      started: true,
+    });
+    console.log(this.timer)
+    if (this.timer == 0 && this.state.seconds > 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
+  }
+
+  secondsToTime(secs){
+    let hours = Math.floor(secs / (60 * 60));
+
+    let divisor_for_minutes = secs % (60 * 60);
+    let minutes = Math.floor(divisor_for_minutes / 60);
+
+    let divisor_for_seconds = divisor_for_minutes % 60;
+    let seconds = Math.ceil(divisor_for_seconds);
+
+    let obj = {
+      "h": hours,
+      "m": minutes,
+      "s": seconds
+    };
+    return obj;
+  }
+
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      time: this.secondsToTime(seconds),
+      seconds: seconds,
+    });
+    // Check if we're at zero.
+    if (seconds == 0) { 
+      // alert("Time out. Auto Submited");
+      this.submitExam();
+      Router.push("/")
+      
+      clearInterval(this.timer);
+    }
+  }
+
   onChange = (e) => {
       var copyItems = this.state.items;
       var check = false;
@@ -58,7 +111,7 @@ class Examinations extends React.Component {
       strapi
           .createEntry("results", {
               point: point,
-              username: this.props.loggedUser,
+              email: this.props.loggedUser,
               examCode: examination.code,
               datetime: new Date()+7,
             }).then(Router.push("/"));
@@ -66,6 +119,8 @@ class Examinations extends React.Component {
           
        
   };
+        
+  
   render() {
     const {
       data: { loading, error, examination },
@@ -77,13 +132,29 @@ class Examinations extends React.Component {
     if (error) return "Error Loading Questions";
 
     if (examination) {
-      if(new Date() < examination.startTime || new Date() > examination.endTime) return <h5><br></br>Exam is timeout</h5>;
+      if(new Date() < new Date(examination.startTime) || new Date() > new Date(examination.endTime)) return <h5><br></br>Exam has expired</h5>;
+
       if( examination.questions.length===0) return <h5><br></br>Exam don't have any questions</h5>;
+      
+      if(this.state.started === false) return (
+        <div>
+          <h2>{examination.name}</h2>
+          <h5><i>{examination.description}</i></h5>
+          <h6><i>Time for this exam is: {examination.examTime} minutes</i></h6>
+          <Button style={{marginTop: "30px" }} color="danger" size="lg" onClick={this.startExamTime}>Start</Button>
+        </div>
+      );
       let pos = 1;
       return (
         <>
           <h2>{examination.name}</h2>
           <h5><i>{examination.description}</i></h5>
+            <div style={{display: 'flex'}}>
+              <h6 style={{marginRight: "10px"}}>Time left: </h6>
+              <span>   {this.state.time.h}h</span> :   
+              <span>   {this.state.time.m}m</span> :    
+              <span>   {this.state.time.s}s</span>
+            </div> 
               <div style={{ display: "inline-block" }} className="h-100">
                 {examination.questions.map(res => (
                     <div>
@@ -135,6 +206,7 @@ const GET_EXAMINATION_QUESTIONS = gql`
       code
       startTime
       endTime
+      examTime
       questions {
         id
         question

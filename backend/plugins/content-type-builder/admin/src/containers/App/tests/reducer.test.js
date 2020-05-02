@@ -1,4 +1,4 @@
-import { fromJS, List, Map, OrderedMap } from 'immutable';
+import {fromJS, List, Map, OrderedMap} from 'immutable';
 
 import {
   addAttributeRelation,
@@ -31,7 +31,7 @@ import {
   updateTempContentType,
   setTemporaryAttributeRelation,
 } from '../actions';
-import appReducer, { shouldPluralizeKey, shouldPluralizeName } from '../reducer';
+import appReducer, {shouldPluralizeKey, shouldPluralizeName} from '../reducer';
 
 describe('Reducer utils', () => {
   describe('ShouldPluralizeKey', () => {
@@ -73,7 +73,7 @@ describe('appReducer', () => {
           description: 'super api',
           mainField: '',
           attributes: OrderedMap({
-            name: { type: 'string' },
+            name: {type: 'string'},
           }),
         },
       },
@@ -98,7 +98,7 @@ describe('appReducer', () => {
           mainField: '',
           attributes: OrderedMap(
             fromJS({
-              name: { type: 'string' },
+              name: {type: 'string'},
             }),
           ),
         },
@@ -395,7 +395,7 @@ describe('appReducer', () => {
   it('should handle the cancelNewContentType action correctly', () => {
     state = state
       .setIn(['newContentType', 'name'], 'test')
-      .setIn(['newContentType', 'attributes'], { test: { type: 'string' } });
+      .setIn(['newContentType', 'attributes'], {test: {type: 'string'}});
 
     const expected = state.set(
       'newContentType',
@@ -649,11 +649,11 @@ describe('appReducer', () => {
         attributes: [
           {
             name: 'type',
-            params: { type: 'string', required: true, configurable: false },
+            params: {type: 'string', required: true, configurable: false},
           },
           {
             name: 'controller',
-            params: { type: 'string', required: true, configurable: false },
+            params: {type: 'string', required: true, configurable: false},
           },
         ],
       },
@@ -691,35 +691,35 @@ describe('appReducer', () => {
       .setIn(['newContentType', 'connection'], 'default')
       .set('connections', List(connections));
 
-    expect(appReducer(state, getDataSucceeded({ allModels, models }, connections))).toEqual(expected);
+    expect(appReducer(state, getDataSucceeded({allModels, models}, connections))).toEqual(expected);
   });
 
   it('should handle the onChangeExistingContentTypeMainInfos action correctly', () => {
     const expected = state.setIn(['modifiedData', 'product', 'name'], 'test');
-    const target = { name: 'product.name', value: 'test' };
+    const target = {name: 'product.name', value: 'test'};
 
-    expect(appReducer(state, onChangeExistingContentTypeMainInfos({ target }))).toEqual(expected);
+    expect(appReducer(state, onChangeExistingContentTypeMainInfos({target}))).toEqual(expected);
   });
 
   it('should handle the onChangeNewContentTypeMainInfos action correctly', () => {
     const expected = state.setIn(['newContentType', 'name'], 'test');
-    const target = { name: 'name', value: 'test' };
+    const target = {name: 'name', value: 'test'};
 
-    expect(appReducer(state, onChangeNewContentTypeMainInfos({ target }))).toEqual(expected);
+    expect(appReducer(state, onChangeNewContentTypeMainInfos({target}))).toEqual(expected);
   });
 
   it('should handle the onChangeAttribute action correctly', () => {
     const expected = state.setIn(['temporaryAttribute', 'name'], 'test');
-    const target = { name: 'name', value: 'test' };
+    const target = {name: 'name', value: 'test'};
 
-    expect(appReducer(state, onChangeAttribute({ target }))).toEqual(expected);
+    expect(appReducer(state, onChangeAttribute({target}))).toEqual(expected);
   });
 
   it('should handle the onChangeRelation action correctly', () => {
     const expected = state.setIn(['temporaryAttributeRelation', 'name'], 'test');
-    const target = { name: 'name', value: 'test' };
+    const target = {name: 'name', value: 'test'};
 
-    expect(appReducer(state, onChangeRelation({ target }))).toEqual(expected);
+    expect(appReducer(state, onChangeRelation({target}))).toEqual(expected);
   });
 
   it('should handle the onChangeRelationNature action correctly for the oneWay', () => {
@@ -783,7 +783,7 @@ describe('appReducer', () => {
       .setIn(['temporaryAttributeRelation', 'name'], 'strapis');
 
     expect(
-      appReducer(state, onChangeRelationTarget({ name: 'strapi', source: null }, 'soupette', false)),
+      appReducer(state, onChangeRelationTarget({name: 'strapi', source: null}, 'soupette', false)),
     ).toEqual(expected);
   });
 
@@ -792,7 +792,7 @@ describe('appReducer', () => {
       .setIn(['modifiedData', 'product', 'attributes', 'test'], {
         type: 'string',
       })
-      .set('temporaryAttribute', { name: 'test', type: 'string' });
+      .set('temporaryAttribute', {name: 'test', type: 'string'});
     const expected = state
       .removeIn(['modifiedData', 'product', 'attributes', 'test'])
       .set('temporaryAttribute', Map({}));
@@ -813,7 +813,7 @@ describe('appReducer', () => {
 
   it('should handle the resetEditTempContentType action correctly', () => {
     state = state.setIn(['newContentType', 'attributes'], {
-      test: { type: 'string' },
+      test: {type: 'string'},
     });
     const expected = state.setIn(['newContentType', 'attributes'], Map({}));
 
@@ -883,7 +883,7 @@ describe('appReducer', () => {
   });
 
   it('should handle the saveEditedAttribute action correctly if the model is not temporary', () => {
-    state = state.set('temporaryAttribute', Map({ name: 'test', type: 'string' }));
+    state = state.set('temporaryAttribute', Map({name: 'test', type: 'string'}));
     const expected = state
       .removeIn(['modifiedData', 'product', 'attributes', 'name'])
       .setIn(['modifiedData', 'product', 'attributes', 'test', 'type'], 'string');
@@ -893,7 +893,7 @@ describe('appReducer', () => {
 
   it('should handle the saveEditedAttribute action correctly if the model is temporary', () => {
     state = state
-      .set('temporaryAttribute', Map({ name: 'test', type: 'string' }))
+      .set('temporaryAttribute', Map({name: 'test', type: 'string'}))
       .setIn(['newContentType', 'attributes', 'name', 'type'], 'string');
     const expected = state
       .removeIn(['newContentType', 'attributes', 'name'])
@@ -965,7 +965,7 @@ describe('SavedEditedAttributeRelation with a temporary model', () => {
         name: 'test',
         attributes: OrderedMap(
           fromJS({
-            name: { type: 'string' },
+            name: {type: 'string'},
             test: {
               columnName: '',
               targetColumnName: '',
@@ -1178,8 +1178,8 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
           description: '',
           mainField: '',
           attributes: OrderedMap({
-            name: { type: 'string' },
-            othername: { type: 'string' },
+            name: {type: 'string'},
+            othername: {type: 'string'},
             article: {
               columnName: '',
               dominant: false,
@@ -1226,8 +1226,8 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
     const expected = state.setIn(
       ['modifiedData', 'article', 'attributes'],
       OrderedMap({
-        name: { type: 'string' },
-        othername: { type: 'string' },
+        name: {type: 'string'},
+        othername: {type: 'string'},
         article: Map({
           columnName: '',
           dominant: false,
@@ -1264,8 +1264,8 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
       .setIn(
         ['modifiedData', 'article', 'attributes'],
         OrderedMap({
-          name: { type: 'string' },
-          othername: { type: 'string' },
+          name: {type: 'string'},
+          othername: {type: 'string'},
           articles: {
             columnName: '',
             dominant: true,
@@ -1322,8 +1322,8 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
     const expected = state.setIn(
       ['modifiedData', 'article', 'attributes'],
       OrderedMap({
-        name: { type: 'string' },
-        othername: { type: 'string' },
+        name: {type: 'string'},
+        othername: {type: 'string'},
         test: {
           type: 'string',
         },
@@ -1346,7 +1346,7 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
   it('should not modify the order of the attributes if the relation changes from something different than oneWay to something different than oneWay', () => {
     const articleAttributes = OrderedMap(
       fromJS({
-        name: { type: 'string' },
+        name: {type: 'string'},
         as: {
           columnName: '',
           dominant: true,
@@ -1357,7 +1357,7 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
           targetColumnName: '',
           unique: false,
         },
-        othername: { type: 'string' },
+        othername: {type: 'string'},
         bs: {
           columnName: '',
           dominant: false,
@@ -1368,12 +1368,12 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
           targetColumnName: '',
           unique: false,
         },
-        lastname: { type: 'string' },
+        lastname: {type: 'string'},
       }),
     );
     const updatedAttributes = OrderedMap(
       fromJS({
-        name: { type: 'string' },
+        name: {type: 'string'},
         as: {
           columnName: '',
           dominant: false,
@@ -1384,7 +1384,7 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
           targetColumnName: '',
           unique: false,
         },
-        othername: { type: 'string' },
+        othername: {type: 'string'},
         b: {
           columnName: '',
           dominant: false,
@@ -1395,7 +1395,7 @@ describe('SavedEditedAttributeRelation without a temporary model', () => {
           targetColumnName: '',
           unique: false,
         },
-        lastname: { type: 'string' },
+        lastname: {type: 'string'},
       }),
     );
 
@@ -1449,7 +1449,7 @@ describe('SetTemporaryAttributeRelation', () => {
           description: '',
           mainField: '',
           attributes: {
-            name: { type: 'string' },
+            name: {type: 'string'},
             products: {
               key: 'products',
               nature: 'manyToMany',
@@ -1466,7 +1466,7 @@ describe('SetTemporaryAttributeRelation', () => {
           description: 'super api',
           mainField: '',
           attributes: {
-            name: { type: 'string' },
+            name: {type: 'string'},
           },
         },
       },

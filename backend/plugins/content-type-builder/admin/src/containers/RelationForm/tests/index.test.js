@@ -10,7 +10,11 @@ import RelationForm from '../index';
 
 const messages = formatMessagesWithPluginId(pluginId, pluginTradsEn);
 const renderComponent = (props = {}, context = {}) =>
-  mountWithIntl(<RelationForm {...props} />, messages, context);
+  mountWithIntl( < RelationForm
+{...
+  props
+}
+/>, messages, context);
 
 describe('<RelationForm />', () => {
   let props;
@@ -63,21 +67,21 @@ describe('<RelationForm />', () => {
   describe('GetFormErrors', () => {
     it('should return an object with the errors if the form is empty', () => {
       wrapper = renderComponent(props);
-      const { getFormErrors } = wrapper.find(RelationForm).instance();
+      const {getFormErrors} = wrapper.find(RelationForm).instance();
 
       expect(getFormErrors()).toEqual({
-        name: [{ id: 'content-type-builder.error.validation.required' }],
-        key: [{ id: 'content-type-builder.error.validation.required' }],
+        name: [{id: 'content-type-builder.error.validation.required'}],
+        key: [{id: 'content-type-builder.error.validation.required'}],
       });
     });
 
     it('should return an object with the errors if the form if the key is empty', () => {
       props.modifiedData.name = 'test';
       wrapper = renderComponent(props);
-      const { getFormErrors } = wrapper.find(RelationForm).instance();
+      const {getFormErrors} = wrapper.find(RelationForm).instance();
 
       expect(getFormErrors()).toEqual({
-        key: [{ id: 'content-type-builder.error.validation.required' }],
+        key: [{id: 'content-type-builder.error.validation.required'}],
       });
     });
 
@@ -87,10 +91,10 @@ describe('<RelationForm />', () => {
       props.modifiedData.key = 'strapi';
 
       wrapper = renderComponent(props);
-      const { getFormErrors } = wrapper.find(RelationForm).instance();
+      const {getFormErrors} = wrapper.find(RelationForm).instance();
 
       expect(getFormErrors()).toEqual({
-        name: [{ id: 'content-type-builder.error.attribute.key.taken' }],
+        name: [{id: 'content-type-builder.error.attribute.key.taken'}],
       });
     });
 
@@ -100,10 +104,10 @@ describe('<RelationForm />', () => {
       props.modifiedData.key = 'test';
 
       wrapper = renderComponent(props);
-      const { getFormErrors } = wrapper.find(RelationForm).instance();
+      const {getFormErrors} = wrapper.find(RelationForm).instance();
 
       expect(getFormErrors()).toEqual({
-        key: [{ id: 'content-type-builder.error.attribute.key.taken' }],
+        key: [{id: 'content-type-builder.error.attribute.key.taken'}],
       });
     });
 
@@ -115,7 +119,7 @@ describe('<RelationForm />', () => {
       props.attributeToEditName = 'test';
 
       wrapper = renderComponent(props);
-      const { getFormErrors } = wrapper.find(RelationForm).instance();
+      const {getFormErrors} = wrapper.find(RelationForm).instance();
 
       expect(getFormErrors()).toEqual({});
     });
@@ -127,7 +131,7 @@ describe('<RelationForm />', () => {
         props.modelToEditName = 'test';
 
         wrapper = renderComponent(props);
-        const { handleClick } = wrapper.find(RelationForm).instance();
+        const {handleClick} = wrapper.find(RelationForm).instance();
 
         handleClick('strapi');
 
@@ -139,7 +143,7 @@ describe('<RelationForm />', () => {
         props.actionType = 'edit';
 
         wrapper = renderComponent(props);
-        const { handleClick } = wrapper.find(RelationForm).instance();
+        const {handleClick} = wrapper.find(RelationForm).instance();
 
         handleClick('strapi');
 
@@ -151,20 +155,20 @@ describe('<RelationForm />', () => {
   describe('HandleCancel', () => {
     it('should clear the search', () => {
       wrapper = renderComponent(props);
-      const { handleCancel } = wrapper.find(RelationForm).instance();
+      const {handleCancel} = wrapper.find(RelationForm).instance();
 
       handleCancel();
 
-      expect(props.push).toHaveBeenCalledWith({ search: '' });
+      expect(props.push).toHaveBeenCalledWith({search: ''});
     });
   });
 
   describe('HandleGoTo', () => {
     it('should emit the event didSelectContentTypeFieldSettings if the user clicks on the advanced tab', () => {
-      const context = { emitEvent: jest.fn() };
+      const context = {emitEvent: jest.fn()};
 
       wrapper = renderComponent(props, context);
-      const { handleGoTo } = wrapper.find(RelationForm).instance();
+      const {handleGoTo} = wrapper.find(RelationForm).instance();
 
       handleGoTo('advanced');
 
@@ -175,11 +179,11 @@ describe('<RelationForm />', () => {
     });
 
     it('should add the keep the attribute name if the action is edit', () => {
-      const context = { emitEvent: jest.fn() };
+      const context = {emitEvent: jest.fn()};
       props.actionType = 'edit';
       props.attributeToEditName = 'test';
       wrapper = renderComponent(props, context);
-      const { handleGoTo } = wrapper.find(RelationForm).instance();
+      const {handleGoTo} = wrapper.find(RelationForm).instance();
 
       handleGoTo('advanced');
 
@@ -191,10 +195,10 @@ describe('<RelationForm />', () => {
     });
 
     it('should not emit the event if the tab is base', () => {
-      const context = { emitEvent: jest.fn() };
+      const context = {emitEvent: jest.fn()};
 
       wrapper = renderComponent(props, context);
-      const { handleGoTo } = wrapper.find(RelationForm).instance();
+      const {handleGoTo} = wrapper.find(RelationForm).instance();
 
       handleGoTo('base');
 
@@ -209,11 +213,11 @@ describe('<RelationForm />', () => {
     it('should update the state and call the onCancel prop', () => {
       wrapper = renderComponent(props);
       const compo = wrapper.find(RelationForm);
-      compo.setState({ showForm: true, formErrors: { name: {} } });
+      compo.setState({showForm: true, formErrors: {name: {}}});
 
       expect(compo.state('showForm')).toBeTruthy();
 
-      const { handleOnClosed } = compo.instance();
+      const {handleOnClosed} = compo.instance();
 
       handleOnClosed();
 
@@ -225,13 +229,13 @@ describe('<RelationForm />', () => {
 
   describe('HandleOnOpened', () => {
     it('should update the state and call the onCancel prop', () => {
-      props.models = [{ name: 'test', source: 'test' }];
+      props.models = [{name: 'test', source: 'test'}];
       wrapper = renderComponent(props);
       const compo = wrapper.find(RelationForm);
 
       expect(compo.state('showForm')).toBeFalsy();
 
-      const { handleOnOpened } = compo.instance();
+      const {handleOnOpened} = compo.instance();
 
       handleOnOpened();
 
@@ -240,7 +244,7 @@ describe('<RelationForm />', () => {
     });
 
     it('should update the state and call the onCancel prop', () => {
-      props.models = [{ name: 'test' }];
+      props.models = [{name: 'test'}];
       props.modelToEditName = 'strapi';
       props.actionType = 'edit';
       props.attributeToEditName = 'test';
@@ -249,7 +253,7 @@ describe('<RelationForm />', () => {
 
       expect(compo.state('showForm')).toBeFalsy();
 
-      const { handleOnOpened } = compo.instance();
+      const {handleOnOpened} = compo.instance();
 
       handleOnOpened();
 
@@ -267,18 +271,18 @@ describe('<RelationForm />', () => {
         key: '-',
       };
       wrapper = renderComponent(props);
-      const { handleSubmit } = wrapper.instance();
+      const {handleSubmit} = wrapper.instance();
 
-      handleSubmit({ preventDefault: jest.fn() });
+      handleSubmit({preventDefault: jest.fn()});
 
       expect(props.onSubmit).toHaveBeenCalledWith(false);
     });
 
     it('should not call the submit if the form is empty', () => {
       wrapper = renderComponent(props);
-      const { handleSubmit } = wrapper.instance();
+      const {handleSubmit} = wrapper.instance();
 
-      handleSubmit({ preventDefault: jest.fn() });
+      handleSubmit({preventDefault: jest.fn()});
 
       expect(props.onSubmit).not.toHaveBeenCalled();
     });
@@ -293,18 +297,18 @@ describe('<RelationForm />', () => {
         key: '-',
       };
       wrapper = renderComponent(props);
-      const { handleSubmitAndContinue } = wrapper.instance();
+      const {handleSubmitAndContinue} = wrapper.instance();
 
-      handleSubmitAndContinue({ preventDefault: jest.fn() });
+      handleSubmitAndContinue({preventDefault: jest.fn()});
 
       expect(props.onSubmit).toHaveBeenCalledWith(true);
     });
 
     it('should not call the submit if the form is empty', () => {
       wrapper = renderComponent(props);
-      const { handleSubmitAndContinue } = wrapper.instance();
+      const {handleSubmitAndContinue} = wrapper.instance();
 
-      handleSubmitAndContinue({ preventDefault: jest.fn() });
+      handleSubmitAndContinue({preventDefault: jest.fn()});
 
       expect(props.onSubmit).not.toHaveBeenCalled();
     });
@@ -313,11 +317,11 @@ describe('<RelationForm />', () => {
   describe('HandleToggle', () => {
     it('should clear the search', () => {
       wrapper = renderComponent(props);
-      const { handleToggle } = wrapper.instance();
+      const {handleToggle} = wrapper.instance();
 
       handleToggle();
 
-      expect(props.push).toHaveBeenCalledWith({ search: '' });
+      expect(props.push).toHaveBeenCalledWith({search: ''});
     });
   });
 
@@ -326,7 +330,7 @@ describe('<RelationForm />', () => {
       props.actionType = 'edit';
       wrapper = renderComponent(props);
 
-      const { submit } = wrapper.instance();
+      const {submit} = wrapper.instance();
 
       submit();
 
@@ -336,7 +340,7 @@ describe('<RelationForm />', () => {
     it('should call the onSubmitEdit if the actionType is create', () => {
       wrapper = renderComponent(props);
 
-      const { submit } = wrapper.instance();
+      const {submit} = wrapper.instance();
 
       submit(true);
 

@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * SettingPage reducer
  */
 
-import { fromJS } from 'immutable';
+import {fromJS} from 'immutable';
 import {
   ON_CLICK_EDIT_FIELD,
   ON_CLICK_EDIT_LIST_ITEM,
@@ -18,7 +18,7 @@ const initialState = fromJS({
 
 function settingPageReducer(state = initialState, action) {
   switch (action.type) {
-    case ON_CLICK_EDIT_FIELD: 
+    case ON_CLICK_EDIT_FIELD:
       return state
         .update('fieldToEdit', () => fromJS(action.fieldToEdit))
         .update('relationToEdit', () => fromJS({})); // Both these objects will be used to set the form in order to know which form needs to be displayed

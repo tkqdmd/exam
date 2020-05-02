@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, Map, List } from 'immutable';
+import {fromJS, Map, List} from 'immutable';
 import {
   ADD_RELATION_ITEM,
   CHANGE_DATA,
@@ -47,10 +47,10 @@ function editPageReducer(state = initialState, action) {
       return state
         .updateIn(['record', action.key], (list) => {
           if (List.isList(list)) {
-            return list 
+            return list
               .push(action.value);
           }
-          
+
           return List([])
             .push(action.value);
         });
@@ -89,7 +89,7 @@ function editPageReducer(state = initialState, action) {
     case ON_REMOVE_RELATION_ITEM:
       return state
         .updateIn(['record', action.key], (list) => {
-          return list 
+          return list
             .delete(action.index);
         });
     case RESET_PROPS:

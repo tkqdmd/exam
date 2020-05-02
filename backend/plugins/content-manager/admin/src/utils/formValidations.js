@@ -37,7 +37,7 @@ export function getValidationsFromForm(form, formValidations) {
 
     // Push the target and the validation
     if (value.name) {
-      formValidations.push({ name: value.name, validations: value.validations });
+      formValidations.push({name: value.name, validations: value.validations});
     }
   });
 
@@ -55,7 +55,7 @@ export function checkFormValidity(formData, formValidations) {
       const inputErrors = validate(value, validationValue.validations);
 
       if (!isEmpty(inputErrors)) {
-        errors.push({ name: key, errors: inputErrors });
+        errors.push({name: key, errors: inputErrors});
       }
 
     }
@@ -67,37 +67,37 @@ export function checkFormValidity(formData, formValidations) {
 function validate(value, validations) {
   let errors = [];
   // Handle i18n
-  const requiredError = { id: 'content-manager.error.validation.required' };
+  const requiredError = {id: 'content-manager.error.validation.required'};
   mapKeys(validations, (validationValue, validationKey) => {
     switch (validationKey) {
       case 'max':
         if (parseInt(value, 10) > validationValue) {
-          errors.push({ id: 'content-manager.error.validation.max' });
+          errors.push({id: 'content-manager.error.validation.max'});
         }
         break;
       case 'min':
         if (parseInt(value, 10) < validationValue) {
-          errors.push({ id: 'content-manager.error.validation.min' });
+          errors.push({id: 'content-manager.error.validation.min'});
         }
         break;
       case 'maxLength':
         if (value.length > validationValue) {
-          errors.push({ id: 'content-manager.error.validation.maxLength' });
+          errors.push({id: 'content-manager.error.validation.maxLength'});
         }
         break;
       case 'minLength':
         if (value.length < validationValue) {
-          errors.push({ id: 'content-manager.error.validation.minLength' });
+          errors.push({id: 'content-manager.error.validation.minLength'});
         }
         break;
       case 'required':
         if (validationValue === true && value.length === 0) {
-          errors.push({ id: 'content-manager.error.validation.required' });
+          errors.push({id: 'content-manager.error.validation.required'});
         }
         break;
       case 'regex':
         if (!new RegExp(validationValue).test(value)) {
-          errors.push({ id: 'content-manager.error.validation.regex' });
+          errors.push({id: 'content-manager.error.validation.regex'});
         }
         break;
       case 'type':
@@ -106,10 +106,10 @@ function validate(value, validations) {
             if (isObject(value) || isBoolean(value) || isNumber(value) || isArray(value) || isNaN(value) || isNull(value)) {
               value = JSON.parse(JSON.stringify(value));
             } else {
-              errors.push({ id: 'content-manager.error.validation.json' });
+              errors.push({id: 'content-manager.error.validation.json'});
             }
-          } catch(err) {
-            errors.push({ id: 'content-manager.error.validation.json' });
+          } catch (err) {
+            errors.push({id: 'content-manager.error.validation.json'});
           }
         }
         break;

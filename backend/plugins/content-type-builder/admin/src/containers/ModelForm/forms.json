@@ -29,7 +29,9 @@
         "name": "connection",
         "type": "select",
         "value": "default",
-        "items": [{}],
+        "items": [
+          {}
+        ],
         "validations": {
           "required": true
         }

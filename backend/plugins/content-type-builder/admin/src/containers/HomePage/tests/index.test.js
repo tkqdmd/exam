@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
 import pluginId from '../../../pluginId';
 
@@ -72,25 +72,37 @@ describe('CTB <HomePage />', () => {
   });
 
   it('should not crash', () => {
-    const context = { emitEvent: jest.fn() };
+    const context = {emitEvent: jest.fn()};
 
-    shallow(<HomePage {...props} />, { context });
+    shallow( < HomePage
+    {...
+      props
+    }
+    />, { context });
   });
 
   describe('render', () => {
     it('should display the EmptyContentTypeView if there is no model in the application', () => {
       props.models = [];
 
-      const context = { emitEvent: jest.fn() };
-      const wrapper = shallow(<HomePage {...props} />, { context });
+      const context = {emitEvent: jest.fn()};
+      const wrapper = shallow( < HomePage
+      {...
+        props
+      }
+      />, { context });
       const emptyView = wrapper.find(EmptyContentTypeView);
 
       expect(emptyView).toHaveLength(1);
     });
 
     it('the tableList should have a plural title if there is more than 1 model', () => {
-      const context = { emitEvent: jest.fn() };
-      const wrapper = shallow(<HomePage {...props} />, { context });
+      const context = {emitEvent: jest.fn()};
+      const wrapper = shallow( < HomePage
+      {...
+        props
+      }
+      />, { context });
       const table = wrapper.find(TableList);
 
       expect(table).toHaveLength(1);
@@ -109,8 +121,12 @@ describe('CTB <HomePage />', () => {
         },
       ];
 
-      const context = { emitEvent: jest.fn() };
-      const wrapper = shallow(<HomePage {...props} />, { context });
+      const context = {emitEvent: jest.fn()};
+      const wrapper = shallow( < HomePage
+      {...
+        props
+      }
+      />, { context });
       const table = wrapper.find(TableList);
 
       expect(table).toHaveLength(1);
@@ -121,11 +137,15 @@ describe('CTB <HomePage />', () => {
   describe('workflow', () => {
     it('should open the modelForm if there is no saved content type', () => {
       props.canOpenModal = true;
-      props.history.push = jest.fn(({ search }) => {
+      props.history.push = jest.fn(({search}) => {
         props.location.search = `?${search}`;
       });
-      const context = { emitEvent: jest.fn() };
-      const wrapper = shallow(<HomePage {...props} />, { context });
+      const context = {emitEvent: jest.fn()};
+      const wrapper = shallow( < HomePage
+      {...
+        props
+      }
+      />, { context });
       const spyOnClick = jest.spyOn(wrapper.instance(), 'handleClick');
 
       wrapper.instance().forceUpdate();
@@ -145,8 +165,12 @@ describe('CTB <HomePage />', () => {
 
     it('should not open the modal if the is one or more not saved content type and display a notification', () => {
       props.canOpenModal = false;
-      const context = { emitEvent: jest.fn() };
-      const wrapper = shallow(<HomePage {...props} />, { context });
+      const context = {emitEvent: jest.fn()};
+      const wrapper = shallow( < HomePage
+      {...
+        props
+      }
+      />, { context });
 
       wrapper.find(TableList).prop('onButtonClick')();
       wrapper.instance().forceUpdate();

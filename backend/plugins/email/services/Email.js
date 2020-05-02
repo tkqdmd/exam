@@ -33,7 +33,7 @@ const getProviderConfig = async (env) => {
     name: 'email'
   }).get({key: 'provider'});
 
-  if(!config) {
+  if (!config) {
     config = await createDefaultEnvConfig(env);
   }
 
@@ -44,11 +44,11 @@ module.exports = {
   getProviderConfig,
   send: async (options, config, cb) => {
     // Get email provider settings to configure the provider to use.
-    if(!config) {
+    if (!config) {
       config = await getProviderConfig(strapi.config.environment);
     }
 
-    const provider = _.find(strapi.plugins.email.config.providers, { provider: config.provider });
+    const provider = _.find(strapi.plugins.email.config.providers, {provider: config.provider});
 
     if (!provider) {
       throw new Error(`The provider package isn't installed. Please run \`npm install strapi-provider-email-${config.provider}\``);

@@ -3,11 +3,12 @@
   height: 41px;
   overflow: hidden;
 
-  th{
+  th {
     height: 41px;
     border: none !important;
     font-size: 1.3rem;
     vertical-align: middle !important;
+
     > span {
       position: relative;
       cursor: pointer;
@@ -23,17 +24,19 @@
   }
 }
 
-.iconAsc{
+.iconAsc {
   position: absolute;
-  top: 3px; right: -12px;
+  top: 3px;
+  right: -12px;
 
-  &:before{
+  &:before {
     vertical-align: sub;
   }
 }
 
-.iconDesc{
+.iconDesc {
   position: absolute;
-  top: 3px; right: -12px;
+  top: 3px;
+  right: -12px;
   transform: translateY(-3px) rotateZ(180deg);
 }

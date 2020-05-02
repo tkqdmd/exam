@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { isEmpty, isNull, isObject, toLower, toString } from 'lodash';
+import {isEmpty, isNull, isObject, toLower, toString} from 'lodash';
 import cn from 'classnames';
 
 import IcoContainer from 'components/IcoContainer';
@@ -73,59 +73,99 @@ class TableRow extends React.Component {
   }
 
   renderAction = () => (
-    <td key='action' className={styles.actions}>
-      <IcoContainer
-        icons={[
-          { icoType: 'pencil', onClick: this.handleClick },
-          { id: this.props.record.id, icoType: 'trash', onClick: this.props.onDelete },
-        ]}
-      />
-    </td>
-  );
+    < td
+  key = 'action'
+  className = {styles.actions} >
+    < IcoContainer
+  icons = {
+    [
+      {icoType: 'pencil', onClick: this.handleClick}, {
+  id: this
+.
+  props
+.
+  record
+.
+  id
+,
+  icoType: 'trash'
+,
+  onClick: this
+.
+  props
+.
+  onDelete
+}
 
-  renderCells = () => {
-    const { headers } = this.props;
-    return [this.renderDelete()]
-      .concat(
-        headers.map((header, i) => (
-          <td key={i}>
-            <div className={styles.truncate}>
-              <div className={styles.truncated}>
-                {this.getDisplayedValue(
-                  header.type,
-                  this.props.record[header.name],
-                  header.name,
-                )}
-              </div>
-            </div>
-          </td>
-        )))
-      .concat([this.renderAction()]);
-  }
+,
+]
+}
+/>
+< /td>
+)
+;
 
-  renderDelete = () => {
-    if (this.props.enableBulkActions) {
-      return (
-        <td onClick={(e) => e.stopPropagation()} key="i">
-          <CustomInputCheckbox
-            name={this.props.record.id}
-            onChange={this.props.onChange}
-            value={this.props.value}
-          />
-        </td>
-      );
+renderCells = () => {
+  const {headers} = this.props;
+  return [this.renderDelete()]
+    .concat(
+      headers.map((header, i) => (
+        < td
+  key = {i} >
+    < div
+  className = {styles.truncate} >
+    < div
+  className = {styles.truncated} >
+    {
+      this.getDisplayedValue(
+        header.type,
+        this.props.record[header.name],
+        header.name,
+      )
     }
+    < /div>
+    < /div>
+    < /td>
+)))
+.
+  concat([this.renderAction()]);
+}
 
-    return null;
-  }
-
-  render() {
+renderDelete = () => {
+  if (this.props.enableBulkActions) {
     return (
-      <tr className={cn(styles.tableRow, this.props.enableBulkActions && styles.tableRowWithBulk)} onClick={this.handleClick}>
-        {this.renderCells()}
-      </tr>
-    );
+      < td
+    onClick = {(e)
+  =>
+    e.stopPropagation()
   }
+    key = "i" >
+      < CustomInputCheckbox
+    name = {this.props.record.id}
+    onChange = {this.props.onChange}
+    value = {this.props.value}
+    />
+    < /td>
+  )
+    ;
+  }
+
+  return null;
+}
+
+render()
+{
+  return (
+    < tr
+  className = {cn(styles.tableRow, this.props.enableBulkActions && styles.tableRowWithBulk
+)
+}
+  onClick = {this.handleClick} >
+    {this.renderCells()}
+    < /tr>
+)
+  ;
+}
 }
 
 TableRow.contextTypes = {
@@ -146,7 +186,8 @@ TableRow.propTypes = {
 
 TableRow.defaultProps = {
   enableBulkActions: true,
-  onDelete: () => {},
+  onDelete: () => {
+  },
   value: false,
 };
 

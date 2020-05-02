@@ -23,7 +23,7 @@ module.exports = async cb => {
       }, null, 2), 'utf8');
 
       _.set(strapi.plugins['users-permissions'], 'config.jwtSecret', jwtSecret);
-    } catch(err) {
+    } catch (err) {
       strapi.log.error(err);
     }
   }

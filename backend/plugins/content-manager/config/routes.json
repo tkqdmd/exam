@@ -13,7 +13,9 @@
       "path": "/explorer/:model",
       "handler": "ContentManager.find",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     },
     {
@@ -21,7 +23,9 @@
       "path": "/explorer/:model/count",
       "handler": "ContentManager.count",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     },
     {
@@ -29,7 +33,9 @@
       "path": "/models",
       "handler": "ContentManager.updateSettings",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     },
     {
@@ -37,14 +43,19 @@
       "path": "/explorer/:model/:id",
       "handler": "ContentManager.findOne",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
-    },{
+    },
+    {
       "method": "POST",
       "path": "/explorer/:model",
       "handler": "ContentManager.create",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     },
     {
@@ -52,7 +63,9 @@
       "path": "/explorer/:model/:id",
       "handler": "ContentManager.update",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     },
     {
@@ -60,7 +73,9 @@
       "path": "/explorer/deleteAll/:model",
       "handler": "ContentManager.deleteAll",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     },
     {
@@ -68,7 +83,9 @@
       "path": "/explorer/:model/:id",
       "handler": "ContentManager.delete",
       "config": {
-        "policies": ["routing"]
+        "policies": [
+          "routing"
+        ]
       }
     }
   ]

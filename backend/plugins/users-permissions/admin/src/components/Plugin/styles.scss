@@ -12,6 +12,7 @@
   padding-right: 43px;
   color: #787E8F;
   cursor: pointer;
+
   > div:first-child {
     display: flex;
     line-height: 5.3rem;
@@ -21,6 +22,7 @@
 .chevronDown {
   margin: auto;
   margin-right: 0;
+
   &:before {
     content: '\F078';
     display: block;
@@ -33,6 +35,7 @@
 .chevronUp {
   margin: auto;
   margin-right: 0;
+
   &:before {
     content: '\F077';
     display: block;
@@ -47,6 +50,7 @@
   > div:not(:first-child) {
     padding-top: 2.3rem;
   }
+
   > div:last-child {
     padding-bottom: 1.8rem;
   }
@@ -69,7 +73,7 @@
   margin: auto;
   margin-right: 14px;
   color: #333740;
-  border: 1px solid rgba(28,93,231,0.1);
+  border: 1px solid rgba(28, 93, 231, 0.1);
   border-radius: 3px;
   line-height: 36px;
   text-align: center;

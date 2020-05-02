@@ -16,9 +16,9 @@ import {
   Entity,
   CharacterMetadata,
 } from 'draft-js';
-import { List, OrderedSet, Repeat, fromJS } from 'immutable';
+import {List, OrderedSet, Repeat, fromJS} from 'immutable';
 import cn from 'classnames';
-import { isEmpty, toArray } from 'lodash';
+import {isEmpty, toArray} from 'lodash';
 
 import WysiwygEditor from '../WysiwygEditor';
 import converter from './converter';
@@ -34,6 +34,7 @@ import Link from './link';
 import Video from './video';
 
 import styles from './componentsStyles.scss';
+
 /* eslint-disable react/no-unused-state */
 function getBlockStyle(block) {
   switch (block.getType()) {
@@ -106,7 +107,7 @@ const replaceElement = (oldEl, newEl) => {
 const aReplacer = aElement => replaceElement(aElement, elementToBlockSpecElement(aElement));
 
 const createContentBlock = (blockData = {}) => {
-  const { key, type, text, data, inlineStyles, entityData } = blockData;
+  const {key, type, text, data, inlineStyles, entityData} = blockData;
 
   let blockSpec = {
     type: type !== null && type !== undefined ? type : 'unstyled',
@@ -121,14 +122,14 @@ const createContentBlock = (blockData = {}) => {
   if (inlineStyles || entityData) {
     let entityKey;
     if (entityData) {
-      const { type, mutability, data } = entityData;
+      const {type, mutability, data} = entityData;
       entityKey = Entity.create(type, mutability, data);
     } else {
       entityKey = null;
     }
     const style = OrderedSet(inlineStyles || []);
     const charData = CharacterMetadata.applyEntity(
-      CharacterMetadata.create({ style, entityKey }),
+      CharacterMetadata.create({style, entityKey}),
       entityKey,
     );
     blockSpec.characterList = List(Repeat(charData, text.length));
@@ -137,11 +138,11 @@ const createContentBlock = (blockData = {}) => {
 };
 
 class PreviewWysiwyg extends React.PureComponent {
-  state = { editorState: EditorState.createEmpty(), isMounted: false };
+  state = {editorState: EditorState.createEmpty(), isMounted: false};
 
   componentDidMount() {
-    const { data } = this.props;
-    this.setState({ isMounted: true });
+    const {data} = this.props;
+    this.setState({isMounted: true});
 
     if (!isEmpty(data)) {
       this.previewHTML(data);
@@ -167,7 +168,7 @@ class PreviewWysiwyg extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.setState({ isMounted: false });
+    this.setState({isMounted: false});
   }
 
   getClassName = () => {
@@ -195,7 +196,7 @@ class PreviewWysiwyg extends React.PureComponent {
       blocksFromHTML = blocksFromHTML.contentBlocks.reduce((acc, block) => {
         if (block.getType() === 'blockquote') {
           try {
-            const { aHref, aInnerHTML } = JSON.parse(block.getText());
+            const {aHref, aInnerHTML} = JSON.parse(block.getText());
             const entityData = {
               type: 'LINK',
               mutability: 'IMMUTABLE',
@@ -206,8 +207,8 @@ class PreviewWysiwyg extends React.PureComponent {
             };
 
             const blockSpec = Object.assign(
-              { type: 'atomic', text: ' ', key: block.getKey() },
-              { entityData },
+              {type: 'atomic', text: ' ', key: block.getKey()},
+              {entityData},
             );
             const atomicBlock = createContentBlock(blockSpec); // Create an atomic block so we can identify it easily
 
@@ -222,26 +223,40 @@ class PreviewWysiwyg extends React.PureComponent {
 
       const contentState = ContentState.createFromBlockArray(blocksFromHTML);
 
-      return this.setState({ editorState: EditorState.createWithContent(contentState, decorator) });
+      return this.setState({editorState: EditorState.createWithContent(contentState, decorator)});
     }
 
-    return this.setState({ editorState: EditorState.createEmpty() });
+    return this.setState({editorState: EditorState.createEmpty()});
   };
 
   render() {
-    const { placeholder } = this.context;
+    const {placeholder} = this.context;
     // this.previewHTML2(this.props.data);
     return (
-      <div className={this.getClassName()}>
-        <WysiwygEditor
-          blockStyleFn={getBlockStyle}
-          editorState={this.state.editorState}
-          onChange={() => {}}
-          placeholder={placeholder}
-        />
-        <input className={styles.editorInput} value="" onChange={() => {}} tabIndex="-1" />
-      </div>
-    );
+      < div
+    className = {this.getClassName()} >
+      < WysiwygEditor
+    blockStyleFn = {getBlockStyle}
+    editorState = {this.state.editorState}
+    onChange = {()
+  =>
+    {
+    }
+  }
+    placeholder = {placeholder}
+    />
+    < input
+    className = {styles.editorInput}
+    value = ""
+    onChange = {()
+  =>
+    {
+    }
+  }
+    tabIndex = "-1" / >
+      < /div>
+  )
+    ;
   }
 }
 

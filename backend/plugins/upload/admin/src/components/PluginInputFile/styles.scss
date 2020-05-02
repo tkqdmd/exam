@@ -19,15 +19,16 @@
     display: none;
   }
 
-  .icon{
+  .icon {
     width: 82px;
-    path{
+
+    path {
       fill: #CCD0DA;
       transition: fill .3s ease;
     }
   }
 
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
@@ -44,8 +45,8 @@
 }
 
 .pluginInputFileHover {
-  background-color: rgba(28,93,231,0.01) !important;
-  border: 2px dashed rgba(28,93,231,0.10) !important;
+  background-color: rgba(28, 93, 231, 0.01) !important;
+  border: 2px dashed rgba(28, 93, 231, 0.10) !important;
 }
 
 .underline {
@@ -92,7 +93,7 @@
 }
 
 .quadrat {
-  .icon{
+  .icon {
     path {
       fill: #729BEF;
     }

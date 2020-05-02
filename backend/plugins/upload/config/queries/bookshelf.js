@@ -1,25 +1,25 @@
 const _ = require('lodash');
-const { convertRestQueryParams, buildQuery } = require('strapi-utils');
+const {convertRestQueryParams, buildQuery} = require('strapi-utils');
 
 module.exports = {
-  find: async function(params, populate) {
+  find: async function (params, populate) {
     const model = this;
 
     const filters = convertRestQueryParams(params);
 
-    return this.query(buildQuery({ model, filters }))
+    return this.query(buildQuery({model, filters}))
       .fetchAll({
         withRelated: populate || this.associations.map(x => x.alias),
       })
       .then(data => data.toJSON());
   },
 
-  count: async function(params = {}) {
+  count: async function (params = {}) {
     const model = this;
 
-    const { where } = convertRestQueryParams(params);
+    const {where} = convertRestQueryParams(params);
 
-    return this.query(buildQuery({ model, filters: { where } })).count();
+    return this.query(buildQuery({model, filters: {where}})).count();
   },
 
   findOne: async function (params, populate) {
@@ -53,7 +53,7 @@ module.exports = {
       .catch((err) => {
         if (err.detail) {
           const field = _.last(_.words(err.detail.split('=')[0]));
-          err = { message: `This ${field} is already taken`, field };
+          err = {message: `This ${field} is already taken`, field};
         }
 
         throw err;
@@ -85,7 +85,7 @@ module.exports = {
       })
       .catch((err) => {
         const field = _.last(_.words(err.detail.split('=')[0]));
-        const error = { message: `This ${field} is already taken`, field };
+        const error = {message: `This ${field} is already taken`, field};
 
         throw error;
       });
@@ -101,7 +101,7 @@ module.exports = {
 
   search: async function (params) {
     return this
-      .query(function(qb) {
+      .query(function (qb) {
         qb
           .whereRaw(`LOWER(hash) LIKE ?`, [`%${params.id}%`])
           .orWhereRaw(`LOWER(name) LIKE ?`, [`%${params.id}%`]);

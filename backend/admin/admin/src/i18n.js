@@ -5,11 +5,11 @@
  *
  */
 
-import { addLocaleData } from 'react-intl';
-import { reduce } from 'lodash';
+import {addLocaleData} from 'react-intl';
+import {reduce} from 'lodash';
 
 // Import config
-import { languages } from './config/languages.json';
+import {languages} from './config/languages.json';
 
 /**
  * Try to require translation file.

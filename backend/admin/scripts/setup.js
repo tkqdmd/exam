@@ -33,7 +33,7 @@ if (process.env.npm_config_plugins === 'true') {
       try {
         fs.accessSync(path.resolve(appPath, 'plugins', x, 'admin', 'src', 'containers', 'App'));
         hasAdminFolder = true;
-      } catch(err) {
+      } catch (err) {
         hasAdminFolder = false;
       }
 

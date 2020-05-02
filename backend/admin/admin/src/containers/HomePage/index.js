@@ -5,13 +5,13 @@
  */
 
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
-import { bindActionCreators, compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import {FormattedMessage} from 'react-intl';
+import {bindActionCreators, compose} from 'redux';
+import {createStructuredSelector} from 'reselect';
 import PropTypes from 'prop-types';
-import { get, isEmpty, upperFirst } from 'lodash';
+import {get, isEmpty, upperFirst} from 'lodash';
 import cn from 'classnames';
 
 import Button from 'components/Button';
@@ -24,7 +24,7 @@ import Sub from '../../components/Sub';
 import SupportUsCta from '../../components/SupportUsCta';
 import SupportUsTitle from '../../components/SupportUsTitle';
 
-import { selectPlugins } from '../App/selectors';
+import {selectPlugins} from '../App/selectors';
 
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
@@ -35,7 +35,7 @@ import CreateContent from './CreateContent';
 import SocialLink from './SocialLink';
 import WelcomeContent from './WelcomeContent';
 
-import { getArticles, onChange, submit } from './actions';
+import {getArticles, onChange, submit} from './actions';
 import makeSelectHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -46,15 +46,20 @@ const FIRST_BLOCK = [
     title: {
       id: 'app.components.HomePage.welcome',
     },
-    content: () => <WelcomeContent />,
-  },
-  {
-    title: {
-      id: 'app.components.HomePage.create',
-    },
-    content: () => <CreateContent />,
-  },
-];
+    content: () => < WelcomeContent / >,
+},
+{
+  title: {
+    id: 'app.components.HomePage.create',
+  }
+,
+  content: () =>
+<
+  CreateContent / >,
+}
+,
+]
+;
 
 const FIRST_BLOCK_LINKS = [
   {
@@ -80,11 +85,11 @@ const FIRST_BLOCK_LINKS = [
 ];
 
 const SECOND_BLOCK = {
-  title: {
-    id: 'app.components.HomePage.community',
-  },
-  content: () => <CommunityContent />,
-};
+    title: {
+      id: 'app.components.HomePage.community',
+    },
+    content: () => < CommunityContent / >,
+  };
 
 const SOCIAL_LINKS = [
   {
@@ -115,7 +120,7 @@ const SOCIAL_LINKS = [
 
 export class HomePage extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
-  state = { errors: [] };
+  state = {errors: []};
 
   componentDidMount() {
     this.props.getArticles();
@@ -125,10 +130,10 @@ export class HomePage extends React.PureComponent {
     e.preventDefault();
     const errors = validateInput(
       this.props.homePage.body.email,
-      { required: true },
+      {required: true},
       'email',
     );
-    this.setState({ errors });
+    this.setState({errors});
 
     if (isEmpty(errors)) {
       return this.props.submit();
@@ -147,7 +152,7 @@ export class HomePage extends React.PureComponent {
       ? {
         className: styles.homePageTutorialButton,
         href:
-            'https://strapi.io/documentation/getting-started/quick-start.html#_3-create-a-content-type',
+          'https://strapi.io/documentation/getting-started/quick-start.html#_3-create-a-content-type',
         id: 'app.components.HomePage.button.quickStart',
         primary: true,
       }
@@ -159,17 +164,24 @@ export class HomePage extends React.PureComponent {
       };
 
     return (
-      <a href={data.href} target="_blank">
-        <Button className={data.className} primary={data.primary}>
-          <FormattedMessage id={data.id} />
-        </Button>
-      </a>
-    );
+      < a
+    href = {data.href}
+    target = "_blank" >
+      < Button
+    className = {data.className}
+    primary = {data.primary} >
+      < FormattedMessage
+    id = {data.id}
+    />
+    < /Button>
+    < /a>
+  )
+    ;
   };
 
   render() {
     const {
-      homePage: { articles, body },
+      homePage: {articles, body},
     } = this.props;
     const WELCOME_AGAIN_BLOCK = [
       {
@@ -177,91 +189,163 @@ export class HomePage extends React.PureComponent {
           id: 'app.components.HomePage.welcome.again',
         },
         name: upperFirst(`${get(auth.getUserInfo(), 'username')}!`),
-        content: () => <WelcomeContent hasContent />,
-      },
-    ];
+        content: () => < WelcomeContent hasContent / >,
+  },
+  ]
+    ;
 
     return (
-      <div className={cn('container-fluid', styles.containerFluid)}>
-        <Helmet title="Home Page" />
-        <div className="row">
-          <div className="col-md-8 col-lg-8">
-            <Block>
-              {this.showFirstBlock() &&
-                FIRST_BLOCK.map((value, key) => (
-                  <Sub
-                    key={key}
-                    {...value}
-                    underline={key === 0}
-                    bordered={key === 0}
-                  />
-                ))}
-              {!this.showFirstBlock() &&
-                WELCOME_AGAIN_BLOCK.concat(articles).map((value, key) => (
-                  <Sub
-                    key={key}
-                    {...value}
-                    bordered={key === 0}
-                    style={key === 1 ? { marginBottom: '33px' } : {}}
-                    underline={key === 0}
-                  />
-                ))}
-              {this.renderButton()}
-              <div className={styles.homePageFlex}>
-                {FIRST_BLOCK_LINKS.map((value, key) => (
-                  <BlockLink {...value} key={key} />
-                ))}
-              </div>
-            </Block>
-            <Block>
-              <Sub {...SECOND_BLOCK} />
-              <div className={styles.homePageFlex}>
-                <div
-                  className="row"
-                  style={{ width: '100%', marginRight: '0' }}
-                >
-                  {SOCIAL_LINKS.map((value, key) => (
-                    <SocialLink key={key} {...value} />
-                  ))}
-                </div>
-                <div className={styles.newsLetterWrapper}>
-                  <div>
-                    <FormattedMessage id="app.components.HomePage.newsLetter" />
-                  </div>
-                  <form onSubmit={this.handleSubmit}>
-                    <div className={cn(styles.homePageForm, 'row')}>
-                      <div className="col-md-12">
-                        <Input
-                          value={body.email}
-                          onChange={this.props.onChange}
-                          name=""
-                          placeholder="johndoe@gmail.com"
-                          error={!isEmpty(this.state.errors)}
-                        />
-                        <FormattedMessage id="app.components.HomePage.cta">
-                          {message => <button type="submit">{message}</button>}
-                        </FormattedMessage>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </Block>
-          </div>
-          <div className="col-lg-4 col-md-4">
-            <Block className={styles.blockShirt}>
-              <div>
-                <SupportUsTitle />
-                <FormattedMessage id="app.components.HomePage.support.content">
-                  {message => <p>{message}</p>}
-                </FormattedMessage>
-                <SupportUsCta />
-              </div>
-            </Block>
-          </div>
-        </div>
-      </div>
-    );
+      < div
+    className = {cn('container-fluid', styles.containerFluid
+  )
+  }>
+  <
+    Helmet
+    title = "Home Page" / >
+      < div
+    className = "row" >
+      < div
+    className = "col-md-8 col-lg-8" >
+      < Block >
+      {
+        this.showFirstBlock() &&
+          FIRST_BLOCK.map((value, key) => (
+            < Sub
+        key = {key}
+    {...
+      value
+    }
+    underline = {key === 0
+  }
+    bordered = {key === 0
+  }
+    />
+  ))
+  }
+    {
+      !this.showFirstBlock() &&
+      WELCOME_AGAIN_BLOCK.concat(articles).map((value, key) => (
+        < Sub
+      key = {key}
+      {...
+        value
+      }
+      bordered = {key === 0
+    }
+      style = {key === 1 ? {marginBottom: '33px'} : {}
+    }
+      underline = {key === 0
+    }
+      />
+    ))
+    }
+    {
+      this.renderButton()
+    }
+  <
+    div
+    className = {styles.homePageFlex} >
+      {
+        FIRST_BLOCK_LINKS.map((value, key) => (
+          < BlockLink
+    {...
+      value
+    }
+    key = {key}
+    />
+  ))
+  }
+  <
+    /div>
+    < /Block>
+    < Block >
+    < Sub
+    {...
+      SECOND_BLOCK
+    }
+    />
+    < div
+    className = {styles.homePageFlex} >
+      < div
+    className = "row"
+    style = {
+    {
+      width: '100%', marginRight
+    :
+      '0'
+    }
+  }
+  >
+    {
+      SOCIAL_LINKS.map((value, key) => (
+        < SocialLink
+      key = {key}
+      {...
+        value
+      }
+      />
+    ))
+    }
+  <
+    /div>
+    < div
+    className = {styles.newsLetterWrapper} >
+      < div >
+      < FormattedMessage
+    id = "app.components.HomePage.newsLetter" / >
+      < /div>
+      < form
+    onSubmit = {this.handleSubmit} >
+      < div
+    className = {cn(styles.homePageForm, 'row'
+  )
+  }>
+  <
+    div
+    className = "col-md-12" >
+      < Input
+    value = {body.email}
+    onChange = {this.props.onChange}
+    name = ""
+    placeholder = "johndoe@gmail.com"
+    error = {
+    !isEmpty(this.state.errors)
+  }
+    />
+    < FormattedMessage
+    id = "app.components.HomePage.cta" >
+      {message
+  => <
+    button
+    type = "submit" > {message} < /button>}
+      < /FormattedMessage>
+      < /div>
+      < /div>
+      < /form>
+      < /div>
+      < /div>
+      < /Block>
+      < /div>
+      < div
+    className = "col-lg-4 col-md-4" >
+      < Block
+    className = {styles.blockShirt} >
+      < div >
+      < SupportUsTitle / >
+      < FormattedMessage
+    id = "app.components.HomePage.support.content" >
+      {message
+  => <
+    p > {message} < /p>}
+    < /FormattedMessage>
+    < SupportUsCta / >
+    < /div>
+    < /Block>
+    < /div>
+    < /div>
+    < /div>
+  )
+    ;
   }
 }
 
@@ -294,8 +378,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'homePage', reducer });
-const withSaga = injectSaga({ key: 'homePage', saga });
+const withReducer = injectReducer({key: 'homePage', reducer});
+const withSaga = injectSaga({key: 'homePage', saga});
 
 // export default connect(mapDispatchToProps)(HomePage);
 export default compose(

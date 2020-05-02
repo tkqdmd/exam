@@ -1,13 +1,13 @@
 /**
-*
-* InputSelect
-*
-*/
+ *
+ * InputSelect
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty, map } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import {isEmpty, map} from 'lodash';
+import {FormattedMessage} from 'react-intl';
 import styles from './styles.scss';
 
 /* eslint-disable react/require-default-props  */
@@ -15,8 +15,8 @@ class InputSelect extends React.Component { // eslint-disable-line react/prefer-
   componentDidMount() {
     // Init the select value
     if (this.props.selectOptions[0].value !== '' && isEmpty(this.props.value)) {
-      const target = { name: this.props.target, value: this.props.selectOptions[0].value  };
-      this.props.handleChange({ target });
+      const target = {name: this.props.target, value: this.props.selectOptions[0].value};
+      this.props.handleChange({target});
     }
   }
 
@@ -25,31 +25,53 @@ class InputSelect extends React.Component { // eslint-disable-line react/prefer-
     const requiredClass = this.props.validations.required && this.props.addRequiredInputDesign ? styles.requiredClass : '';
 
     return (
-      <div className={`${styles.input} ${requiredClass} ${bootStrapClass}`}>
-        <label htmlFor={this.props.name}>
-          <FormattedMessage id={`settings-manager.${this.props.name}`} />
-        </label>
-        <select
-          className="form-control"
-          id={this.props.name}
-          name={this.props.target}
-          onChange={this.props.handleChange}
-          value={this.props.value}
-        >
-          {map(this.props.selectOptions, (option, key) => (
-            option.name ?
-              <FormattedMessage id={`settings-manager.${option.name}`} key={key}>
-                {(message) => (
-                  <option value={option.value}>
-                    {message}
-                  </option>
-                )}
-              </FormattedMessage> :
-              <option value={option.value} key={key}>{option.name}</option>
-          ))}
-        </select>
-      </div>
-    );
+      < div
+    className = {`${styles.input} ${requiredClass} ${bootStrapClass}`
+  }>
+  <
+    label
+    htmlFor = {this.props.name} >
+      < FormattedMessage
+    id = {`settings-manager.${this.props.name}`
+  }
+    />
+    < /label>
+    < select
+    className = "form-control"
+    id = {this.props.name}
+    name = {this.props.target}
+    onChange = {this.props.handleChange}
+    value = {this.props.value}
+      >
+      {map(this.props.selectOptions,(option, key)
+  =>
+    (
+      option.name ?
+    < FormattedMessage
+    id = {`settings-manager.${option.name}`
+  }
+    key = {key} >
+      {(message)
+  =>
+    (
+    < option
+    value = {option.value} >
+      {message}
+      < /option>
+  )
+  }
+  <
+    /FormattedMessage> :
+    < option
+    value = {option.value}
+    key = {key} > {option.name} < /option>
+  ))
+  }
+  <
+    /select>
+    < /div>
+  )
+    ;
   }
 }
 

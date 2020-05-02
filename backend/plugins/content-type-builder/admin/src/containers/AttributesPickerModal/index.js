@@ -21,10 +21,10 @@ import attributes from './attributes.json';
 
 class AttributesPickerModal extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-  state = { isDisplayed: false, nodeToFocus: 0 };
+  state = {isDisplayed: false, nodeToFocus: 0};
 
   componentDidMount() {
-    const { isOpen } = this.props;
+    const {isOpen} = this.props;
 
     if (isOpen) {
       this.addEventListener();
@@ -32,7 +32,7 @@ class AttributesPickerModal extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { isOpen } = this.props;
+    const {isOpen} = this.props;
 
     if (prevProps.isOpen !== isOpen) {
       this.updateNodeToFocus(0);
@@ -46,7 +46,7 @@ class AttributesPickerModal extends React.Component {
   }
 
   getAttributes = () => {
-    const { plugins } = this.context;
+    const {plugins} = this.context;
     const appPlugins = plugins.toJS ? plugins.toJS() : plugins;
 
     return attributes.filter(attr => {
@@ -67,19 +67,19 @@ class AttributesPickerModal extends React.Component {
   };
 
   handleClick = type => {
-    const { emitEvent } = this.context;
-    const { push } = this.props;
+    const {emitEvent} = this.context;
+    const {push} = this.props;
 
-    emitEvent('didSelectContentTypeFieldType', { type });
-    push({ search: `modalType=attributeForm&attributeType=${type}&settingType=base&actionType=create` });
+    emitEvent('didSelectContentTypeFieldType', {type});
+    push({search: `modalType=attributeForm&attributeType=${type}&settingType=base&actionType=create`});
   };
 
   /* istanbul ignore next */
   handleKeyDown = e => {
-    const { push } = this.props;
+    const {push} = this.props;
 
     /* istanbul ignore next */
-    const { nodeToFocus } = this.state;
+    const {nodeToFocus} = this.state;
     /* istanbul ignore next */
     const attributesLength = this.getAttributes().length;
     /* istanbul ignore next */
@@ -117,51 +117,69 @@ class AttributesPickerModal extends React.Component {
     this.updateNodeToFocus(next);
   };
 
-  handleOnClosed = () => this.setState(prevState => ({ isDisplayed: !prevState.isDisplayed }));
+  handleOnClosed = () => this.setState(prevState => ({isDisplayed: !prevState.isDisplayed}));
 
-  handleOnOpened = () => this.setState(prevState => ({ isDisplayed: !prevState.isDisplayed }));
+  handleOnOpened = () => this.setState(prevState => ({isDisplayed: !prevState.isDisplayed}));
 
   handleToggle = () => {
-    const { push } = this.props;
+    const {push} = this.props;
 
-    push({ search: '' });
+    push({search: ''});
   };
 
-  updateNodeToFocus = position => this.setState({ nodeToFocus: position });
+  updateNodeToFocus = position => this.setState({nodeToFocus: position});
 
   renderAttribute = (attribute, index) => {
-    const { isDisplayed, nodeToFocus } = this.state;
+    const {isDisplayed, nodeToFocus} = this.state;
 
     return (
-      <AttributeOption
-        autoFocus={nodeToFocus === index}
-        key={attribute.type}
-        tabIndex={index}
-        isDisplayed={isDisplayed}
-        nodeToFocus={nodeToFocus}
-        onClick={this.handleClick}
-        {...attribute}
-      />
-    );
+      < AttributeOption
+    autoFocus = {nodeToFocus === index
+  }
+    key = {attribute.type}
+    tabIndex = {index}
+    isDisplayed = {isDisplayed}
+    nodeToFocus = {nodeToFocus}
+    onClick = {this.handleClick}
+    {...
+      attribute
+    }
+    />
+  )
+    ;
   };
 
   render() {
-    const { isOpen } = this.props;
+    const {isOpen} = this.props;
 
     return (
-      <WrapperModal
-        isOpen={isOpen}
-        onToggle={this.handleToggle}
-        onClosed={this.handleOnClosed}
-        onOpened={this.handleOnOpened}
+      < WrapperModal
+    isOpen = {isOpen}
+    onToggle = {this.handleToggle}
+    onClosed = {this.handleOnClosed}
+    onOpened = {this.handleOnOpened}
       >
-        <HeaderModal>
-          <HeaderModalTitle title={`${pluginId}.popUpForm.choose.attributes.header.title`} />
-        </HeaderModal>
-        <BodyModal style={{ paddingTop: '2.3rem' }}>{attributes.map(this.renderAttribute)}</BodyModal>
-        <FooterModal />
-      </WrapperModal>
-    );
+      < HeaderModal >
+      < HeaderModalTitle
+    title = {`${pluginId}.popUpForm.choose.attributes.header.title`
+  }
+    />
+    < /HeaderModal>
+    < BodyModal
+    style = {
+    {
+      paddingTop: '2.3rem'
+    }
+  }>
+    {
+      attributes.map(this.renderAttribute)
+    }
+  <
+    /BodyModal>
+    < FooterModal / >
+    < /WrapperModal>
+  )
+    ;
   }
 }
 

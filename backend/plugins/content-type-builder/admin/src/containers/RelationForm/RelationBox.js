@@ -10,50 +10,76 @@ import styles from './styles.scss';
 
 /* istanbul ignore next */
 const RelationBox = ({
-  autoFocus,
-  didCheckErrors,
-  errors,
-  main,
-  models,
-  modelName,
-  nature,
-  onChange,
-  onClick,
-  selectedModel,
-  plugin,
-  source,
-  value,
-}) => {
+                       autoFocus,
+                       didCheckErrors,
+                       errors,
+                       main,
+                       models,
+                       modelName,
+                       nature,
+                       onChange,
+                       onClick,
+                       selectedModel,
+                       plugin,
+                       source,
+                       value,
+                     }) => {
   return (
-    <InlineBlock>
-      <div className={styles.relationBox}>
-        <div className={styles.relationBoxHeader}>
-          {main ? (
-            <p>
-              <i className="fa fa-caret-square-o-right" />
-              {modelName}
-              {!!source && <span style={{ fontStyle: 'italic', fontWeight: '500' }}>&nbsp;({source})</span>}
-            </p>
-          ) : (
-            <ModelPicker models={models} onClick={onClick} plugin={plugin} selectedModel={selectedModel} />
-          )}
-        </div>
-        <div className={styles.relationBoxBody}>
-          <InputText
-            autoFocus={autoFocus}
-            didCheckErrors={didCheckErrors}
-            errors={errors}
-            label="Field Name"
-            disabled={value === '-' || nature === 'oneWay'}
-            name={main ? 'name' : 'key'}
-            onChange={onChange}
-            type="text"
-            value={nature === 'oneWay' ? '-' : value}
-          />
-        </div>
-      </div>
-    </InlineBlock>
-  );
+    < InlineBlock >
+    < div
+  className = {styles.relationBox} >
+    < div
+  className = {styles.relationBoxHeader} >
+    {
+      main ? (
+        < p >
+        < i className = "fa fa-caret-square-o-right" / >
+        {modelName}
+  {
+    !!source && < span
+    style = {
+    {
+      fontStyle: 'italic', fontWeight
+    :
+      '500'
+    }
+  }>&
+    nbsp;
+    ({source}) < /span>}
+    < /p>
+  )
+:
+  (
+  < ModelPicker
+  models = {models}
+  onClick = {onClick}
+  plugin = {plugin}
+  selectedModel = {selectedModel}
+  />
+)
+}
+<
+  /div>
+  < div
+  className = {styles.relationBoxBody} >
+    < InputText
+  autoFocus = {autoFocus}
+  didCheckErrors = {didCheckErrors}
+  errors = {errors}
+  label = "Field Name"
+  disabled = {value === '-' || nature === 'oneWay'
+}
+  name = {main ? 'name' : 'key'}
+  onChange = {onChange}
+  type = "text"
+  value = {nature === 'oneWay' ? '-' : value
+}
+  />
+  < /div>
+  < /div>
+  < /InlineBlock>
+)
+  ;
 };
 
 RelationBox.defaultProps = {
@@ -64,7 +90,8 @@ RelationBox.defaultProps = {
   modelName: '',
   models: [],
   nature: null,
-  onClick: () => {},
+  onClick: () => {
+  },
   plugin: null,
   selectedModel: null,
   source: null,
