@@ -1,0 +1,44 @@
+{
+  "connection": "default",
+  "collectionName": "questions",
+  "info": {
+    "name": "question",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "question": {
+      "required": true,
+      "type": "string"
+    },
+    "examination": {
+      "model": "examination",
+      "via": "questions"
+    },
+    "answerA": {
+      "type": "string"
+    },
+    "answerB": {
+      "type": "string"
+    },
+    "answerC": {
+      "type": "string"
+    },
+    "answerD": {
+      "type": "string"
+    },
+    "answer": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "type": "enumeration"
+    }
+  }
+}

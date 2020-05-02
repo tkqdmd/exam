@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "results",
+  "info": {
+    "name": "result",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "point": {
+      "type": "integer",
+      "required": true
+    },
+    "datetime": {
+      "type": "date"
+    },
+    "username": {
+      "type": "string"
+    },
+    "examCode": {
+      "type": "integer"
+    }
+  }
+}

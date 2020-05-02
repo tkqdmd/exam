@@ -1,0 +1,47 @@
+{
+  "connection": "default",
+  "collectionName": "examinations",
+  "info": {
+    "name": "examination",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "required": true,
+      "type": "string"
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 100
+    },
+    "questions": {
+      "collection": "question",
+      "via": "examination"
+    },
+    "code": {
+      "type": "integer",
+      "unique": true,
+      "required": true
+    },
+    "private": {
+      "default": true,
+      "type": "boolean",
+      "required": true
+    },
+    "startTime": {
+      "required": true,
+      "type": "date",
+      "default": "2020-05-01T00:00:00.000Z"
+    },
+    "endTime": {
+      "required": true,
+      "type": "date",
+      "default": "2020-05-01T00:00:00.000Z"
+    }
+  }
+}
