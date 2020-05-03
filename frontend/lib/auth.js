@@ -21,13 +21,19 @@ export const strapiRegister = (username, email, password) => {
 //use strapi to get a JWT and token object, save
 //to approriate cookei for future requests
 export const strapiLogin = (email, password) => {
+  let error = "";
   if (!process.browser) {
     return;
   }
   // Get a token
-  strapi.login(email, password).then(res => {
-    setToken(res);
-  });
+  strapi.login(email, password)
+    .then(res => {
+      setToken(res);
+    })
+    .catch(error = "Identifier or password invalid.")
+    
+  if(error !== "") throw error;
+  
   return Promise.resolve();
 };
 

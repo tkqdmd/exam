@@ -52,7 +52,7 @@ class History extends React.Component {
                 </Table>
             );
         }
-        return <h1><br></br>You haven't done any exam</h1>;
+        return <h1><br></br>You have never done any exam</h1>;
     }
 }
 

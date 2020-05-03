@@ -38,16 +38,19 @@ class SignIn extends React.Component {
 
     this.setState({loading: true});
 
-    strapiLogin(email, password).then(() => console.log(Cookies.get("user")))
-        .catch(error => {
-          this.setState({error: error})
-          console.log(error);
-        });
-
+    try{
+      strapiLogin(email, password)
+      .then(() => console.log(Cookies.get("user")));
+    }
+    catch(error){
+      this.setState({
+        error: error,
+      })
+    }
+    
+        
   }
   render() {
-    const { error } = this.state;
-    console.log(error);
     return (
       <Container>
         <Row>
@@ -57,7 +60,7 @@ class SignIn extends React.Component {
                 <img src="https://strapi.io/assets/images/logo.png" />
               </div>
               <section className="wrapper">
-                <div className="notification">{error}</div>
+                <div className="notification">{this.state.error}</div>
                 <Form>
                   <FormGroup>
                     <Label>Email:</Label>
