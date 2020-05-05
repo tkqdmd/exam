@@ -1,7 +1,7 @@
 /* /pages/index.js */
 
 import ExaminationList from "../components/ExaminationList";
-import React from "react";
+import React, {useState} from "react";
 import securePage from "../hocs/securePage";
 import {
   Alert,
@@ -10,9 +10,12 @@ import {
   Input,
   InputGroup,
   InputGroupAddon,
-  Row
+  Row,
 } from "reactstrap";
 import Router from "next/dist/next-server/server/router";
+import ErrorAlert from "../components/Common/ErrorAlert";
+
+
 
 class Index extends React.Component {
   constructor(props) {
@@ -22,8 +25,12 @@ class Index extends React.Component {
       query: "",
       examCode:"",
       examCodeFound: false,
+      redirectLink: "",
+      errorState: false,
+      errorMessage:"",
     };
   }
+
   onChange(e) {
     //set the state = to the input typed in the search Input Component
     //this.state.query gets passed into ExaminationList to filter the results
@@ -42,14 +49,24 @@ class Index extends React.Component {
     });
   }
   onSubmitExamCode() {
-    if(examCodeFound===false)
-    alert("Exam code not found. Please try again");
+    if(this.state.examCodeFound===false){
+      this.setState({
+        errorState: true,
+        errorMessage: "Examination not found"
+      })
+    }
+    
   }
   
   render() {
-    console.log(this.props.isAuthenticated);
+    // console.log(this.props.isAuthenticated);
     return (
+      
       <div className="container-fluid">
+        <ErrorAlert
+          errorState={this.state.errorState}
+          errorMessage={this.state.errorMessage}
+        />
         <Row>
           <Col>
             <div className="search">
@@ -65,6 +82,7 @@ class Index extends React.Component {
                 search={this.state.query} 
                 examCode={this.state.examCode}
                 examCodeFound={this.state.examCodeFound}
+                redirectLink={this.state.redirectLink}
                 onChangeExamCode={this.onChangeExamCode.bind(this)}
                 onExamCodeFound={this.onExamCodeFound.bind(this)}
                 onSubmitExamCode={this.onSubmitExamCode.bind(this)}

@@ -1,7 +1,8 @@
 /* components/ExaminationList/index.js */
+import { useState } from "react";
 import gql from "graphql-tag";
 import Link from "next/link";
-import {graphql} from "react-apollo";
+import {graphql, from} from "react-apollo";
 import {
     Button,
     Card,
@@ -12,10 +13,12 @@ import {
     Col,
     Input,
     InputGroup,
-    InputGroupAddon
+    InputGroupAddon,
+    UncontrolledAlert
 } from "reactstrap";
 
 const ExaminationList = (
+  
   { data: { error, examinations }, search, examCode, onChangeExamCode, onExamCodeFound, onSubmitExamCode }) => {
   
   if (error) {
@@ -32,19 +35,20 @@ const ExaminationList = (
       query.name.toLowerCase().includes(search)
     ).filter(ex => (
       ex.private === false
-    ))
-    ;
+    )).filter(e => (
+      new Date() >= new Date(e.startTime) && new Date() <= new Date(e.endTime)
+    ));
     const targetExam = examinations.filter(tar =>
       tar.code == examCode
     );
-
-      let examId;
+    let examId;
+    let redirectLink="javascript:void(0);";
     if(targetExam.length === 1) {
         examId = targetExam[0].id;
-        
+        redirectLink= "/examinations/"+examId;
         onExamCodeFound;
     }
-    
+          
     if (searchQuery.length != 0) {
       return (
         
@@ -55,7 +59,7 @@ const ExaminationList = (
                 <div className="examCode">
                   <InputGroup style={{ width: "100%", margin: "0 00px 30px"}}>
                       <Input placeholder="Enter your exam code" onChange={onChangeExamCode}/> 
-                      <InputGroupAddon addonType="prepend"><Button onClick={onSubmitExamCode} href={"/examinations/"+examId}>Join with exam code</Button></InputGroupAddon>
+                      <InputGroupAddon addonType="prepend"><Button onClick={onSubmitExamCode} href={redirectLink}>Join with exam code</Button></InputGroupAddon>
                   </InputGroup>
                 </div>
             </div>

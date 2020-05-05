@@ -29,7 +29,7 @@ class Examinations extends React.Component {
         this.startExamTime = this.startExamTime.bind(this);
         this.countDown = this.countDown.bind(this);
     }
-
+    
     startExamTime() {
         const examination = this.props.data.examination;
         this.setState({
