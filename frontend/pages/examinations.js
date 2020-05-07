@@ -139,16 +139,7 @@ class Examinations extends React.Component {
         if (error) return "Error Loading Questions";
 
         if (examination) {
-            const checkList = examusers.filter(eu => (
-                eu.email === this.props.loggedUser
-            )).filter(e => (
-                e.examCode === examination.code
-            ));
-            console.log(examusers);
-            if (checkList.length !== 0) return <h5><br></br>You have done this Exam before</h5>;
-            if (new Date() < new Date(examination.startTime) || new Date() > new Date(examination.endTime)) return <h5>
-                <br></br>Exam has expired</h5>;
-
+            
             if (examination.questions.length === 0) return <h5><br></br>Exam don't have any questions</h5>;
 
             if (this.state.started === false) return (
@@ -235,10 +226,6 @@ const GET_EXAMINATION_QUESTIONS = gql`
             }
         }
 
-        examusers {
-            email
-            examCode
-        }
     }
 `;
 // The `graphql` wrapper executes a GraphQL query and makes the results

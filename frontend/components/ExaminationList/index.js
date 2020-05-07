@@ -3,6 +3,7 @@ import { useState } from "react";
 import gql from "graphql-tag";
 import Link from "next/link";
 import {graphql, from} from "react-apollo";
+import ErrorModal from "../Common/ErrorModal"
 import {
     Button,
     Card,
@@ -19,11 +20,10 @@ import {
 
 const ExaminationList = (
   
-  { data: { error, examinations }, search, examCode, onChangeExamCode, onExamCodeFound, onSubmitExamCode }) => {
-  
+  { data: { error, examinations, examusers }, search, examCode, onExamCodeFound, onExamOutDated, onChangeExamCode, onExamDone, hideModal, onSubmitExamCode, loggedUser }) => {
+
   if (error) {
     console.log(error);
-    
     return "Error loading examinations";
   }
   //if examinations are returned from the GraphQL query, run the filter query
@@ -38,17 +38,34 @@ const ExaminationList = (
     )).filter(e => (
       new Date() >= new Date(e.startTime) && new Date() <= new Date(e.endTime)
     ));
+
+    
     const targetExam = examinations.filter(tar =>
       tar.code == examCode
     );
     let examId;
     let redirectLink="javascript:void(0);";
+    
+    const checkList = examusers.filter(eu => (
+      eu.email == loggedUser
+      )).filter(e => (
+          e.examCode == examCode
+      ));
+    
     if(targetExam.length === 1) {
-        examId = targetExam[0].id;
-        redirectLink= "/examinations/"+examId;
-        onExamCodeFound;
+      onExamCodeFound();
+      if (new Date() < new Date(targetExam[0].startTime) || new Date() > new Date(targetExam[0].endTime)) onExamOutDated();
+      else {
+        if (checkList.length !== 0) onExamDone();
+        else {
+          examId = targetExam[0].id;
+          redirectLink= "/examinations/"+examId;
+        }
+      }        
     }
-          
+    
+    
+
     if (searchQuery.length != 0) {
       return (
         
@@ -67,6 +84,7 @@ const ExaminationList = (
           <div className="h-100">
             <CardColumns>
             {searchQuery.map(res => (
+              
               <Card
                 outline color="primary"
                 style={{ width: "100%", margin: "0 10px 20px"}}
@@ -132,6 +150,11 @@ const query = gql`
       private
       startTime
       endTime
+    }
+    
+    examusers {
+      email
+      examCode
     }
   }
 `;

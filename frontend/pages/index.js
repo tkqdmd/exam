@@ -13,9 +13,7 @@ import {
   Row,
 } from "reactstrap";
 import Router from "next/dist/next-server/server/router";
-import ErrorAlert from "../components/Common/ErrorAlert";
-
-
+import ErrorModal from "../components/Common/ErrorModal";
 
 class Index extends React.Component {
   constructor(props) {
@@ -24,11 +22,16 @@ class Index extends React.Component {
     this.state = {
       query: "",
       examCode:"",
-      examCodeFound: false,
+      
+      examDone: false,
+      examOutDated: false,
       redirectLink: "",
       errorState: false,
       errorMessage:"",
     };
+    let examCodeFound = false;
+    let examDone = false;
+    let examOutDated = false;
   }
 
   onChange(e) {
@@ -42,31 +45,60 @@ class Index extends React.Component {
     this.setState({ 
         examCode: e.target.value
     });
+    console.log(this.state);
   }
-  onExamCodeFound() {
-    this.setState({
-        examCodeFound: true,
-    });
+  onExamCodeFound (){
+    this.examCodeFound = true;    
+  }
+  onExamDone () {
+    this.examDone = true;
+  }
+
+  onExamOutDated() {
+    this.examOutDated= true;
   }
   onSubmitExamCode() {
-    if(this.state.examCodeFound===false){
+    if(this.examCodeFound===false){
       this.setState({
         errorState: true,
         errorMessage: "Examination not found"
       })
     }
-    
+    if(this.examOutDated===true){
+      this.setState({
+        errorState: true,
+        errorMessage: "Exam has expired"
+      })
+    }
+    if(this.examDone===true){
+      this.setState({
+        errorState: true,
+        errorMessage: "You have done this Exam before"
+      })
+    }    
+  }
+
+  hideModal() {
+    this.setState({
+      errorState: false,
+    });
+    this.examCodeFound = false;
+    this.examDone = false;
+    this.examOutDated = false;
   }
   
   render() {
-    // console.log(this.props.isAuthenticated);
+    this.examCodeFound = false;
+    this.examDone = false;
+    this.examOutDated = false;
     return (
       
       <div className="container-fluid">
-        <ErrorAlert
-          errorState={this.state.errorState}
-          errorMessage={this.state.errorMessage}
-        />
+        <ErrorModal
+            errorState={this.state.errorState}
+            errorMessage={this.state.errorMessage}
+            hideModal={this.hideModal.bind(this)}
+          />
         <Row>
           <Col>
             <div className="search">
@@ -79,13 +111,17 @@ class Index extends React.Component {
             <h4>OR</h4>
                 
             <ExaminationList 
+                loggedUser={this.props.loggedUser}
                 search={this.state.query} 
                 examCode={this.state.examCode}
                 examCodeFound={this.state.examCodeFound}
                 redirectLink={this.state.redirectLink}
+                onExamDone={this.onExamDone.bind(this)}
                 onChangeExamCode={this.onChangeExamCode.bind(this)}
                 onExamCodeFound={this.onExamCodeFound.bind(this)}
+                onExamOutDated={this.onExamOutDated.bind(this)}
                 onSubmitExamCode={this.onSubmitExamCode.bind(this)}
+                hideModal={this.hideModal.bind(this)}
                 />
           </Col>
           
@@ -96,8 +132,6 @@ class Index extends React.Component {
               margin: 20px;
               width: 500px;
             }
-
-
           `}
         </style>
       </div>
