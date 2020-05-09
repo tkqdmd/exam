@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "questions",
+  "collectionName": "radioquestions",
   "info": {
-    "name": "question",
+    "name": "radioquestion",
     "description": ""
   },
   "options": {
@@ -11,13 +11,13 @@
     "comment": ""
   },
   "attributes": {
-    "question": {
+    "type": {
       "required": true,
+      "default": "radio",
       "type": "string"
     },
-    "examination": {
-      "model": "examination",
-      "via": "questions"
+    "question": {
+      "type": "string"
     },
     "answerA": {
       "type": "string"
@@ -38,7 +38,12 @@
         "C",
         "D"
       ],
-      "type": "enumeration"
+      "type": "enumeration",
+      "default": "A"
+    },
+    "examination": {
+      "model": "examination",
+      "via": "radioquestions"
     }
   }
 }

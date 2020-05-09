@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/questions",
-      "handler": "Question.find",
+      "path": "/checkboxquestions",
+      "handler": "Checkboxquestion.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/questions/count",
-      "handler": "Question.count",
+      "path": "/checkboxquestions/count",
+      "handler": "Checkboxquestion.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/questions/:id",
-      "handler": "Question.findOne",
+      "path": "/checkboxquestions/:id",
+      "handler": "Checkboxquestion.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/questions",
-      "handler": "Question.create",
+      "path": "/checkboxquestions",
+      "handler": "Checkboxquestion.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/questions/:id",
-      "handler": "Question.update",
+      "path": "/checkboxquestions/:id",
+      "handler": "Checkboxquestion.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/questions/:id",
-      "handler": "Question.destroy",
+      "path": "/checkboxquestions/:id",
+      "handler": "Checkboxquestion.destroy",
       "config": {
         "policies": []
       }

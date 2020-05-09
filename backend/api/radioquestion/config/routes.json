@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/examusers",
-      "handler": "Examuser.find",
+      "path": "/radioquestions",
+      "handler": "Radioquestion.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/examusers/count",
-      "handler": "Examuser.count",
+      "path": "/radioquestions/count",
+      "handler": "Radioquestion.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/examusers/:id",
-      "handler": "Examuser.findOne",
+      "path": "/radioquestions/:id",
+      "handler": "Radioquestion.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/examusers",
-      "handler": "Examuser.create",
+      "path": "/radioquestions",
+      "handler": "Radioquestion.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/examusers/:id",
-      "handler": "Examuser.update",
+      "path": "/radioquestions/:id",
+      "handler": "Radioquestion.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/examusers/:id",
-      "handler": "Examuser.destroy",
+      "path": "/radioquestions/:id",
+      "handler": "Radioquestion.destroy",
       "config": {
         "policies": []
       }

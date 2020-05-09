@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/examusers",
-      "handler": "Examuser.find",
+      "path": "/textquestions",
+      "handler": "Textquestion.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/examusers/count",
-      "handler": "Examuser.count",
+      "path": "/textquestions/count",
+      "handler": "Textquestion.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/examusers/:id",
-      "handler": "Examuser.findOne",
+      "path": "/textquestions/:id",
+      "handler": "Textquestion.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/examusers",
-      "handler": "Examuser.create",
+      "path": "/textquestions",
+      "handler": "Textquestion.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/examusers/:id",
-      "handler": "Examuser.update",
+      "path": "/textquestions/:id",
+      "handler": "Textquestion.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/examusers/:id",
-      "handler": "Examuser.destroy",
+      "path": "/textquestions/:id",
+      "handler": "Textquestion.destroy",
       "config": {
         "policies": []
       }

@@ -7,7 +7,7 @@ import {compose} from "recompose";
 import React from 'react';
 import Strapi from "strapi-sdk-javascript/build/main";
 import securePage from "../hocs/securePage";
-import {Answers} from "../components/answers";
+import {Question} from "../components/Question";
 import {Button} from "reactstrap";
 
 const apiUrl = process.env.API_URL || "http://localhost:1337";
@@ -18,7 +18,9 @@ class Examinations extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: [],
+            radioItems: [],
+            checkboxItems: [],
+            inputItems: [],
             questions: [],
             time: {},
             seconds: 1,
@@ -32,10 +34,11 @@ class Examinations extends React.Component {
     
     startExamTime() {
         const examination = this.props.data.examination;
+        const questionList = examination.radioquestions.concat(examination.checkboxquestions, examination.textquestions);
         this.setState({
             seconds: examination.examTime * 60,
             time: this.secondsToTime(examination.examTime * 60),
-            questions: _.shuffle(examination.questions),
+            questions: _.shuffle(questionList),
             started: true,
         });
         if (this.timer == 0 && this.state.seconds > 0) {
@@ -82,8 +85,32 @@ class Examinations extends React.Component {
         }
     }
 
-    onChange = (e) => {
-        var copyItems = this.state.items;
+    onInputChange = (e) => {
+        console.log(e.target);
+        
+        var copyItems = this.state.inputItems;
+        console.log(copyItems);
+        var check = false;
+        if (copyItems.length > 0) {
+            for (var i = 0; i < copyItems.length; i++) {
+                if (copyItems[i].name == e.target.name) {
+                    copyItems[i].value = e.target.value.trim().toLowerCase();
+                    check = true;
+                }
+            }
+        }
+        if (check === false) {
+            copyItems.push({name: e.target.name, value: e.target.value})
+        }
+        this.setState({
+            inputItems: copyItems
+        });
+    };
+
+    onRadioChange = (e) => {
+        console.log(e.target);
+        var copyItems = this.state.radioItems;
+        console.log(copyItems);
         var check = false;
         if (copyItems.length > 0) {
             for (var i = 0; i < copyItems.length; i++) {
@@ -94,27 +121,86 @@ class Examinations extends React.Component {
             }
         }
         if (check === false) {
-            copyItems.push({name: e.target.name, value: e.target.value})
+            copyItems.push({name: e.target.name, value: e.target.value});
         }
         this.setState({
-            items: copyItems
+            radioItems: copyItems
         });
     };
 
+    onCheckboxChange = (e) => {
+        var copyItems = this.state.checkboxItems;
+        var check = false;
+        if (copyItems.length > 0) {
+            for (var i = 0; i < copyItems.length; i++) {
+                if (copyItems[i].name == e.target.name) {
+                    var index = copyItems[i].value.indexOf(e.target.value);
+                    if (index == -1) {
+                        copyItems[i].value = copyItems[i].value + " " + e.target.value;
+                    }
+                    else {
+                        if(index == 0){
+                            copyItems[i].value = copyItems[i].value.substring(2);
+                        }
+                        else {
+                            if(index == copyItems[i].value.length){
+                                copyItems[i].value = copyItems[i].value.substring(0, index-2);
+                            }
+                            else copyItems[i].value = copyItems[i].value.substring(0, index-1) + copyItems[i].value.substring(index+1);
+                        }
+                    }
+                    check = true;
+                }
+            }
+        }
+        if (check === false) {
+            copyItems.push({name: e.target.name, value: e.target.value})
+        }
+        this.setState({
+            checkboxItems: copyItems
+        });
+    };
     submitExam() {
         var examination = this.props.data.examination;
-        const copyItems = this.state.items;
+        const radioItems = this.state.radioItems;
+        const checkboxItems = this.state.checkboxItems;
+        const inputItems = this.state.inputItems;
         let point = 0;
-        for (var i = 0; i < copyItems.length; i++) {
-            examination.questions.forEach(
+        for (var i = 0; i < radioItems.length; i++) {
+            this.state.questions.filter(ques => (ques.type == "radio")).forEach(
                 q => {
-                    if (q.id == copyItems[i].name && q.answer == copyItems[i].value) {
+                    if (q.id == radioItems[i].name.substring(5) && q.answer == radioItems[i].value) {
                         point++;
                     }
                 }
             )
         }
-        point = (point / examination.questions.length) * 10;
+        for (var i = 0; i < checkboxItems.length; i++) {
+            this.state.questions.filter(ques => (ques.type == "checkbox")).forEach(
+                q => {
+                    var check = true;
+                    if (q.id == checkboxItems[i].name.substring(8) && q.answer.length == checkboxItems[i].value.length) {
+                        for (var j = 0; j < q.answer.length; j+=2) {
+                            if(checkboxItems[i].value.indexOf(q.answer.charAt(j))==-1){
+                                check = false;
+                                break;
+                            }
+                        }
+                        if (check == true) point++;
+                    }   
+                }
+            )
+        }
+        for (var i = 0; i < inputItems.length; i++) {
+            this.state.questions.filter(ques => (ques.type == "text")).forEach(
+                q => {
+                    if (q.id == inputItems[i].name.substring(4) && q.answer.trim().toLowerCase() == inputItems[i].value.trim().toLowerCase()) {
+                        point++;
+                    }
+                }
+            )
+        }
+        point = (point / this.state.questions.length) * 10;
         strapi
             .createEntry("results", {
                 point: point,
@@ -140,12 +226,12 @@ class Examinations extends React.Component {
 
         if (examination) {
             
-            if (examination.questions.length === 0) return <h5><br></br>Exam don't have any questions</h5>;
+            if (examination.radioquestions.length === 0 && examination.checkboxquestions.length === 0 && examination.textquestions.length === 0) return <h5><br></br>Exam don't have any questions</h5>;
 
             if (this.state.started === false) return (
                 <div>
                     <h2>{examination.name}</h2>
-                    <h5><i>{examination.description}</i></h5>
+                    <h6><i>{examination.description}</i></h6>
                     <h6><i>Time for this exam is: {examination.examTime} minutes</i></h6>
                     <Button style={{marginTop: "30px"}} color="danger" size="lg"
                             onClick={this.startExamTime}>Start</Button>
@@ -155,7 +241,7 @@ class Examinations extends React.Component {
             return (
                 <>
                     <h2>{examination.name}</h2>
-                    <h5><i>{examination.description}</i></h5>
+                    <h6><i>{examination.description}</i></h6>
                     <div style={{display: 'flex'}}>
                         <h6 style={{marginRight: "10px"}}>Time left: </h6>
                         <span>{this.state.time.h}h</span> :
@@ -165,32 +251,32 @@ class Examinations extends React.Component {
                     <div style={{display: "inline-block"}} className="h-100">
                         {this.state.questions.map(res => (
                             <div>
-                                <div style={{marginTop: "30px"}}>
-                                    <h5>Question {pos++}: {res.question}</h5>
-                                    <Answers
-                                        res={res}
-                                        onChange={this.onChange}
-                                    ></Answers>
-                                </div>
+                                <Question
+                                    pos={pos++}
+                                    question={res}
+                                    onInputChange={this.onInputChange}
+                                    onRadioChange={this.onRadioChange}
+                                    onCheckboxChange={this.onCheckboxChange}
+                                />
                                 <style jsx>
                                     {`
-                          a {
-                            color: white;
-                          }
-                          a:link {
-                            text-decoration: none;
-                            color: white;
-                          }
-                          .container-fluid {
-                            margin-bottom: 30px;
-                          }
-                          .btn-outline-primary {
-                            color: #007bff !important;
-                          }
-                          a:hover {
-                            color: white !important;
-                          }
-                        `}
+                                    a {
+                                        color: white;
+                                    }
+                                    a:link {
+                                        text-decoration: none;
+                                        color: white;
+                                    }
+                                    .container-fluid {
+                                        margin-bottom: 30px;
+                                    }
+                                    .btn-outline-primary {
+                                        color: #007bff !important;
+                                    }
+                                    a:hover {
+                                        color: white !important;
+                                    }
+                                    `}
                                 </style>
                             </div>
 
@@ -215,13 +301,30 @@ const GET_EXAMINATION_QUESTIONS = gql`
             startTime
             endTime
             examTime
-            questions {
+            radioquestions{
                 id
+                type
                 question
                 answerA
                 answerB
                 answerC
                 answerD
+                answer
+            }
+    		checkboxquestions{
+                id
+                type
+                question
+                answerA
+                answerB
+                answerC
+                answerD
+                answer
+            }
+      		textquestions{
+                id
+                type
+                question
                 answer
             }
         }

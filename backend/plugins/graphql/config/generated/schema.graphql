@@ -1,3 +1,65 @@
+type Checkboxquestion {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  type: String!
+  question: String
+  answerA: String
+  answerB: String
+  answerC: String
+  answerD: String
+  answer: String!
+  examination: Examination
+}
+
+input CheckboxquestionInput {
+  type: String!
+  question: String
+  answerA: String
+  answerB: String
+  answerC: String
+  answerD: String
+  answer: String!
+  examination: ID
+}
+
+type Course {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  teachername: String
+  teacheremail: String
+  Students: JSON
+  description: String
+  examinations(sort: String, limit: Int, start: Int, where: JSON): [Examination]
+}
+
+input CourseInput {
+  name: String
+  teachername: String
+  teacheremail: String
+  examinations: [ID]
+  Students: JSON
+  description: String
+}
+
+input createCheckboxquestionInput {
+  data: CheckboxquestionInput
+}
+
+type createCheckboxquestionPayload {
+  checkboxquestion: Checkboxquestion
+}
+
+input createCourseInput {
+  data: CourseInput
+}
+
+type createCoursePayload {
+  course: Course
+}
+
 input createExaminationInput {
   data: ExaminationInput
 }
@@ -14,12 +76,12 @@ type createExamuserPayload {
   examuser: Examuser
 }
 
-input createQuestionInput {
-  data: QuestionInput
+input createRadioquestionInput {
+  data: RadioquestionInput
 }
 
-type createQuestionPayload {
-  question: Question
+type createRadioquestionPayload {
+  radioquestion: Radioquestion
 }
 
 input createResultInput {
@@ -38,6 +100,14 @@ type createRolePayload {
   role: UsersPermissionsRole
 }
 
+input createTextquestionInput {
+  data: TextquestionInput
+}
+
+type createTextquestionPayload {
+  textquestion: Textquestion
+}
+
 input createUserInput {
   data: UserInput
 }
@@ -50,6 +120,22 @@ type createUserPayload {
 The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
+
+input deleteCheckboxquestionInput {
+  where: InputID
+}
+
+type deleteCheckboxquestionPayload {
+  checkboxquestion: Checkboxquestion
+}
+
+input deleteCourseInput {
+  where: InputID
+}
+
+type deleteCoursePayload {
+  course: Course
+}
 
 input deleteExaminationInput {
   where: InputID
@@ -67,12 +153,12 @@ type deleteExamuserPayload {
   examuser: Examuser
 }
 
-input deleteQuestionInput {
+input deleteRadioquestionInput {
   where: InputID
 }
 
-type deleteQuestionPayload {
-  question: Question
+type deleteRadioquestionPayload {
+  radioquestion: Radioquestion
 }
 
 input deleteResultInput {
@@ -91,6 +177,14 @@ type deleteRolePayload {
   role: UsersPermissionsRole
 }
 
+input deleteTextquestionInput {
+  where: InputID
+}
+
+type deleteTextquestionPayload {
+  textquestion: Textquestion
+}
+
 input deleteUserInput {
   where: InputID
 }
@@ -99,15 +193,38 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
+input editCheckboxquestionInput {
+  type: String
+  question: String
+  answerA: String
+  answerB: String
+  answerC: String
+  answerD: String
+  answer: String
+  examination: ID
+}
+
+input editCourseInput {
+  name: String
+  teachername: String
+  teacheremail: String
+  examinations: [ID]
+  Students: JSON
+  description: String
+}
+
 input editExaminationInput {
   name: String
   description: String
-  questions: [ID]
   code: Int
   private: Boolean
   startTime: DateTime
   endTime: DateTime
   examTime: Int
+  radioquestions: [ID]
+  checkboxquestions: [ID]
+  textquestions: [ID]
+  course: ID
 }
 
 input editExamuserInput {
@@ -128,14 +245,15 @@ input editFileInput {
   related: [ID]
 }
 
-input editQuestionInput {
+input editRadioquestionInput {
+  type: String
   question: String
-  examination: ID
   answerA: String
   answerB: String
   answerC: String
   answerD: String
-  answer: ENUM_QUESTION_ANSWER
+  answer: ENUM_RADIOQUESTION_ANSWER
+  examination: ID
 }
 
 input editResultInput {
@@ -154,6 +272,13 @@ input editRoleInput {
   users: [ID]
 }
 
+input editTextquestionInput {
+  type: String
+  question: String
+  answer: String
+  examination: ID
+}
+
 input editUserInput {
   username: String
   email: String
@@ -165,7 +290,7 @@ input editUserInput {
   role: ID
 }
 
-enum ENUM_QUESTION_ANSWER {
+enum ENUM_RADIOQUESTION_ANSWER {
   A
   B
   C
@@ -183,18 +308,24 @@ type Examination {
   startTime: DateTime!
   endTime: DateTime!
   examTime: Int
-  questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
+  course: Course
+  radioquestions(sort: String, limit: Int, start: Int, where: JSON): [Radioquestion]
+  checkboxquestions(sort: String, limit: Int, start: Int, where: JSON): [Checkboxquestion]
+  textquestions(sort: String, limit: Int, start: Int, where: JSON): [Textquestion]
 }
 
 input ExaminationInput {
   name: String!
   description: String
-  questions: [ID]
   code: Int!
   private: Boolean!
   startTime: DateTime!
   endTime: DateTime!
   examTime: Int
+  radioquestions: [ID]
+  checkboxquestions: [ID]
+  textquestions: [ID]
+  course: ID
 }
 
 type Examuser {
@@ -235,21 +366,30 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Examination | createExaminationPayload | updateExaminationPayload | deleteExaminationPayload | Examuser | createExamuserPayload | updateExamuserPayload | deleteExamuserPayload | Question | createQuestionPayload | updateQuestionPayload | deleteQuestionPayload | Result | createResultPayload | updateResultPayload | deleteResultPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Checkboxquestion | createCheckboxquestionPayload | updateCheckboxquestionPayload | deleteCheckboxquestionPayload | Course | createCoursePayload | updateCoursePayload | deleteCoursePayload | Examination | createExaminationPayload | updateExaminationPayload | deleteExaminationPayload | Examuser | createExamuserPayload | updateExamuserPayload | deleteExamuserPayload | Radioquestion | createRadioquestionPayload | updateRadioquestionPayload | deleteRadioquestionPayload | Result | createResultPayload | updateResultPayload | deleteResultPayload | Textquestion | createTextquestionPayload | updateTextquestionPayload | deleteTextquestionPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
+  createCheckboxquestion(input: createCheckboxquestionInput): createCheckboxquestionPayload
+  updateCheckboxquestion(input: updateCheckboxquestionInput): updateCheckboxquestionPayload
+  deleteCheckboxquestion(input: deleteCheckboxquestionInput): deleteCheckboxquestionPayload
+  createCourse(input: createCourseInput): createCoursePayload
+  updateCourse(input: updateCourseInput): updateCoursePayload
+  deleteCourse(input: deleteCourseInput): deleteCoursePayload
   createExamination(input: createExaminationInput): createExaminationPayload
   updateExamination(input: updateExaminationInput): updateExaminationPayload
   deleteExamination(input: deleteExaminationInput): deleteExaminationPayload
   createExamuser(input: createExamuserInput): createExamuserPayload
   updateExamuser(input: updateExamuserInput): updateExamuserPayload
   deleteExamuser(input: deleteExamuserInput): deleteExamuserPayload
-  createQuestion(input: createQuestionInput): createQuestionPayload
-  updateQuestion(input: updateQuestionInput): updateQuestionPayload
-  deleteQuestion(input: deleteQuestionInput): deleteQuestionPayload
+  createRadioquestion(input: createRadioquestionInput): createRadioquestionPayload
+  updateRadioquestion(input: updateRadioquestionInput): updateRadioquestionPayload
+  deleteRadioquestion(input: deleteRadioquestionInput): deleteRadioquestionPayload
   createResult(input: createResultInput): createResultPayload
   updateResult(input: updateResultInput): updateResultPayload
   deleteResult(input: deleteResultInput): deleteResultPayload
+  createTextquestion(input: createTextquestionInput): createTextquestionPayload
+  updateTextquestion(input: updateTextquestionInput): updateTextquestionPayload
+  deleteTextquestion(input: deleteTextquestionInput): deleteTextquestionPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -272,14 +412,20 @@ type Mutation {
 }
 
 type Query {
+  checkboxquestion(id: ID!): Checkboxquestion
+  checkboxquestions(sort: String, limit: Int, start: Int, where: JSON): [Checkboxquestion]
+  course(id: ID!): Course
+  courses(sort: String, limit: Int, start: Int, where: JSON): [Course]
   examination(id: ID!): Examination
   examinations(sort: String, limit: Int, start: Int, where: JSON): [Examination]
   examuser(id: ID!): Examuser
   examusers(sort: String, limit: Int, start: Int, where: JSON): [Examuser]
-  question(id: ID!): Question
-  questions(sort: String, limit: Int, start: Int, where: JSON): [Question]
+  radioquestion(id: ID!): Radioquestion
+  radioquestions(sort: String, limit: Int, start: Int, where: JSON): [Radioquestion]
   result(id: ID!): Result
   results(sort: String, limit: Int, start: Int, where: JSON): [Result]
+  textquestion(id: ID!): Textquestion
+  textquestions(sort: String, limit: Int, start: Int, where: JSON): [Textquestion]
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -292,27 +438,29 @@ type Query {
   me: UsersPermissionsMe
 }
 
-type Question {
+type Radioquestion {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  question: String!
-  examination: Examination
+  type: String!
+  question: String
   answerA: String
   answerB: String
   answerC: String
   answerD: String
-  answer: ENUM_QUESTION_ANSWER
+  answer: ENUM_RADIOQUESTION_ANSWER
+  examination: Examination
 }
 
-input QuestionInput {
-  question: String!
-  examination: ID
+input RadioquestionInput {
+  type: String!
+  question: String
   answerA: String
   answerB: String
   answerC: String
   answerD: String
-  answer: ENUM_QUESTION_ANSWER
+  answer: ENUM_RADIOQUESTION_ANSWER
+  examination: ID
 }
 
 type Result {
@@ -342,6 +490,41 @@ input RoleInput {
   users: [ID]
 }
 
+type Textquestion {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  type: String!
+  question: String
+  answer: String
+  examination: Examination
+}
+
+input TextquestionInput {
+  type: String!
+  question: String
+  answer: String
+  examination: ID
+}
+
+input updateCheckboxquestionInput {
+  where: InputID
+  data: editCheckboxquestionInput
+}
+
+type updateCheckboxquestionPayload {
+  checkboxquestion: Checkboxquestion
+}
+
+input updateCourseInput {
+  where: InputID
+  data: editCourseInput
+}
+
+type updateCoursePayload {
+  course: Course
+}
+
 input updateExaminationInput {
   where: InputID
   data: editExaminationInput
@@ -360,13 +543,13 @@ type updateExamuserPayload {
   examuser: Examuser
 }
 
-input updateQuestionInput {
+input updateRadioquestionInput {
   where: InputID
-  data: editQuestionInput
+  data: editRadioquestionInput
 }
 
-type updateQuestionPayload {
-  question: Question
+type updateRadioquestionPayload {
+  radioquestion: Radioquestion
 }
 
 input updateResultInput {
@@ -385,6 +568,15 @@ input updateRoleInput {
 
 type updateRolePayload {
   role: UsersPermissionsRole
+}
+
+input updateTextquestionInput {
+  where: InputID
+  data: editTextquestionInput
+}
+
+type updateTextquestionPayload {
+  textquestion: Textquestion
 }
 
 input updateUserInput {

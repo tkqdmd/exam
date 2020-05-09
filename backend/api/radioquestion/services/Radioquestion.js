@@ -1,8 +1,8 @@
-/* global Question */
+/* global Radioquestion */
 'use strict';
 
 /**
- * Question.js service
+ * Radioquestion.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -12,49 +12,49 @@ const _ = require('lodash');
 
 // Strapi utilities.
 const utils = require('strapi-hook-bookshelf/lib/utils/');
-const {convertRestQueryParams, buildQuery} = require('strapi-utils');
+const { convertRestQueryParams, buildQuery } = require('strapi-utils');
 
 
 module.exports = {
 
   /**
-   * Promise to fetch all questions.
+   * Promise to fetch all radioquestions.
    *
    * @return {Promise}
    */
 
   fetchAll: (params, populate) => {
     // Select field to populate.
-    const withRelated = populate || Question.associations
+    const withRelated = populate || Radioquestion.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
     const filters = convertRestQueryParams(params);
 
-    return Question.query(buildQuery({model: Question, filters}))
-      .fetchAll({withRelated})
+    return Radioquestion.query(buildQuery({ model: Radioquestion, filters }))
+      .fetchAll({ withRelated })
       .then(data => data.toJSON());
   },
 
   /**
-   * Promise to fetch a/an question.
+   * Promise to fetch a/an radioquestion.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Question.associations
+    const populate = Radioquestion.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Question.forge(_.pick(params, 'id')).fetch({
+    return Radioquestion.forge(_.pick(params, 'id')).fetch({
       withRelated: populate
     });
   },
 
   /**
-   * Promise to count a/an question.
+   * Promise to count a/an radioquestion.
    *
    * @return {Promise}
    */
@@ -63,54 +63,54 @@ module.exports = {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = convertRestQueryParams(params);
 
-    return Question.query(buildQuery({model: Question, filters: _.pick(filters, 'where')})).count();
+    return Radioquestion.query(buildQuery({ model: Radioquestion, filters: _.pick(filters, 'where') })).count();
   },
 
   /**
-   * Promise to add a/an question.
+   * Promise to add a/an radioquestion.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Question.associations.map(ast => ast.alias));
-    const data = _.omit(values, Question.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Radioquestion.associations.map(ast => ast.alias));
+    const data = _.omit(values, Radioquestion.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Question.forge(data).save();
+    const entry = await Radioquestion.forge(data).save();
 
     // Create relational data and return the entry.
-    return Question.updateRelations({id: entry.id, values: relations});
+    return Radioquestion.updateRelations({ id: entry.id , values: relations });
   },
 
   /**
-   * Promise to edit a/an question.
+   * Promise to edit a/an radioquestion.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Question.associations.map(ast => ast.alias));
-    const data = _.omit(values, Question.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Radioquestion.associations.map(ast => ast.alias));
+    const data = _.omit(values, Radioquestion.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Question.forge(params).save(data);
+    const entry = await Radioquestion.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Question.updateRelations(Object.assign(params, {values: relations}));
+    return Radioquestion.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an question.
+   * Promise to remove a/an radioquestion.
    *
    * @return {Promise}
    */
 
   remove: async (params) => {
     params.values = {};
-    Question.associations.map(association => {
+    Radioquestion.associations.map(association => {
       switch (association.nature) {
         case 'oneWay':
         case 'oneToOne':
@@ -127,41 +127,41 @@ module.exports = {
       }
     });
 
-    await Question.updateRelations(params);
+    await Radioquestion.updateRelations(params);
 
-    return Question.forge(params).destroy();
+    return Radioquestion.forge(params).destroy();
   },
 
   /**
-   * Promise to search a/an question.
+   * Promise to search a/an radioquestion.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('question', params);
+    const filters = strapi.utils.models.convertParams('radioquestion', params);
     // Select field to populate.
-    const populate = Question.associations
+    const populate = Radioquestion.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    const associations = Question.associations.map(x => x.alias);
-    const searchText = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Question._attributes[attribute].type));
+    const associations = Radioquestion.associations.map(x => x.alias);
+    const searchText = Object.keys(Radioquestion._attributes)
+      .filter(attribute => attribute !== Radioquestion.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['string', 'text'].includes(Radioquestion._attributes[attribute].type));
 
-    const searchInt = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Question._attributes[attribute].type));
+    const searchInt = Object.keys(Radioquestion._attributes)
+      .filter(attribute => attribute !== Radioquestion.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['integer', 'decimal', 'float'].includes(Radioquestion._attributes[attribute].type));
 
-    const searchBool = Object.keys(Question._attributes)
-      .filter(attribute => attribute !== Question.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Question._attributes[attribute].type));
+    const searchBool = Object.keys(Radioquestion._attributes)
+      .filter(attribute => attribute !== Radioquestion.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['boolean'].includes(Radioquestion._attributes[attribute].type));
 
     const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
-    return Question.query(qb => {
+    return Radioquestion.query(qb => {
       if (!_.isNaN(_.toNumber(query))) {
         searchInt.forEach(attribute => {
           qb.orWhereRaw(`${attribute} = ${_.toNumber(query)}`);
@@ -175,7 +175,7 @@ module.exports = {
       }
 
       // Search in columns with text using index.
-      switch (Question.client) {
+      switch (Radioquestion.client) {
         case 'mysql':
           qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
           break;

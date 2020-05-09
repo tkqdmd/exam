@@ -1,0 +1,44 @@
+{
+  "connection": "default",
+  "collectionName": "checkboxquestions",
+  "info": {
+    "name": "checkboxquestion",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "type": {
+      "default": "checkbox",
+      "required": true,
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "answerA": {
+      "type": "string"
+    },
+    "answerB": {
+      "type": "string"
+    },
+    "answerC": {
+      "type": "string"
+    },
+    "answerD": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string",
+      "default": "A B C",
+      "required": true
+    },
+    "examination": {
+      "model": "examination",
+      "via": "checkboxquestions"
+    }
+  }
+}

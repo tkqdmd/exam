@@ -19,10 +19,6 @@
       "type": "text",
       "maxLength": 100
     },
-    "questions": {
-      "collection": "question",
-      "via": "examination"
-    },
     "code": {
       "type": "integer",
       "unique": true,
@@ -46,6 +42,22 @@
     "examTime": {
       "type": "integer",
       "default": "-1"
+    },
+    "radioquestions": {
+      "collection": "radioquestion",
+      "via": "examination"
+    },
+    "checkboxquestions": {
+      "collection": "checkboxquestion",
+      "via": "examination"
+    },
+    "textquestions": {
+      "collection": "textquestion",
+      "via": "examination"
+    },
+    "course": {
+      "model": "course",
+      "via": "examinations"
     }
   }
 }

@@ -1,0 +1,30 @@
+{
+  "connection": "default",
+  "collectionName": "textquestions",
+  "info": {
+    "name": "textquestion",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "type": {
+      "default": "text",
+      "required": true,
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string"
+    },
+    "examination": {
+      "model": "examination",
+      "via": "textquestions"
+    }
+  }
+}

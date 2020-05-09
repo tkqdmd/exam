@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "courses",
+  "info": {
+    "name": "course",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "unique": true,
+      "type": "string"
+    },
+    "teachername": {
+      "type": "string"
+    },
+    "teacheremail": {
+      "type": "email"
+    },
+    "examinations": {
+      "collection": "examination",
+      "via": "course"
+    },
+    "Students": {
+      "type": "json"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

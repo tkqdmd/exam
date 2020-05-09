@@ -50,7 +50,6 @@ class Layout extends React.Component {
             </NavItem>
             {isAuthenticated ? (
               <>
-
                 <NavItem className="ml-auto">
                   <UncontrolledDropdown style={{marginRight: 30}}>
                     <DropdownToggle caret>

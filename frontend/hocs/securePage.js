@@ -3,7 +3,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import defaultPage from "./defaultPage";
-import {Button} from "reactstrap";
+import Router from "next/router";
 
 const securePageHoc = Page =>
   class SecurePage extends React.Component {
@@ -17,12 +17,11 @@ const securePageHoc = Page =>
 
     render() {
       const { isAuthenticated } = this.props;
-      return isAuthenticated ? <Page {...this.props} /> : 
-        <div> 
-        <br></br>You must login before
-        <br></br>
-        <a href="/signin"><Button color="primary">Login</Button></a>
-        </div>;
+      if (!isAuthenticated) { 
+        Router.ready(() => Router.push('/signin'))
+        return "";
+      }
+      return <Page {...this.props} />;  
     }
   };
 
