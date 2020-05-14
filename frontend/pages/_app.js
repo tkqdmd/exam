@@ -47,4 +47,5 @@ class MyApp extends App {
         );
     }
 }
+
 export default withData(MyApp);

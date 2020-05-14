@@ -58,6 +58,33 @@
     "course": {
       "model": "course",
       "via": "examinations"
+    },
+    "hardRadioQues": {
+      "type": "integer"
+    },
+    "hardCheckboxQues": {
+      "type": "integer"
+    },
+    "hardTextQues": {
+      "type": "integer"
+    },
+    "mediumRadioQues": {
+      "type": "integer"
+    },
+    "mediumCheckboxQues": {
+      "type": "integer"
+    },
+    "mediumTextQues": {
+      "type": "integer"
+    },
+    "easyRadioQues": {
+      "type": "integer"
+    },
+    "easyCheckboxQues": {
+      "type": "integer"
+    },
+    "easyTextQues": {
+      "type": "integer"
     }
   }
 }

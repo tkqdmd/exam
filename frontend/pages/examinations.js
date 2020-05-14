@@ -31,7 +31,7 @@ class Examinations extends React.Component {
         this.startExamTime = this.startExamTime.bind(this);
         this.countDown = this.countDown.bind(this);
     }
-    
+
     startExamTime() {
         const examination = this.props.data.examination;
         const questionList = examination.radioquestions.concat(examination.checkboxquestions, examination.textquestions);
@@ -87,7 +87,7 @@ class Examinations extends React.Component {
 
     onInputChange = (e) => {
         console.log(e.target);
-        
+
         var copyItems = this.state.inputItems;
         console.log(copyItems);
         var check = false;
@@ -137,16 +137,13 @@ class Examinations extends React.Component {
                     var index = copyItems[i].value.indexOf(e.target.value);
                     if (index == -1) {
                         copyItems[i].value = copyItems[i].value + " " + e.target.value;
-                    }
-                    else {
-                        if(index == 0){
+                    } else {
+                        if (index == 0) {
                             copyItems[i].value = copyItems[i].value.substring(2);
-                        }
-                        else {
-                            if(index == copyItems[i].value.length){
-                                copyItems[i].value = copyItems[i].value.substring(0, index-2);
-                            }
-                            else copyItems[i].value = copyItems[i].value.substring(0, index-1) + copyItems[i].value.substring(index+1);
+                        } else {
+                            if (index == copyItems[i].value.length) {
+                                copyItems[i].value = copyItems[i].value.substring(0, index - 2);
+                            } else copyItems[i].value = copyItems[i].value.substring(0, index - 1) + copyItems[i].value.substring(index + 1);
                         }
                     }
                     check = true;
@@ -160,6 +157,7 @@ class Examinations extends React.Component {
             checkboxItems: copyItems
         });
     };
+
     submitExam() {
         var examination = this.props.data.examination;
         const radioItems = this.state.radioItems;
@@ -180,14 +178,14 @@ class Examinations extends React.Component {
                 q => {
                     var check = true;
                     if (q.id == checkboxItems[i].name.substring(8) && q.answer.length == checkboxItems[i].value.length) {
-                        for (var j = 0; j < q.answer.length; j+=2) {
-                            if(checkboxItems[i].value.indexOf(q.answer.charAt(j))==-1){
+                        for (var j = 0; j < q.answer.length; j += 2) {
+                            if (checkboxItems[i].value.indexOf(q.answer.charAt(j)) == -1) {
                                 check = false;
                                 break;
                             }
                         }
                         if (check == true) point++;
-                    }   
+                    }
                 }
             )
         }
@@ -225,8 +223,9 @@ class Examinations extends React.Component {
         if (error) return "Error Loading Questions";
 
         if (examination) {
-            
-            if (examination.radioquestions.length === 0 && examination.checkboxquestions.length === 0 && examination.textquestions.length === 0) return <h5><br></br>Exam don't have any questions</h5>;
+
+            if (examination.radioquestions.length === 0 && examination.checkboxquestions.length === 0 && examination.textquestions.length === 0) return <h5>
+                <br></br>Exam don't have any questions</h5>;
 
             if (this.state.started === false) return (
                 <div>
@@ -311,7 +310,7 @@ const GET_EXAMINATION_QUESTIONS = gql`
                 answerD
                 answer
             }
-    		checkboxquestions{
+            checkboxquestions{
                 id
                 type
                 question
@@ -321,7 +320,7 @@ const GET_EXAMINATION_QUESTIONS = gql`
                 answerD
                 answer
             }
-      		textquestions{
+            textquestions{
                 id
                 type
                 question

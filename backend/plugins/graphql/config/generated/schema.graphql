@@ -10,6 +10,7 @@ type Checkboxquestion {
   answerD: String
   answer: String!
   examination: Examination
+  level: ENUM_CHECKBOXQUESTION_LEVEL
 }
 
 input CheckboxquestionInput {
@@ -21,6 +22,7 @@ input CheckboxquestionInput {
   answerD: String
   answer: String!
   examination: ID
+  level: ENUM_CHECKBOXQUESTION_LEVEL
 }
 
 type Course {
@@ -30,7 +32,7 @@ type Course {
   name: String
   teachername: String
   teacheremail: String
-  Students: JSON
+  students: JSON
   description: String
   examinations(sort: String, limit: Int, start: Int, where: JSON): [Examination]
 }
@@ -40,7 +42,7 @@ input CourseInput {
   teachername: String
   teacheremail: String
   examinations: [ID]
-  Students: JSON
+  students: JSON
   description: String
 }
 
@@ -202,6 +204,7 @@ input editCheckboxquestionInput {
   answerD: String
   answer: String
   examination: ID
+  level: ENUM_CHECKBOXQUESTION_LEVEL
 }
 
 input editCourseInput {
@@ -209,7 +212,7 @@ input editCourseInput {
   teachername: String
   teacheremail: String
   examinations: [ID]
-  Students: JSON
+  students: JSON
   description: String
 }
 
@@ -225,6 +228,15 @@ input editExaminationInput {
   checkboxquestions: [ID]
   textquestions: [ID]
   course: ID
+  hardRadioQues: Int
+  hardCheckboxQues: Int
+  hardTextQues: Int
+  mediumRadioQues: Int
+  mediumCheckboxQues: Int
+  mediumTextQues: Int
+  easyRadioQues: Int
+  easyCheckboxQues: Int
+  easyTextQues: Int
 }
 
 input editExamuserInput {
@@ -254,6 +266,7 @@ input editRadioquestionInput {
   answerD: String
   answer: ENUM_RADIOQUESTION_ANSWER
   examination: ID
+  level: ENUM_RADIOQUESTION_LEVEL
 }
 
 input editResultInput {
@@ -277,6 +290,7 @@ input editTextquestionInput {
   question: String
   answer: String
   examination: ID
+  level: ENUM_TEXTQUESTION_LEVEL
 }
 
 input editUserInput {
@@ -290,11 +304,29 @@ input editUserInput {
   role: ID
 }
 
+enum ENUM_CHECKBOXQUESTION_LEVEL {
+  Easy
+  Medium
+  Hard
+}
+
 enum ENUM_RADIOQUESTION_ANSWER {
   A
   B
   C
   D
+}
+
+enum ENUM_RADIOQUESTION_LEVEL {
+  Easy
+  Medium
+  Hard
+}
+
+enum ENUM_TEXTQUESTION_LEVEL {
+  Easy
+  Medium
+  Hard
 }
 
 type Examination {
@@ -309,6 +341,15 @@ type Examination {
   endTime: DateTime!
   examTime: Int
   course: Course
+  hardRadioQues: Int
+  hardCheckboxQues: Int
+  hardTextQues: Int
+  mediumRadioQues: Int
+  mediumCheckboxQues: Int
+  mediumTextQues: Int
+  easyRadioQues: Int
+  easyCheckboxQues: Int
+  easyTextQues: Int
   radioquestions(sort: String, limit: Int, start: Int, where: JSON): [Radioquestion]
   checkboxquestions(sort: String, limit: Int, start: Int, where: JSON): [Checkboxquestion]
   textquestions(sort: String, limit: Int, start: Int, where: JSON): [Textquestion]
@@ -326,6 +367,15 @@ input ExaminationInput {
   checkboxquestions: [ID]
   textquestions: [ID]
   course: ID
+  hardRadioQues: Int
+  hardCheckboxQues: Int
+  hardTextQues: Int
+  mediumRadioQues: Int
+  mediumCheckboxQues: Int
+  mediumTextQues: Int
+  easyRadioQues: Int
+  easyCheckboxQues: Int
+  easyTextQues: Int
 }
 
 type Examuser {
@@ -450,6 +500,7 @@ type Radioquestion {
   answerD: String
   answer: ENUM_RADIOQUESTION_ANSWER
   examination: Examination
+  level: ENUM_RADIOQUESTION_LEVEL
 }
 
 input RadioquestionInput {
@@ -461,6 +512,7 @@ input RadioquestionInput {
   answerD: String
   answer: ENUM_RADIOQUESTION_ANSWER
   examination: ID
+  level: ENUM_RADIOQUESTION_LEVEL
 }
 
 type Result {
@@ -498,6 +550,7 @@ type Textquestion {
   question: String
   answer: String
   examination: Examination
+  level: ENUM_TEXTQUESTION_LEVEL
 }
 
 input TextquestionInput {
@@ -505,6 +558,7 @@ input TextquestionInput {
   question: String
   answer: String
   examination: ID
+  level: ENUM_TEXTQUESTION_LEVEL
 }
 
 input updateCheckboxquestionInput {

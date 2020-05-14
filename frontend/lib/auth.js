@@ -10,71 +10,71 @@ const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
 
 export const strapiRegister = (username, email, password) => {
-  if (!process.browser) {
-    return undefined;
-  }
-  strapi.register(username, email, password).then(res => {
-    setToken(res);
-  });
-  return Promise.resolve();
+    if (!process.browser) {
+        return undefined;
+    }
+    strapi.register(username, email, password).then(res => {
+        setToken(res);
+    });
+    return Promise.resolve();
 };
 //use strapi to get a JWT and token object, save
 //to approriate cookei for future requests
 export const strapiLogin = (email, password) => {
-  let error = "";
-  if (!process.browser) {
-    return;
-  }
-  // Get a token
-  strapi.login(email, password)
-    .then(res => {
-      setToken(res);
-    })
-    .catch(error = "Identifier or password invalid.")
-    
-  if(error !== "") throw error;
-  
-  return Promise.resolve();
+    let error = "";
+    if (!process.browser) {
+        return;
+    }
+    // Get a token
+    strapi.login(email, password)
+        .then(res => {
+            setToken(res);
+        })
+        .catch(error = "Identifier or password invalid.")
+
+    if (error !== "") throw error;
+
+    return Promise.resolve();
 };
 
 export const setToken = token => {
-  if (!process.browser) {
-    return;
-  }
-  Cookies.set("username", token.user.username);
-  Cookies.set("email", token.user.email);
-  Cookies.set("jwt", token.jwt);
-  console.log(token);
-  
-  if (Cookies.get("username")) {
-    Router.push("/");
-  }
+    if (!process.browser) {
+        return;
+    }
+    Cookies.set("username", token.user.username);
+    Cookies.set("email", token.user.email);
+    Cookies.set("jwt", token.jwt);
+    console.log(token);
+
+    if (Cookies.get("username")) {
+        Router.push("/");
+    }
 };
 
 export const unsetToken = () => {
-  if (!process.browser) {
-    return;
-  }
-  Cookies.remove("jwt");
-  Cookies.remove("username");
-  Cookies.remove("email");
+    if (!process.browser) {
+        return;
+    }
+    Cookies.remove("jwt");
+    Cookies.remove("username");
+    Cookies.remove("email");
 
-  // to support logging out from all windows
-  window.localStorage.setItem("logout", Date.now());
-  Router.push("/");
+    // to support logging out from all windows
+    window.localStorage.setItem("logout", Date.now());
+    Router.push("/");
 };
 
 export const getUserFromServerCookie = req => {
-  if (!req.headers.cookie || "") {
-    return undefined;
-  }
+    if (!req.headers.cookie || "") {
+        return undefined;
+    }
 
-  let username = req.headers.cookie
-    .split(";")
-    .find(user => user.trim().startsWith("username="));
-  if (username) {
-    username = username.split("=")[1];
-  }
+    let username = req.headers.cookie
+        .split(";")
+        .find(user => user.trim().startsWith("username="));
+    if (username) {
+        username = username.split("=")[1];
+    }
 
     const jwtCookie = req.headers.cookie
         .split(";")
@@ -126,12 +126,12 @@ const getQueryParams = () => {
             params[$1] = $3;
         }
     );
-  return params;
+    return params;
 };
 export const extractInfoFromHash = () => {
-  if (!process.browser) {
-    return undefined;
-  }
-  const { id_token, state } = getQueryParams();
-  return { token: id_token, secret: state };
+    if (!process.browser) {
+        return undefined;
+    }
+    const {id_token, state} = getQueryParams();
+    return {token: id_token, secret: state};
 };

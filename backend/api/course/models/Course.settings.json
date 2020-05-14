@@ -25,7 +25,7 @@
       "collection": "examination",
       "via": "course"
     },
-    "Students": {
+    "students": {
       "type": "json"
     },
     "description": {

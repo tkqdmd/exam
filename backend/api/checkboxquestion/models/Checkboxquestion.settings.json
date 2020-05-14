@@ -39,6 +39,14 @@
     "examination": {
       "model": "examination",
       "via": "checkboxquestions"
+    },
+    "level": {
+      "enum": [
+        "Easy",
+        "Medium",
+        "Hard"
+      ],
+      "type": "enumeration"
     }
   }
 }
