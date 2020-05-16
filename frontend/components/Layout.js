@@ -40,6 +40,10 @@ class Layout extends React.Component {
                         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
                         crossOrigin="anonymous"
                     />
+                    <link rel="shortcut icon" 
+                        type="image/x-icon" 
+                        href="./favicon.ico"
+                    />
                     <script src="https://js.stripe.com/v3"/>
                 </Head>
                 <header>

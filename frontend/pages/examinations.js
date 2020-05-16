@@ -34,7 +34,34 @@ class Examinations extends React.Component {
 
     startExamTime() {
         const examination = this.props.data.examination;
-        const questionList = examination.radioquestions.concat(examination.checkboxquestions, examination.textquestions);
+        const checkboxHard = _.shuffle(examination.checkboxquestions.filter(q => (
+            q.level == "Hard"
+        ))).slice(0, examination.hardCheckboxQues);
+        const checkboxMedium = _.shuffle(examination.checkboxquestions.filter(q => (
+            q.level == "Medium"
+        ))).slice(0, examination.mediumCheckboxQues);        
+        const checkboxEasy = _.shuffle(examination.checkboxquestions.filter(q => (
+            q.level == "Easy"
+        ))).slice(0, examination.easyCheckboxQues);
+        const radioHard = _.shuffle(examination.radioquestions.filter(q => (
+            q.level == "Hard"
+        ))).slice(0, examination.hardRadioQues);
+        const radioMedium = _.shuffle(examination.radioquestions.filter(q => (
+            q.level == "Medium"
+        ))).slice(0, examination.mediumRadioQues);
+        const radioEasy = _.shuffle(examination.radioquestions.filter(q => (
+            q.level == "Easy"
+        ))).slice(0, examination.easyRadioQues);
+        const textHard = _.shuffle(examination.textquestions.filter(q => (
+            q.level == "Hard"
+        ))).slice(0, examination.hardTextQues);
+        const textMedium = _.shuffle(examination.textquestions.filter(q => (
+            q.level == "Medium"
+        ))).slice(0, examination.mediumTextQues);
+        const textEasy = _.shuffle(examination.textquestions.filter(q => (
+            q.level == "Easy"
+        ))).slice(0, examination.easyTextQues);
+        const questionList = radioHard.concat(radioMedium, radioEasy, checkboxHard, checkboxMedium, checkboxEasy, textHard, textMedium, textEasy);
         this.setState({
             seconds: examination.examTime * 60,
             time: this.secondsToTime(examination.examTime * 60),
@@ -300,6 +327,15 @@ const GET_EXAMINATION_QUESTIONS = gql`
             startTime
             endTime
             examTime
+            hardRadioQues
+            mediumRadioQues
+            easyRadioQues
+            hardCheckboxQues
+            mediumCheckboxQues
+            easyCheckboxQues
+            hardTextQues
+            mediumTextQues
+            easyTextQues
             radioquestions{
                 id
                 type
@@ -309,6 +345,7 @@ const GET_EXAMINATION_QUESTIONS = gql`
                 answerC
                 answerD
                 answer
+                level
             }
             checkboxquestions{
                 id
@@ -319,12 +356,14 @@ const GET_EXAMINATION_QUESTIONS = gql`
                 answerC
                 answerD
                 answer
+                level
             }
             textquestions{
                 id
                 type
                 question
                 answer
+                level
             }
         }
 
