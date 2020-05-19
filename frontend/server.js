@@ -2,6 +2,7 @@
 
 const express = require('express')
 const next = require('next')
+const window = require('global')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -10,7 +11,9 @@ const handle = app.getRequestHandler()
 app.prepare()
 	.then(() => {
 		const server = express()
-
+		if (typeof window === 'undefined') {
+			global.window = {}
+		  }
 		server.get('/examinations/:id', (req, res) => {
 			const actualPage = '/examinations'
 			const queryParams = { id: req.params.id }

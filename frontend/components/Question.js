@@ -5,13 +5,22 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {Input} from "reactstrap";
+import loadable from '@loadable/component';
+const Speech = loadable(() => import('react-speech'));
 
 export const Question = (props) => {
     // console.log(props);
     if (props.question.type == "radio") {
-        // console.log("radio"+props.question.id);
         return (
             <div style={{marginTop: "20px"}}>
+                <Speech 
+                    textAsButton={true}    
+                    displayText={"Read Question " + props.pos}
+                    text={"Question " + props.pos + ". Choose the best answer: . " + props.question.question + 
+                            "Option A is " + props.question.answerA + " . " + 
+                            "Option B is " + props.question.answerB + " . " + 
+                            "Option C is" + props.question.answerC + " . " + 
+                            "Option D is " + props.question.answerD } />
                 <h5>Question {props.pos}: <i>Choose the best answer: </i><br/>{props.question.question}</h5>
                 <RadioGroup aria-label={"radio" + props.question.id} name={"radio" + props.question.id}
                             onChange={props.onRadioChange}>
@@ -30,6 +39,14 @@ export const Question = (props) => {
         if (props.question.type == "checkbox") {
             return (
                 <div style={{marginTop: "20px"}}>
+                    <Speech 
+                    textAsButton={true}    
+                    displayText={"Read Question " + props.pos}
+                    text={"Question " + props.pos + ". Choose the correct answers: . " + props.question.question +
+                        "Option A is " + props.question.answerA + " . " + 
+                        "Option B is " + props.question.answerB + " . " + 
+                        "Option C is" + props.question.answerC + " . " + 
+                        "Option D is " + props.question.answerD } />
                     <h5>Question {props.pos}: <i>Choose the correct answers: </i><br/>{props.question.question}</h5>
                     <FormGroup>
                         <FormControlLabel
@@ -62,6 +79,10 @@ export const Question = (props) => {
         } else {
             return (
                 <div style={{marginTop: "20px"}}>
+                    <Speech 
+                        textAsButton={true}    
+                        displayText={"Read Question " + props.pos}
+                        text={"Question " + props.pos + ". Fill in the blank: . " + props.question.question} />
                     <h5>Question {props.pos}: <i>Fill in the blank:</i><br/> {props.question.question}</h5>
                     <Input type="text" style={{marginTop: "10px"}} name={"text" + props.question.id}
                            onChange={props.onInputChange} placeholder="Enter your answer here"/>

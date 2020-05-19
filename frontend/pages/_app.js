@@ -16,6 +16,7 @@ class MyApp extends App {
 
     render() {
         const {Component, pageProps, isAuthenticated, ctx} = this.props;
+        
         return (
             <Container>
 

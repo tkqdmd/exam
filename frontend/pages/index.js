@@ -28,10 +28,12 @@ class Index extends React.Component {
       redirectLink: "",
       errorState: false,
       errorMessage:"",
+      
     };
     let examCodeFound = false;
     let examDone = false;
     let examOutDated = false;
+    
   }
 
   onChange(e) {
@@ -41,6 +43,7 @@ class Index extends React.Component {
         query: e.target.value.toLowerCase() 
     });
   }
+
   onChangeExamCode(e) {
     this.setState({ 
         examCode: e.target.value
@@ -91,9 +94,13 @@ class Index extends React.Component {
     this.examCodeFound = false;
     this.examDone = false;
     this.examOutDated = false;
+
     return (
       
       <div className="container-fluid">
+        
+        
+      
         <ErrorModal
             errorState={this.state.errorState}
             errorMessage={this.state.errorMessage}

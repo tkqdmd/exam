@@ -2,13 +2,14 @@
 
 import gql from "graphql-tag";
 import Router, {withRouter} from "next/router";
-import {graphql} from "react-apollo";
+import {graphql, from} from "react-apollo";
 import {compose} from "recompose";
 import React from 'react';
 import Strapi from "strapi-sdk-javascript/build/main";
 import securePage from "../hocs/securePage";
 import {Question} from "../components/Question";
 import {Button} from "reactstrap";
+import Dictaphone from "../components/Dictaphone";
 
 const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
@@ -25,6 +26,7 @@ class Examinations extends React.Component {
             time: {},
             seconds: 1,
             started: false,
+            transcript: "",
         }
         this.timer = 0;
         this.submitExam = this.submitExam.bind(this);
@@ -238,6 +240,9 @@ class Examinations extends React.Component {
 
     };
 
+    handleChangeParent = (transcript) => {
+        console.log("ahihi");
+    }
 
     render() {
         const {
@@ -266,6 +271,10 @@ class Examinations extends React.Component {
             let pos = 1;
             return (
                 <>
+                    <Dictaphone
+                        handleChangeParent={this.handleChangeParent}
+                    />
+                    <div>{this.state.transcript}</div>
                     <h2>{examination.name}</h2>
                     <h6><i>{examination.description}</i></h6>
                     <div style={{display: 'flex'}}>
