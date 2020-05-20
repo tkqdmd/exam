@@ -9,20 +9,24 @@ import loadable from '@loadable/component';
 const Speech = loadable(() => import('react-speech'));
 
 export const Question = (props) => {
-    // console.log(props);
+    if(props.pos == props.currentQues) {
+        props.setCurrentQuestion(props.question.type + props.question.id);
+    }
     if (props.question.type == "radio") {
+        var temp = props.radioItems.filter( i => (i.name == "radio" + props.question.id ));
+        
         return (
             <div style={{marginTop: "20px"}}>
                 <Speech 
                     textAsButton={true}    
                     displayText={"Read Question " + props.pos}
                     text={"Question " + props.pos + ". Choose the best answer: . " + props.question.question + 
-                            "Option A is " + props.question.answerA + " . " + 
-                            "Option B is " + props.question.answerB + " . " + 
-                            "Option C is" + props.question.answerC + " . " + 
-                            "Option D is " + props.question.answerD } />
+                            "Option 1 is " + props.question.answerA + " . " + 
+                            "Option 2 is " + props.question.answerB + " . " + 
+                            "Option 3 is" + props.question.answerC + " . " + 
+                            "Option 4 is " + props.question.answerD } />
                 <h5>Question {props.pos}: <i>Choose the best answer: </i><br/>{props.question.question}</h5>
-                <RadioGroup aria-label={"radio" + props.question.id} name={"radio" + props.question.id}
+                <RadioGroup aria-label={"radio" + props.question.id} value={temp.length == 1 ? temp[0].value : ""} name={"radio" + props.question.id}
                             onChange={props.onRadioChange}>
                     <FormControlLabel style={{margin: "0px"}} value="A" control={<Radio/>}
                                       label={props.question.answerA}/>
@@ -43,10 +47,10 @@ export const Question = (props) => {
                     textAsButton={true}    
                     displayText={"Read Question " + props.pos}
                     text={"Question " + props.pos + ". Choose the correct answers: . " + props.question.question +
-                        "Option A is " + props.question.answerA + " . " + 
-                        "Option B is " + props.question.answerB + " . " + 
-                        "Option C is" + props.question.answerC + " . " + 
-                        "Option D is " + props.question.answerD } />
+                        "Option 1 is " + props.question.answerA + " . " + 
+                        "Option 2 is " + props.question.answerB + " . " + 
+                        "Option 3 is" + props.question.answerC + " . " + 
+                        "Option 4 is " + props.question.answerD }  />
                     <h5>Question {props.pos}: <i>Choose the correct answers: </i><br/>{props.question.question}</h5>
                     <FormGroup>
                         <FormControlLabel

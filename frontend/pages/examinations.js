@@ -19,19 +19,24 @@ class Examinations extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            radioItems: [],
-            checkboxItems: [],
-            inputItems: [],
+            
             questions: [],
             time: {},
             seconds: 1,
             started: false,
-            transcript: "",
+            speech: false,
         }
         this.timer = 0;
+        this.answer = "";
+        this.currentQues = 0 ;
+        this.currentQuesName = "" ;
+        this.radioItems = [];
+        this.checkboxItems = [];
+        this.inputItems = [];
         this.submitExam = this.submitExam.bind(this);
         this.startExamTime = this.startExamTime.bind(this);
         this.countDown = this.countDown.bind(this);
+        let transcript = "";
     }
 
     startExamTime() {
@@ -117,7 +122,7 @@ class Examinations extends React.Component {
     onInputChange = (e) => {
         console.log(e.target);
 
-        var copyItems = this.state.inputItems;
+        var copyItems = this.inputItems;
         console.log(copyItems);
         var check = false;
         if (copyItems.length > 0) {
@@ -131,16 +136,15 @@ class Examinations extends React.Component {
         if (check === false) {
             copyItems.push({name: e.target.name, value: e.target.value})
         }
-        this.setState({
-            inputItems: copyItems
-        });
+        this.inputItems = copyItems;
     };
 
     onRadioChange = (e) => {
         console.log(e.target);
-        var copyItems = this.state.radioItems;
+        var copyItems = this.radioItems;
         console.log(copyItems);
         var check = false;
+        this.answer = e.target.value;
         if (copyItems.length > 0) {
             for (var i = 0; i < copyItems.length; i++) {
                 if (copyItems[i].name == e.target.name) {
@@ -152,13 +156,12 @@ class Examinations extends React.Component {
         if (check === false) {
             copyItems.push({name: e.target.name, value: e.target.value});
         }
-        this.setState({
-            radioItems: copyItems
-        });
+        this.radioItems = copyItems;
+        
     };
 
     onCheckboxChange = (e) => {
-        var copyItems = this.state.checkboxItems;
+        var copyItems = this.checkboxItems;
         var check = false;
         if (copyItems.length > 0) {
             for (var i = 0; i < copyItems.length; i++) {
@@ -182,16 +185,16 @@ class Examinations extends React.Component {
         if (check === false) {
             copyItems.push({name: e.target.name, value: e.target.value})
         }
-        this.setState({
-            checkboxItems: copyItems
-        });
+        
+        this.checkboxItems = copyItems;
+        
     };
 
     submitExam() {
         var examination = this.props.data.examination;
-        const radioItems = this.state.radioItems;
-        const checkboxItems = this.state.checkboxItems;
-        const inputItems = this.state.inputItems;
+        const radioItems = this.radioItems;
+        const checkboxItems = this.checkboxItems;
+        const inputItems = this.inputItems;
         let point = 0;
         for (var i = 0; i < radioItems.length; i++) {
             this.state.questions.filter(ques => (ques.type == "radio")).forEach(
@@ -241,9 +244,70 @@ class Examinations extends React.Component {
     };
 
     handleChangeParent = (transcript) => {
-        console.log("ahihi");
+        this.transcript = transcript;
+        if(transcript.toLowerCase().includes("question")){
+            this.currentQues = transcript.substring(transcript.toLowerCase().indexOf("question ")).split(" ")[1];
+            if(transcript.toLowerCase().includes("choose 1") ||
+            transcript.toLowerCase().includes("choose one")
+            ) { 
+                this.answer = "A";
+            }
+            else {
+                if(transcript.toLowerCase().includes("choose 2") ||
+                transcript.toLowerCase().includes("choose two")  ||
+                transcript.toLowerCase().includes("choose to")
+                ) { 
+                    this.answer = "B";
+                }
+                else {
+                    if(transcript.toLowerCase().includes("choose 3") ||
+                    transcript.toLowerCase().includes("choose three")
+                    ) { 
+                        this.answer = "C";
+                    }
+                    else {
+                        if(transcript.toLowerCase().includes("choose 4") ||
+                        transcript.toLowerCase().includes("choose four")
+                        ) { 
+                            this.answer = "D";
+                        }
+                    }
+                }
+            }
+            console.log(this.answer);
+            
+            if(this.currentQuesName.includes("radio") && this.answer != "") {
+                var check = false;
+                if (this.radioItems.length > 0) {
+                    for (var i = 0; i < this.radioItems.length; i++) {
+                        if (this.radioItems[i].name == this.currentQuesName) {
+                            this.radioItems[i].value = this.answer;
+                            check = true;
+                            break;
+                        }
+                    }
+                }
+                if (check === false) {
+                    this.radioItems.push({name: this.currentQuesName, value: this.answer})
+                }
+                
+                console.log(this.radioItems);
+                
+            }
+            else {
+                
+            }
+        }
+        
+
+        
+        
+            
     }
 
+    setCurrentQuestion = (id) => {
+        this.currentQuesName = id;      
+    }
     render() {
         const {
             data: {loading, error, examination, examusers},
@@ -274,7 +338,7 @@ class Examinations extends React.Component {
                     <Dictaphone
                         handleChangeParent={this.handleChangeParent}
                     />
-                    <div>{this.state.transcript}</div>
+                    <div>{this.transcript}</div>
                     <h2>{examination.name}</h2>
                     <h6><i>{examination.description}</i></h6>
                     <div style={{display: 'flex'}}>
@@ -289,9 +353,15 @@ class Examinations extends React.Component {
                                 <Question
                                     pos={pos++}
                                     question={res}
+                                    speech={this.state.speech}
+                                    radioItems = {this.radioItems}
+                                    checkboxItems = {this.checkboxItems}
+                                    inputItems = {this.inputItems}
+                                    currentQues={this.currentQues}
                                     onInputChange={this.onInputChange}
                                     onRadioChange={this.onRadioChange}
                                     onCheckboxChange={this.onCheckboxChange}
+                                    setCurrentQuestion={this.setCurrentQuestion}
                                 />
                                 <style jsx>
                                     {`
