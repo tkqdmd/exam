@@ -14,7 +14,10 @@ export const Question = (props) => {
     }
     if (props.question.type == "radio") {
         var temp = props.radioItems.filter( i => (i.name == "radio" + props.question.id ));
-        
+        if(temp.length == 1) {
+            temp = temp[0].value;
+        }
+        else temp = "";
         return (
             <div style={{marginTop: "20px"}}>
                 <Speech 
@@ -26,7 +29,7 @@ export const Question = (props) => {
                             "Option 3 is" + props.question.answerC + " . " + 
                             "Option 4 is " + props.question.answerD } />
                 <h5>Question {props.pos}: <i>Choose the best answer: </i><br/>{props.question.question}</h5>
-                <RadioGroup aria-label={"radio" + props.question.id} value={temp.length == 1 ? temp[0].value : ""} name={"radio" + props.question.id}
+                <RadioGroup aria-label={"radio" + props.question.id} value={temp} name={"radio" + props.question.id}
                             onChange={props.onRadioChange}>
                     <FormControlLabel style={{margin: "0px"}} value="A" control={<Radio/>}
                                       label={props.question.answerA}/>
@@ -41,6 +44,11 @@ export const Question = (props) => {
         );
     } else {
         if (props.question.type == "checkbox") {
+            var temp = props.checkboxItems.filter( i => (i.name == "checkbox" + props.question.id ));
+            if(temp.length == 1) {
+                temp = temp[0].value;
+            }
+            else temp = "";
             return (
                 <div style={{marginTop: "20px"}}>
                     <Speech 
@@ -57,30 +65,39 @@ export const Question = (props) => {
                             style={{margin: "0px"}}
                             control={<Checkbox onChange={props.onCheckboxChange} name={"checkbox" + props.question.id}
                                                value="A"/>}
+                            checked={temp.includes("A")}
                             label={props.question.answerA}
                         />
                         <FormControlLabel
                             style={{margin: "0px"}}
                             control={<Checkbox onChange={props.onCheckboxChange} name={"checkbox" + props.question.id}
                                                value="B"/>}
+                            checked={temp.includes("B")}
                             label={props.question.answerB}
                         />
                         <FormControlLabel
                             style={{margin: "0px"}}
                             control={<Checkbox onChange={props.onCheckboxChange} name={"checkbox" + props.question.id}
                                                value="C"/>}
+                            checked={temp.includes("C")}                    
                             label={props.question.answerC}
                         />
                         <FormControlLabel
                             style={{margin: "0px"}}
                             control={<Checkbox onChange={props.onCheckboxChange} name={"checkbox" + props.question.id}
                                                value="D"/>}
+                            checked={temp.includes("D")}
                             label={props.question.answerD}
                         />
                     </FormGroup>
                 </div>
             );
         } else {
+            var temp = props.inputItems.filter( i => (i.name == "text" + props.question.id ));
+            if(temp.length == 1) {
+                temp = temp[0].value;
+            }
+            else temp = "";
             return (
                 <div style={{marginTop: "20px"}}>
                     <Speech 
@@ -89,7 +106,7 @@ export const Question = (props) => {
                         text={"Question " + props.pos + ". Fill in the blank: . " + props.question.question} />
                     <h5>Question {props.pos}: <i>Fill in the blank:</i><br/> {props.question.question}</h5>
                     <Input type="text" style={{marginTop: "10px"}} name={"text" + props.question.id}
-                           onChange={props.onInputChange} placeholder="Enter your answer here"/>
+                           onChange={props.onInputChange} value={temp} placeholder="Enter your answer here"/>
                 </div>
             );
         }

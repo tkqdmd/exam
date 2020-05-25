@@ -1,11 +1,11 @@
 import React, {Component } from 'react'
 import SpeechRecognition from 'react-speech-recognition'
 
-const recognition = new SpeechRecognition()
+// const recognition = new SpeechRecognition()
 
-recognition.continous = true
-recognition.interimResults = true
-recognition.lang = 'ja-JP' 
+// recognition.continous = true
+// recognition.interimResults = true
+// recognition.lang = 'ja-JP' 
 
 class Dictaphone extends Component {
   constructor(props) {
@@ -15,9 +15,9 @@ class Dictaphone extends Component {
 
   
   render() {
-    const { handleChangeParent, transcript, resetTranscript, browserSupportsSpeechRecognition, lang} = this.props
+    const { handleChangeParent, transcript, resetTranscript, browserSupportsSpeechRecognition, recognition} = this.props
     handleChangeParent(transcript);
-
+    recognition.lang = 'en-US';
     if (!browserSupportsSpeechRecognition) {
       return null;
     }
@@ -32,7 +32,7 @@ class Dictaphone extends Component {
     return (
       <div>
         <button onClick={resetTranscript}>Reset</button>
-        <span>{transcript}</span>
+        <span>{recognition.lang}</span>
         {/* <input type="text" value={transcript} onChange={e => (console.log(e.target.value))}/> */}
       </div>
     )
