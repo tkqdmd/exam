@@ -9,7 +9,7 @@ import Strapi from "strapi-sdk-javascript/build/main";
 import securePage from "../hocs/securePage";
 import {Question} from "../components/Question";
 import {Button} from "reactstrap";
-import Dictaphone from "../components/Dictaphone";
+
 
 const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
@@ -19,24 +19,19 @@ class Examinations extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            
             questions: [],
             time: {},
             seconds: 1,
             started: false,
-            speech: false,
+            radioItems: [],
+            checkboxItems: [],
+            inputItems: [],
         }
         this.timer = 0;
-        this.answer = "";
-        this.currentQues = 0 ;
-        this.currentQuesName = "" ;
-        this.radioItems = [];
-        this.checkboxItems = [];
-        this.inputItems = [];
         this.submitExam = this.submitExam.bind(this);
         this.startExamTime = this.startExamTime.bind(this);
         this.countDown = this.countDown.bind(this);
-        let transcript = "";
+        
     }
 
     startExamTime() {
@@ -83,6 +78,8 @@ class Examinations extends React.Component {
                 email: this.props.loggedUser,
                 examCode: examination.code,
             });
+        console.log(strapi.getEntries("examinations"));
+        
     }
 
     secondsToTime(secs) {
@@ -121,7 +118,7 @@ class Examinations extends React.Component {
 
     onInputChange = (e) => {
 
-        var copyItems = this.inputItems;
+        var copyItems = this.state.inputItems;
         var check = false;
         if (copyItems.length > 0) {
             for (var i = 0; i < copyItems.length; i++) {
@@ -132,14 +129,13 @@ class Examinations extends React.Component {
             }
         }
         if (check === false) {
-            copyItems.push({name: e.target.name, value: e.target.value})
+            copyItems.push({name: e.target.name, value: e.target.value});
         }
-        this.inputItems = copyItems;
+        this.setState({inputItems: copyItems});
     };
 
     onRadioChange = (e) => {
-        console.log(e.target);
-        var copyItems = this.radioItems;
+        var copyItems = this.state.radioItems;
         console.log(copyItems);
         var check = false;
         this.answer = e.target.value;
@@ -154,12 +150,12 @@ class Examinations extends React.Component {
         if (check === false) {
             copyItems.push({name: e.target.name, value: e.target.value});
         }
-        this.radioItems = copyItems;
+        this.setState({radioItems: copyItems});
         
     };
 
     onCheckboxChange = (e) => {
-        var copyItems = this.checkboxItems;
+        var copyItems = this.state.checkboxItems;
         var check = false;
         if (copyItems.length > 0) {
             for (var i = 0; i < copyItems.length; i++) {
@@ -183,16 +179,14 @@ class Examinations extends React.Component {
         if (check === false) {
             copyItems.push({name: e.target.name, value: e.target.value})
         }
-        
-        this.checkboxItems = copyItems;
-        
+        this.setState({radioItems: copyItems});
     };
 
     submitExam() {
         var examination = this.props.data.examination;
-        const radioItems = this.radioItems;
-        const checkboxItems = this.checkboxItems;
-        const inputItems = this.inputItems;
+        const radioItems = this.state.radioItems;
+        const checkboxItems = this.state.checkboxItems;
+        const inputItems = this.state.inputItems;
         let point = 0;
         for (var i = 0; i < radioItems.length; i++) {
             this.state.questions.filter(ques => (ques.type == "radio")).forEach(
@@ -241,164 +235,7 @@ class Examinations extends React.Component {
 
     };
 
-    handleChangeParent = (transcript) => {
-        this.transcript = transcript;
-        if(transcript.toLowerCase().includes("question")){
-            this.currentQues = transcript.substring(transcript.toLowerCase().indexOf("question ")).split(" ")[1];
-            
-            if(this.currentQuesName.includes("radio")) {
-                if(transcript.toLowerCase().includes("option 1") ||
-                transcript.toLowerCase().includes("option one")
-                ) { 
-                    this.answer = "A";
-                }
-                else {
-                    if(transcript.toLowerCase().includes("option 2") ||
-                    transcript.toLowerCase().includes("option two")  ||
-                    transcript.toLowerCase().includes("option to")
-                    ) { 
-                        this.answer = "B";
-                    }
-                    else {
-                        if(transcript.toLowerCase().includes("option 3") ||
-                        transcript.toLowerCase().includes("option three") ||
-                        transcript.toLowerCase().includes("option tree")
-                        ) { 
-                            this.answer = "C";
-                        }
-                        else {
-                            if(transcript.toLowerCase().includes("option 4") ||
-                            transcript.toLowerCase().includes("option four") ||
-                            transcript.toLowerCase().includes("option for")
-                            ) { 
-                                this.answer = "D";
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                if(this.currentQuesName.includes("checkbox")) {
-                    var index = transcript.substring(transcript.toLowerCase().lastIndexOf("option ")).split(" ")[1];
-                    if(index == "1" ||
-                        index == "one"
-                    ) { 
-                        this.answer = "A";
-                    }
-                    
-                    if(index == "2" ||
-                        index == "two"  ||
-                        index == "to"
-                    ) { 
-                        this.answer = "B";
-                    }
-                        
-                    if(index == "3" ||
-                        index == "three" ||
-                        index == "tree"
-                    ) { 
-                        this.answer = "C";
-                    }
-                            
-                    if(index == "4" ||
-                        index == "four" ||
-                        index == "for"
-                    ) { 
-                        this.answer = "D";
-                    }
-                    
-                }
-                else {
-                    if(this.currentQuesName.includes("text")) {
-                        var index = transcript.toLowerCase().indexOf("answer is ");
-                        if(index != -1) {
-                            this.answer = transcript.substring(index + 10);  
-                        }
-                        else this.answer = "";
-                        
-                    }
-                }
-            }
-            
-            console.log(this.answer);
-            
-            if(this.answer != ""){
-                if(this.currentQuesName.includes("radio")) {
-                    var check = false;
-                    if (this.radioItems.length > 0) {
-                        for (var i = 0; i < this.radioItems.length; i++) {
-                            if (this.radioItems[i].name == this.currentQuesName) {
-                                this.radioItems[i].value = this.answer;
-                                check = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (check === false) {
-                        this.radioItems.push({name: this.currentQuesName, value: this.answer})
-                    }
-                    console.log(this.radioItems);
-                }
-                else {
-                    if(this.currentQuesName.includes("checkbox")) {
-                        var check = false;
-                        if (this.checkboxItems.length > 0) {
-                            for (var i = 0; i < this.checkboxItems.length; i++) {
-                                if (this.checkboxItems[i].name == this.currentQuesName) {
-                                    console.log(true);
-                                    
-                                    var index = this.checkboxItems[i].value.indexOf(this.answer);
-                                    if (index == -1) {
-                                        this.checkboxItems[i].value = this.checkboxItems[i].value + " " + this.answer;
-                                    }
-                                    // else {
-                                    //     if (index == 0) {
-                                    //         this.checkboxItems[i].value = this.checkboxItems[i].value.substring(2);
-                                    //     } else {
-                                    //         if (index == this.checkboxItems[i].value.length) {
-                                    //             this.checkboxItems[i].value = this.checkboxItems[i].value.substring(0, index - 2);
-                                    //         } else this.checkboxItems[i].value = this.checkboxItems[i].value.substring(0, index - 1) + this.checkboxItems[i].value.substring(index + 1);
-                                    //     }
-                                    // }
-                                    check = true;
-                                }
-                            }
-                        }
-                        if (check == false) {
-                            this.checkboxItems.push({name: this.currentQuesName, value: this.answer})
-                        }
-                        console.log(this.checkboxItems);
-                        
-                    }
-                    else {
-                        if(this.currentQuesName.includes("text")) {
-                            var check = false;
-                            if (this.inputItems.length > 0) {
-                                for (var i = 0; i < this.inputItems.length; i++) {
-                                    if (this.inputItems[i].name == this.currentQuesName) {
-                                        this.inputItems[i].value = this.answer.trim().toLowerCase();
-                                        check = true;
-                                    }
-                                }
-                            }
-                            if (check === false) {
-                                this.inputItems.push({name: this.currentQuesName, value: this.answer})
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }
-        if(transcript.toLowerCase().includes("submit")) {
-            this.submitExam();
-        }
-        
-    }
-
-    setCurrentQuestion = (id) => {
-        this.currentQuesName = id;      
-    }
+    
     render() {
         const {
             data: {loading, error, examination, examusers},
@@ -426,10 +263,6 @@ class Examinations extends React.Component {
             let pos = 1;
             return (
                 <>
-                    <Dictaphone
-                        handleChangeParent={this.handleChangeParent}
-                    />
-                    <div>{this.transcript}</div>
                     <h2>{examination.name}</h2>
                     <h6><i>{examination.description}</i></h6>
                     <div style={{display: 'flex'}}>
@@ -444,15 +277,9 @@ class Examinations extends React.Component {
                                 <Question
                                     pos={pos++}
                                     question={res}
-                                    speech={this.state.speech}
-                                    radioItems = {this.radioItems}
-                                    checkboxItems = {this.checkboxItems}
-                                    inputItems = {this.inputItems}
-                                    currentQues={this.currentQues}
                                     onInputChange={this.onInputChange}
                                     onRadioChange={this.onRadioChange}
                                     onCheckboxChange={this.onCheckboxChange}
-                                    setCurrentQuestion={this.setCurrentQuestion}
                                 />
                                 <style jsx>
                                     {`
