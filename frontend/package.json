@@ -29,7 +29,7 @@
     "reactstrap": "^8.4.1",
     "recompose": "^0.30.0",
     "strapi-sdk-javascript": "^0.3.3",
-    "underscore": "^1.10.2"
+    "underscore": "^1.12.1"
   },
   "scripts": {
     "dev": "node server.js",
